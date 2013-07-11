@@ -1,0 +1,64 @@
+<template name="course">
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="box box-bordered box-color">
+                {{#with course}}
+                    <div class="box-title">
+                        <h3><i class="icon-th-list"></i> Course: {{name}}</h3>
+                    </div>
+
+                    <div class="box-content nopadding">
+                        <div class="tabs-container">
+                            <ul class="tabs tabs-inline tabs-left ">
+                                <li class="active">
+                                    <a href="#events" data-toggle="tab"><i class="icon-road"></i> <span
+                                            class="hidden-phone">Course Events</span></a>
+                                </li>
+                                <li>
+                                    <a href="#lessons" data-toggle="tab"><i class='icon-camera'></i> <span
+                                            class="hidden-phone">Lessons</span></a>
+                                </li>
+                                <li>
+                                    <a href="#second" data-toggle="tab"><i class="icon-twitter"></i> <span
+                                            class="hidden-phone">Comments </span>(9)</a>
+                                </li>
+
+                                <li>
+                                    <a href="#thirds" data-toggle="tab"><i class="icon-calendar"></i> <span
+                                            class="hidden-phone">History</span></a>
+                                </li>
+                                {{#if isCourseOwner}}
+                                    <li>
+                                        <a href="#stats" data-toggle="tab"><i class="icon-edit"></i> <span
+                                                class="hidden-phone">Stats</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#students" data-toggle="tab"><i class="icon-edit"></i> <span
+                                                class="hidden-phone">Students</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span
+                                                class="hidden-phone">Edit</span></a>
+                                    </li>
+                                    <li>
+                                        <a href="#addFlashcard" data-toggle="tab"><i class="icon-edit"></i> <span
+                                                class="hidden-phone">Add Flashcard</span></a>
+                                    </li>
+                                {{/if}}
+                            </ul>
+                        </div>
+                        <div class="tab-content padding tab-content-inline">
+                            {{> courseEventsTab }}
+                            {{> courseLessonsTab }}
+                            <div class="tab-pane" id="picture">
+                                awerwreaw
+                            </div>
+                        </div>
+                    </div>
+                {{/with}}
+            </div>
+        </div>
+    </div>
+</template>
+

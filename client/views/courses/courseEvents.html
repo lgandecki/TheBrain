@@ -1,0 +1,48 @@
+<template name="courseEventsTab">
+    <div class="tab-pane active" id="events">
+        {{> courseEvents }}
+
+    </div>
+</template>
+
+
+<template name="courseEvents">
+    <div class="box box-color box-bordered">
+        <div class="box-title">
+            <h3>
+                <i class="icon-reorder"></i>
+                Events
+            </h3>
+        </div>
+        <div class="box-content nopadding">
+            <ul class="timeline">
+                {{#each courseEvent}}
+                    <li>
+                        <div class="timeline-content">
+                            {{#with eventData}}
+                                <div class="left">
+                                    <div class="icon {{color}}">
+                                        <i class="{{icon}}"></i>
+                                    </div>
+
+                                </div>
+                                <div class="activity">
+                                    <div class="user"><a href="#">{{user}}</a>
+                                        <span>{{event}}</span>
+
+                                        <div><span class="activityDate">{{date}}</span></div>
+                                    </div>
+
+                                    <p>
+                                        {{message}}
+                                    </p>
+                                </div>
+                            {{/with}}
+                        </div>
+                        <div class="line"></div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</template>

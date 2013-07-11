@@ -1,0 +1,53 @@
+<template name="courseLessonsTab">
+    <div class="tab-pane" id="lessons">
+        {{> lessonsTable }}
+    </div>
+</template>
+
+<template name="lessonsTable">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> Lessons</h3>
+                </div>
+                <div class="box-content nopadding">
+                    <table class="table table-hover table-nomargin">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th class="hidden-480">Description</th>
+                            <th class="hidden-480">Flashcards</th>
+                            <th>Enter</th>
+                            <th>Add Flashcards</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {{#each lesson}}
+                            <tr class="lessonRow" data-id="{{_id}}">
+                                <td><a href="javascript:" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a></td>
+                                <td class="hidden-480"><a href="javascript;" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a></td>
+                                <td>{{flashcards}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-enterLesson btn-block" data-id="{{_id}}"><i class="icon-hand-left"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary btn-addFlashcardToLesson btn-block" data-id="{{_id}}"><i class="icon-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        <tr>
+                            <td></td><td></td><td class="hidden-480"></td><td></td>
+                            <td><button class="btn btn-primary btn-addLessonModal btn-block" data-id="{{_id}}"><i class="icon-plus-sign-at"></i> Add new</button></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> newLessonModal }}
+</template>
