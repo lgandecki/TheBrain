@@ -1,0 +1,24 @@
+.login {
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+}
+
+#main {
+    margin-top: 50px !important;
+    margin-left: 0px !important;
+}
+
+.center {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.box-content {
+    overflow: hidden;
+}
+
+
+.tab-content {
+    overflow: hidden !important;
+}

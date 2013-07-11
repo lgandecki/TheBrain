@@ -1,0 +1,116 @@
+<template name="login">
+
+        <div class="row-fluid">
+
+            <div class="span6 loginSignUp">
+                <div class="box box-bordered box-color">
+                    <div class="box-title">
+                        <h3><i class="icon-th-list"></i> Join TheBrain!</h3>
+                    </div>
+                    <div class="box-content padding" style="text-align: center;">
+
+
+                        <p class="lead">Are you already familiar with spaced repetition? </p>
+
+
+                        <button type="submit" class="btn btn-primary btn-block btn-large btn-signUpWithFacebook">Join <strong>TheBrain</strong>
+                            with <i class="icon-facebook-sign"></i>acebook!
+                        </button>
+
+                        <p class="login-or">OR</p>
+
+
+                        <div class="submit">
+                            <button type="submit" class="btn btn-primary btn-block btn-large btn-signUpWithEmailModal">
+                                Join with
+                                Email
+                            </button>
+                        </div>
+                        <h2 class="text-center">For Free. For Ever.</h2>
+
+                        <p class="lead" style="margin-top: 10px; margin-bottom: 10px;">Are you not? Enjoy the <strong>introductory
+                            video</strong> first. <i class="icon-hand-right hidden-phone"></i><i
+                                class="icon-hand-down visible-phone"></i></p>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="span6 loginWelcome">
+                <div class="box box-bordered box-color">
+                    <div class="box-title">
+                        <h3><i class="icon-th-list"></i> Welcome to TheBrain!</h3>
+                    </div>
+
+                    <div class="box-content padding" style="text-align: center;">
+
+
+                        <ul class="icons" style="text-align: left; font-size: 18px; margin-bottom: 30px">
+                            <li><i class="icon-ok"></i><strong>Remember for life</strong>, not for exams</li>
+                            <li><i class="icon-ok"></i>Learn smart and <strong>save your time</strong></li>
+                            <li><i class="icon-ok"></i><strong>Amaze</strong> your teachers, friends and yourself <strong>with your memory</strong></li>
+                            <li><i class="icon-ok"></i>Become a part of the <strong>growing learning social network</strong> - <strong>TheBrain</strong></li>
+                        </ul>
+                        <div class="flex-video widescreen">
+
+                            <iframe src="http://www.youtube.com/embed/Cyp4pNiUTAg?HD=1;rel=0;showinfo=0;controls=0"
+                                    frameborder="0" allowfullscreen=""></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {{> signUpWithEmailModal }}
+</template>
+
+<template name="signUpWithEmailModal">
+    <!-- Modal -->
+    <div id="signUpWithEmailModal" class="modal hide fade" tabindex="-1" role="dialog"
+         aria-labelledby="signUpWithEmailModal" aria-hidden="true">
+        <div class="box box-bordered box-color box-modal">
+            <div class="box-title box-modal">
+                <h3><i class="icon-th-list"></i> Join with Email</h3>
+                <button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="box-content nopadding modal-box">
+
+                    {{> signUpWithEmailForm }}
+
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="signUpWithEmailForm">
+    <form action="#" class="form-validate form-horizontal form-bordered" id="signUp">
+        <div class="control-group">
+            <label class="control-label">Email</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i></span>
+                    <input class="signUp newEmail" type="email" required
+                           placeholder="Email address">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Password</label>
+            <div class="controls">
+
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-credit-card"></i></span>
+                    <input class="signUp newPassword" type="password" required
+                           placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div class="form-actions pull-right modal-form-actions">
+            <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button type="submit" class="btn btn-primary signUpWithEmail">Join TheBrain!</button>
+        </div>
+    </form>
+</template>

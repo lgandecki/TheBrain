@@ -1,0 +1,43 @@
+<template name="topMenu">
+<ul class="main-nav">
+    <li class="topNav">
+        <a href="{{homePath}}">
+            <span>Dashboard</span>
+        </a>
+    </li>
+    <li class="topNav">
+        <a href="{{newFlashcardPath}}">
+            <span>Add new Flashcard</span>
+        </a>
+    </li>
+    <li class="topNav">
+        <a href="{{repeatPath}}">
+            <span>Repeat</span>
+        </a>
+    </li>
+    <li class="topNav">
+        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+            <span>Courses</span>
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{myCoursesPath}}">
+                    My Courses
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    Enrolled Courses
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    Available Courses
+                </a>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+</template>

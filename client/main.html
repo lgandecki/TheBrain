@@ -1,0 +1,48 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Apple devices fullscreen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Apple devices fullscreen -->
+    <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>TheBrain</title>
+
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- Apple devices Homescreen icon -->
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png">
+
+</head>
+
+<body>
+<div id="wrapper">
+{{> header }}
+
+
+<div id="main">
+    {{#if isLoggedIn}}{{> topPanel }}{{/if}}
+        <div id="transition">
+            <div class="container-fluid">
+    {{renderPage}}
+            </div>
+            </div>
+    <div class="push"></div>
+</div>
+</div>
+
+<div id="footer">
+    <p class="hidden-phone">
+        2013 TheBrain by Łukasz Gozda Gandecki <span class="font-grey-4">|</span> <a href="#">Contact</a>
+    </p>
+    <p class="visible-phone">
+        TheBrain by Łukasz Gozda Gandecki
+    </p>
+    <a href="#" class="gototop"><i class="icon-arrow-up"></i></a>
+</div>
+
+
+
+</body>

@@ -1,0 +1,138 @@
+.flashcard {
+    text-align: left;
+    background: #ddd;
+    color: #000000;
+    border: 2px solid #2E80DA !important;
+    font-weight: normal;
+    width: 100%;
+    resize: none;
+}
+
+textarea[disabled].flashcard  {
+    background: #ddd !important;
+}
+
+.evaluate {
+    display: none;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    margin: 0;
+    text-align: center;
+}
+
+.evaluation {
+    margin-top: 3px;
+}
+
+.flashcards {
+    position: relative;
+}
+
+.currentFlashcard {
+    position: relative;
+    left: -6px;
+}
+
+.modal-form-actions {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.box-modal {
+    margin-top: 0px !important;
+}
+.modal-box {
+    border: 8px solid #368ee0 !important;
+}
+.modal-close {
+    padding-right: 8px !important;
+}
+
+.slider-custom {
+    display: none !important;
+}
+
+.centerTable > td {
+    text-align: center !important;
+}
+
+#transition {
+    position: relative;
+    display: none;
+}
+
+.flex-video {
+    position: relative;
+    padding-top: 25px;
+    padding-bottom: 67.5%;
+    height: 0;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+.flex-video.widescreen { padding-bottom: 57.25%; }
+.flex-video.vimeo { padding-top: 0; }
+.flex-video iframe,
+.flex-video object,
+.flex-video embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+@media only screen and (max-device-width: 800px), only screen and (device-width: 1024px) and (device-height: 600px), only screen and (width: 1280px) and (orientation: landscape), only screen and (device-width: 800px), only screen and (max-width: 767px) {
+    .flex-video { padding-top: 0; }
+}
+
+.loginButtons {
+
+}
+
+.login-or {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-weight: 200;
+    line-height: 30px;
+    font-size: 15px;
+}
+
+.icon-facebook-sign {
+    margin-right: 3px;
+    font-size: 20px !important;
+}
+
+.brand {
+    margin-top: 5px;
+}
+
+
+html, body {
+    height: 100%;
+}
+.push {
+    margin-bottom: 40px;
+}
+#footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    height: 40px;/* .push must be the same height as .footer */
+}
+
+
+
+/*.modal {*/
+    /*position: absolute !important;*/
+/*}*/
+
+.activityDate {
+    font-size: 75%;
+}
+
+@media (max-width : 480px) {
+.form-actions .btn {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 2px;
+}
+}

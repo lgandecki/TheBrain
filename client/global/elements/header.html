@@ -1,0 +1,13 @@
+<template name="header">
+<div id="navigation" class="navbar-fixed-top">
+    <div class="container-fluid">
+        <a href="{{homePath}}" id="brand">TheBrain</a>
+        {{#if isLoggedIn}}
+            {{> topMenu }}
+            {{> userHeader }}
+        {{else}}
+            {{> logInHeader }}
+        {{/if}}
+        </div>
+    </div>
+</template>

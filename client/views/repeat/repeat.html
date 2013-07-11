@@ -1,0 +1,65 @@
+<template name="repeat">
+
+    <div class="row-fluid">
+        <div class="span9 center">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> Improve TheBrain connections!</h3>
+                </div>
+
+                <div class="box-content nopadding">
+                    <div class="tabs-container">
+                        <ul class="tabs tabs-inline tabs-left ">
+                            <li class="active">
+                                <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> <span class="hidden-phone">Repetitions</span></a>
+                            </li>
+                            <li>
+                                <a href="#picture" data-toggle="tab"><i class='icon-camera'></i> <span class="hidden-phone">Picture</span></a>
+                            </li>
+                            <li>
+                                <a href="#second" data-toggle="tab"><i class="icon-twitter"></i> <span class="hidden-phone">Comments </span>(9)</a>
+                            </li>
+
+                            <li>
+                                <a href="#thirds" data-toggle="tab"><i class="icon-calendar"></i> <span class="hidden-phone">History</span></a>
+                            </li>
+                            <li>
+                                <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span class="hidden-phone">Edit</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content padding tab-content-inline">
+                        <div class="tab-pane active" id="repeatFlashcards">
+                            <div class="flashcards">
+
+                                <div class="currentFlashcard">
+                                    <textarea class="flashcard front"></textarea>
+                                    <textarea class="flashcard answer hidden-phone"></textarea>
+                                    <button class="btn btn-large btn-primary btn-block btn-show-answer visible-phone" style="">Show answer</button>
+                                    <textarea class="flashcard back" style="display: none;"></textarea>
+
+                                    <div class="evaluate" class="form-actions" item-id="">
+                                        <button class="btn btn-primary evaluation" value="0">Blackout</button>
+                                        <button class="btn btn-primary evaluation" value="1">Terrible</button>
+                                        <button class="btn btn-primary evaluation" value="2">Bad</button>
+                                        <button class="btn btn-primary evaluation" value="3">Hardly</button>
+                                        <button class="btn btn-primary evaluation" value="4">Good</button>
+                                        <button class="btn btn-primary evaluation" value="5">Perfect!</button>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="picture">
+                            awerwreaw
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</template>

@@ -1,0 +1,1 @@
+ItemFlashcards = new Meteor.Collection("itemFlashcards");
