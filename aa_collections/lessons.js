@@ -1,12 +1,12 @@
-Lessons = new Meteor.Collection('lessons');
-
-Lessons.allow({
-
-    'insert': isAdmin,
-    'update': isAdmin,
-    'remove': isAdmin
-
-});
+//Lessons = new Meteor.Collection('lessons');
+//
+//Lessons.allow({
+//
+////    'insert': isAdmin,
+////    'update': isAdmin,
+////    'remove': isAdmin
+//
+//});
 
 Meteor.methods({
     newLesson: function (lessonAttributes) {
@@ -26,13 +26,18 @@ Meteor.methods({
         if (Courses.find({_id: lessonAttributes.courseId, admins: user._id}).count() < 1)
             throw new Meteor.Error(422, "You can only add lesson to your course");
 
-        var lesson = _.extend(_.pick(lessonAttributes, "name", "shortDescription", "courseId"), {
+        _newLessonId = new Meteor.Collection.ObjectID()._str;
+
+        var lesson = _.extend(_.pick(lessonAttributes, "name", "shortDescription"), {
+            _id: _newLessonId
         });
 
-        _newLessonId = Lessons.insert(lesson);
+        console.log("lesson", lesson);
+        Courses.update({_id: lessonAttributes.courseId}, {$addToSet: {lessons: lesson}});
+
         if (_newLessonId) {
             var courseEvent = {
-                "courseId": lesson.courseId,
+                "courseId": lessonAttributes.courseId,
                 "user": user._id,
                 "type": "newLesson",
                 "lessonId": _newLessonId,
@@ -42,6 +47,7 @@ Meteor.methods({
             CourseEvents.insert(courseEvent);
         }
 
+        Meteor.theBrain.addConnections(15);
 
     }
 })

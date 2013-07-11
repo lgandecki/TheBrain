@@ -5,7 +5,6 @@ Template.newCourseModal.events({
         $(e.target).attr("disabled", true).html("Adding...");
         if (validateNewCourse()) {
             newCourse = createNewCourse();
-            _result = false;
             Meteor.call('newCourse', newCourse, function (error, id) {
                 if (error) {
                     Meteor.popUp.error("TheBrain is confused", "Course adding server error: " + error.reason);
@@ -13,12 +12,8 @@ Template.newCourseModal.events({
                 else {
                     Meteor.popUp.success("Course added", "TheBrain prepared new neural path you asked for.");
                     $("#newCourseModal").modal("hide");
-                    _result = true;
                 }
             });
-            if (_result) {
-                $("#newCourseModal").modal("hide");
-            }
         }
         else {
             Meteor.validations.markInvalids();

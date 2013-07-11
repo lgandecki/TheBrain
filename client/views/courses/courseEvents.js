@@ -4,9 +4,9 @@ Template.courseEvents.courseEvent = function () {
 }
 
 Template.courseEvents.eventData = function (e) {
-    console.log("this event" + this.type);
+    //console.log("this event" + this.type);
     var _event = {};
-                           console.log("this ", this);
+                       //    console.log("this ", this);
     switch (this.type) {
         case 'created':
 
@@ -18,7 +18,9 @@ Template.courseEvents.eventData = function (e) {
             };
             break;
         case 'newLesson':
-            _lesson = Lessons.findOne(this.lessonId);
+            _course = Courses.findOne({_id: Session.get("selectedCourse")});
+            _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), this.lessonId);
+            _lesson = _course.lessons[_lessonIndex];
             _event = {
                 color: "blue",
                 icon: "icon-bullhorn",

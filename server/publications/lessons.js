@@ -1,3 +1,3 @@
-Meteor.publish("lessons", function(id) {
-    return Lessons.find();
-});
+//Meteor.publish("lessons", function(id) {
+//    return Lessons.find();
+//});

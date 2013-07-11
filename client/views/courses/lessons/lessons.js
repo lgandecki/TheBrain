@@ -1,5 +1,6 @@
 Template.lessonsTable.lesson = function () {
-    return Lessons.find({courseId: Session.get("selectedCourse")});
+    _course = Courses.findOne({_id: Session.get("selectedCourse")});
+    return _course ? _course.lessons : [];
 }
 
 
@@ -9,12 +10,12 @@ Template.lessonsTable.rendered = function () {
 
     $('.lesson-name.editable:not(.editable-click)').editable('destroy').editable({
         success: function (response, newName) {
-            Lessons.update($(this).attr("data-id"), {$set: {name: newName}});
+            //Lessons.update($(this).attr("data-id"), {$set: {name: newName}});
         }});
 
     $('.lesson-description.editable:not(.editable-click)').editable('destroy').editable({
         success: function (response, newDescription) {
-            Lessons.update($(this).attr("data-id"), {$set: {shortDescription: newDescription}});
+            //Lessons.update($(this).attr("data-id"), {$set: {shortDescription: newDescription}});
         }});
 
 }

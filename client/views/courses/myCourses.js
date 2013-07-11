@@ -3,6 +3,10 @@ Template.myCourses.course = function() {
     return Courses.find({admins: Meteor.userId()});
 };
 
+Template.myCourses.lessonsLength = function() {
+
+}
+
 Template.myCourses.events({
     "click .courseRow": function(e) {
         console.log("this " + this._id);

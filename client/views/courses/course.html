@@ -3,20 +3,20 @@
     <div class="row-fluid">
         <div class="span12">
             <div class="box box-bordered box-color">
-                {{#with course}}
+
                     <div class="box-title">
                         <h3><i class="icon-th-list"></i> Course: {{name}}</h3>
                     </div>
 
                     <div class="box-content nopadding">
                         <div class="tabs-container">
-                            <ul class="tabs tabs-inline tabs-left ">
-                                <li class="active">
-                                    <a href="#events" data-toggle="tab"><i class="icon-road"></i> <span
+                            <ul class="tabs tabs-inline tabs-left nav">
+                                <li>
+                                    <a href="#events" data-toggle="tab" class="tabLink"><i class="icon-road"></i> <span
                                             class="hidden-phone">Course Events</span></a>
                                 </li>
                                 <li>
-                                    <a href="#lessons" data-toggle="tab"><i class='icon-camera'></i> <span
+                                    <a href="#lessons" data-toggle="tab" class="tabLink"><i class='icon-camera'></i> <span
                                             class="hidden-phone">Lessons</span></a>
                                 </li>
                                 <li>
@@ -28,7 +28,6 @@
                                     <a href="#thirds" data-toggle="tab"><i class="icon-calendar"></i> <span
                                             class="hidden-phone">History</span></a>
                                 </li>
-                                {{#if isCourseOwner}}
                                     <li>
                                         <a href="#stats" data-toggle="tab"><i class="icon-edit"></i> <span
                                                 class="hidden-phone">Stats</span></a>
@@ -45,18 +44,18 @@
                                         <a href="#addFlashcard" data-toggle="tab"><i class="icon-edit"></i> <span
                                                 class="hidden-phone">Add Flashcard</span></a>
                                     </li>
-                                {{/if}}
                             </ul>
                         </div>
                         <div class="tab-content padding tab-content-inline">
+                            {{#with course}}
                             {{> courseEventsTab }}
                             {{> courseLessonsTab }}
+                            {{/with}}
                             <div class="tab-pane" id="picture">
                                 awerwreaw
                             </div>
                         </div>
                     </div>
-                {{/with}}
             </div>
         </div>
     </div>
