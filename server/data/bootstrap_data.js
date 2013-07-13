@@ -55,6 +55,7 @@ bootstrapData = {
             "downVotes": [],
             "news": [],
             "lessons": [],
+            "events": [],
             "shortDescription": "",
             "longDescription": "",
             "comments": [

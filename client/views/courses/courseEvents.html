@@ -1,5 +1,5 @@
 <template name="courseEventsTab">
-    <div class="tab-pane" id="events">
+    <div class="tab-pane active fade in" id="events">
         {{> courseEvents }}
 
     </div>
@@ -16,7 +16,10 @@
         </div>
         <div class="box-content nopadding">
             <ul class="timeline">
-                {{#each courseEvent}}
+                {{#with course}}
+
+                    {{#each event}}
+
                     <li>
                         <div class="timeline-content">
                             {{#with eventData}}
@@ -42,6 +45,7 @@
                         <div class="line"></div>
                     </li>
                 {{/each}}
+{{/with}}
             </ul>
         </div>
     </div>

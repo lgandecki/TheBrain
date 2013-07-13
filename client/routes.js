@@ -17,6 +17,15 @@ Meteor.Router.add({
         return "course";
     }
 
+    , '/courseLessons/:id': function(id) {
+        Session.set("selectedCourse", id);
+//        if (!Session.get("selectedCourseTab")) {
+//            console.log("We are doing this for some reason " + Session.get("selectedCourseTab"));
+        Session.set("selectedCourseTab", "#events");
+//        }
+        return "courseLessons";
+    }
+
     , '/login': function() {
         return "login";
     }

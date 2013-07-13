@@ -1,16 +1,11 @@
 Template.newLessonModal.events({
-    "click .addLesson2": function(e, template) {
-        e.preventDefault();
-    },
     "click .addLesson": function (e, template) {
-        var _result = false;
         e.preventDefault();
         Meteor.validations.clearErrors();
         $(e.target).attr("disabled", true).html("Adding...");
         if (validateNewLesson()) {
             newLesson = createNewLesson();
             Meteor.call('newLesson', newLesson, function (error, id) {
-                console.log("_result before ", _result);
                 if (error) {
                     Meteor.popUp.error("TheBrain is confused", "Lesson adding server error: " + error.reason);
                 }
@@ -19,15 +14,8 @@ Template.newLessonModal.events({
                     console.log("are we hiding it from the else");
                     $("#newLessonModal").modal("hide");
 
-                    _result = true;
-                    console.log("_result meanwhile ", _result);
                 }
             });
-//            console.log("_result after ", _result);
-//            if (_result === true) {
-//                console.log("Are we hiding it from the result");
-//                //$("#newLessonModal").modal("hide");
-//            }
         }
         else {
             Meteor.validations.markInvalids();

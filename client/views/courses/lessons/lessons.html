@@ -1,10 +1,16 @@
 <template name="courseLessonsTab">
-    <div class="tab-pane" id="lessons">
-        {{> lessonsTable }}
+    <div class="tab-pane fade" id="lessons">
+        {{> courseLessons }}
     </div>
 </template>
 
+<template name="courseLessons">
+    {{> lessonsTable }}
+    {{> newLessonModal }}
+</template>
+
 <template name="lessonsTable">
+
     <div class="row-fluid">
         <div class="span12">
             <div class="box box-bordered box-color">
@@ -23,6 +29,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {{#isolate}}
                             {{#each lesson}}
                             <tr class="lessonRow" data-id="{{_id}}">
                                 <td><a href="javascript:" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a></td>
@@ -38,6 +45,7 @@
                                 </td>
                             </tr>
                             {{/each}}
+                        {{/isolate}}
                         <tr>
                             <td></td><td></td><td class="hidden-480"></td><td></td>
                             <td><button class="btn btn-primary btn-addLessonModal btn-block" data-id="{{_id}}"><i class="icon-plus-sign-at"></i> Add new</button></td>
@@ -49,5 +57,4 @@
             </div>
         </div>
     </div>
-    {{> newLessonModal }}
 </template>

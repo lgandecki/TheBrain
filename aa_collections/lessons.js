@@ -33,19 +33,21 @@ Meteor.methods({
         });
 
         console.log("lesson", lesson);
-        Courses.update({_id: lessonAttributes.courseId}, {$addToSet: {lessons: lesson}});
-
         if (_newLessonId) {
-            var courseEvent = {
-                "courseId": lessonAttributes.courseId,
+            var event = {
                 "user": user._id,
                 "type": "newLesson",
                 "lessonId": _newLessonId,
                 "created": { by: user._id, on: Meteor.moment.now() },
                 "lastModified": { by: user._id, on: Meteor.moment.now() }
             }
-            CourseEvents.insert(courseEvent);
+            //CourseEvents.insert(event);
         }
+
+        Courses.update({_id: lessonAttributes.courseId}, {$addToSet: {lessons: lesson, events: event}});
+            //, $addToSet: {events: event}});
+
+
 
         Meteor.theBrain.addConnections(15);
 

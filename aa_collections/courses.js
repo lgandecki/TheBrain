@@ -39,30 +39,42 @@ Meteor.methods({
             admins: [user._id],
             upVotes: [],
             downVotes: [],
-            lessons: [],
-            flashcards: 0
-        });
-
-        _newCourseId = Courses.insert(course);
-
-        if (_newCourseId) {
-            var _newLesson = {
-                name: "Lesson 1",
-                shortDescription: "",
-                courseId: _newCourseId
-            };
-
-            Meteor.call('newLesson', _newLesson);
-
-            var courseEvent = {
-                "courseId": _newCourseId,
+            lessons: [{
+                "_id": new Meteor.Collection.ObjectID()._str,
+                name: "Day One",
+                shortDescription: "Temporary description"
+            }],
+            events: [{
+                "_id": new Meteor.Collection.ObjectID()._str,
                 "user": user._id,
                 "type": "created",
                 "created": { by: user._id, on: Meteor.moment.now() },
                 "lastModified": { by: user._id, on: Meteor.moment.now() }
-            }
-            CourseEvents.insert(courseEvent);
-        }
+            }],
+            flashcards: 0
+        });
+
+        _newCourseId = Courses.insert(course);
+        Meteor.theBrain.addConnections(15);
+
+//        if (_newCourseId) {
+//            var _newLesson = {
+//                name: "Lesson 1",
+//                shortDescription: "",
+//                courseId: _newCourseId
+//            };
+//
+//            Meteor.call('newLesson', _newLesson);
+
+//            var courseEvent = {
+//                "courseId": _newCourseId,
+//                "user": user._id,
+//                "type": "created",
+//                "created": { by: user._id, on: Meteor.moment.now() },
+//                "lastModified": { by: user._id, on: Meteor.moment.now() }
+//            }
+//            CourseEvents.insert(courseEvent);
+//        }
 
 
     },

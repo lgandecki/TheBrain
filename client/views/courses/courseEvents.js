@@ -1,6 +1,15 @@
 
-Template.courseEvents.courseEvent = function () {
-    return CourseEvents.find({courseId: Session.get("selectedCourse")}, {sort: {"lastModified.on" : -1}});
+Template.courseEvents.course = function () {
+    _course = Courses.findOne({_id: Session.get("selectedCourse")});
+
+    return _course;
+    //? _course.events : {}
+    //CourseEvents.find({courseId: Session.get("selectedCourse")}, {sort: {"lastModified.on" : -1}});
+}
+
+Template.courseEvents.event = function() {
+    console.log("this ", this);
+    return this.events;
 }
 
 Template.courseEvents.eventData = function (e) {
