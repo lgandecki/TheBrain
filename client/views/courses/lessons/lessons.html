@@ -7,17 +7,16 @@
 <template name="courseLessons">
     {{> lessonsTable }}
     {{> newLessonModal }}
+    {{> newFlashcardModal }}
+    {{> newCollectionModal }}
 </template>
 
 <template name="lessonsTable">
 
     <div class="row-fluid">
         <div class="span12">
-            <div class="box box-bordered box-color">
-                <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Lessons</h3>
-                </div>
-                <div class="box-content nopadding">
+            <div class="box box-tab">
+                <div class="nopadding">
                     <table class="table table-hover table-nomargin">
                         <thead>
                         <tr>

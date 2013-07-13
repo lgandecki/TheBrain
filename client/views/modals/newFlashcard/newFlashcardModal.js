@@ -7,11 +7,21 @@
  */
 
 Template.newFlashcardModal.selectedCourseName = function() {
-    _selectedCourse = Courses.findOne(Session.get("selectedCourse"));
+	_selectedCourseSession = Session.get("selectedCourse");
+    var _selectedCourse = Courses.findOne({_id: _selectedCourseSession});
     return _selectedCourse ? _selectedCourse.name : "";
 }
 
 Template.newFlashcardModal.selectedLessonName = function() {
-    _selectedLesson = Lessons.findOne(Session.get("selectedLesson"));
-    return _selectedLesson ? _selectedLesson.name : "";
+    var _selectedCourse = Courses.findOne({_id: Session.get("selectedCourse")});
+    var _selectedLesson = Session.get("selectedLesson");
+    console.log("_selectedLesson", _selectedLesson);
+    if (_selectedCourse && _selectedLesson) {
+	    var _lessonIndex = _.indexOf(_.pluck(_selectedCourse.lessons, '_id'), _selectedLesson);
+	   	console.log("_lessonIndex", _lessonIndex);
+	   	_lesson = _selectedCourse.lessons[_lessonIndex];
+	   	console.log("_lesson", _lesson);
+	    return _lesson ? _lesson.name : "";
+    }
+	return "";
 }

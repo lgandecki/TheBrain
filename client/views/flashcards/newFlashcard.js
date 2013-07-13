@@ -3,7 +3,7 @@ Template.flashcardForm.collection = function () {
 };
 
 Template.flashcardForm.course = function () {
-    return Courses.find({admins: Meteor.userId()});
+    return Courses.find({$or: [{admins: Meteor.userId()}, {public: true}]});
 };
 
 Template.flashcardForm.events({

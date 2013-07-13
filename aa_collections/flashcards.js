@@ -28,6 +28,7 @@ Meteor.methods({
             throw new Meteor.Error(422, "Please fill the front of your flashcard");
 
 
+        flashcard = {};
         flashcard.lessons = {};
 
         if (flashcardAttributes.course) {

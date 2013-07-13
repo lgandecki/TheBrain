@@ -30,12 +30,19 @@ Template.lessonsTable.events({
     "click .lessonRow .btn": function(e) {
         e.stopPropagation();
     },
-    "click .lessonRow:not(.editable)": function(e) {
+    "click .lessonRow:not(.editable), click .btn-enterLesson": function(e) {
         console.log("this " + this._id);
         Meteor.Router.to('/lesson/' + this._id);
     },
     "click .btn-addLessonModal": function (e, template) {
         e.preventDefault();
         $('#newLessonModal').modal('show');
+    },
+    "click .btn-addFlashcardToLesson": function (e, template) {
+        e.preventDefault();
+        console.log("this._id", this._id);
+        $("#newFlashcardModal").modal('show');
+        Session.set("selectedLesson", this._id);
+
     }
 });
