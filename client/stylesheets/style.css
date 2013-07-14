@@ -190,3 +190,10 @@ html, body {
 .repeat {
     padding: 20px 0 0 0;
 }
+
+.clickable { cursor: pointer; !important }
+
+.btn-primary-reversed {
+    background: #fff;
+    color: #368ee0;
+}

@@ -61,6 +61,27 @@ Meteor.methods({
 
 
     },
+    downVoteCourse: function(courseId) {
+        var user = Meteor.user();
+        if (!user) 
+            throw new Meteor.Error(401, "You need to login to vote");
+        _course = Courses.findOne(courseId);
+        if (!_course) 
+            throw new Meteor.Error(401, "You have to vote on existing course!");
+        Courses.update({_id: courseId}, {$addToSet: {downVotes: user._id}, $pull: {upVotes: user._id}});
+
+    },
+    upVoteCourse: function(courseId) {
+        var user = Meteor.user();
+        if (!user) 
+            throw new Meteor.Error(401, "You need to login to vote");
+        _course = Courses.findOne(courseId);
+        if (!_course) 
+            throw new Meteor.Error(401, "You have to vote on existing course!");
+        console.log("in upVoteCourse", courseId);
+        Courses.update({_id: courseId}, {$addToSet: {upVotes: user._id}, $pull: {downVotes: user._id}});
+   
+    },
     courseCommentVoteUp: function(courseId) {
         var user = Meteor.user();
         if (!user)

@@ -19,14 +19,14 @@
 
 <body>
 <div id="wrapper">
-{{> header }}
+{{#isolate}}{{> header }}{{/isolate}}
 
 
 <div id="main">
-    {{#if isLoggedIn}}{{> topPanel }}{{/if}}
+    {{#isolate}}{{#if isLoggedIn}}{{> topPanel }}{{/if}}{{/isolate}}
         <div id="transition">
             <div class="container-fluid">
-    {{renderPage}}
+    {{#isolate}} {{renderPage}} {{/isolate}}
             </div>
             </div>
     <div class="push"></div>

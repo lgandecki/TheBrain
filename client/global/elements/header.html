@@ -3,8 +3,8 @@
     <div class="container-fluid">
         <a href="{{homePath}}" id="brand">TheBrain</a>
         {{#if isLoggedIn}}
-            {{> topMenu }}
-            {{> userHeader }}
+            {{#isolate}}{{> topMenu }}{{/isolate}}
+            {{#isolate}}{{> userHeader }}{{/isolate}}
         {{else}}
             {{> logInHeader }}
         {{/if}}

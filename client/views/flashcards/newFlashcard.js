@@ -1,4 +1,4 @@
-Template.flashcardForm.collection = function () {
+Template.collectionGroup.collection = function () {
     return Meteor.user() ? Meteor.user().collections : [];
 };
 
@@ -51,7 +51,7 @@ Template.flashcardButtons.events({
     }
 });
 
-Template.flashcardForm.selectIfNewOrMain = function () {
+Template.collectionGroup.selectIfNewOrMain = function () {
     var _newCollectionName = Session.get("newCollectionName");
     if (_newCollectionName) {
         return this.name === _newCollectionName ? "selected" : "";
@@ -66,6 +66,7 @@ Template.flashcardForm.selectIfSelectedCourse = function () {
         return this._id === _selectedCourse ? "selected" : "";
     }
     return "";
+
 };
 
 Template.flashcardForm.selectIfSelectedLesson = function () {
@@ -74,6 +75,14 @@ Template.flashcardForm.selectIfSelectedLesson = function () {
         return this._id === _selectedLesson ? "selected" : "";
     }
     return "";    
+}
+
+Template.collectionGroup.rendered = function() {
+    console.log("collectionGroup rendered");
+    $("#collection.select2").select2();
+    _selectedId = $("#collection option:selected").val();
+    $("#collection").select2("val", _selectedId);
+
 }
 
 addFlashcard = function (e) {
@@ -129,10 +138,16 @@ createNewFlashcard = function () {
     return _newFlashcard;
 };
 
+Template.publicGroup.rendered = function() {
+    $('#public').parent().bootstrapSwitch().on('switch-change', function(e, data){
+        console.log("data.value", data.value);
+        $("#public").val(data.value);
+    });
+}
 
 
 Template.flashcardForm.rendered = function() {
     if (Session.get("selectedCourse")) {
-        // $("#coursesControlGroup").hide();
+        $("#coursesControlGroup").hide();
     }
 }

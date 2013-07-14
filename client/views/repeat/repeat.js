@@ -59,35 +59,63 @@ function returnNextItem() {
 
 
 Template.repeat.created = function () {
-    Session.set("itemsToRepeat", "");
-    var _itemsToLearn = {};
-    myCollections = Meteor.user().collections || [];
-    myCollections.forEach(function(collection) {
-        _itemsToLearn[collection._id] = 99999;
-    });
 
-    Session.set("itemsToLearn", _itemsToLearn);
-
-    console.log("_itemsToLearn " + _itemsToLearn);
-    itemsToLearn = Session.get("itemsToLearn");
 };
+
+_firstRender = true;
 
 Template.repeat.rendered = function () {
 //
 
     window.clearTimeout(_renderer);
     _renderer = window.setTimeout(function () {
-        displayNextRepetition();
         Meteor.tabs.setHeight();
+
+        if (_firstRender) {
+
         $(".currentFlashcard > .back").prop("disabled", true);
         $(".currentFlashcard > .front").prop("disabled", true);
+
+        _firstRender = false;
+            Session.set("itemsToRepeat", "");
+            var _itemsToLearn = {};
+            myCollections = Meteor.user().collections || [];
+            myCollections.forEach(function(collection) {
+                _itemsToLearn[collection._id] = 99999;
+            });
+
+            console.log("myCollections ", myCollections);
+
+            Session.set("itemsToLearn", _itemsToLearn);
+
+            console.log("_itemsToLearn " + _itemsToLearn);
+            itemsToLearn = Session.get("itemsToLearn");
+
+        if (Session.equals("showScheduleModal", true)) {
+            console.log("Are we supposed to show the modal?");
+            
+            $("#scheduleModal").modal("show").on('hidden', function() {
+                displayNextRepetition();
+            });
+        }
+        else {
+            console.log("Or not?");
+            displayNextRepetition();
+        }
+    }
+
+
     }, 150);
 };
 
+Template.repeat.destroyed = function() {
+    Session.set("showScheduleModal", false);
+    _firstRender = true;
+}
 
 displayNextRepetition = function() {
     _nextItem = returnNextItem();
-    console.log("nextItem " + _nextItem);
+    console.log("nextItem ", _nextItem);
     if (_nextItem) {
         currentItemId = _nextItem;
         fillTemplate();
@@ -151,13 +179,6 @@ Template.repeat.events({
         var _itemId = $(e.target).parent().attr("item-id");
         var _item = Items.findOne(_itemId);
         setNextRepetition(_evaluation, _item);
-        collectionId = Collections.findOne(_item.collection)._id;
-        if (itemsToLearn[collectionId] === 1) {
-            delete itemsToLearn[collectionId];
-        }
-        else {
-            itemsToLearn[collectionId]--;
-        }
     }
 });
 

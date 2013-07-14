@@ -9,11 +9,7 @@ bootstrapData = {
             "password": "testowe",
             "points": 50,
             "achievements": [],
-                        "collections": [
-                {
-                    "name": "Main collection"
-                }
-            ],
+            
         },
         {   "_id": "normalUser",
             "email": "andy@css.edu",
@@ -22,13 +18,7 @@ bootstrapData = {
             },
             "password": "testowe2",
             "points": 100,
-            "collections": [
-                {
-                    "name": "Main collection",
-                    "itemsToLearn": [],
-                    "itemsToRepeat": []
-                }
-            ],
+            
             "achievements": []
         },
         {   "_id": "normalUser2",
@@ -38,13 +28,7 @@ bootstrapData = {
             },
             "password": "testowe3",
             "points": 500,
-            "collections": [
-                {
-                    "name": "Main collection",
-                    "itemsToLearn": [],
-                    "itemsToRepeat": []
-                }
-            ],
+            
             "achievements": []
         },
 

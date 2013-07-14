@@ -13,6 +13,6 @@ Meteor.methods({
         });
 
         Meteor.users.update({_id: user._id}, {$addToSet: {collections: collection}});
-        Meteor.theBrain.addConnections(10);
+        //Meteor.theBrain.addConnections(10);
     }
 })

@@ -6,6 +6,11 @@ Meteor.Router.add({
 
     , '/repeat': "repeat"
 
+    , '/learnAndRepeat': function() {
+        Session.set("showScheduleModal", true);
+        return "repeat";
+    } 
+
     , '/myCourses': "myCourses"
 
     , '/course/:id': function(id) {
@@ -41,7 +46,7 @@ Meteor.Router.filters({
     "postLoad": function (page) {
 
 
-
+                        console.log("So we end up doing this twice ", page);
                 var _tran = $("#transition")
                     , _html = _tran.html()
                     , _off = _tran.offset()
@@ -49,8 +54,8 @@ Meteor.Router.filters({
                     , _prev = null
                     , _easing = "easeInOutCubic";
 
-                if (_html) {
-                    _prev = $("<div id='previousPage'/>").html(_html).css({ "z-index": 0, position: "absolute", left: _off.left + "px", top: _off.top + "px", width: _width + "px" });
+                if (_html && $(".previousPage").length === 0 && !Meteor.loggingIn()) {
+                    _prev = $("<div class='previousPage'/>").html(_html).css({ "z-index": 0, position: "absolute", left: _off.left + "px", top: _off.top + "px", width: _width + "px" });
                     $(document.body).append(_prev);
                     _tran.hide();
                 }
@@ -69,6 +74,7 @@ Meteor.Router.filters({
                                 $(".answer").focus();
                             });
 
+                      // $(".select2").select2();
 
 //                    //auto converts all selects to chosen
 //                    $(".make-chosen").chosen({allow_single_deselect: true});
@@ -83,13 +89,32 @@ Meteor.Router.filters({
                     resizeContent();
 
                 }, 10);
+        
 
-         if (Meteor.user()) {
-            console.log("So we end up doing this twice");
-            return page;
+                        // setTimeout(function () {
+        //     if (Meteor.userId()) {
+        //         console.log("Inside logged");
+
+
+
+        //     return page;
+
+        // }
+        // else {
+        //     return "login";
+        // }
+
+        if (Meteor.loggingIn()) {
+            return "loading";
+
+        }
+        else if (Meteor.userId()) {
+
+             return page;
         } else {
             return "login";
         }
+        
     }
 });
 

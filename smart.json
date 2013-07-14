@@ -3,6 +3,7 @@
     "jquery-ui": {},
     "jquery-ui-bootstrap": {},
     "accounts-ui-bootstrap-dropdown": {},
-    "router": {}
+    "router": {},
+    "select2": {}
   }
 }
