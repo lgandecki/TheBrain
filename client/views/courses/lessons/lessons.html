@@ -21,8 +21,8 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th class="hidden-480">Description</th>
-                            <th class="hidden-480">Flashcards</th>
+                            <th class="hidden-phone">Description</th>
+                            <th class="hidden-phone">Flashcards</th>
                             <th>Enter</th>
                             <th>Add Flashcards</th>
                         </tr>
@@ -32,8 +32,8 @@
                             {{#each lesson}}
                             <tr class="lessonRow" data-id="{{_id}}">
                                 <td><a href="javascript:" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a></td>
-                                <td class="hidden-480"><a href="javascript;" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a></td>
-                                <td>{{flashcards}}</td>
+                                <td class="hidden-phone"><a href="javascript;" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a></td>
+                                <td class="hidden-phone">{{flashcards}}</td>
                                 <td>
                                     <button class="btn btn-primary btn-enterLesson btn-block" data-id="{{_id}}"><i class="icon-hand-left"></i>
                                     </button>
@@ -46,8 +46,8 @@
                             {{/each}}
                         {{/isolate}}
                         <tr>
-                            <td></td><td></td><td class="hidden-480"></td><td></td>
-                            <td><button class="btn btn-primary btn-addLessonModal btn-block" data-id="{{_id}}"><i class="icon-plus-sign-at"></i> Add new</button></td>
+                            <td></td><td class="hidden-phone"></td><td class="hidden-phone"></td><td></td>
+                            <td><button class="btn btn-primary btn-addLessonModal btn-block" data-id="{{_id}}"><i class="icon-plus-sign-at"></i> New Lesson</button></td>
                         </tr>
 
                         </tbody>

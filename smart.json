@@ -4,6 +4,7 @@
     "jquery-ui-bootstrap": {},
     "accounts-ui-bootstrap-dropdown": {},
     "router": {},
-    "select2": {}
+    "select2": {},
+    "modernizr-meteor": {}
   }
 }

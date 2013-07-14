@@ -14,10 +14,13 @@ Template.myCollectionsList.rendered = function() {
             mode: 'inline',
             showbuttons: false,
             success: function(response, newValue) {
+
                 console.log("newValue " + newValue + "collection Id " + $(this).attr("data-id"));
             },
             validate: function(value) {
-                if (value > Math.floor(value)) {
+                _value = parseFloat(value);
+                var intRegex = /^\d+$/;
+                if (!intRegex.test(_value)){
                     return "Has to be decimal";
                 }
             }

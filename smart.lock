@@ -6,7 +6,8 @@
       "jquery-ui-bootstrap": {},
       "accounts-ui-bootstrap-dropdown": {},
       "router": {},
-      "select2": {}
+      "select2": {},
+      "modernizr-meteor": {}
     },
     "packages": {
       "jquery-ui": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/nate-strauser/meteor-select2.git",
         "tag": "v3.4.0",
         "commit": "a731bdb357cadd840aa5d9a3e893ab3df097a09c"
+      },
+      "modernizr-meteor": {
+        "git": "https://github.com/ckir/modernizr-meteor.git",
+        "tag": "v2.6.2",
+        "commit": "391ca2a3beff3cd2b0e1099cb2d744b5a2e8a73e"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
