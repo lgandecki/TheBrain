@@ -12,6 +12,8 @@ Template.newCourseModal.events({
                 else {
                     Meteor.popUp.success("Course added", "TheBrain prepared new neural path you asked for.");
                     $("#newCourseModal").modal("hide");
+                    $("#newCourseName").val("");
+                    $("#newCourseShortDescription").val("");
                 }
             });
         }

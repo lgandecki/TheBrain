@@ -7,7 +7,6 @@ Meteor.startup(function(){
         {collectionName: "FlashcardCommentVotes", logMethod: "json"},
         {collectionName: "CourseVotes", logMethod: "json"},
         {collectionName: "CourseCommentVotes", logMethod: "json"},
-        {collectionName: "Collections", logMethod: "json"},
         {collectionName: "TheBrain", logMethod: "json"}
 
     ]

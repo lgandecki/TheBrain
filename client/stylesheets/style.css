@@ -42,7 +42,8 @@ textarea[disabled].flashcard  {
     margin-top: 0px !important;
 }
 .modal-box {
-    border: 8px solid #368ee0 !important;
+    border: 5px solid #368ee0 !important;
+    border-top: 0px !important;
 }
 .modal-close {
     padding-right: 8px !important;
@@ -163,4 +164,29 @@ html, body {
     form input[type='text'] {
         width: 98%;
     }
+}
+
+.badge-upVote.badge-success {
+    border: 1px solid #468847;   
+}
+
+.badge-success-reversed {
+    background-color: white;
+    border: 1px solid #468847;
+    color: #468847;
+}
+
+
+.badge-downVote.badge-warning {
+    border: 1px solid #f89406;   
+}
+
+.badge-warning-reversed {
+    background-color: white;
+    border: 1px solid #f89406;
+    color: #f89406;
+}
+
+.repeat {
+    padding: 20px 0 0 0;
 }

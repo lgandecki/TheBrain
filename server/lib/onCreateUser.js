@@ -5,6 +5,9 @@ Accounts.onCreateUser(function (options, user) {
     if (options._id) {
         user._id = options._id;
     }
+    else {
+        // user._id = 
+    }
 
     if (options.identity) {
         user.identity = options.identity;
@@ -19,6 +22,18 @@ Accounts.onCreateUser(function (options, user) {
 
     user.points = options.points ? options.points : 0;
 
+    if (options.collections) {
+        user.collections = options.collections;
+    }
+    else {
+        _.extend(user, {
+            "collections": [
+            {
+                "_id": new Meteor.Collection.ObjectID()._str,
+                "name": "Main collection"
+            }]
+        })
+    }
 
     if (options.achievements) {
         user.achievements = options.achievements;

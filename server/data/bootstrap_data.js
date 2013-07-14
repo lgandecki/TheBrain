@@ -8,7 +8,12 @@ bootstrapData = {
             },
             "password": "testowe",
             "points": 50,
-            "achievements": []
+            "achievements": [],
+                        "collections": [
+                {
+                    "name": "Main collection"
+                }
+            ],
         },
         {   "_id": "normalUser",
             "email": "andy@css.edu",

@@ -51,30 +51,13 @@ Meteor.methods({
                 "created": { by: user._id, on: Meteor.moment.now() },
                 "lastModified": { by: user._id, on: Meteor.moment.now() }
             }],
-            flashcards: 0
+            flashcards: 0,
+            comments: 0
         });
 
         _newCourseId = Courses.insert(course);
         Meteor.theBrain.addConnections(15);
 
-//        if (_newCourseId) {
-//            var _newLesson = {
-//                name: "Lesson 1",
-//                shortDescription: "",
-//                courseId: _newCourseId
-//            };
-//
-//            Meteor.call('newLesson', _newLesson);
-
-//            var courseEvent = {
-//                "courseId": _newCourseId,
-//                "user": user._id,
-//                "type": "created",
-//                "created": { by: user._id, on: Meteor.moment.now() },
-//                "lastModified": { by: user._id, on: Meteor.moment.now() }
-//            }
-//            CourseEvents.insert(courseEvent);
-//        }
 
 
     },

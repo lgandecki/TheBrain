@@ -14,7 +14,7 @@ Template.course.name = function () {
 
 Template.course.isCourseOwner = function () {
     var _selectedCourse = Courses.findOne({_id: Session.get("selectedCourse")}, {fields: {admins: 1}});
-    if ($.inArray(Meteor.userId(), _selectedCourse.admins) === 0) {
+    if ($.inArray(Meteor.userId(), _selectedCourse.admins) > -1) {
         return true
     }
     else {

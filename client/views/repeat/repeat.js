@@ -61,7 +61,7 @@ function returnNextItem() {
 Template.repeat.created = function () {
     Session.set("itemsToRepeat", "");
     var _itemsToLearn = {};
-    myCollections = Collections.find({user: Meteor.userId()});
+    myCollections = Meteor.user().collections || [];
     myCollections.forEach(function(collection) {
         _itemsToLearn[collection._id] = 99999;
     });
@@ -94,7 +94,9 @@ displayNextRepetition = function() {
     }
     else {
         emptyTemplate();
-
+        $("#doneForTodayModal").modal("show").on('hidden', function() {
+            Meteor.Router.to("/");
+        });
         // Info that you've done all repetitions for given day.
     }
 }

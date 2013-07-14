@@ -13,6 +13,8 @@ Template.newLessonModal.events({
                     Meteor.popUp.success("Lesson added", "TheBrain prepared new neural path you asked for.");
                     console.log("are we hiding it from the else");
                     $("#newLessonModal").modal("hide");
+                    $("#newLessonName").val("");
+                    $("#newLessonShortDescription").val("");
 
                 }
             });

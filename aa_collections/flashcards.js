@@ -29,13 +29,13 @@ Meteor.methods({
 
 
         flashcard = {};
-        flashcard.lessons = {};
+        flashcard.lessons = [];
 
         if (flashcardAttributes.course) {
             if (!flashcardAttributes.lesson) {
                 throw new Meteor.Error(422, "If you want to add a flashcard to a course you have to specify the lesson");
             }
-            else if(Courses.find({lessons: flashcardAttributes.lesson}).count() < 1) {
+            else if(Courses.find({"lessons._id": flashcardAttributes.lesson}).count() < 1) {
                 throw new Meteor.Error(422, "You have to add a flashcard to an existing lesson");
             }
             else {
@@ -43,12 +43,15 @@ Meteor.methods({
             }
         }
 
+        if (flashcardAttributes.collection) {
+            // if ()
+        }
+
         var flashcard = _.extend(_.pick(flashcardAttributes, "public", "front",
             "back", "source"), {
             user: user._id,
             "previousVersions": [],
             "suggestedVersions": [],
-            "comments": [],
             "upVotes": [],
             "downVotes": []
         });
@@ -57,6 +60,7 @@ Meteor.methods({
 
         var flashcardId = Flashcards.insert(flashcard);
 
+        if (flashcardAttributes.collection) {
         var item = _.extend(_.pick(flashcardAttributes, "collection"), {
 
             "user": user._id,
@@ -77,6 +81,7 @@ Meteor.methods({
         });
 
         Items.insert(item);
+    }
 
 
     }

@@ -1,13 +1,3 @@
-Collections = new Meteor.Collection("collections");
-
-Collections.allow({
-
-    'insert': ownsDocument,
-    'update': ownsDocument,
-    'remove': ownsDocument
-
-});
-
 Meteor.methods({
     newCollection: function (collectionAttributes) {
         console.log("ever here?");
@@ -19,9 +9,10 @@ Meteor.methods({
             throw new Meteor.Error(422, "Please fill the name of your collection");
 
         var collection = _.extend(_.pick(collectionAttributes, "name"), {
-            user: user._id
+            _id: new Meteor.Collection.ObjectID()._str
         });
 
-        Collections.insert(collection);
+        Meteor.users.update({_id: user._id}, {$addToSet: {collections: collection}});
+        Meteor.theBrain.addConnections(10);
     }
 })

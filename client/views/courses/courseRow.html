@@ -1,0 +1,19 @@
+<template name="courseRow">
+
+	<tr class="courseRow" data-id="{{_id}}">
+		<td>{{name}}</td>
+		<td>0</td>
+		<td class="hidden-480">0</td>
+		<td class="hidden-480">{{lessons.length}}</td>
+		<td class="hidden-480">
+			<span class="badge badge-upVote badge-success">+ {{upVotes.length}}</span> /
+			<span class="badge badge-downVote badge-warning">- {{downVotes.length}}</span>
+		</td>
+		<td class="hidden-480"></td>
+		<td>
+			<button class="btn btn-primary btn-enterCourse btn-block" data-id="{{_id}}"><i class="icon-hand-left"></i>
+			</button>
+		</td>
+	</tr>
+
+</template>

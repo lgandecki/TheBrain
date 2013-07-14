@@ -12,6 +12,14 @@ _checkIfUniqueNameForUser = function (selector, collection) {
     }
 }
 
+_checkIfUniqueCollectionName = function (selector) {
+    // uniqueName = $(selector).val();
+    // if ($.inArray(Meteor.user().collections, uniqueName) > -1)
+    // if (Meteor.user().find({collections: uniqueName}).count() > 0) {
+    //     invalids.push(selector);
+    // }
+}
+
 _markInvalids = function () {
     _.each(invalids, function (i) {
         _invalid($(i));
@@ -32,5 +40,6 @@ _.extend(Meteor.validations, {
     markInvalids: _markInvalids,
     invalids: invalids,
     clearErrors: _clearErrors,
-    checkIfUniqueNameForUser: _checkIfUniqueNameForUser
+    checkIfUniqueNameForUser: _checkIfUniqueNameForUser,
+    checkIfUniqueCollectionName: _checkIfUniqueCollectionName
 });

@@ -1,10 +1,21 @@
 Template.flashcardForm.collection = function () {
-    return Collections.find({user: Meteor.userId()});
+    return Meteor.user() ? Meteor.user().collections : [];
 };
 
 Template.flashcardForm.course = function () {
-    return Courses.find({$or: [{admins: Meteor.userId()}, {public: true}]});
+    //return Courses.find({$or: [{admins: Meteor.userId()}, {public: true}]});
+    // You don't need to specify. You should not see any more courses anyway
+    return Courses.find();
 };
+
+Template.flashcardForm.lesson = function () {
+    var _selectedCourse, _course;
+    _selectedCourse = Session.get("selectedCourse");
+    if (_selectedCourse) {
+        _course = Courses.findOne({_id: _selectedCourse});
+    }
+    return _course ? _course.lessons : [];
+}
 
 Template.flashcardForm.events({
     "click .btn-collectionModal": function (e, template) {
@@ -57,6 +68,14 @@ Template.flashcardForm.selectIfSelectedCourse = function () {
     return "";
 };
 
+Template.flashcardForm.selectIfSelectedLesson = function () {
+    var _selectedLesson = Session.get("selectedLesson");
+    if (_selectedLesson) {
+        return this._id === _selectedLesson ? "selected" : "";
+    }
+    return "";    
+}
+
 addFlashcard = function (e) {
     $(e.target).attr("disabled", true).html("Checking...");
     Meteor.validations.clearErrors();
@@ -97,7 +116,7 @@ createNewFlashcard = function () {
         "front": $("#front").val(),
         "back": $("#back").val(),
         "course": $("#course").val(),
-        "lessons": $("#lesson").val(),
+        "lesson": $("#lesson").val(),
         "collection": $("#collection").val(),
         "source": {
             "youtube": $("#youtubeSource").val(),
@@ -114,6 +133,6 @@ createNewFlashcard = function () {
 
 Template.flashcardForm.rendered = function() {
     if (Session.get("selectedCourse")) {
-        $("#coursesControlGroup").hide();
+        // $("#coursesControlGroup").hide();
     }
 }

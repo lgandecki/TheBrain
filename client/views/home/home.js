@@ -1,6 +1,6 @@
 var _renderer;
 Template.collections.collection = function() {
-    return Collections.find({user: Meteor.userId()});
+    return Meteor.user() ? Meteor.user().collections : [];
 };
 
 

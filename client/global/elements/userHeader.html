@@ -104,7 +104,7 @@
         </li>
     </ul>
     <div class="dropdown">
-        <a href="#" class='dropdown-toggle' data-toggle="dropdown"> {{user.identity.nick}} ({{user.points}}) <img style="height: 27px; width: 27px" src="{{#if user.profile.picture}}{{user.profile.picture}}{{else}}img/demo/user-avatar.jpg{{/if}}" alt=""></a>
+        <a href="#" class='dropdown-toggle' data-toggle="dropdown"> {{#isolate}}{{user.identity.nick}} ({{user.points}}{{/isolate}}) <img style="height: 27px; width: 27px" src="{{#if user.profile.picture}}{{user.profile.picture}}{{else}}img/demo/user-avatar.jpg{{/if}}" alt=""></a>
         <ul class="dropdown-menu pull-right">
             <li>
                 <a href="more-userprofile.html">Edit profile</a>

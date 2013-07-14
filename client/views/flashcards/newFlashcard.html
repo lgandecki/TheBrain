@@ -51,9 +51,11 @@
 
             <div class="controls">
                 <select name="collection" id="collection" class="input-large">
+                    {{#isolate}}
                     {{#each collection}}
                         <option value="{{_id}}" {{selectIfNewOrMain}}>{{name}}</option>
                     {{/each}}
+                    {{/isolate}}
                     <option value="">Don't add to any collections</option>
                 </select>
                 <button class="btn btn-primary btn-collectionModal">Add new</button>
@@ -72,20 +74,22 @@
                 </select>
             </div>
         </div>
-        <div class="control-group" id="lessonControlGroup" style='display: none;'>
+        <div class="control-group" id="lessonControlGroup" style=''>
             <label class="control-label">Lesson</label>
 
             <div class="controls">
 
                 <select name="lesson" id="lesson" class="input-large">
                     <option value="">Don't add to any lessons</option>
+                    {{#isolate}}
                     {{#each lesson}}
                         <option value="{{_id}}" id="{{_id}}" {{selectIfSelectedLesson}}>{{name}}</option>
                     {{/each}}
+                    {{/isolate}}
                 </select>
             </div>
         </div>
-        <div class="control-group" id="sourcesControlGroup">
+        <div class="control-group" id="sourcesControlGroup" style="display: none;">
             <label class="control-label">Sources</label>
 
             <div class="controls">

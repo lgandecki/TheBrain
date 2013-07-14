@@ -85,6 +85,7 @@ Meteor.Router.filters({
                 }, 10);
 
          if (Meteor.user()) {
+            console.log("So we end up doing this twice");
             return page;
         } else {
             return "login";

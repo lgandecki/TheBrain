@@ -27,7 +27,7 @@ Template.newCollectionModal.events({
 validateNewCollection = function() {
     invalids = [];
     Meteor.validations.checkIfEmpty("#newCollectionName");
-    Meteor.validations.checkIfUniqueNameForUser("#newCollectionName", Collections);
+    Meteor.validations.checkIfUniqueCollectionName("#newCollectionName", "collections");
     return !!(invalids.length === 0);
 }
 createNewCollection = function() {
