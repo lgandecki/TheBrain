@@ -1,4 +1,4 @@
-var currentFlashcard, currentItemId, itemsToLearn, _renderer;
+var currentFlashcard, currentItemId, itemsToLearn = [], _renderer, _renderer2;
 
 Meteor.subscribe("itemFlashcards");
 
@@ -35,6 +35,9 @@ function returnNextItem() {
             if (_currentCollectionItemsToLearn && _currentCollectionItemsToLearn > 0) {
                 if (itemsToLearn[collectionId] > _currentCollectionItemsToLearn) {
                     itemsToLearn[collectionId] = _currentCollectionItemsToLearn;
+                }
+                else {
+                    itemsToLearn[collectionId]--;
                 }
                 _nextItem = ItemFlashcards.findOne({collection: collectionId, actualTimesRepeated: 0});
                 console.log("Items to learn");
@@ -78,18 +81,18 @@ Template.repeat.rendered = function () {
 
         _firstRender = false;
             Session.set("itemsToRepeat", "");
-            var _itemsToLearn = {};
-            myCollections = Meteor.user().collections || [];
-            myCollections.forEach(function(collection) {
-                _itemsToLearn[collection._id] = 99999;
-            });
+            // var _itemsToLearn = {};
+            // myCollections = Meteor.user().collections || [];
+            // myCollections.forEach(function(collection) {
+            //     _itemsToLearn[collection._id] = 99999;
+            // });
 
-            console.log("myCollections ", myCollections);
+            // console.log("myCollections ", myCollections);
 
-            Session.set("itemsToLearn", _itemsToLearn);
+            // Session.set("itemsToLearn", _itemsToLearn);
 
-            console.log("_itemsToLearn " + _itemsToLearn);
-            itemsToLearn = Session.get("itemsToLearn");
+            // console.log("_itemsToLearn " + _itemsToLearn);
+            // itemsToLearn = Session.get("itemsToLearn");
 
         if (Session.equals("showScheduleModal", true)) {
             console.log("Are we supposed to show the modal?");
@@ -278,3 +281,38 @@ hideBackAndEvaluation = function () {
         }
     )
 };
+
+
+Template.myCollectionsList.rendered = function() {
+    window.clearTimeout(_renderer2);
+    _renderer2 = window.setTimeout(function () {
+        $(".slider-custom").slider({value: 0}).on("slide", function(ev) {
+            _collectionId = $(this).attr("data-id");
+            $(".toLearn.editable[data-id='"+ _collectionId + "']").editable("setValue", ev.value);
+            itemsToLearn[_collectionId] = ev.value;
+        });
+
+//        $.fn.editable.defaults.mode = 'inline';
+        $(".toLearn.editable:not(.editable-click)").editable('destroy').editable({
+            anim: '100',
+            mode: 'inline',
+            showbuttons: false,
+            success: function(response, newValue) {
+                _collectionId = $(this).attr("data-id");
+                $(".slider-custom[data-id='" + _collectionId + "']").slider("setValue", newValue);
+
+                itemsToLearn[_collectionId] = newValue;
+            },
+            validate: function(value) {
+                _value = parseFloat(value);
+                var intRegex = /^\d+$/;
+                if (!intRegex.test(_value)){
+                    return "Has to be decimal";
+                }
+            }
+
+        })
+
+    }, 150);
+}
+

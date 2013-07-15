@@ -53,6 +53,18 @@ textarea[disabled].flashcard  {
     display: none !important;
 }
 
+@media (max-width: 767px) {
+    .slider {
+    margin-bottom: 0px !important
+    margin-top: 10px;
+}
+}
+@media (min-width: 768px) {
+.slider {
+    margin-bottom: 0px !important;
+    margin-top: 50px !important;
+}
+}
 .centerTable > td {
     text-align: center !important;
 }
@@ -118,6 +130,7 @@ html, body {
     width: 100%;
     bottom: 0;
     height: 40px;/* .push must be the same height as .footer */
+    z-index: 150;
 }
 
 
@@ -146,13 +159,13 @@ html, body {
     margin-bottom: -20px;
 }
 
-@media (min-width : 767px) {
+@media (min-width : 768px) {
 .modal-wide {
     width: 700px;
     margin-left: -350px;
 }
 }
-@media (max-width: 765px) {
+@media (max-width: 767px) {
     form .btn {
         display: block;
         width: 100%;
@@ -197,3 +210,75 @@ html, body {
     background: #fff;
     color: #368ee0;
 }
+
+.myCollectionsList {
+    text-align: center;
+}
+
+.scheduleDetails {
+    line-height: 25px;
+    font-size: 15px;
+}
+
+.modalInfo {
+    text-align: center; 
+    border-bottom: 1px solid #ddd;
+    background: #f6f6f6;
+}
+
+.addBottomLine {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.slider-horizontal {
+    margin-bottom: 5px !important;
+}
+
+.quickButtons {
+    text-align: center;
+}
+.quickButton {
+    margin-bottom: 5px;
+    padding-right: 9px;
+    width: 100%;
+    height: 100px;
+    display: block;
+    position: relative;
+
+    
+}
+
+.quickButtonHover {
+    background: #368ee0;
+    color: #ffffff;
+    border: 2px solid #368ee0;
+}
+
+.quickButtonNormal   {
+    background: #ffffff;
+    color: #368ee0;
+    border: 2px solid #368ee0;    
+}
+.quickButton span {
+    padding-top: 20px;
+}
+
+.quickIcon {
+    font-size: 45px;
+    margin-top: -10px;
+}
+
+.quickButton .name {
+    display: block;
+    position: absolute;
+    bottom:0;
+    left:5px;
+    right:0;
+    text-align: left;
+    padding 3px 10px;
+    float: left;
+    font-size: 13px;
+    padding: 0;
+}
+

@@ -1,11 +1,44 @@
 <template name="home">
-    {{> collections }}
+    {{> quickButtons}}
 </template>
 
 
+<template name="quickButtons">
+
+    <div class="row-fluid">
+        <div class="span10 center">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> Quick Buttons</h3>
+                </div>
+                <div class="box-content padding">
+            <div class=" quickButtons">
+                <div class="span3">
+                    <button type="button" class="quickButton quickButtonNormal" data-target="/learnAndRepeat">
+                        <span class="quickIcon"><i class="icon-cogs"></i> 2000</span><span class="name">Study!</span></button>
+                </div>
+                                <div class="span3">
+                    <button type="button" class="quickButton quickButtonNormal" data-target="/newFlashcard">
+                        <span class="quickIcon"><i class="icon-edit"></i></span><span class="name">Add Flashcard</span></button>
+                </div>
+                                                <div class="span3">
+                    <button type="button" class="quickButton quickButtonNormal" data-target="/enrolledCourses" >
+                        <span class="quickIcon"><i class="icon-group"></i></span><span class="name">Enrolled courses</span></button>
+                </div>
+                <div class="span3">
+                    <button type="button" class="quickButton quickButtonNormal" data-target="/myCourses">
+                        <span class="quickIcon"><i class="icon-briefcase"></i></span><span class="name">My courses</span></button>
+                </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+
 <template name="myTimeline">
-
-
 
 </template>
 <template name="collections">

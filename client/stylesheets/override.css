@@ -22,3 +22,9 @@
 .tab-content {
     overflow: hidden !important;
 }
+
+.switch-small {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+	font-weight: bold !important;
+	font-size: 13px !important;
+}
