@@ -200,10 +200,18 @@ html, body {
     color: #f89406;
 }
 
-.repeat {
-    padding: 20px 0 0 0;
+h3.repeat {
+    margin-top: 0px;
 }
 
+.repeat {
+    padding: 20px;
+    padding-bottom: 0px;
+}
+
+.repeat.last {
+    padding-bottom: 0px;
+}
 .clickable { cursor: pointer; !important }
 
 .btn-primary-reversed {
@@ -239,7 +247,7 @@ html, body {
     text-align: center;
 }
 .quickButton {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     padding-right: 9px;
     width: 100%;
     height: 100px;
@@ -247,6 +255,30 @@ html, body {
     position: relative;
 
     
+}
+
+.btn-mine {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    filter: none;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    height: 40px;
+    letter-spacing: normal;
+    line-height: 20px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 10px;
+    border: 0;
+    text-align: center;
+    width: 100%;
 }
 
 .quickButtonHover {
@@ -266,19 +298,47 @@ html, body {
 
 .quickIcon {
     font-size: 45px;
-    margin-top: -10px;
+    position: relative;
+    top: -10px;
 }
 
 .quickButton .name {
     display: block;
     position: absolute;
-    bottom:0;
+    bottom:5px;
     left:5px;
     right:0;
     text-align: left;
     padding 3px 10px;
     float: left;
-    font-size: 13px;
+    font-size: 21px;
     padding: 0;
 }
 
+.padding-quickButtons {
+    padding-bottom: 0px !important;
+}
+@media (min-width : 768px) {
+.btn-signUpWithFacebook, .btn-signUpWithEmailModal {
+    font-size: 25px;
+    padding-top: 7px;
+}
+}
+
+@media (max-width : 767px) {
+    .btn-signUpWithFacebook, .btn-signUpWithEmailModal {
+    font-size: 20px;
+    padding-top: 7px;
+}
+}
+ul.icons {
+text-align: left; font-size: 18px; margin-bottom: 20px
+}
+
+ul.icons > li {
+    margin-bottom: 5px;
+}
+
+.loginSignUp > h2 {
+    margin-top: 20px;
+}

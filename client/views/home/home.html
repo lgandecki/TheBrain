@@ -1,34 +1,37 @@
 <template name="home">
     {{> quickButtons}}
+
 </template>
 
 
 <template name="quickButtons">
 
     <div class="row-fluid">
-        <div class="span10 center">
+        <div class="span8 center">
             <div class="box box-bordered box-color">
                 <div class="box-title">
                     <h3><i class="icon-th-list"></i> Quick Buttons</h3>
                 </div>
-                <div class="box-content padding">
+                <div class="box-content padding padding-quickButtons">
             <div class=" quickButtons">
-                <div class="span3">
+                <div class="span6">
                     <button type="button" class="quickButton quickButtonNormal" data-target="/learnAndRepeat">
                         <span class="quickIcon"><i class="icon-cogs"></i> 2000</span><span class="name">Study!</span></button>
                 </div>
-                                <div class="span3">
+                                <div class="span6">
                     <button type="button" class="quickButton quickButtonNormal" data-target="/newFlashcard">
                         <span class="quickIcon"><i class="icon-edit"></i></span><span class="name">Add Flashcard</span></button>
                 </div>
-                                                <div class="span3">
+                <div class="row-fluid">
+                                                <div class="span6">
                     <button type="button" class="quickButton quickButtonNormal" data-target="/enrolledCourses" >
                         <span class="quickIcon"><i class="icon-group"></i></span><span class="name">Enrolled courses</span></button>
                 </div>
-                <div class="span3">
+                <div class="span6">
                     <button type="button" class="quickButton quickButtonNormal" data-target="/myCourses">
                         <span class="quickIcon"><i class="icon-briefcase"></i></span><span class="name">My courses</span></button>
                 </div>
+            </div>
 
 
                 </div>
@@ -39,57 +42,5 @@
 </template>
 
 <template name="myTimeline">
-
-</template>
-<template name="collections">
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="box box-bordered box-color">
-                <div class="box-title">
-                    <h3><i class="icon-th-list"></i> My collections</h3>
-                </div>
-                <div class="box-content nopadding">
-                    <table class="table table-hover table-nomargin">
-                        <thead>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <th colspan="4">TheBrain connections</th>
-                            <th>&nbsp;</th>
-                        </tr>
-                        <tr>
-                            <th>Name</th>
-                            <th>to create</th>
-                            <th class="hidden-480">to refresh</th>
-                            <th class="hidden-480">to recreate</th>
-                            <th class="hidden-480">active</th>
-                            <th>Schedule</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {{#each collection}}
-                            <tr>
-                                <td>{{name}}</td>
-                                <td>{{itemsToLearn}}</td>
-                                <td class="hidden-480">{{itemsToRepeat}}</td>
-                                <td class="hidden-480">{{itemsToReLearn}}</td>
-                                <td class="hidden-480">{{learnedItems}}</td>
-                                <td>{{#if itemsToLearn}}
-                                    <input type="text" class="slider-custom" value="" data-slider-min="0"
-                                           data-slider-max="{{itemsToLearn}}" data-slider-step="1" data-slider-value="0"
-                                           data-slider-orientation="horizontal" data-slider-handle="square"
-                                           data-slider-selection="after" data-slider-tooltip="hide">
-                                    <a href="#" data-type="text" data-id="{{_id}}" name="toLearn"
-                                       class="toLearn editable">0</a>
-
-                                {{/if}}</td>
-                            </tr>
-                            {{/each}}
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </template>

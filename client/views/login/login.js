@@ -2,6 +2,8 @@ var _renderer;
 Template.login.rendered = function () {
 //    window.clearTimeout(_renderer);
 //    _renderer = window.setTimeout(function () {
+        $("#workInProgressModal").modal("show");
+
 ////
 ////        welcomeHeight = $(".loginWelcome .box-content").height();
 ////        console.log("Welcome height " + welcomeHeight);
@@ -45,6 +47,14 @@ Template.signUpWithEmailModal.events({
 });
 
 Template.login.events({
+        "mouseenter .btn-mine": function(e) {
+        console.log("ever in mouseEnter?");
+        $(e.target).switchClass("quickButtonNormal", "quickButtonHover");
+    },
+    "mouseleave .btn-mine": function(e) {
+        console.log("or mouse leave?");
+        $(e.target).switchClass("quickButtonHover", "quickButtonNormal");
+    },
     "click .btn-signUpWithEmailModal": function (e, template) {
         e.preventDefault();
         $('#signUpWithEmailModal').modal('show');

@@ -1,0 +1,41 @@
+<template name="myCollections">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> My collections</h3>
+                </div>
+                <div class="box-content nopadding">
+                    <table class="table table-hover table-nomargin">
+                        <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th colspan="4">TheBrain connections</th>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>to create</th>
+                            <th class="hidden-480">to refresh</th>
+                            <th class="hidden-480">to recreate</th>
+                            <th class="hidden-480">active</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {{#each collection}}
+                            <tr>
+                                <td>{{name}}</td>
+                                <td>{{itemsToLearn}}</td>
+                                <td class="hidden-480">{{itemsToRepeat}}</td>
+                                <td class="hidden-480">{{itemsToReLearn}}</td>
+                                <td class="hidden-480">{{learnedItems}}</td>
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
