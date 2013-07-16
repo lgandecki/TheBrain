@@ -20,12 +20,10 @@
 <body>
 <div id="wrapper">
 {{#isolate}}{{> header }}{{/isolate}}
-
-
 <div id="main">
     {{#isolate}}{{#if isLoggedIn}}{{> topPanel }}{{/if}}{{/isolate}}
         <div id="transition">
-            <div class="container-fluid">
+            <div class="container">
     {{#isolate}} {{renderPage}} {{/isolate}}
             </div>
             </div>
@@ -35,7 +33,7 @@
 
 <div id="footer">
     <p class="hidden-phone">
-        2013 TheBrain by Łukasz Gozda Gandecki <span class="font-grey-4">|</span> <a href="#">Contact</a> <span class="font-grey-4">|</span> <a href="#">About</a>
+        2013 TheBrain by Łukasz "gozda" Gandecki <span class="font-grey-4">|</span> <a href="#">Contact</a> <span class="font-grey-4">|</span> <a href="#">About</a>
     </p>
     <p class="visible-phone">
         TheBrain by Łukasz "gozda" Gandecki

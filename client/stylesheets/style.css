@@ -81,6 +81,7 @@ textarea[disabled].flashcard  {
     height: 0;
     margin-bottom: 16px;
     overflow: hidden;
+    z-index: 5;
 }
 .flex-video.widescreen { padding-bottom: 57.25%; }
 .flex-video.vimeo { padding-top: 0; }
