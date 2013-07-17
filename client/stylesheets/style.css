@@ -1,3 +1,6 @@
+body {
+    background: #f2f2f2;
+}
 .flashcard {
     text-align: left;
     background: #ddd;
@@ -42,7 +45,7 @@ textarea[disabled].flashcard  {
     margin-top: 0px !important;
 }
 .modal-box {
-    border: 5px solid #368ee0 !important;
+    border: 3px solid #219BCC !important;
     border-top: 0px !important;
 }
 .modal-close {
@@ -217,7 +220,7 @@ h3.repeat {
 
 .btn-primary-reversed {
     background: #fff;
-    color: #368ee0;
+    color: #E74C3C;
 }
 
 .myCollectionsList {
@@ -283,15 +286,15 @@ h3.repeat {
 }
 
 .quickButtonHover {
-    background: #368ee0;
-    color: #ffffff;
-    border: 2px solid #368ee0;
+    background: #219BCC;
+    color: #F2F2F2;
+    border: 2px solid #219BCC;
 }
 
 .quickButtonNormal   {
-    background: #ffffff;
-    color: #368ee0;
-    border: 2px solid #368ee0;    
+    background: #F2F2F2;
+    color: #204473;
+    border: 2px solid #219BCC;    
 }
 .quickButton span {
     padding-top: 20px;

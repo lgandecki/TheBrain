@@ -3065,7 +3065,7 @@ li [class*=" glyphicon-"], .nav li [class^="glyphicon-"],
   filter: none;
 }
 .dropdown-menu.typeahead > li.active:focus > a, .dropdown-menu.typeahead > li.active:hover > a {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   filter: none;
 }
@@ -3224,7 +3224,7 @@ input, textarea {
   box-shadow: none;
 }
 .btn-group.open .dropdown-toggle.btn-primary {
-  background: #368ee0;
+  background: #219BCC;
 }
 .btn-group.open .dropdown-toggle.btn-danger {
   background: #e51400;
@@ -3239,7 +3239,7 @@ input, textarea {
   background: #f8a31f;
 }
 .btn-group.open .dropdown-toggle.btn-info {
-  background: #368ee0;
+  background: #219BCC;
 }
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
@@ -3255,10 +3255,10 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 .dropdown-menu.dropdown-primary {
-  border-color: #368ee0;
+  border-color: #219BCC;
 }
 .dropdown-menu.dropdown-primary > li > a:hover {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .dropdown-menu.dropdown-danger {
@@ -3335,13 +3335,18 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   outline: none;
 }
 .btn.btn-primary {
-  background: #368ee0;
-  color: #fff;
   text-shadow: none;
   filter: none;
 }
-.btn.btn-primary:hover {
-  background: #1e74c5;
+.btn.btn-primary-main {
+background: #F2F2F2;
+color: #204473;
+border: 2px solid #219BCC;
+}
+.btn.btn-primary-reversed {
+background: #219BCC;
+color: #F2F2F2;
+border: 2px solid #219BCC;
 }
 .btn.btn-info {
   background: #a4ccf1;
@@ -3390,7 +3395,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 .nav.nav-pills > li.active > a, .nav.nav-list > li.active > a {
-  background: #368ee0;
+  background: #219BCC;
 }
 
 .popover {
@@ -3724,7 +3729,9 @@ label, input, button, select, textarea {
 }
 #main .breadcrumbs {
   *zoom: 1;
-  background: #f4f4f4;
+  background: #f2f2f2;
+  border-top: 1px solid #219BCC;
+  border-bottom: 1px solid #219BCC;
 }
 #main .breadcrumbs:after {
   content: "";
@@ -3745,10 +3752,10 @@ label, input, button, select, textarea {
 }
 #main .breadcrumbs ul > li {
   float: left;
-  color: #666;
+  color: #204473;
 }
 #main .breadcrumbs ul > li > a {
-  color: #666;
+  color: #204473;
   display: block;
   padding: 2px 6px;
   font-size: 12px;
@@ -3782,7 +3789,7 @@ label, input, button, select, textarea {
 
 #footer {
   text-align: center;
-  background: #eee;
+  background: #ddd;
   width: 100%;
   position: relative;
 }
@@ -3955,7 +3962,7 @@ label, input, button, select, textarea {
   display: none;
 }
 .mobile-sidebar-toggle:hover {
-  background: #1e74c5;
+  background: #1A385E;
   text-decoration: none;
   color: #fff;
 }
@@ -4027,7 +4034,7 @@ label, input, button, select, textarea {
   margin: 8px 0 0 8px;
 }
 .theme-colors li span.blue {
-  background: #368ee0;
+  background: #219BCC;
 }
 .theme-colors li span.orange {
   background: #f8a31f;
@@ -4082,7 +4089,7 @@ label, input, button, select, textarea {
 }
 
 #navigation {
-  background: #368ee0;
+  background: #219BCC;
   position: relative;
   z-index: 100;
 }
@@ -4092,24 +4099,24 @@ label, input, button, select, textarea {
 }
 #navigation .dropdown-menu {
   border-top: 0;
-  border-color: #368ee0;
+  border-color: #219BCC;
 }
 #navigation .dropdown-menu > li.dropdown-submenu .dropdown-menu {
-  border-top: 2px solid #368ee0;
+  border-top: 2px solid #219BCC;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
   margin-left: 0;
 }
 #navigation .dropdown-menu > li.dropdown-submenu:hover > a, #navigation .dropdown-menu > li.dropdown-submenu:focus > a {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 #navigation .dropdown-menu > li.dropdown-submenu:hover > a:after, #navigation .dropdown-menu > li.dropdown-submenu:focus > a:after {
   border-left-color: #fff;
 }
 #navigation .dropdown-menu > li > a:hover {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   filter: none;
 }
@@ -4122,7 +4129,7 @@ label, input, button, select, textarea {
   text-decoration: none;
 }
 #navigation .toggle-nav:hover {
-  background-color: #1b67af;
+  background-color: #1A385E;
 }
 #navigation #brand {
   float: left;
@@ -4145,7 +4152,7 @@ label, input, button, select, textarea {
 }
 #navigation .toggle-mobile {
   color: #fff;
-  background: #1b67af;
+  background: #1A385E;
   display: block;
   padding: 11px 10px 9px 10px;
   text-decoration: none;
@@ -4163,7 +4170,7 @@ label, input, button, select, textarea {
   list-style: none;
   padding: 0 20px 20px 20px;
   margin: 0;
-  background: #368ee0;
+  background: #219BCC;
 }
 #navigation .mobile-nav > li {
   display: block;
@@ -4181,7 +4188,7 @@ label, input, button, select, textarea {
 }
 #navigation .mobile-nav > li > a {
   display: block;
-  background: #1b67af;
+  background: #1A385E;
   padding: 8px 12px;
   color: #fff;
   text-decoration: none;
@@ -4191,7 +4198,7 @@ label, input, button, select, textarea {
   margin-top: 3px;
 }
 #navigation .mobile-nav > li > ul {
-  background: #1b67af;
+  background: #1A385E;
   list-style-type: none;
   margin: 0;
   padding: 0 0 10px 0;
@@ -4305,7 +4312,7 @@ label, input, button, select, textarea {
   padding: 0 3px;
 }
 #navigation .user .icon-nav > li > a:hover {
-  background: #1b67af;
+  background: #1A385E;
   text-decoration: none;
 }
 #navigation .user .icon-nav > li > a i {
@@ -4316,7 +4323,7 @@ label, input, button, select, textarea {
   float: left;
 }
 #navigation .user .dropdown.open {
-  background: #1b67af;
+  background: #1A385E;
 }
 #navigation .user .dropdown > a {
   display: block;
@@ -4325,7 +4332,7 @@ label, input, button, select, textarea {
   text-decoration: none;
 }
 #navigation .user .dropdown > a:hover {
-  background: #1b67af;
+  background: #1A385E;
 }
 #navigation .user .dropdown > a img {
   margin-left: 10px;
@@ -4350,7 +4357,7 @@ label, input, button, select, textarea {
   background: white;
 }
 #navigation .main-nav > li.open > a {
-  background: #1e74c5;
+  background: #1A385E;
   text-decoration: none;
 }
 #navigation .main-nav > li.open.active > a {
@@ -4374,7 +4381,7 @@ label, input, button, select, textarea {
 }
 #navigation .main-nav > li > a:hover {
   text-decoration: none;
-  background: #1e74c5;
+  background: #1A385E;
 }
 #navigation .main-nav > li > a .caret {
   border-top-color: #fff;
@@ -4415,7 +4422,7 @@ label, input, button, select, textarea {
   color: #aaa;
 }
 .letterbox .letter > li.active {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   cursor: pointer;
 }
@@ -4438,27 +4445,27 @@ label, input, button, select, textarea {
 }
 
 .box.box-color .box-title {
-  background: #368ee0;
+  background: #219BCC;
 }
 .box.box-color .box-title h3 {
   color: #fff;
 }
 .box.box-color .box-title .tabs > li.active > a {
   background: #fff;
-  color: #368ee0;
+  color: #219BCC;
 }
 .box.box-color .box-title .tabs > li > a {
   color: #fff;
 }
 .box.box-color .box-title .tabs > li > a:hover {
-  color: #368ee0;
+  color: #219BCC;
 }
 .box.box-color .box-title .actions > a {
   color: #fff;
 }
 .box.box-color .box-title .actions > a:hover {
   background: #fff;
-  color: #368ee0;
+  color: #219BCC;
 }
 .box.box-bordered .table {
   margin-bottom: 0;
@@ -4488,13 +4495,13 @@ label, input, button, select, textarea {
   border-bottom: 2px solid #ddd;
 }
 .box.box-bordered.box-color .slimScrollDiv {
-  border-bottom: 2px solid #368ee0;
+  border-bottom: 2px solid #219BCC;
 }
 .box.box-bordered.box-color .box-title {
-  border-color: #368ee0;
+  border-color: #219BCC;
 }
 .box.box-bordered.box-color .box-content {
-  border-color: #368ee0;
+  border-color: #219BCC;
 }
 .box.box-bordered .box-title {
   border: 2px solid #ddd;
@@ -4555,7 +4562,7 @@ label, input, button, select, textarea {
   background: #eee;
 }
 .box .box-title .tabs > li.active > a {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .box .box-title .actions {
@@ -4569,7 +4576,7 @@ label, input, button, select, textarea {
   padding: 5px 9px;
 }
 .box .box-title .actions .btn:hover {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .box .box-title .actions .content-move {
@@ -4643,7 +4650,7 @@ label, input, button, select, textarea {
 }
 .search-form > .search-pane button[type="submit"] {
   float: right;
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   border: 0;
   margin: 2px 2px 0px 0;
@@ -4856,7 +4863,7 @@ label, input, button, select, textarea {
 }
 .gallery > li .extras .extras-inner a:hover {
   color: #fff;
-  background: #368ee0;
+  background: #219BCC;
 }
 
 .messages {
@@ -4894,7 +4901,7 @@ label, input, button, select, textarea {
 }
 .messages > li.insert .submit button {
   border: 0;
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   margin: 2px;
   padding: 3px 4px;
@@ -4973,7 +4980,7 @@ label, input, button, select, textarea {
   margin-right: 17px;
 }
 .user-list h4 {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   padding: 5px 8px;
   font-weight: 400;
@@ -5340,12 +5347,12 @@ label, input, button, select, textarea {
   padding: 0;
 }
 .jq-datepicker .ui-datepicker .ui-datepicker-calendar td:hover > a {
-  background: #368ee0;
+  background: #219BCC;
   text-decoration: none;
   color: #fff;
 }
 .jq-datepicker .ui-datepicker .ui-datepicker-calendar td.ui-datepicker-current-day > a {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .jq-datepicker .ui-datepicker .ui-datepicker-calendar td.ui-datepicker-other-month:hover > a {
@@ -5424,7 +5431,7 @@ label, input, button, select, textarea {
 }
 .progress.small .bar {
   height: 8px;
-  background: #368ee0;
+  background: #219BCC;
   filter: none;
 }
 
@@ -5560,7 +5567,7 @@ label, input, button, select, textarea {
   cursor: move;
 }
 .table.table-colored-header thead th, .table.table-colored-header thead td {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .table.table-nohead thead {
@@ -5579,7 +5586,7 @@ label, input, button, select, textarea {
   background: #eee;
 }
 .table.table-user tr.alpha td.alpha-val span {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   display: block;
   padding: 10px 0;
@@ -5958,7 +5965,7 @@ label, input, button, select, textarea {
   height: 120px;
 }
 .tiles > li.image > a .name {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .tiles > li > a {
@@ -6074,7 +6081,7 @@ label, input, button, select, textarea {
   position: relative;
 }
 .timeline > li .timeline-content .left .icon {
-  background: #368ee0;
+  background: #219BCC;
   float: left;
   padding: 6px;
   font-size: 24px;
@@ -6118,7 +6125,7 @@ label, input, button, select, textarea {
 }
 
 body.error {
-  background: #368ee0;
+  background: #219BCC;
 }
 body.error .wrapper {
   width: 300px;
@@ -6153,11 +6160,11 @@ body.error .wrapper .input-append input {
 }
 body.error .wrapper .input-append .btn {
   border: 0;
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 body.error .wrapper .input-append .btn:hover {
-  background: #1b67af;
+  background: #1A385E;
 }
 
 .grids .row-fluid {
@@ -6240,7 +6247,7 @@ body.error .wrapper .input-append .btn:hover {
 }
 
 .locked {
-  background: #368ee0;
+  background: #219BCC;
 }
 .locked .wrapper {
   width: 500px;
@@ -6255,7 +6262,7 @@ body.error .wrapper .input-append .btn:hover {
 .locked .pull-left a {
   color: #fff;
   display: block;
-  background: #1b67af;
+  background: #1A385E;
   text-align: center;
   padding: 4px 8px;
   text-decoration: none;
@@ -6291,7 +6298,7 @@ body.error .wrapper .input-append .btn:hover {
 }
 
 .login {
-  background: #368ee0;
+  background: #219BCC;
 }
 .login .wrapper {
   width: 400px;
@@ -6379,11 +6386,11 @@ body.error .wrapper .input-append .btn:hover {
   margin-top: -1px;
 }
 .pagination.pagination-custom li.active a {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .pagination.pagination-custom li.active a:hover {
-  background: #368ee0;
+  background: #219BCC;
 }
 .pagination.pagination-custom li a {
   background: #eee;
@@ -6448,13 +6455,13 @@ body.error .wrapper .input-append .btn:hover {
   position: relative;
 }
 .shop-items > li:hover {
-  background: #368ee0;
+  background: #219BCC;
 }
 .shop-items > li:hover .extended {
   display: block;
   position: absolute;
   z-index: 999;
-  background: #368ee0;
+  background: #219BCC;
   left: 0;
   right: 0;
 }
@@ -6542,7 +6549,7 @@ body.error .wrapper .input-append .btn:hover {
   border: 0 !important;
 }
 .calendar .fc-content .fc-event .fc-event-inner {
-  background: #368ee0;
+  background: #219BCC;
   border: 0 !important;
   margin: 0;
 }
@@ -6558,11 +6565,11 @@ body.error .wrapper .input-append .btn:hover {
   margin-right: 5px;
 }
 .calendar .fc-button.fc-state-active {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .calendar .fc-button.fc-state-active:hover {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .calendar .fc-button:hover {
@@ -6609,7 +6616,7 @@ body.error .wrapper .input-append .btn:hover {
   box-shadow: none;
 }
 .chzn-container .chzn-drop .chzn-results > li.highlighted {
-  background: #368ee0;
+  background: #219BCC;
 }
 .chzn-container.chzn-container-single .chzn-search input {
   background: none;
@@ -6714,7 +6721,7 @@ table.DTCR_clonedTable {
 
 div.DTCR_pointer {
   width: 1px;
-  background-color: #368ee0;
+  background-color: #219BCC;
   z-index: 201;
 }
 div.DTCR_pointer:before {
@@ -6723,7 +6730,7 @@ div.DTCR_pointer:before {
   position: absolute;
   top: -25px;
   left: -5px;
-  color: #368ee0;
+  color: #219BCC;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -6901,7 +6908,7 @@ span.ColVis_radio {
   cursor: pointer;
 }
 .dataTables_wrapper .dataTables_paginate > span > a.paginate_active {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 
@@ -6974,13 +6981,13 @@ div.DTS div.dataTables_scrollBody {
   border-radius: 0;
 }
 .datepicker.datepicker-dropdown .datepicker-days .active, .datepicker.datepicker-dropdown .datepicker-years .active, .datepicker.datepicker-dropdown .datepicker-months .active {
-  background: #368ee0;
+  background: #219BCC;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
 }
 .datepicker.datepicker-dropdown .datepicker-days .active:hover, .datepicker.datepicker-dropdown .datepicker-years .active:hover, .datepicker.datepicker-dropdown .datepicker-months .active:hover {
-  background: #1e74c5;
+  background: #1A385E;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -7331,7 +7338,7 @@ div.DTS div.dataTables_scrollBody {
   display: block;
 }
 .form-wizard .wizard-steps li.active .single-step .title {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
 }
 .form-wizard .wizard-steps li.active .single-step .description {
@@ -7397,7 +7404,7 @@ div.DTS div.dataTables_scrollBody {
   box-shadow: none !important;
 }
 .ms-container .multi-custom-header {
-  background: #368ee0;
+  background: #219BCC;
   color: #fff;
   padding: 2px 8px;
 }
@@ -7566,7 +7573,7 @@ div.DTS div.dataTables_scrollBody {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  background: #368ee0;
+  background: #219BCC;
   width: 14px;
   height: 14px;
 }
@@ -7590,7 +7597,7 @@ div.DTS div.dataTables_scrollBody {
   padding-bottom: 0;
 }
 .tagsinput#textfield_tagsinput .tag {
-  background: #368ee0;
+  background: #219BCC;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -7622,10 +7629,10 @@ div.DTS div.dataTables_scrollBody {
   background: #bbb;
 }
 .editable-input .datepicker table tr td.active {
-  background: #368ee0;
+  background: #219BCC;
 }
 .editable-input .datepicker table tr td.active:hover {
-  background: #1b67af;
+  background: #1A385E;
 }
 
 .editable-address {
@@ -7649,7 +7656,7 @@ body {
 }
 
 a {
-  color: #368ee0;
+  color: #219BCC;
 }
 a:focus {
   outline: none;

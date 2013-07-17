@@ -35,6 +35,13 @@ Meteor.Router.add({
         return "myCollections";
     }
 
+    , '/lesson/:courseId/:lessonId': function(courseId, lessonId) {
+        Session.set("selectedCourse", courseId);
+        Session.set("selectedLesson", lessonId);
+        console.log("courseId " + courseId + " lessonId " + lessonId);
+        return "lesson";
+    }
+
     , '/login': function() {
         return "login";
     }

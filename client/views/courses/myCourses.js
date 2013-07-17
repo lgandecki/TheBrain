@@ -1,6 +1,6 @@
 var _renderer;
 Template.myCourses.course = function() {
-    return Courses.find({admins: Meteor.userId()});
+    return Courses.find({admins: Meteor.userId()}, {sort: {score: -1}});
 };
 
 Template.myCourses.lessonsLength = function() {

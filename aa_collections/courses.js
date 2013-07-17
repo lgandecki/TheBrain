@@ -39,6 +39,7 @@ Meteor.methods({
             admins: [user._id],
             upVotes: [],
             downVotes: [],
+            score: 0,
             lessons: [{
                 "_id": new Meteor.Collection.ObjectID()._str,
                 name: "Day One",
@@ -68,7 +69,12 @@ Meteor.methods({
         _course = Courses.findOne(courseId);
         if (!_course) 
             throw new Meteor.Error(401, "You have to vote on existing course!");
-        Courses.update({_id: courseId}, {$addToSet: {downVotes: user._id}, $pull: {upVotes: user._id}});
+        Courses.update({_id: courseId, upVotes: user._id}, 
+            {$pull: {upVotes: user._id}, $inc: {score: -1}});
+        Courses.update({_id: courseId, downVotes: {$ne: user._id}}, 
+            {$addToSet: {downVotes: user._id}, 
+            $inc: {score: -1}});
+        // updateScore(courseId);
 
     },
     upVoteCourse: function(courseId) {
@@ -79,7 +85,12 @@ Meteor.methods({
         if (!_course) 
             throw new Meteor.Error(401, "You have to vote on existing course!");
         console.log("in upVoteCourse", courseId);
-        Courses.update({_id: courseId}, {$addToSet: {upVotes: user._id}, $pull: {downVotes: user._id}});
+        Courses.update({_id: courseId, downVotes: user._id}, 
+            {$pull: {downVotes: user._id}, $inc: {score: 1}});
+        Courses.update({_id: courseId, upVotes: {$ne: user._id}}, 
+            {$addToSet: {upVotes: user._id},
+            $inc: {score: 1}});
+        // updateScore(courseId);
    
     },
     courseCommentVoteUp: function(courseId) {
@@ -112,3 +123,9 @@ Meteor.methods({
         Courses.update(courseId, modifier);
 }
 })
+
+updateScore = function(_courseId) {
+        _course = Courses.findOne(_courseId);
+        _score = _course.upVotes.length - _course.downVotes.length;
+        Courses.update({_id: _courseId}, {$set: {score: _score}});
+}

@@ -70,17 +70,17 @@ _firstRender = true;
 Template.repeat.rendered = function () {
 //
 
-    window.clearTimeout(_renderer);
-    _renderer = window.setTimeout(function () {
-        Meteor.tabs.setHeight();
+window.clearTimeout(_renderer);
+_renderer = window.setTimeout(function () {
+    Meteor.tabs.setHeight();
 
-        if (_firstRender) {
+    if (_firstRender) {
 
         $(".currentFlashcard > .back").prop("disabled", true);
         $(".currentFlashcard > .front").prop("disabled", true);
 
         _firstRender = false;
-            Session.set("itemsToRepeat", "");
+        Session.set("itemsToRepeat", "");
             // var _itemsToLearn = {};
             // myCollections = Meteor.user().collections || [];
             // myCollections.forEach(function(collection) {
@@ -94,18 +94,18 @@ Template.repeat.rendered = function () {
             // console.log("_itemsToLearn " + _itemsToLearn);
             // itemsToLearn = Session.get("itemsToLearn");
 
-        if (Session.equals("showScheduleModal", true)) {
-            console.log("Are we supposed to show the modal?");
-            
-            $("#scheduleModal").modal("show").on('hidden', function() {
+            if (Session.equals("showScheduleModal", true)) {
+                console.log("Are we supposed to show the modal?");
+
+                $("#scheduleModal").modal("show").on('hidden', function() {
+                    displayNextRepetition();
+                });
+            }
+            else {
+                console.log("Or not?");
                 displayNextRepetition();
-            });
+            }
         }
-        else {
-            console.log("Or not?");
-            displayNextRepetition();
-        }
-    }
 
 
     }, 150);
@@ -139,8 +139,8 @@ fillTemplate = function() {
 
     $(".currentFlashcard > .front").val(front);
 //    $(".currentFlashcard > .answer").focus();
-    $(".currentFlashcard > .back").val(back)
-    $(".currentFlashcard > .evaluate").attr("item-id", _currentItem._id);
+$(".currentFlashcard > .back").val(back)
+$(".currentFlashcard > .evaluate").attr("item-id", _currentItem._id);
 
 }
 
@@ -278,7 +278,7 @@ hideBackAndEvaluation = function () {
         $(".currentFlashcard > .back").css({"visibility": "hidden"}).hide('10');
         _fDiv.css({"left": (_fDiv.width() + 40)}).animate({"left": 0});
         $(".btn-show-answer").addClass("visible-phone").show();
-        }
+    }
     )
 };
 
@@ -286,33 +286,40 @@ hideBackAndEvaluation = function () {
 Template.myCollectionsList.rendered = function() {
     window.clearTimeout(_renderer2);
     _renderer2 = window.setTimeout(function () {
-        $(".slider-custom").slider({value: 0}).on("slide", function(ev) {
+        var _sliderTimeout;
+        _collectionId = "";
+        $(".slider-custom").slider({value: 0}).on("slideStart", function(ev) {
             _collectionId = $(this).attr("data-id");
-            $(".toLearn.editable[data-id='"+ _collectionId + "']").editable("setValue", ev.value);
             itemsToLearn[_collectionId] = ev.value;
+        }).on("slide", function(ev) {
+                if (itemsToLearn[_collectionId] !== ev.value) {
+                    
+                    $(".toLearn.editable[data-id='"+ _collectionId + "']").editable("setValue", ev.value);
+                    itemsToLearn[_collectionId] = ev.value;
+            }
         });
 
 //        $.fn.editable.defaults.mode = 'inline';
-        $(".toLearn.editable:not(.editable-click)").editable('destroy').editable({
-            anim: '100',
-            mode: 'inline',
-            showbuttons: false,
-            success: function(response, newValue) {
-                _collectionId = $(this).attr("data-id");
-                $(".slider-custom[data-id='" + _collectionId + "']").slider("setValue", newValue);
+$(".toLearn.editable:not(.editable-click)").editable('destroy').editable({
+    anim: '100',
+    mode: 'inline',
+    showbuttons: false,
+    success: function(response, newValue) {
+        _collectionId = $(this).attr("data-id");
+        $(".slider-custom[data-id='" + _collectionId + "']").slider("setValue", newValue);
 
-                itemsToLearn[_collectionId] = newValue;
-            },
-            validate: function(value) {
-                _value = parseFloat(value);
-                var intRegex = /^\d+$/;
-                if (!intRegex.test(_value)){
-                    return "Has to be decimal";
-                }
-            }
+        itemsToLearn[_collectionId] = newValue;
+    },
+    validate: function(value) {
+        _value = parseFloat(value);
+        var intRegex = /^\d+$/;
+        if (!intRegex.test(_value)){
+            return "Has to be decimal";
+        }
+    }
 
-        })
+})
 
-    }, 150);
+}, 150);
 }
 

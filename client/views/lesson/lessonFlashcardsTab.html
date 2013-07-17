@@ -1,0 +1,22 @@
+<template name="lessonFlashcardsTab">
+    <div class="tab-pane fade" id="lessonFlashcards">
+    	pokazuje sie to w ogole?
+        {{> lessonFlashcardsList }}
+    </div>
+</template>
+
+<template name="lessonFlashcardsList">
+	{{#each flashcard}}
+	{{> flashcardRow}}
+	{{/each}}
+</template>
+
+<template name="flashcardRow">
+	<div class="flashcardRow">
+	<h4>{{front}}</h4>
+	<h4>{{back}}</h4>
+	{{upVotes}} / {{downVotes}}
+	Author: {{author}} ({{points}})
+	Comments: {{comments}}
+</div>
+	</template>

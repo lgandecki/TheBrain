@@ -19,3 +19,14 @@ Deps.autorun(function () {
 console.log("How often are we rereading this?");
 
 $.fn.modal.Constructor.prototype.enforceFocus = function () {}; // Fix to enable stacking modals
+
+Template.body.events({
+        "mouseenter .btn-primary": function(e) {
+        console.log("ever in mouseEnter?");
+        $(e.target).switchClass("btn-primary-main", "btn-primary-reversed");
+    },
+    "mouseleave .btn-primary": function(e) {
+        console.log("or mouse leave?");
+        $(e.target).switchClass("btn-primary-reversed", "btn-primary-main");
+    }
+})
