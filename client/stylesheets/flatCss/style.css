@@ -3729,9 +3729,9 @@ label, input, button, select, textarea {
 }
 #main .breadcrumbs {
   *zoom: 1;
-  background: #f2f2f2;
-  border-top: 1px solid #219BCC;
-  border-bottom: 1px solid #219BCC;
+  background: #eeeeee;
+  border-top: 1px dashed #ddd;
+  border-bottom: 1px dashed #ddd;
 }
 #main .breadcrumbs:after {
   content: "";
@@ -3755,7 +3755,6 @@ label, input, button, select, textarea {
   color: #204473;
 }
 #main .breadcrumbs ul > li > a {
-  color: #204473;
   display: block;
   padding: 2px 6px;
   font-size: 12px;

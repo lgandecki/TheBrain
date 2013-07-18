@@ -5,9 +5,9 @@
 </template>
 
 <template name="courseLessons">
-    {{> lessonsTable }}
-    {{> newLessonModal }}
-    {{> newFlashcardModal }}
+    {{#isolate}} {{> lessonsTable }} {{/isolate}}
+    {{#isolate}} {{> newLessonModal }} {{/isolate}}
+    {{#isolate}} {{> newFlashcardModal }} {{/isolate}}
     {{> newCollectionModal }}
 </template>
 
@@ -33,7 +33,7 @@
                             <tr class="lessonRow" data-id="{{_id}}">
                                 <td><a href="javascript:" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a></td>
                                 <td class="hidden-phone"><a href="javascript;" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a></td>
-                                <td class="hidden-phone">{{flashcards}}</td>
+                                <td class="hidden-phone">{{flashcards.count}}</td>
                                 <td>
                                     <button class="btn btn-primary btn-primary-main btn-enterLesson btn-block" data-id="{{_id}}"><i class="icon-hand-left"></i>
                                     </button>

@@ -36,8 +36,10 @@ Meteor.Router.add({
     }
 
     , '/lesson/:courseId/:lessonId': function(courseId, lessonId) {
+        setTimeout(function () {
         Session.set("selectedCourse", courseId);
         Session.set("selectedLesson", lessonId);
+    }, 50);
         console.log("courseId " + courseId + " lessonId " + lessonId);
         return "lesson";
     }

@@ -182,6 +182,13 @@ Template.repeat.events({
         var _itemId = $(e.target).parent().attr("item-id");
         var _item = Items.findOne(_itemId);
         setNextRepetition(_evaluation, _item);
+    }, 
+    "click a[href='#picture']": function (e) {
+        console.log("click on picture");
+        $(".mainBox").switchClass("span8", "span12");
+    },
+    "click a[href='#repeatFlashcards']": function (e) {
+        $(".mainBox").switchClass("span12", "span8");
     }
 });
 

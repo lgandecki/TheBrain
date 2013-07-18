@@ -3,16 +3,21 @@ body {
 }
 .flashcard {
     text-align: left;
-    background: #ddd;
+    background: #f2f2f2;
     color: #000000;
-    border: 2px solid #2E80DA !important;
+    border: 2px solid #219BCC !important;
     font-weight: normal;
-    width: 100%;
+    width: 98%;
     resize: none;
+    height: 60px;
+    margin-bottom: 20px;
 }
 
 textarea[disabled].flashcard  {
-    background: #ddd !important;
+    background: #f2f2f2 !important;
+    color: #000000 !important;
+    border: 2px solid #219BCC !important;
+    opacity: 1 !important;
 }
 
 .evaluate {
@@ -179,7 +184,7 @@ html, body {
         float: none !important;
     }
     form input[type='text'] {
-        width: 98%;
+        width: 96%;
     }
 }
 
@@ -345,4 +350,51 @@ ul.icons > li {
 
 .loginSignUp > h2 {
     margin-top: 20px;
+}
+
+
+.flashcardsList {
+    text-align: center;
+}
+
+.flashcardRow {
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    border-right: 1px solid #ddd;
+
+}
+
+.flashcardsList .row-fluid .span9, .flashcardsList .row-fluid .span3 {
+    border-top: 1px solid #ddd;   
+}
+
+.flashcardsList .row-fluid .span9:hover {
+    background: #f2f2f2;
+} 
+.flashcardOptionsRow:hover {
+    background: #f2f2f2;
+}
+
+.flashcardOptionsRow {
+    margin-left: 0px !important;
+    height: 100%;
+}
+
+.flashcardsOptions {
+    padding: 5px;
+}
+
+.flashcardRow h4 {
+    margin-top: 0px;
+
+    text-align: left;
+    background: #f2f2f2;
+    color: #000000;
+    border: 2px solid #219BCC !important;
+    font-weight: normal;
+    height: 60px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+
 }
