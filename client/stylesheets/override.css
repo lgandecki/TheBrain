@@ -29,3 +29,7 @@
 	font-weight: bold !important;
 	font-size: 13px !important;
 }
+
+.flashcardsOptions .btn {
+    width: 80%;
+}
