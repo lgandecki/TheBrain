@@ -16,12 +16,10 @@ Deps.autorun(function () {
 	}, 20);
 });
 
-console.log("How often are we rereading this?");
 
 $.fn.modal.Constructor.prototype.enforceFocus = function () {}; // Fix to enable stacking modals
 _runOnce = true;
 Template.body.rendered = function() {
-    console.log("everytime the page changes");
     if (_runOnce === true) {
         new GA(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', 'UA-33043573-4', 'thebrain.pro');

@@ -78,7 +78,6 @@ Template.flashcardForm.selectIfSelectedLesson = function () {
 }
 
 Template.collectionGroup.rendered = function() {
-    console.log("collectionGroup rendered");
     $("#collection.select2").select2();
     _selectedId = $("#collection option:selected").val();
     $("#collection").select2("val", _selectedId);
@@ -103,7 +102,6 @@ addFlashcard = function (e) {
                 $("#back").val("");
             }
         });
-        console.log("result ? " + result);
     }
     else {
         Meteor.validations.markInvalids();
@@ -141,7 +139,6 @@ createNewFlashcard = function () {
 
 Template.publicGroup.rendered = function() {
     $('#public').parent().bootstrapSwitch().on('switch-change', function(e, data){
-        console.log("data.value", data.value);
         $("#public").val(data.value);
     });
 }

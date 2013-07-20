@@ -14,7 +14,6 @@ Template.lesson.created = function() {
 
 Template.flashcardsOptions.events({
 		"click .btn-hideStudentsFlashcards": function(e) {
-		console.log("hide button clicked");
 		e.preventDefault();
 		e.stopPropagation();
 		setTimeout(function() {
@@ -29,7 +28,6 @@ Template.flashcardsOptions.events({
 
 	},
 	"click .btn-showStudentsFlashcards": function(e) {
-		console.log("showButtonClicked");
 		e.preventDefault();
 		e.stopPropagation();
 		$(".btn-showStudentsFlashcards").removeClass("btn-showStudentsFlashcards").addClass("btn-hideStudentsFlashcards").html("Hide students flashcards");
@@ -49,7 +47,6 @@ Template.flashcardsOptions.events({
 				courseId: Session.get("selectedCourse")
 			}
 			Meteor.call("addFlashcardsToCollection", _opts);
-			console.log("_flashcards from btn-all ", _opts.flashcardsIds);
 		}
 	}
 
@@ -57,13 +54,11 @@ Template.flashcardsOptions.events({
 
 Template.lesson.rendered = function() {
 		_course = Courses.findOne({_id: Session.get("selectedCourse")});
-	console.log("_course", _course);
-	console.log("selectedCourse ", Session.get("selectedCourse"));
+
 	if (_course) {
 	var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
 	_lesson = _course.lessons[_lessonIndex];
 
-	console.log("_lesson ", _lesson);
 	_flashcardSubscription = Meteor.subscribe("lessonFlashcards", {lessonId: _lesson._id, onlyAdmin: true, adminIds: _course.admins});
 	}
 }
@@ -93,8 +88,6 @@ _getFlashcards = function() {
 	if (_course) {
 	var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), _lessonId);
 	_lesson = _course.lessons[_lessonIndex];
-	console.log("_lessonId", _lessonId);
-	console.log("_course", _course);
 	_optionsQuery = Session.get("_optionsQuery") || {};
 	if (_lesson) {
 		_query = {public: true, "lessons.lesson": _lesson._id};

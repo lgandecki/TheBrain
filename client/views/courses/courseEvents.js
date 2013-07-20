@@ -8,14 +8,11 @@ Template.courseEvents.course = function () {
 }
 
 Template.courseEvents.event = function() {
-    console.log("this ", this);
     return this.events;
 }
 
 Template.courseEvents.eventData = function (e) {
-    //console.log("this event" + this.type);
     var _event = {};
-                       //    console.log("this ", this);
     switch (this.type) {
         case 'created':
 

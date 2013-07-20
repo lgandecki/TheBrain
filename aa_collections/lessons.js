@@ -32,7 +32,6 @@ Meteor.methods({
             _id: _newLessonId
         });
 
-        console.log("lesson", lesson);
         if (_newLessonId) {
             var event = {
                 "user": user._id,
@@ -77,10 +76,6 @@ Meteor.methods({
 
         var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), lessonAttributes.lessonId);
 
-
-        console.log("_course", _course)
-        console.log("_lessonIndex ", _lessonIndex);
-
         // if (Meteor.isServer) {
         //     //Courses.update({_id: courseId, "comments._id": "firstComment"}, {$inc: {"comments.$.upVotes": 1}});
         // }
@@ -91,7 +86,6 @@ Meteor.methods({
         var modifier = {$set: {}};
         modifier.$set["lessons." + _lessonIndex + ".name"] = lessonAttributes.name;
 
-        console.log("modifier ", modifier);
         Courses.update(_courseId, modifier);
         
 
@@ -122,9 +116,6 @@ Meteor.methods({
         var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), lessonAttributes.lessonId);
 
 
-        console.log("_course", _course)
-        console.log("_lessonIndex ", _lessonIndex);
-
         // if (Meteor.isServer) {
         //     //Courses.update({_id: courseId, "comments._id": "firstComment"}, {$inc: {"comments.$.upVotes": 1}});
         // }
@@ -135,7 +126,6 @@ Meteor.methods({
         var modifier = {$set: {}};
         modifier.$set["lessons." + _lessonIndex + ".shortDescription"] = lessonAttributes.description;
 
-        console.log("modifier ", modifier);
         Courses.update(_courseId, modifier);
         
 

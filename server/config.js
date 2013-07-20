@@ -1,7 +1,6 @@
 Accounts.loginServiceConfiguration.remove({
     service: "facebook"
 });
-console.log("Are we here?");
 Accounts.loginServiceConfiguration.insert({
     service: "facebook",
     appId: "613948438636088",

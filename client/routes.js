@@ -19,7 +19,6 @@ Meteor.Router.add({
     , '/course/:id': function(id) {
         Session.set("selectedCourse", id);
 //        if (!Session.get("selectedCourseTab")) {
-//            console.log("We are doing this for some reason " + Session.get("selectedCourseTab"));
         Session.set("selectedCourseTab", "#events");
         //        }
         return "course";
@@ -28,7 +27,6 @@ Meteor.Router.add({
 , '/courseLessons/:id': function(id) {
     Session.set("selectedCourse", id);
 //        if (!Session.get("selectedCourseTab")) {
-//            console.log("We are doing this for some reason " + Session.get("selectedCourseTab"));
 Session.set("selectedCourseTab", "#events");
 //        }
 return "courseLessons";
@@ -41,7 +39,6 @@ return "courseLessons";
         Session.set("selectedCourse", courseId);
         Session.set("selectedLesson", lessonId);
     }, 50);
-    console.log("courseId " + courseId + " lessonId " + lessonId);
     return "lesson";
 }
 
@@ -60,7 +57,6 @@ Meteor.Router.filters({
     "postLoad": function (page) {
 
 
-        console.log("So we end up doing this twice ", page);
         var _tran = $("#transition")
         , _html = _tran.html()
         , _off = _tran.offset()
@@ -83,7 +79,6 @@ Meteor.Router.filters({
                     _prev.remove();
                 });
             }
-            console.log("_width " + _width);
             $("#transition").css({ "left": _width + 40 + "px" }).show()
             .animate({ "left": "0" }, 1200, _easing, function() {
                 $(".answer").focus();
@@ -133,6 +128,5 @@ resizeContent();
 }
 });
 
-console.log("Loading postLoad");
 
 Meteor.Router.filter('postLoad');

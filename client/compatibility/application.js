@@ -130,7 +130,6 @@ function initSidebarScroll(){
             }
             if($(".toggle-mobile").length == 0){
 
-                console.log("We are doing this!");
             }
 
             if($(".mobile-nav").length == 0){
@@ -190,23 +189,19 @@ function getNav(current){
     var currentNav = "";
     currentNav += "<ul>";
     current.find(">li").each(function(){
-        console.log("that should fire a couple times");
         currentNav += getNavElement($(this));
     });
     currentNav += "</ul>";
     nav = currentNav;
-    console.log("currentNav " + currentNav);
     return currentNav;
 }
 
 function createSubNav(){
-    console.log("Are we here?");
     if($(".mobile-nav").length == 0){
         var original = $("#navigation .main-nav");
         // loop
         var current = original;
         getNav(current);
-        console.log("nav " + nav);
         $("#navigation").append(nav);
         $("#navigation > ul").last().addClass("mobile-nav");
 
@@ -277,7 +272,6 @@ function resizeContent(){
 $(document).ready(function () {
     setTimeout(function(){
 
-    console.log("are we here? - documentReady");
     checkLeftNav();
     resizeContent();
 
@@ -364,7 +358,6 @@ $(document).ready(function () {
                         // close all
                         $el.parent().removeClass("open");
                         $cloned.remove();
-                        console.log("ASD");
                     }
                 });
             // }
@@ -909,7 +902,6 @@ $(window).scroll(function(e){
 });
 
 $(window).resize(function(e){
-    console.log("we are getting here");
     checkLeftNav();
 //    getSidebarScrollHeight();
 //    resizeContent();

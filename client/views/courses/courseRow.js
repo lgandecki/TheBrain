@@ -1,9 +1,4 @@
 Template.courseRow.events({
-	"click .badge-upVote": function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-		console.log("click");
-	},
 	"mouseenter .badge-upVote": function(e) {
 		$(e.target).switchClass("badge-success", "badge-success-reversed");
 	},
@@ -25,7 +20,6 @@ Template.courseRow.events({
 		"click .badge-upVote": function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log("upVote");
 		Meteor.call("upVoteCourse", this._id);
 		$(e.target).removeClass("badge-success-reversed").removeClass("badge-success");
 
@@ -41,7 +35,6 @@ Template.courseRow.events({
 });
 
 Template.courseRow.isUpVoted = function() {
-	console.log("this", this);
 	if (voted(this.upVotes)) {
 		return "";
 	}
@@ -50,7 +43,6 @@ Template.courseRow.isUpVoted = function() {
 
 
 Template.courseRow.isDownVoted = function() {
-	console.log("this", this);
 	if (voted(this.downVotes)) {
 		return "";	
 	}

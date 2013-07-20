@@ -4,9 +4,7 @@ Meteor.subscribe("itemFlashcards");
 
 function getNextItem() {
     currentItem = Items.findOne();
-    console.log("jestesmy tutaj " + currentItem);
     if (currentItem) {
-        console.log("a pozniej tutaj " + currentFlashcard);
         currentFlashcard = Flashcards.findOne(currentItem.flashcard);
     }
 }
@@ -18,7 +16,6 @@ function returnNextItem() {
 
     // Repetition first
     if (ItemFlashcards.find({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).count() > 0) {
-        console.log("Repetition");
         _nextItem = ItemFlashcards.findOne({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}});
         return _nextItem;
     }
@@ -26,12 +23,12 @@ function returnNextItem() {
 
     // Items to learn
     for (var collectionId in itemsToLearn) {
-        console.log("collectionId " + collectionId);
+        // console.log("collectionId " + collectionId);
         if (itemsToLearn.hasOwnProperty(collectionId) && itemsToLearn[collectionId] > 0) {
-            console.log("second step,, items To learn " + itemsToLearn[collectionId]);
+            // console.log("second step,, items To learn " + itemsToLearn[collectionId]);
             _currentCollectionItemsToLearn = ItemFlashcards.find({collection: collectionId, actualTimesRepeated: 0}).count();
-            console.log("collections count " + _currentCollectionItemsToLearn);
-            console.log("currentCollection " + collectionId);
+            // console.log("collections count " + _currentCollectionItemsToLearn);
+            // console.log("currentCollection " + collectionId);
             if (_currentCollectionItemsToLearn && _currentCollectionItemsToLearn > 0) {
                 if (itemsToLearn[collectionId] > _currentCollectionItemsToLearn) {
                     itemsToLearn[collectionId] = _currentCollectionItemsToLearn;
@@ -40,7 +37,7 @@ function returnNextItem() {
                     itemsToLearn[collectionId]--;
                 }
                 _nextItem = ItemFlashcards.findOne({collection: collectionId, actualTimesRepeated: 0});
-                console.log("Items to learn");
+                // console.log("Items to learn");
                 return _nextItem;
             }
             else {
@@ -184,7 +181,6 @@ Template.repeat.events({
         setNextRepetition(_evaluation, _item);
     }, 
     "click a[href='#picture']": function (e) {
-        console.log("click on picture");
         $(".mainBox").switchClass("span8", "span11", 800, "easeInOutBack");
     },
     "click a[href='#repeatFlashcards']": function (e) {
@@ -193,7 +189,6 @@ Template.repeat.events({
 });
 
 setNextRepetition = function (evaluation, _item) {
-    console.log("evaluation " + evaluation + " itemID " + _item._id);
     if (_item) {
         if (_item.extraRepeatToday) {
             if (evaluation >= 3) {
@@ -218,7 +213,6 @@ setNextRepetition = function (evaluation, _item) {
             _item.previousDaysChange = daysChange;
 
         }
-        console.log("_item._id " + _item._id + "user " + _item.user);
         Items.update(_item._id, {$set: {
             nextRepetition: _item.nextRepetition,
             easinessFactor: _item.easinessFactor,
@@ -228,7 +222,7 @@ setNextRepetition = function (evaluation, _item) {
             previousDaysChange: _item.previousDaysChange}
         }, function(err) {
             if (err) {
-                console.log("err " + err);
+                console.log("err ", err);
             }
         });
     }

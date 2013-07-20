@@ -49,7 +49,6 @@ Template.lessonsTable.rendered = function () {
 
 Template.lessonsTable.events({
     "click .lessonRow .editable": function(e) {
-        console.log("click ", e);
         e.preventDefault();
         e.stopPropagation();
     },
@@ -57,7 +56,6 @@ Template.lessonsTable.events({
         e.stopPropagation();
     },
     "click .lessonRow:not(.editable), click .btn-enterLesson": function(e) {
-        console.log("this " + this._id);
         Meteor.Router.to('/lesson/' + Session.get("selectedCourse") + "/" + this._id);
     },
     "click .btn-addLessonModal": function (e, template) {
@@ -66,7 +64,6 @@ Template.lessonsTable.events({
     },
     "click .btn-addFlashcardToLesson": function (e, template) {
         e.preventDefault();
-        console.log("this._id", this._id);
         $("#newFlashcardModal").modal('show');
         Session.set("selectedLesson", this._id);
 

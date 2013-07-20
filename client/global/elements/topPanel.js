@@ -8,7 +8,6 @@ Template.topPanel.connections = function() {
 }
 
 Template.topPanel.rendered = function() {
-	    console.log("test");
     $('li.active').removeClass('active');
     var _currentRoute = Meteor.Router.page();
     var _currentRoute = window.location.pathname;

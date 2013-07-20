@@ -85,7 +85,6 @@ Meteor.methods({
         _course = Courses.findOne(courseId);
         if (!_course) 
             throw new Meteor.Error(401, "You have to vote on existing course!");
-        console.log("in upVoteCourse", courseId);
         Courses.update({_id: courseId, downVotes: user._id}, 
             {$pull: {downVotes: user._id}, $inc: {score: 1}});
         Courses.update({_id: courseId, upVotes: {$ne: user._id}}, 
@@ -106,10 +105,6 @@ Meteor.methods({
 
         var _commentIndex = _.indexOf(_.pluck(_course.comments, '_id'), _commentId);
 
-
-        console.log("_course", _course)
-        console.log("_commentIndex ", _commentIndex);
-
         if (Meteor.isServer) {
             //Courses.update({_id: courseId, "comments._id": "firstComment"}, {$inc: {"comments.$.upVotes": 1}});
         }
@@ -120,7 +115,6 @@ Meteor.methods({
         var modifier = {$addToSet: {}};
         modifier.$addToSet["comments." + _commentIndex + ".upVotesArray"] = "testabc";
 
-        console.log("modifier ", modifier);
         Courses.update(courseId, modifier);
 }
 })

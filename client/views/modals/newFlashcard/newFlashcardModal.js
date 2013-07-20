@@ -15,13 +15,9 @@ Template.newFlashcardModal.selectedCourseName = function() {
 Template.newFlashcardModal.selectedLessonName = function() {
     var _selectedCourse = Courses.findOne({_id: Session.get("selectedCourse")});
     var _selectedLesson = Session.get("selectedLesson");
-    console.log("_selectedLesson", _selectedLesson);
-    console.log("_selectedCourse", _selectedCourse);
     if (_selectedCourse && _selectedLesson) {
 	    var _lessonIndex = _.indexOf(_.pluck(_selectedCourse.lessons, '_id'), _selectedLesson);
-	   	console.log("_lessonIndex", _lessonIndex);
 	   	_lesson = _selectedCourse.lessons[_lessonIndex];
-	   	console.log("_lesson", _lesson);
 	    return _lesson ? _lesson.name : "";
     }
 	return "";

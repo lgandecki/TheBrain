@@ -16,7 +16,6 @@ Template.login.rendered = function () {
 
 Template.signUpWithEmailModal.events({
     'submit #signUp': function (e, t) {
-        console.log("I'm submitting!");
         e.preventDefault();
         _email = $(".newEmail").val();
         _password = $(".newPassword").val();
@@ -48,11 +47,9 @@ Template.signUpWithEmailModal.events({
 
 Template.login.events({
         "mouseenter .btn-mine": function(e) {
-        console.log("ever in mouseEnter?");
         $(e.target).switchClass("quickButtonNormal", "quickButtonHover");
     },
     "mouseleave .btn-mine": function(e) {
-        console.log("or mouse leave?");
         $(e.target).switchClass("quickButtonHover", "quickButtonNormal");
     },
     "click .btn-signUpWithEmailModal": function (e, template) {

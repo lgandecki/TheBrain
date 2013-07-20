@@ -86,7 +86,6 @@ Meteor.methods({
 
 
         if (Meteor.isServer && opts.flashcardsIds) {
-            console.log("Ever here? in MeteorIsErver");
             var _items = [];
             _course = Courses.findOne({_id: opts.courseId});
 

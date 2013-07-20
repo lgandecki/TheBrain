@@ -9,7 +9,7 @@ var _audit = function () {
     };
 
     _self.update = function (userId, coll, doc) {
-        console.log("I'm in audit update");s
+        console.log("I'm in audit update");
 
         //update last modified on collection
         coll.update(doc._id, { $set: { lastModified: { by: userId, on: new Date().getTime() } } });

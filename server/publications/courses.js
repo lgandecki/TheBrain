@@ -9,6 +9,5 @@ Meteor.publish("myCourses", function() {
 
 
 Meteor.publish("selectedCourse", function(id) {
-   console.log("Selected Course publish? " + id);
    return Courses.find({_id: id},{fields: {'_id': 1, 'name': 1, 'admins': 1, 'upVotes': 1, 'downVotes': 1, 'lessons': 1, 'events': 1, 'comments': 1, 'score': 1}} );
 });
