@@ -16,4 +16,4 @@ Template.topMenu.events({
     'mouseleave li.topNav.open ': function(e, template) {
         $(e.target).removeClass("open");
     }
-})
+});

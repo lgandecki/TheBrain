@@ -6,12 +6,20 @@ Meteor.subscribe("myCollections");
 Meteor.subscribe("myItems");
 Meteor.subscribe("lessons");
 Meteor.subscribe("theBrain");
+Meteor.subscribe("notifications");
+
+Meteor.autosubscribe(function() {
+    Notifications.find({userId: Meteor.userId()}).observe({
+        added: function(item) {
+            Meteor.popUp.notification("test", "tak to juz jest", 'img/demo/user-avatar.jpg');
+        }
+    });
+});
 
 Deps.autorun(function () {
     console.log("deps selectedCourse " + Session.get("selectedCourse"));
     Meteor.subscribe("selectedCourse", Session.get("selectedCourse"));
     setTimeout(function () {
-    	
     	$("#transition").css("display", "block");
 	}, 20);
 });

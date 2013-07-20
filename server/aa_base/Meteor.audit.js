@@ -1,18 +1,31 @@
-var _audit = function () {
+var _audit = function() {
     var _self = this;
     console.log("I'm in audit");
-    _self.init = function (userId, coll, doc) {
+    _self.init = function(userId, coll, doc) {
         console.log("I'm in audit init");
-        doc.created = { by: userId, on: new Date().getTime() };
-        doc.lastModified = { by: userId, on: new Date().getTime() };
+        doc.created = {
+            by: userId,
+            on: new Date().getTime()
+        };
+        doc.lastModified = {
+            by: userId,
+            on: new Date().getTime()
+        };
 
     };
 
-    _self.update = function (userId, coll, doc) {
+    _self.update = function(userId, coll, doc) {
         console.log("I'm in audit update");
 
         //update last modified on collection
-        coll.update(doc._id, { $set: { lastModified: { by: userId, on: new Date().getTime() } } });
+        coll.update(doc._id, {
+            $set: {
+                lastModified: {
+                    by: userId,
+                    on: new Date().getTime()
+                }
+            }
+        });
     };
 
 };

@@ -9,3 +9,13 @@
 .ui-pnotify-history-container {
     display: none;
 }
+
+.ui-pnotify.stack-bottomright {
+	right: auto;
+	top: auto;
+}
+
+.notificationImage {
+	height: 40px; 
+	width: 40px;
+}

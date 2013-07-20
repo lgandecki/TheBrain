@@ -46,9 +46,23 @@ Accounts.onCreateUser(function (options, user) {
 
     }
 
+    user.courses = [];
+
     if (options.profile) {
         options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
         user.profile = options.profile;
+        _fbName = user.profile.name.split(" ");
+        _fbNameLength = _fbName.length;
+        _firstName = _fbName[0];
+        _lastName = _fbName[_fbNameLength-1];
+        user.identity.nick = _firstName + " " + _lastName;
+        user.identity.name.firstName = _firstName;
+        user.identity.name.lastName = _lastName;
+    } else {
+        user.identity.nick = user.emails[0].address.split("@")[0];
+        user.profile = {
+            picture: "http://elpaso.coloradogop.us/images/ui2013/dummy_user.png"
+        };
     }
 
 
