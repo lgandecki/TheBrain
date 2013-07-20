@@ -43,7 +43,8 @@ Meteor.methods({
             lessons: [{
                 "_id": new Meteor.Collection.ObjectID()._str,
                 name: "Day One",
-                shortDescription: "Temporary description"
+                shortDescription: "Temporary description",
+                flashcards: []
             }],
             events: [{
                 "_id": new Meteor.Collection.ObjectID()._str,

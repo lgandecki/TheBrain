@@ -32,10 +32,11 @@ validateNewCourse = function() {
     return !!(invalids.length === 0);
 }
 createNewCourse = function() {
+    _isPublic = ($("#newCoursePublic").val() === "true") ? true : false;
     var _newCourse = {
         name: $("#newCourseName").val(),
         shortDescription: $("#newCourseShortDescription").val(),
-        public: $("#newCoursePublic").val() || false
+        public: _isPublic
     };
     return _newCourse;
 };

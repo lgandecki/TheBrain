@@ -120,8 +120,9 @@ validateNewFlashcard = function () {
 };
 
 createNewFlashcard = function () {
+    _isPublic = ($("#public").val() === "true") ? true : false;
     var _newFlashcard = {
-        "public": $("#public").val(),
+        "public": _isPublic,
         "front": $("#front").val(),
         "back": $("#back").val(),
         "course": $("#course").val(),

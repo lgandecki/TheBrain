@@ -1,5 +1,5 @@
 Meteor.publish("publicCourses", function() {
-    return Courses.find({public: 1}, {sort: {score: -1}}, {fields: {'_id': 1, 'name': 1, 'upVotes': 1, 'downVotes': 1, 'lessons': 1 }});
+    return Courses.find({public: true}, {sort: {score: -1}}, {fields: {'_id': 1, 'name': 1, 'upVotes': 1, 'downVotes': 1, 'lessons': 1, 'score': 1, 'comments._id': 1 }});
 });
 
 

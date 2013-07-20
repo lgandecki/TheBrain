@@ -185,10 +185,10 @@ Template.repeat.events({
     }, 
     "click a[href='#picture']": function (e) {
         console.log("click on picture");
-        $(".mainBox").switchClass("span8", "span12");
+        $(".mainBox").switchClass("span8", "span11", 800, "easeInOutBack");
     },
     "click a[href='#repeatFlashcards']": function (e) {
-        $(".mainBox").switchClass("span12", "span8");
+        $(".mainBox").switchClass("span11", "span8", 800, "easeInOutBack");
     }
 });
 
@@ -278,12 +278,12 @@ showBackAndEvaluation = function () {
 
 hideBackAndEvaluation = function () {
     _fDiv = $(".flashcards");
-    _fDiv.animate({"left": (_fDiv.width() + 40) * -1}, function() {
+    _fDiv.animate({"left": (_fDiv.width() + 40) * -1}, 500, "easeInOutBack", function() {
         displayNextRepetition();
         $(".currentFlashcard > .answer").val("");
         $(".currentFlashcard > .evaluate").css({"visibility": "hidden"}).hide('10');
         $(".currentFlashcard > .back").css({"visibility": "hidden"}).hide('10');
-        _fDiv.css({"left": (_fDiv.width() + 40)}).animate({"left": 0});
+        _fDiv.css({"left": (_fDiv.width() + 40)}).animate({"left": 0}, 500, "easeInOutBack");
         $(".btn-show-answer").addClass("visible-phone").show();
     }
     )

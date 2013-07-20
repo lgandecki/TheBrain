@@ -29,8 +29,8 @@
 			</div>
 			<div class="span3 flashcardOptionsRow">
 				<div class="pull-left">{{upVotes}} / {{downVotes}}</div>
-				<div class="">By: {{author}} ({{points}})</div>
-				<div class="">Comments: {{comments}}</div>
+				<div class="">By: {{user}} ({{points}})</div>
+				<div class="">Comments: {{comments.length}}</div>
 				<div class=""></div>
 			</div>
 		</div>
@@ -39,10 +39,10 @@
 
 <template name="flashcardsOptions">
 	<div class="flashcardsOptions row-fluid">
-			<button class="center btn btn-primary btn-primary-main btn-addAll btn-block"><i class="icon-group"></i> Show users flashcards (10 more)
+			<button class="center btn btn-primary btn-primary-main btn-showStudentsFlashcards btn-block"><i class="icon-group"></i> Show students flashcards (10 more)
 			</button>
 
-			<button class="center btn btn-primary btn-primary-main btn-addAll btn-block"><i class="icon-hand-down"></i> Add All (10)
+			<button class="center btn btn-primary btn-primary-main btn-addAll btn-block"><i class="icon-hand-down"></i> Add all teacher's flashcards (10)
 			</button>
 	</div>
 
