@@ -3489,7 +3489,6 @@ label, input, button, select, textarea {
 }
 @media (max-width: 1200px) {
   .icon-nav {
-    display: none !important;
   }
 }
 @media (max-width: 1024px) {

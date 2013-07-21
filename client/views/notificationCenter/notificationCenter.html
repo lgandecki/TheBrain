@@ -1,0 +1,37 @@
+<template name="notificationCenter">
+    <div class="row-fluid">
+        <div class="span6 center">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> Notification center</h3>
+                </div>
+                <div class="box-content nopadding" style="text-align: center">
+
+                            {{#each notification}}
+                            	{{> notificationRow}}
+                            {{/each}}
+{{#if notificationsReady}}
+      {{#unless allNotificationsLoaded}}
+                            <button class="btn btn-primary btn-primary-main btn-loadMore"><i class="icon-hand-down"> Load more</i>
+
+      {{/unless}}
+    {{else}}
+      <div style="margin-bottom: 10px;">{{> spinner}}</div>
+    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+
+<template name="notificationRow">
+	<img src="{{eventUserPicture}}" alt="">
+                <div class="details">
+                    <div class="name">{{eventUserName}}</div>
+                    <div class="message">
+                        {{message}}
+                    </div>
+                </div>
+                <br/>
+</template>

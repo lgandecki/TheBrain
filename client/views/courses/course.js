@@ -35,11 +35,23 @@ Template.course.events({
   },
   "click .btn-courseDropOut": function(e) {
     courseId = Session.get("selectedCourse");
-    Meteor.call("dropOutFromTheCourse", courseId);
+    Meteor.call("dropOutFromTheCourse", courseId, function(error, id) {
+      if (error) {
+        Meteor.popUp.error("TheBrain is confused", error.reason);
+      } else {
+        Meteor.popUp.success("Dropped the course", "TheBrain made the neural connections changes you asked for.");
+      }
+    });
   },
   "click .btn-courseEnroll": function(e) {
     courseId = Session.get("selectedCourse");
-    Meteor.call("enrollInCourse", courseId);
+    Meteor.call("enrollInCourse", courseId, function(error, id) {
+      if (error) {
+        Meteor.popUp.error("TheBrain is confused", error.reason);
+      } else {
+        Meteor.popUp.success("Enrolled to the course", "TheBrain made the neural connections changes you asked for.");
+      }
+    });
   }
 });
 

@@ -1,6 +1,6 @@
 <template name="header">
 <div id="navigation" class="navbar-fixed-top">
-    <div class="container">
+    <div class="{{containerType}}">
         <a href="{{homePath}}" id="brand">TheBrain</a>
         {{#if isLoggedIn}}
             {{#isolate}}{{> topMenu }}{{/isolate}}

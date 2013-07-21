@@ -4,7 +4,7 @@ Template.userHeader.events({
         Meteor.logout();
     }
     , "click .toggle-mobile": function (e, template) {
-        $(".mobile-nav").slideToggle();
+        $(".mobile-nav").slideToggle(600, "easeInOutBack");
     }
 });
 
@@ -13,18 +13,6 @@ Template.userHeader.user = function() {
 };
 
 Template.userHeader.events({
-    'mouseenter li.dropdown': function(e, template) {
-        $(e.target).addClass("open");
-    },
-    'mouseleave li.dropdown.open': function(e, template) {
-        $(e.target).removeClass("open");
-    },
-    'mouseenter div.dropdown': function(e, template) {
-        $(e.target).addClass("open");
-    },
-    'mouseleave div.dropdown.open ': function(e, template) {
-        $(e.target).removeClass("open");
-    },
     'mouseenter .theme-colors > li > span ': function(e){
     var $el = $(e.target),
     body = $('body');

@@ -6,7 +6,7 @@
         
         <li class='dropdown colo'>
             <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
-            <ul class="dropdown-menu pull-right theme-colors">
+            <ul class="dropdown-menu dropdown-menu-custom pull-right theme-colors">
                 <li class="subtitle">
                     Predefined colors
                 </li>
@@ -30,18 +30,15 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="more-locked.html" class='lock-screen' rel='tooltip' title="Lock screen" data-placement="bottom"><i class="icon-lock"></i></a>
-        </li>
     </ul>
     <div class="dropdown">
-        <a href="#" class='dropdown-toggle' data-toggle="dropdown"> {{#isolate}}{{user.identity.nick}} ({{user.points}}{{/isolate}}) <img style="height: 27px; width: 27px" src="{{#if user.profile.picture}}{{user.profile.picture}}{{else}}img/demo/user-avatar.jpg{{/if}}" alt=""></a>
-        <ul class="dropdown-menu pull-right">
+        <a href="#" class='dropdown-toggle visible-desktop' data-toggle="dropdown"> {{#isolate}} {{user.identity.nick}} ({{user.points}}{{/isolate}}) <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
+        <a href="#" class='dropdown-toggle hidden-desktop' data-toggle="dropdown">  <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt="">({{#isolate}}{{user.points}}{{/isolate}})</a> 
+        <ul class="dropdown-menu dropdown-menu-custom pull-right">
             <li>
-                <a href="more-userprofile.html">Edit profile</a>
+                <a href="/myProfile">My Profile</a>
             </li>
-            <li>
-                <a href="#">Account settings</a>
+            <li><a href="/myAchievements">My Achievements</a>
             </li>
             <li>
                 <a id="logOut" href="javascript:">Sign out</a>

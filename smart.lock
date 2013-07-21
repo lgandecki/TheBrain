@@ -7,7 +7,9 @@
       "accounts-ui-bootstrap-dropdown": {},
       "router": {},
       "select2": {},
-      "modernizr-meteor": {}
+      "modernizr-meteor": {},
+      "paginated-subscription": {},
+      "spin": {}
     },
     "packages": {
       "jquery-ui": {
@@ -39,6 +41,16 @@
         "git": "https://github.com/ckir/modernizr-meteor.git",
         "tag": "v2.6.2",
         "commit": "391ca2a3beff3cd2b0e1099cb2d744b5a2e8a73e"
+      },
+      "paginated-subscription": {
+        "git": "https://github.com/tmeasday/meteor-paginated-subscription.git",
+        "tag": "v0.1.2",
+        "commit": "35e0c6112df2b4cfeb60b559276a93cac5ee2dd6"
+      },
+      "spin": {
+        "git": "https://github.com/SachaG/meteor-spin.git",
+        "tag": "v0.2.0",
+        "commit": "fd3a2871a69442848b4b4e74f5e1ae28fa4a95a4"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

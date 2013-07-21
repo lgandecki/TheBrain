@@ -22,17 +22,29 @@
 
 <template name="flashcardForm">
     <div class="control-group">
-        <label for="front" class="control-label">Front</label>
+        <label for="front" class="control-label">Front
+            
+            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront hidden-phone">Add Picture</button>
+</label>
 
         <div class="controls">
-            <textarea name="front" id="front" rows="5" class="input-block-level"></textarea>
+
+            <div name="front" id="front" class="flashcard flashcardNoMargin" contentEditable="false">
+                {{#isolate}}<a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}<div name="front" class="flashcardFront"   contentEditable="true"></div>
+</div>
+            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront visible-phone">Add Picture</button>
         </div>
     </div>
     <div class="control-group">
-        <label for="back" class="control-label">Back</label>
+
+        <label for="back" class="control-label">Back
+                    <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack hidden-phone">Add Picture</button></label>
 
         <div class="controls">
-            <textarea name="back" id="back" rows="5" class="input-block-level"></textarea>
+<div name="back" id="back" class="flashcard flashcardNoMargin" contentEditable="false">
+                {{#isolate}}<a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newBackPicture}}<img src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}<div name="back" class="flashcardBack"   contentEditable="true"></div>
+</div>
+                    <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack visible-phone">Add Picture</button>
         </div>
     </div>
     <div id="advancedSettings" style='display: none;'>
@@ -93,7 +105,6 @@
 
     <button type="submit" class="btn btn-primary btn-primary-main btn-submit">Add Flashcard</button>
     <button class="btn btn-primary btn-primary-main btn-showAdvanced">Show advanced settings</button>
-
 </template>
 
 <template name="publicGroup">

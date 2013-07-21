@@ -6,3 +6,6 @@ router
 page-js-ie-support
 select2
 modernizr-meteor
+paginated-subscription
+spin
+fancybox

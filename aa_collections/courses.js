@@ -101,7 +101,7 @@ Meteor.methods({
             }
         });
         // updateScore(courseId);
-
+        courseVoteUpNotification(_opts);
     },
     upVoteCourse: function(courseId) {
         var user = Meteor.user();
@@ -134,6 +134,13 @@ Meteor.methods({
                 score: 1
             }
         });
+
+        var _opts = {
+            courseId: courseId,
+            userId: user._id
+        };
+        courseVoteUpNotification(_opts);
+
         // updateScore(courseId);
 
     },
@@ -176,7 +183,7 @@ Meteor.methods({
             courseId: courseId,
             userId: user._id
         };
-        createEnrollmentNotification(_opts);
+        courseEnrollmentNotification(_opts);
 
     },
     dropOutFromTheCourse: function(courseId) {

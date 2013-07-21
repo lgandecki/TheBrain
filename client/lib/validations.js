@@ -5,6 +5,12 @@ _checkIfEmpty = function (selector) {
     }
 };
 
+_checkIfEmptyDiv = function (selector) {
+    if ($(selector).html === "") {
+        invalids.push(selector);
+    }
+}
+
 _checkIfUniqueNameForUser = function (selector, collection) {
     uniqueName = $(selector).val();
     if (collection.find({user: Meteor.userId(), name: uniqueName}).count() > 0) {
@@ -41,5 +47,6 @@ _.extend(Meteor.validations, {
     invalids: invalids,
     clearErrors: _clearErrors,
     checkIfUniqueNameForUser: _checkIfUniqueNameForUser,
-    checkIfUniqueCollectionName: _checkIfUniqueCollectionName
+    checkIfUniqueCollectionName: _checkIfUniqueCollectionName,
+    checkIfEmptyDiv: _checkIfEmptyDiv
 });

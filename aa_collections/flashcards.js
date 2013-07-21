@@ -24,8 +24,8 @@ Meteor.methods({
         if (!user)
             throw new Meteor.Error(401, "You need to login to add new flashcards");
 
-        if (!flashcardAttributes.front)
-            throw new Meteor.Error(422, "Please fill the front of your flashcard");
+        if (!flashcardAttributes.front && !flashcardAttributes.frontPicture)
+            throw new Meteor.Error(422, "Please either fill the front of your flashcard or add picture");
 
 
         if (flashcardAttributes.collection) {
@@ -33,7 +33,7 @@ Meteor.methods({
         }
 
         var flashcard = _.extend(_.pick(flashcardAttributes, "public", "front",
-            "back", "source"), {
+            "back", "source", "frontPicture", "backPicture"), {
             user: user._id,
             "previousVersions": [],
             "suggestedVersions": [],
@@ -60,7 +60,7 @@ Meteor.methods({
         var flashcardId = Flashcards.insert(flashcard);
 
         if (flashcardAttributes.collection) {
-            var item = returnItem(flashcardAttributes.collection);
+            var item = returnItem(flashcardAttributes.collection, flashcardId);
             Items.insert(item);
         }
 

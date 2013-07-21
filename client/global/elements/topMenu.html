@@ -1,21 +1,21 @@
 <template name="topMenu">
 <ul class="main-nav">
-    <li class="topNav">
+    <li class="topNav dropdown">
         <a href="{{homePath}}">
             <span>Dashboard</span>
         </a>
     </li>
-    <li class="topNav">
+    <li class="topNav dropdown">
         <a href="{{newFlashcardPath}}">
             <span>Add new Flashcard</span>
         </a>
     </li>
-    <li class="topNav">
+    <li class="topNav dropdown">
         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
             <span>Learn</span>
             <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu dropdown-menu-custom">
             <li>
         <a href="{{repeatPath}}">
             <span>Repeat</span>
@@ -28,12 +28,12 @@
         </li>    
     </ul>
     </li>
-    <li class="topNav">
+    <li class="topNav dropdown">
         <a href="#" data-toggle="dropdown" class="dropdown-toggle">
             <span>Courses</span>
             <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu dropdown-menu-custom ">
             <li>
                 <a href="{{myCoursesPath}}">
                     My Courses
@@ -51,7 +51,7 @@
             </li>
         </ul>
     </li>
-        <li class="topNav">
+        <li class="topNav dropdown">
         <a href="/myCollections">
             <span>My collections</span>
         </a>

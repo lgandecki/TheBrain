@@ -134,17 +134,50 @@ fillTemplate = function() {
     front = (_currentItem.personalFront) ? personalFront : _currentItem.flashcardObject.front;
     back =  (_currentItem.personalBack) ? personalBack : _currentItem.flashcardObject.back;
 
-    $(".currentFlashcard > .front").val(front);
-//    $(".currentFlashcard > .answer").focus();
-$(".currentFlashcard > .back").val(back)
+    var _frontPicture, _backPicture;
+    if (_currentItem.personalFrontPicture) {
+        _frontPicture = _currentItem.personalFrontPicture;
+    }
+    else if (_currentItem.flashcardObject.frontPicture) {
+        _frontPicture = _currentItem.flashcardObject.frontPicture;
+    }
+
+    if (_currentItem.personalBackPicture) {
+        _backPicture = _currentItem.personalBackPicture;
+    }
+    else if (_currentItem.flashcardObject.backPicture) {
+        _backPicture = _currentItem.flashcardObject.backPicture;
+    }
+    if (_frontPicture) {
+        console.log("in front before ", front);
+        front = '<a id="test2" href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
+        <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
+        <div name="front" class="flashcardFront">' + front + '</div>';
+        console.log("front after", front);
+    }
+
+    if (_backPicture) {
+              back = '<a id="test1" href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
+        <img src="' + _backPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
+        <div name="back" class="flashcardBack">' + back + '</div>';  
+    }
+
+
+
+$(".currentFlashcard > .front").html(front);
+$(".currentFlashcard > .back").html(back);
 $(".currentFlashcard > .evaluate").attr("item-id", _currentItem._id);
+// setTimeout(function() {
+// $(".currentFlashcard > .answer").focus();
+
+
 
 }
 
 emptyTemplate = function() {
-    $(".currentFlashcard > .front").val("");
-    $(".currentFlashcard > .answer").val("").prop("disabled", true);
-    $(".currentFlashcard > .back").val("");
+    $(".currentFlashcard > .front").html("");
+    $(".currentFlashcard > .answer").html("").prop("disabled", true);
+    $(".currentFlashcard > .back").html("");
     $(".currentFlashcard > .answer").prop("disabled", true);
 }
 
@@ -274,7 +307,7 @@ hideBackAndEvaluation = function () {
     _fDiv = $(".flashcards");
     _fDiv.animate({"left": (_fDiv.width() + 40) * -1}, 500, "easeInOutBack", function() {
         displayNextRepetition();
-        $(".currentFlashcard > .answer").val("");
+        $(".currentFlashcard > .answer").html("");
         $(".currentFlashcard > .evaluate").css({"visibility": "hidden"}).hide('10');
         $(".currentFlashcard > .back").css({"visibility": "hidden"}).hide('10');
         _fDiv.css({"left": (_fDiv.width() + 40)}).animate({"left": 0}, 500, "easeInOutBack");

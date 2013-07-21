@@ -5,6 +5,8 @@
     "accounts-ui-bootstrap-dropdown": {},
     "router": {},
     "select2": {},
-    "modernizr-meteor": {}
+    "modernizr-meteor": {},
+    "paginated-subscription": {},
+    "spin": {}
   }
 }
