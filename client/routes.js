@@ -18,6 +18,8 @@ Meteor.Router.add({
 
     '/myCourses': "myCourses",
 
+    '/enrolledCourses': "enrolledCourses",
+
     '/course/:id': function(id) {
         Session.set("selectedCourse", id);
         //        if (!Session.get("selectedCourseTab")) {
@@ -84,7 +86,15 @@ Meteor.Router.filters({
         }
 
         setTimeout(function() {
-            ga('send', 'pageview', window.location.pathname);
+            
+            if (typeof ga !== 'undefined') {
+                ga('send', 'pageview', window.location.pathname);
+            }
+            else {
+                setTimeout(function() {
+                    ga('send', 'pageview', window.location.pathname);
+                }, 300);
+            }
 
 
             if (_prev) {

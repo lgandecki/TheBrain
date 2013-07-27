@@ -5,7 +5,7 @@ Courses.allow({
 
     'insert': function(userId, doc) {
         if (ownsDocument) {
-            Meteor.Audit.init(userId, Courses, doc)
+            Meteor.Audit.init(userId, Courses, doc);
             return true;
         } else {
             return false;
@@ -60,7 +60,7 @@ Meteor.methods({
                 }
             }],
             flashcards: 0,
-            comments: 0,
+            comments: [],
             students: []
         });
 
@@ -101,7 +101,12 @@ Meteor.methods({
             }
         });
         // updateScore(courseId);
-        courseVoteUpNotification(_opts);
+
+        var _opts = {
+            courseId: courseId,
+            userId: user._id
+        };
+        courseVoteDownNotification(_opts);
     },
     upVoteCourse: function(courseId) {
         var user = Meteor.user();
@@ -144,30 +149,129 @@ Meteor.methods({
         // updateScore(courseId);
 
     },
-    courseCommentVoteUp: function(courseId) {
+    newCourseComment: function(newCourseComment) {
+        var _user = Meteor.user();
+        if (!_user) 
+            throw new Meteor.Error(401, "You need to login to comment");
+        _course = Courses.findOne(newCourseComment.courseId);
+
+        if (!_course)
+            throw new Meteor.Error(401, "You have to comment on existing course");
+
+        var comment = _.extend(_.pick(newCourseComment, "comment"), {
+            _id: new Meteor.Collection.ObjectID()._str,
+            user: _user._id,
+            userName: _user.identity.nick,
+            userPicture: _user.profile.picture,
+            posted: Meteor.moment.fullNow(),
+            parent: null,
+            upVotes: [],
+            downVotes: [],
+            score: 0
+        });
+
+        Courses.update({_id: _course._id}, {$addToSet: {comments: comment}});
+
+
+        var _opts = {
+            courseId: _course._id,
+            userId: _user._id
+        };
+
+        courseCommentNotification(_opts);
+
+
+    },
+    courseCommentVoteUp: function(opts) {
         var user = Meteor.user();
         if (!user)
-            throw new Meteor.Error(401, "You need to login to add new course");
+            throw new Meteor.Error(401, "You need to login to vote on comments");
 
-        _commentId = "firstComment";
+        _course = Courses.findOne(opts.courseId);
 
+        var _commentIndex = _.indexOf(_.pluck(_course.comments, '_id'), opts.commentId);
 
-        _course = Courses.findOne(courseId);
-
-        var _commentIndex = _.indexOf(_.pluck(_course.comments, '_id'), _commentId);
-
-        if (Meteor.isServer) {
-            //Courses.update({_id: courseId, "comments._id": "firstComment"}, {$inc: {"comments.$.upVotes": 1}});
-        } else {
-
-        }
 
         var modifier = {
-            $addToSet: {}
+            $pull: {},
+            $inc: {}
         };
-        modifier.$addToSet["comments." + _commentIndex + ".upVotesArray"] = "testabc";
 
-        Courses.update(courseId, modifier);
+        _query = {_id: _course._id};
+        _query["comments." + _commentIndex + ".downVotes"] = user._id;
+
+        modifier.$pull["comments." + _commentIndex + ".downVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = 1
+
+        Courses.update(_query, modifier);
+
+        var modifier = {
+            $addToSet: {},
+            $inc: {}
+        };
+
+        _query = {_id: _course._id};
+        _query["comments." + _commentIndex + ".upVotes"] = { $ne: user._id};
+
+        modifier.$addToSet["comments." + _commentIndex + ".upVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = 1
+
+        Courses.update(_query, modifier);
+        _opts = {
+            user: user._id,
+            commentId: opts.commentId,
+            courseId: _course._id
+        };
+        commentUpVoteNotification(_opts);
+    },
+        courseCommentVoteDown: function(opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to vote on comments");
+
+        _course = Courses.findOne(opts.courseId);
+
+        var _commentIndex = _.indexOf(_.pluck(_course.comments, '_id'), opts.commentId);
+
+        var modifier = {
+            $pull: {},
+            $inc: {}
+        };
+
+        _query = {_id: _course._id};
+        _query["comments." + _commentIndex + ".upVotes"] = user._id;
+
+        modifier.$pull["comments." + _commentIndex + ".upVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = -1;
+
+        console.log("modifier first ", modifier);
+
+        Courses.update(_query, modifier);
+
+
+        var modifier = {
+            $addToSet: {},
+            $inc: {}
+        };
+
+        _query = {_id: _course._id};
+        _query["comments." + _commentIndex + ".downVotes"] = { $ne: user._id};
+
+        modifier.$addToSet["comments." + _commentIndex + ".downVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = -1;
+
+
+                console.log("modifier second ", modifier);
+
+
+        Courses.update(_query, modifier);
+
+        _opts = {
+            user: user._id,
+            commentId: opts.commentId,
+            courseId: _course._id
+        };
+        commentDownVoteNotification(_opts);
     },
     enrollInCourse: function(courseId) {
         var user = Meteor.user();
@@ -209,4 +313,5 @@ updateScore = function(_courseId) {
             score: _score
         }
     });
+
 }

@@ -47,8 +47,8 @@ _notification = function(title, message, userAvatar) {
         opacity: 1,
         nonblock: true,
         nonblock_opacity: .4,
-        delay: 6000,
-        animate_speed: 700,
+        delay: 4000,
+        animate_speed: 900,
         animation: {
             effect_in: "drop",
             options_in: {

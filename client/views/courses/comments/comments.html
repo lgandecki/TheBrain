@@ -7,113 +7,61 @@
 
 <template name="comments">
 
-	<div class="post-comments">
+<div class='row-fluid'>
+
+	{{> addComment }}
+
+	<div class="post-comments">	
+		{{#each mainComment}}
 										<div class="media">
 											<a class="pull-left" href="#">
-												<img src="/img/demo/user-1.jpg">
+												<img class='userPictureComment' src="{{userPicture}}">
 											</a>
 											<div class="media-body">
 												<div class="comment">
-												<h4 class="media-heading">Jane Doe <small>15 days ago</small></h4>
-												<p>Lorem ipsum Consectetur voluptate dolore sint dolor esse anim. Lorem ipsum Eiusmod non dolor in adipisicing quis ullamco cillum anim mollit proident.</p>
+												<h4 class="media-heading">{{userName}} <small>{{date}}</small></h4>
+												<p>{{comment}}</p>
 												<div class="media-actions">
 													<button class="btn btn-small btn-primary btn-primary-main btn-reply" data-id="{{_id}}"><i class="icon-reply"></i></button>
 													|
-													<span class="badge badge-success">+ 4</span> /
-                                    <span class="badge badge-warning">- 3</span>
+													<span class="badge badge-success badge-upVote">+ {{upVotes.length}}</span> /
+                                    <span class="badge badge-warning badge-downVote">- {{downVotes.length}}</span>
 												</div>
 											</div>
+											{{#each subComment}}
 												<div class="media">
 													<a class="pull-left" href="#">
-														<img src="/img/demo/user-2.jpg">
+														<img src="{{userPicture}}">
 													</a>
 													<div class="media-body">
-														<h4 class="media-heading">Max Mustermann <small>16 days ago</small></h4>
-														<p>Lorem ipsum Et consequat cupidatat nulla aliqua exercitation consequat aute ea veniam ut.</p>
+														<h4 class="media-heading">{{userName}} <small>{{date}}</small></h4>
+														<p>{{comment}}</p>
 														<div class="media-actions">
 															<a href="#" class="btn btn-small"><i class="icon-reply"></i> Reply</a>
 														</div>
 													</div>
 												</div>
-												<div class="media">
-													<a class="pull-left" href="#">
-														<img src="/img/demo/user-3.jpg">
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading">Max Mustermann <small>16 days ago</small></h4>
-														<p>Lorem ipsum Et consequat cupidatat nulla aliqua exercitation consequat aute ea veniam ut.</p>
-														<div class="media-actions">
-															<a href="#" class="btn btn-small"><i class="icon-reply"></i> Reply</a>
-														</div>
-													</div>
-												</div>
+												{{/each}}
 											</div>
 										</div>
-										<div class="media">
-											<a class="pull-left" href="#">
-												<img src="/img/demo/user-4.jpg">
-											</a>
-											<div class="media-body">
-												<h4 class="media-heading">Jane Doe<small>14 days ago</small></h4>
-												<p>Lorem ipsum Consectetur voluptate dolore sint dolor esse anim. Lorem ipsum Eiusmod non dolor in adipisicing quis ullamco cillum anim mollit proident.</p>
-												<div class="media-actions">
-													<a href="#" class="btn btn-small"><i class="icon-reply"></i> Reply</a>
-												</div>
-												<div class="media">
-													<a class="pull-left" href="#">
-														<img src="/img/demo/user-5.jpg">
-													</a>
-													<div class="media-body">
-														<h4 class="media-heading">Username #1<small>15 days ago</small></h4>
-														<p>Lorem ipsum Pariatur ut consectetur commodo fugiat quis cupidatat ut consectetur sed ullamco ea incididunt. Lorem ipsum Eiusmod sit magna officia magna in aliquip pariatur. Lorem ipsum Nostrud in veniam anim quis quis nulla incididunt amet elit ad esse do. Lorem ipsum Magna fugiat enim ex tempor cupidatat est consequat qui Excepteur.</p>
-														<div class="media-actions">
-															<a href="#" class="btn btn-small"><i class="icon-reply"></i> Reply</a>
-														</div>
-													</div>
-												</div>
+										{{/each}}
 											</div>
 										</div>
-										<div class="media">
-											<a class="pull-left" href="#">
-												<img src="/img/demo/user-6.jpg">
-											</a>
-											<div class="media-body">
-												<h4 class="media-heading">Username #2<small>13 days ago</small></h4>
-												<p>Lorem ipsum Dolore id anim Duis exercitation exercitation in aliqua incididunt commodo. Lorem ipsum Adipisicing sunt ex ad esse fugiat laborum voluptate aute proident.</p>
-												<div class="media-actions">
-													<a href="#" class="btn btn-small"><i class="icon-reply"></i> Reply</a>
-												</div>
-											</div>
-										</div>
-										<div class="media">
-											<a class="pull-left" href="#">
-												<img src="/img/demo/user-1.jpg">
-											</a>
-											<div class="media-body">
-												<h4 class="media-heading">Username #3<small>5 days ago</small></h4>
-												<p>Lorem ipsum Cillum Ut voluptate tempor Ut consectetur qui.</p>
-												<div class="media-actions">
-													<a href="#" class="btn btn-small"><i class="icon-reply"></i> Reply</a>
-												</div>
-											</div>
-										</div>
-										<div class="new-comment">
+										
+</template>
+
+
+<template name="addComment">
+	<div class="row-fluid">
+	<div class="new-comment">
 											<h4>Add a new comment</h4>
-											<form action="#" method="POST" class="form-vertical">
 												<div class="control-group">
-													<label for="name" class="control-label">Name</label>
 													<div class="controls">
-														<input type="text" name="name" id="name" class="input-block-level">
+														<textarea name="newComment" class="span8 newComment" rows="2"></textarea>
 													</div>
 												</div>
-												<div class="control-group">
-													<label for="ta" class="control-label">Message</label>
-													<div class="controls">
-														<textarea name="ta" id="ta" class="span12" rows="4"></textarea>
-													</div>
-												</div>
-												<button type="submit" class="btn btn-primary btn-primary-main pull-right">Post comment</button>
-											</form>
+												<button type="submit" class="span6 btn btn-primary btn-primary-main center btn-addNewComment">Post Comment</button>
 										</div>
-									</div> 
+									</div>
+
 </template>

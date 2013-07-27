@@ -438,3 +438,26 @@ div.flashcardFront, div.flashcardBack {
 .flashcardPicture.pull-right {
     float: right !important;
 }
+
+.new-comment > h4 {
+    text-align: center;
+}
+.new-comment { 
+text-align: center;
+}
+.new-comment > .control-group {
+    text-align: center;
+}
+.new-comment > .btn-addNewComment {
+    text-align: center;
+}
+
+.new-comment {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.userPictureComment {
+    width: 84px;
+}
