@@ -1,15 +1,9 @@
-<template name="commentsTab">
-    <div class="tab-pane fade" id="comments">
-        {{> courseComments }}
 
-    </div>
-</template>
-
-<template name="courseComments">
+<template name="flashcardComments">
 
     <div class='row-fluid'>
 
-        {{> addCourseComment }}
+        {{> addFlashcardComment }}
 
         <div class="post-comments">
             {{#each mainComment}}
@@ -88,7 +82,7 @@
 </template>
 
 
-<template name="addCourseComment">
+<template name="addFlashcardComment">
     <div class="row-fluid">
         <div class="new-comment">
             <h4>Add a new comment</h4>

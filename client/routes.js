@@ -65,15 +65,14 @@ Meteor.Router.add({
 Meteor.Router.filters({
     "postLoad": function(page) {
 
-
-        var _tran = $("#transition"),
+        var _tran = $(".transition"),
             _html = _tran.html(),
             _off = _tran.offset(),
             _width = _tran.width(),
             _prev = null,
             _easing = "easeInOutBack";
 
-        if (_html && $(".previousPage").length === 0 && !Meteor.loggingIn()) {
+        if (_html && _off && !Meteor.loggingIn()) {
             _prev = $("<div class='previousPage'/>").html(_html).css({
                 "z-index": 0,
                 position: "absolute",
@@ -82,11 +81,31 @@ Meteor.Router.filters({
                 width: _width + "px"
             });
             $(document.body).append(_prev);
-            _tran.hide();
         }
 
+        $("html, body").animate({
+            scrollTop: 0
+        }, 300);
+
+        $(".transition").hide();
+
         setTimeout(function() {
-            
+            $(".transition").show();
+            if ($(".transition").length > 0 ) {
+                console.log("_width", _width);
+                console.log("transition", $(".transition").width());
+                $(".transition").css({
+                    "left": $(".transition").width() + 40 + "px"
+                }).show()
+                    .animate({
+                        "left": "0"
+                    }, 1200, _easing, function() {
+                        $(".answer").focus();
+
+                    });
+            }
+
+
             if (typeof ga !== 'undefined') {
                 ga('send', 'pageview', window.location.pathname);
             }
@@ -101,17 +120,10 @@ Meteor.Router.filters({
                 _prev.animate({
                     "left": ((_width + _off.left) * -1) + "px"
                 }, 1200, _easing, function() {
-                    _prev.remove();
+                   this.remove();
                 });
             }
-            $("#transition").css({
-                "left": _width + 40 + "px"
-            }).show()
-                .animate({
-                    "left": "0"
-                }, 1200, _easing, function() {
-                    $(".answer").focus();
-                });
+
 
             // $(".select2").select2();
 
@@ -127,7 +139,7 @@ Meteor.Router.filters({
             checkLeftNav();
             resizeContent();
 
-        }, 10);
+        }, 50);
 
 
         // setTimeout(function () {
@@ -141,11 +153,12 @@ Meteor.Router.filters({
         // else {
         //     return "login";
         // }
+        $(".dropdown-menu").hide('normal', "easeInOutCubic");
 
         if (Meteor.loggingIn()) {
             return "loading";
 
-        } else if (Meteor.userId()) {
+        } else if (Meteor.userId() || Session.get("exploreMode")) {
 
             return page;
         } else {

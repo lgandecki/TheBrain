@@ -92,21 +92,27 @@ Template.flashcardButtons.events({
     "click .btn-showAdvanced": function(e, template) {
         e.preventDefault();
         $(".btn-showAdvanced").attr("disabled", true).html("Loading...");
-        $("#advancedSettings").slideDown(function() {
+        $("#advancedSettings").slideDown(400,
+            "easeInOutCubic",
+            function() {
             $(".btn-showAdvanced").attr("disabled", false)
                 .html("Hide advanced settings")
                 .removeClass("btn-showAdvanced")
                 .addClass("btn-hideAdvanced");
+            $(".btn-hideAdvanced").switchClass("btn-primary-reversed", "btn-primary-main", 400);
         });
     },
     "click .btn-hideAdvanced": function(e, template) {
         e.preventDefault();
         $(".btn-hideAdvanced").attr("disabled", true).html("Unloading...");
-        $("#advancedSettings").slideUp(function() {
+        $("#advancedSettings").slideUp(400,
+            "easeInOutCubic",
+            function() {
             $(".btn-hideAdvanced").attr("disabled", false)
                 .html("Show advanced settings")
                 .removeClass("btn-hideAdvanced")
                 .addClass("btn-showAdvanced");
+            $(".btn-showAdvanced").switchClass("btn-primary-reversed", "btn-primary-main", 400);
         });
     },
     "click .btn-submit": function(e, template) {

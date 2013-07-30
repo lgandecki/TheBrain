@@ -182,6 +182,43 @@ Meteor.methods({
 
 
     },
+    newCourseReply: function(newCourseComment) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to comment");
+        var _course = Courses.findOne(newCourseComment.courseId);
+
+        if (!_course)
+            throw new Meteor.Error(401, "You have to comment on existing course");
+
+        var comment = _.extend(_.pick(newCourseComment, "comment"), {
+            _id: new Meteor.Collection.ObjectID()._str,
+            user: _user._id,
+            userName: _user.identity.nick,
+            userPicture: _user.profile.picture,
+            posted: Meteor.moment.fullNow(),
+            parent: newCourseComment.repliedCommentId,
+            upVotes: [],
+            downVotes: [],
+            score: 0
+        });
+
+        Courses.update({_id: _course._id}, {$addToSet: {comments: comment}});
+
+
+        var _opts = {
+            courseId: _course._id,
+            userId: _user._id
+        };
+
+        courseCommentNotification(_opts);
+        var _opts2 = {
+            courseId: _course._id,
+            userId: _user._id,
+            commentId: newCourseComment.repliedCommentId
+        };
+//        courseReplyNotification(_opts2);
+    },
     courseCommentVoteUp: function(opts) {
         var user = Meteor.user();
         if (!user)

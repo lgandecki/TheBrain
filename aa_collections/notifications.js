@@ -53,7 +53,7 @@ courseVoteUpNotification = function(opts) {
 				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
-				message: "Up Voted your " + _course.name + " course!",
+				message: "Up voted your " + _course.name + " course!",
 				type: "courseUpVote",
 				read: false
 			});
@@ -84,7 +84,7 @@ courseVoteDownNotification = function(opts) {
 				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
-				message: "Down Voted your " + _course.name + " course",
+				message: "Down voted your " + _course.name + " course",
 				type: "courseDownVote",
 				read: false
 			});
@@ -142,7 +142,7 @@ commentUpVoteNotification = function(opts) {
 				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
-				message: "Up Voted your comment in " + _course.name + " course",
+				message: "Up voted your comment in " + _course.name + " course",
 				type: "courseCommentUpVote",
 				read: false
 			});

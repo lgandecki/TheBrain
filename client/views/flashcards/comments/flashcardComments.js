@@ -1,11 +1,11 @@
-Template.addCourseComment.events({
+Template.addFlashcardComment.events({
     "click .btn-addNewComment": function(e) {
         e.preventDefault();
         Meteor.validations.clearErrors();
         $(e.target).attr("disabled", true).html("Adding...");
-        if (validateNewCourseComment()) {
-            newCourseComment = createNewCourseComment();
-            Meteor.call('newCourseComment', newCourseComment, function(error, id) {
+        if (validateNewFlashcardComment()) {
+            newFlashcardComment = createNewFlashcardComment();
+            Meteor.call('newFlashcardComment', newFlashcardComment, function(error, id) {
                 if (error) {
                     Meteor.popUp.error("TheBrain is confused", "Comment adding server error: " + error.reason);
                 } else {
@@ -22,16 +22,16 @@ Template.addCourseComment.events({
 
 });
 
-Template.courseComments.mainComment = function() {
-    _selectedCourse = Session.get("selectedCourse");
-    _course = Courses.findOne({
-        _id: _selectedCourse
+Template.flashcardComments.mainComment = function() {
+    _currentFlashcardId = Session.get("currentFlashcardId");
+    _flashcard = Flashcards.findOne({
+        _id: _currentFlashcardId
     });
 
 
 
-    if (_course && _course.comments) {
-        _comments = _course.comments;
+    if (_flashcard && _flashcard.comments) {
+        _comments = _flashcard.comments;
 
 //        var _mainComments = [];
         var _mainComments = $.grep(_comments, function(comment) {
@@ -55,16 +55,16 @@ Template.courseComments.mainComment = function() {
     }
 };
 
-Template.courseComments.subComment = function() {
-    _selectedCourse = Session.get("selectedCourse");
-    _course = Courses.findOne({
-        _id: _selectedCourse
+Template.flashcardComments.subComment = function() {
+    _currentFlashcardId = Session.get("currentFlashcardId");
+    _flashcard = Flashcards.findOne({
+        _id: _currentFlashcardId
     });
 
 
 
-    if (_course && _course.comments) {
-        _comments = _course.comments;
+    if (_flashcard && _flashcard.comments) {
+        _comments = _flashcard.comments;
 
 //        var _mainComments = [];
         console.log("this._id", this._id);
@@ -92,43 +92,43 @@ Template.courseComments.subComment = function() {
     }
 }
 
-validateNewCourseComment = function() {
+validateNewFlashcardComment = function() {
     invalids = [];
     Meteor.validations.checkIfEmpty(".newComment");
     return !!(invalids.length === 0);
 };
 
-createNewCourseComment = function() {
-    var _newCourseComment = {
+createNewFlashcardComment = function() {
+    var _newFlashcardComment = {
         comment: $(".newComment").val(),
-        courseId: Session.get("selectedCourse")
+        flashcardId: Session.get("currentFlashcardId")
     };
-    return _newCourseComment;
+    return _newFlashcardComment;
 };
 
 
-Template.courseComments.date = function() {
+Template.flashcardComments.date = function() {
     return new moment(this.posted).fromNow();
 };
 
-Template.courseComments.events({
+Template.flashcardComments.events({
     "click .badge-upVote": function(e) {
         e.preventDefault();
         e.stopPropagation();
         _opts = {
-            courseId: Session.get("selectedCourse"),
+            flashcardId: Session.get("currentFlashcardId"),
             commentId: this._id
         }
-        Meteor.call("courseCommentVoteUp", _opts);
+        Meteor.call("flashcardCommentVoteUp", _opts);
     },
     "click .badge-downVote": function(e) {
         e.preventDefault();
         e.stopPropagation();
         _opts = {
-            courseId: Session.get("selectedCourse"),
+            flashcardId: Session.get("currentFlashcardId"),
             commentId: this._id
         }
-        Meteor.call("courseCommentVoteDown", _opts);
+        Meteor.call("flashcardCommentVoteDown", _opts);
     },
     "click .btn-reply": function(e) {
         e.preventDefault();
@@ -148,12 +148,12 @@ Template.courseComments.events({
         $(e.target).attr("disabled", true).html("Adding...");
         var _parentId = $(e.target).attr("data-parentId");
 
-        if (validateNewCourseReply(this._id)) {
-            newCourseReply = createNewCourseReply(this._id);
+        if (validateNewFlashcardReply(this._id)) {
+            newFlashcardReply = createNewFlashcardReply(this._id);
             if (_parentId) {
-                newCourseReply.repliedCommentId = _parentId;
+                newFlashcardReply.repliedCommentId = _parentId;
             }
-            Meteor.call('newCourseReply', newCourseReply, function(error, id) {
+            Meteor.call('newFlashcardReply', newFlashcardReply, function(error, id) {
                 if (error) {
                     Meteor.popUp.error("TheBrain is confused", "Reply adding server error: " + error.reason);
                 } else {
@@ -170,18 +170,18 @@ Template.courseComments.events({
 });
 
 
-var validateNewCourseReply= function(commentId) {
+var validateNewFlashcardReply= function(commentId) {
     invalids = [];
     Meteor.validations.checkIfEmpty(".newReply[data-id='" + commentId + "']");
     return !!(invalids.length === 0);
 };
 
 
-var createNewCourseReply = function(commentId) {
-    var _newCourseReply = {
+var createNewFlashcardReply = function(commentId) {
+    var _newFlashcardReply = {
         comment: $(".newReply[data-id='" + commentId + "']").val(),
         repliedCommentId: commentId,
-        courseId: Session.get("selectedCourse")
+        flashcardId: Session.get("currentFlashcardId")
     };
-    return _newCourseReply;
+    return _newFlashcardReply;
 };

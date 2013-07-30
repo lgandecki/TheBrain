@@ -10,6 +10,8 @@
                 <div class="box-content nopadding">
                     <div class="tabs-container">
                         <ul class="tabs tabs-inline tabs-left ">
+                            {{#isolate}}
+
                             <li class="active">
                                 <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> <span class="hidden-phone">Repetitions</span></a>
                             </li>
@@ -17,15 +19,16 @@
                                 <a href="#picture" data-toggle="tab"><i class='icon-camera'></i> <span class="hidden-phone">Picture</span></a>
                             </li>
                             <li>
-                                <a href="#second" data-toggle="tab"><i class="icon-twitter"></i> <span class="hidden-phone">Comments </span>(9)</a>
+                                <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> <span class="hidden-phone">Comments </span>{{#with flashcard}}({{comments.length}}){{/with}}</a>
                             </li>
 
                             <li>
-                                <a href="#thirds" data-toggle="tab"><i class="icon-calendar"></i> <span class="hidden-phone">History</span></a>
+                                <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> <span class="hidden-phone">History</span> {{#with item}}({{previousAnswers.length}}){{/with}}</a>
                             </li>
                             <li>
                                 <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span class="hidden-phone">Edit</span></a>
                             </li>
+                            {{/isolate}}
                         </ul>
                     </div>
                     <div class="tab-content padding tab-content-inline">
@@ -35,7 +38,7 @@
                                 <div class="currentFlashcard">
                                     <div class="flashcard front"></div>
                                     <div class="flashcard answer hidden-phone" contentEditable="true"></div>
-                                    <button class="btn btn-large btn-primary btn-primary-main btn-block btn-show-answer visible-phone" style="">Show answer</button>
+                                    <button class="btn btn-large btn-primary btn-primary-main btn-block btn-show-answer" style="">Show answer</button>
                                     <div class="flashcard back" style="display: none;"></div>
 
                                     <div class="evaluate" class="form-actions" item-id="">
@@ -55,6 +58,12 @@
                         <div class="tab-pane fade" id="picture">
                             awerwreaw
                         </div>
+                        <div class="tab-pane fade" id="history">
+                            {{> itemHistory }}
+                        </div>
+                        <div class="tab-pane fade" id="comments">
+                            {{> flashcardComments }}
+                        </div>
                     </div>
                 </div>
 
@@ -63,4 +72,23 @@
     </div>
 {{> doneForTodayModal }}
 {{> scheduleModal }}
+</template>
+
+
+<template name="itemHistory">
+        {{#each previousAnswer}}
+        <div class="row-fluid addBottomLine itemHistory">
+            <div class="previousAnswer">
+                <h4>{{historyDate}}</h4>
+                <p>My answer: <strong>{{answer}}</strong><br/>
+                    My evaluation: <strong>{{historyEvaluation}}</strong><br/>
+                    {{#if extraRepetition}}
+                        Additional repetition session.<br/>
+                    {{else}}
+                        Next repetition set for <strong>{{daysChangeFormat}}</strong> in the future.</br>
+                    {{/if}}
+                </p>
+            </div>
+</div>
+        {{/each}}
 </template>

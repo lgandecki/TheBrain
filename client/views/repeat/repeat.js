@@ -1,23 +1,29 @@
 var currentFlashcard, currentItemId, itemsToLearn = [], _renderer, _renderer2;
 
-Meteor.subscribe("itemFlashcards");
+Meteor.subscribe("myItems");
+//Meteor.subscribe("currentFlashcard");
 
-function getNextItem() {
-    currentItem = Items.findOne();
-    if (currentItem) {
-        currentFlashcard = Flashcards.findOne(currentItem.flashcard);
-    }
-}
+Deps.autorun(function() {
+    console.log("deps currentFlashcard " + Session.get("currentFlashcard"));
+    Meteor.subscribe("currentFlashcard", Session.get("currentFlashcard"));
+});
+//
+//function getNextItem() {
+//    currentItem = Items.findOne();
+//    if (currentItem) {
+//        Session.set("currentFlashcard", currentItem.flashcard);
+//    }
+//}
 
 function returnNextItem() {
     // Najpierw powtorki
     var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-    var _nextItem = "";
+    var _nextItem = null;
 
     // Repetition first
-    if (ItemFlashcards.find({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).count() > 0) {
-        _nextItem = ItemFlashcards.findOne({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}});
-        return _nextItem;
+    if (Items.find({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).count() > 0) {
+        _nextItem = Items.findOne({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}});
+        return (_nextItem) ? _nextItem._id : false;
     }
 
 
@@ -26,7 +32,7 @@ function returnNextItem() {
         // console.log("collectionId " + collectionId);
         if (itemsToLearn.hasOwnProperty(collectionId) && itemsToLearn[collectionId] > 0) {
             // console.log("second step,, items To learn " + itemsToLearn[collectionId]);
-            _currentCollectionItemsToLearn = ItemFlashcards.find({collection: collectionId, actualTimesRepeated: 0}).count();
+            _currentCollectionItemsToLearn = Items.find({collection: collectionId, actualTimesRepeated: 0}).count();
             // console.log("collections count " + _currentCollectionItemsToLearn);
             // console.log("currentCollection " + collectionId);
             if (_currentCollectionItemsToLearn && _currentCollectionItemsToLearn > 0) {
@@ -36,9 +42,9 @@ function returnNextItem() {
                 else {
                     itemsToLearn[collectionId]--;
                 }
-                _nextItem = ItemFlashcards.findOne({collection: collectionId, actualTimesRepeated: 0});
+                _nextItem = Items.findOne({collection: collectionId, actualTimesRepeated: 0});
                 // console.log("Items to learn");
-                return _nextItem;
+                return (_nextItem) ? _nextItem._id : false;
             }
             else {
                 delete itemsToLearn[collectionId];
@@ -46,12 +52,81 @@ function returnNextItem() {
         }
     }
 
-    _nextItem = ItemFlashcards.findOne({extraRepeatToday: true});
-    return (_nextItem) ? _nextItem : false;
+    _nextItem = Items.findOne({extraRepeatToday: true});
+    return (_nextItem) ? _nextItem._id : false;
     // Items to reLearn
 }
 
+Template.repeat.item = function() {
+    return Items.findOne({_id: Session.get("currentItemId")});
+}
 
+Template.repeat.flashcard = function() {
+    var _item = Items.findOne({_id: Session.get("currentItemId")});
+    if (_item) {
+        console.log("_item", _item);
+        _flashcard = Flashcards.findOne({_id: _item.flashcard});
+        console.log("_flashcard", _flashcard);
+        return _flashcard;
+    }
+}
+
+Template.itemHistory.previousAnswer = function() {
+    var _item =  Items.findOne({_id: Session.get("currentItemId")});
+    if (_item) {
+        return _item.previousAnswers.reverse();
+    }
+}
+
+Template.itemHistory.historyDate = function() {
+    return new moment(this.date).fromNow();
+}
+
+Template.itemHistory.extraRepetition = function() {
+    if (this.extraRepetition === true) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+Template.itemHistory.historyEvaluation = function() {
+    var _evaluationName = "";
+    switch(this.evaluation) {
+        case '0':
+            _evaluationName = "Blackout";
+            break;
+        case '1':
+            _evaluationName = "Terrible";
+            break;
+        case '2':
+            _evaluationName = "Bad";
+            break;
+        case '3':
+            _evaluationName = "Hardly";
+            break;
+        case '4':
+            _evaluationName = "Good";
+            break;
+        case '5':
+            _evaluationName = "Perfect!";
+            break;
+    }
+    return _evaluationName;
+}
+
+Template.itemHistory.daysChangeFormat = function() {
+    if (this.daysChange === 1) {
+        return "1 day";
+    }
+    else if (this.daysChange) {
+       return this.daysChange + "days"
+    }
+    else {
+        return "error";
+    }
+}
 //Template.repeat.itemFlashcard = function () {
 //    console.log("itemFlashcard");
 //    return ItemFlashcards.findOne(currentItem);
@@ -110,6 +185,8 @@ _renderer = window.setTimeout(function () {
 
 Template.repeat.destroyed = function() {
     Session.set("showScheduleModal", false);
+    Session.set("currentItemId", null);
+    Session.set("currentFlashcardId", null);
     _firstRender = true;
 }
 
@@ -118,9 +195,16 @@ displayNextRepetition = function() {
     console.log("nextItem ", _nextItem);
     if (_nextItem) {
         currentItemId = _nextItem;
+        Session.set("currentItemId", currentItemId);
+        _item = Items.findOne({_id: currentItemId});
+        if (_item) {
+            Session.set("currentFlashcardId", _item.flashcard);
+        }
         fillTemplate();
     }
     else {
+        Session.set("currentItemId", null);
+        Session.set("currentFlashcardId", null);
         emptyTemplate();
         $("#doneForTodayModal").modal("show").on('hidden', function() {
             Meteor.Router.to("/");
@@ -130,23 +214,17 @@ displayNextRepetition = function() {
 }
 
 fillTemplate = function() {
-    var _currentItem = ItemFlashcards.findOne(currentItemId);
-    front = (_currentItem.personalFront) ? personalFront : _currentItem.flashcardObject.front;
-    back =  (_currentItem.personalBack) ? personalBack : _currentItem.flashcardObject.back;
+    var _currentItem = Items.findOne({_id: Session.get("currentItemId")});
+    front =_currentItem.personalFront;
+    back =  _currentItem.personalBack;
 
     var _frontPicture, _backPicture;
     if (_currentItem.personalFrontPicture) {
         _frontPicture = _currentItem.personalFrontPicture;
     }
-    else if (_currentItem.flashcardObject.frontPicture) {
-        _frontPicture = _currentItem.flashcardObject.frontPicture;
-    }
 
     if (_currentItem.personalBackPicture) {
         _backPicture = _currentItem.personalBackPicture;
-    }
-    else if (_currentItem.flashcardObject.backPicture) {
-        _backPicture = _currentItem.flashcardObject.backPicture;
     }
     if (_frontPicture) {
         console.log("in front before ", front);
@@ -203,7 +281,7 @@ Template.repeat.events({
     },
     "click .btn-show-answer": function(e) {
         e.preventDefault();
-        $(".btn-show-answer").removeClass("visible-phone").hide();
+//        $(".btn-show-answer").removeClass("visible-phone").hide();
         showBackAndEvaluation();
     },
     "click .evaluation": function (e) {
@@ -223,9 +301,14 @@ Template.repeat.events({
 
 setNextRepetition = function (evaluation, _item) {
     if (_item) {
+        var _opts = {};
         if (_item.extraRepeatToday) {
             if (evaluation >= 3) {
                 _item.extraRepeatToday = false;
+            }
+            var _opts = {
+                extraRepetition: true,
+                evaluation: evaluation
             }
         }
         else {
@@ -244,6 +327,12 @@ setNextRepetition = function (evaluation, _item) {
             }
             _item.actualTimesRepeated++;
             _item.previousDaysChange = daysChange;
+            _opts = {
+                extraRepetition: false,
+                easinessFactor: _item.easinessFactor,
+                daysChange: _item.previousDaysChange,
+                evaluation: evaluation
+            }
 
         }
         Items.update(_item._id, {$set: {
@@ -258,6 +347,9 @@ setNextRepetition = function (evaluation, _item) {
                 console.log("err ", err);
             }
         });
+
+        var _currentEvaluation = returnCurrentEvaluation(_opts);
+        Items.update({_id: _item._id}, {$addToSet: {previousAnswers: _currentEvaluation}});
     }
 
 }
@@ -269,10 +361,10 @@ calculateItem = function (evaluation, easinessFactor, timesRepeated, previousDay
         daysChange = 1;
         resetTimesRepeated = true;
     }
-    else if (timesRepeated == 0) {
+    else if (timesRepeated === 0) {
         daysChange = 1;
     }
-    else if (timesRepeated == 1) {
+    else if (timesRepeated === 1) {
         daysChange = 5;
     }
     else {
@@ -293,9 +385,30 @@ calculateEasinessFactor = function (evaluation, easinessFactor) {
 roundToTwo = function (value) {
     return(Math.round(value * 100) / 100);
 }
+
+var returnCurrentEvaluation = function(opts) {
+    var _now = Meteor.moment.fullNow();
+    var _currentEvaluation = {
+        evaluation: opts.evaluation,
+        date: _now,
+        answer: $(".currentFlashcard > .answer").text() || "No answer provided"
+    }
+    if (opts.extraRepetition) {
+        _currentEvaluation.extraRepetition = true;
+    }
+    else {
+        _currentEvaluation.extraRepetition = false;
+        _currentEvaluation.easinessFactor = opts.easinessFactor;
+        _currentEvaluation.daysChange = opts.daysChange;
+    }
+    return _currentEvaluation;
+}
+
 showBackAndEvaluation = function () {
     $(".currentFlashcard > .answer").blur();
     $(".currentFlashcard > .evaluate").focus();
+
+    $(".btn-show-answer").hide();
     $(".currentFlashcard > .back").css({"visibility": ""}).show('400', function () {
         $(".currentFlashcard > .evaluate").css({"visibility": ""}).show('400', function () {
             $(".answer").focus();
@@ -311,7 +424,7 @@ hideBackAndEvaluation = function () {
         $(".currentFlashcard > .evaluate").css({"visibility": "hidden"}).hide('10');
         $(".currentFlashcard > .back").css({"visibility": "hidden"}).hide('10');
         _fDiv.css({"left": (_fDiv.width() + 40)}).animate({"left": 0}, 500, "easeInOutBack");
-        $(".btn-show-answer").addClass("visible-phone").show();
+        $(".btn-show-answer").show();
     }
     )
 };

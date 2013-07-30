@@ -1,4 +1,4 @@
-var _renderer;
+var _renderer, _itemsToLearnCount = 0;
 Template.myCollectionsList.collection = function() {
     return Meteor.user() ? Meteor.user().collections : [];
 };
@@ -8,7 +8,9 @@ Template.myCollectionsList.itemsInCollection = function() {
 }
 
 Template.myCollectionsList.itemsToLearn = function() {
-    return Items.find({user: Meteor.userId(), collection: this._id, actualTimesRepeated: 0}).count();
+    var _itemsToLearn = Items.find({user: Meteor.userId(), collection: this._id, actualTimesRepeated: 0}).count();
+    _itemsToLearnCount += _itemsToLearn;
+    return _itemsToLearn;
 }
 
 Template.myCollectionsList.itemsToRepeat = function() {
@@ -22,4 +24,8 @@ Template.myCollectionsList.itemsToReLearn = function() {
 
 Template.myCollectionsList.learnedItems = function() {
     return Items.find({user: Meteor.userId(), collection: this._id, actualTimesRepeated: {$gt: 0}, extraRepeatToday: false}).count();
+}
+
+Template.myCollectionsList.anyItemsToLearn = function() {
+    return (_itemsToLearnCount > 0) ? true : false;
 }

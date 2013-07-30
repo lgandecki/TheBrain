@@ -12,6 +12,18 @@ Template.course.name = function() {
   return _selectedCourse;
 };
 
+Template.course.commentsLength = function() {
+    var _selectedCourse = Courses.findOne({
+        _id: Session.get("selectedCourse")
+    });
+    if (_selectedCourse && _selectedCourse.comments) {
+        return _selectedCourse.comments.length;
+    }
+    else {
+        return 0;
+    }
+}
+
 Template.course.isCourseOwner = function() {
   var _selectedCourse = Courses.findOne({
     _id: Session.get("selectedCourse")
@@ -78,7 +90,7 @@ Template.course.enrollBtnAction = function() {
 };
 
 _isUserEnrolled = function() {
-  if ($.inArray(Session.get("selectedCourse"), Meteor.user().courses) !== -1) {
+  if (Meteor.user() && $.inArray(Session.get("selectedCourse"), Meteor.user().courses) !== -1) {
     return true;
   } else {
     return false;

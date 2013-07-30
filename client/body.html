@@ -3,12 +3,13 @@
 {{#isolate}}{{> header }}{{/isolate}}
 <div id="main">
     {{#isolate}}{{#if isLoggedIn}}{{> topPanel }}{{/if}}{{/isolate}}
-        <div id="transition">
+        <div class="transition" style="position: relative; display: none;">
             <div class="container">
-    {{#isolate}} {{renderPage}} {{/isolate}}
+    {{renderPage}}
             </div>
             </div>
     <div class="push"></div>
+    {{> logInModal }}
 </div>
 </div>
 

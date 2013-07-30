@@ -44,34 +44,32 @@ Template.body.rendered = function() {
 
 Template.body.events({
     "mouseenter .btn-primary": function(e) {
-        $(e.target).switchClass("btn-primary-main", "btn-primary-reversed", 400);
+        $(e.target).stop(true, true).switchClass("btn-primary-main", "btn-primary-reversed", 400);
     },
     "mouseleave .btn-primary": function(e) {
-        $(e.target).switchClass("btn-primary-reversed", "btn-primary-main", 400);
+        $(e.target).stop(true, true).switchClass("btn-primary-reversed", "btn-primary-main", 400);
     },
     "click .mobile-nav li a[href!='#']": function (e, template) {
         console.log("test");
-        $(".mobile-nav").slideToggle(600, "easeInOutBack");
+        $(".mobile-nav").stop().slideToggle(600, "easeInOutBack");
     },
         'mouseenter li.dropdown': function(e, template) {
-        console.log("here?");
-        $(e.target).addClass("open");
-        $(e.target).children(".dropdown-menu").show('normal', "easeInOutCubic");
+        $(e.target).stop(true, true).addClass("open");
+        $(e.target).children(".dropdown-menu").stop(true, true).show('normal', "easeInOutCubic");
     },
     'mouseleave li.dropdown.open': function(e, template) {
-        $(e.target).removeClass("open");
-        $(e.target).children(".dropdown-menu").hide('normal', "easeInOutCubic");
+        $(e.target).stop(true, true).removeClass("open");
+        $(e.target).children(".dropdown-menu").stop(true, true).hide('normal', "easeInOutCubic");
 
     },
     'mouseenter div.dropdown': function(e, template) {
-        console.log("or here?");
-        $(e.target).addClass("open");
-        $(e.target).children(".dropdown-menu").show('normal', "easeInOutCubic");
+        $(e.target).stop(true, true).addClass("open");
+        $(e.target).children(".dropdown-menu").stop(true, true).show('normal', "easeInOutCubic");
 
     },
     'mouseleave div.dropdown.open ': function(e, template) {
-        $(e.target).removeClass("open");
-        $(e.target).children(".dropdown-menu").hide('normal', "easeInOutCubic");
+        $(e.target).stop(true, true).removeClass("open");
+        $(e.target).children(".dropdown-menu").stop(true, true).hide('normal', "easeInOutCubic");
 
     },
     "click .slimboxPicture": function(e) {

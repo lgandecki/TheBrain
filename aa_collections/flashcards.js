@@ -38,7 +38,9 @@ Meteor.methods({
             "previousVersions": [],
             "suggestedVersions": [],
             "upVotes": [],
-            "downVotes": []
+            "downVotes": [],
+            "comments": [],
+            "version": 1
         });
 
         if (flashcardAttributes.course) {
@@ -59,8 +61,10 @@ Meteor.methods({
 
         var flashcardId = Flashcards.insert(flashcard);
 
+        flashcard.id = flashcardId;
+
         if (flashcardAttributes.collection) {
-            var item = returnItem(flashcardAttributes.collection, flashcardId);
+            var item = returnItem(flashcardAttributes.collection, flashcard);
             Items.insert(item);
         }
 
@@ -103,35 +107,203 @@ Meteor.methods({
                 };
                 collectionId = Meteor.call("newCollection", collection);
             }
+            var _flashcards = Flashcards.find({_id: {$all: _opts.flashcardsIds} })
             opts.flashcardsIds.forEach(function(flashcardId) {
-                Items.insert(returnItem(collectionId, flashcardId));
+              //  _flashcard = Flashcards.find({_id: flashcardId});
+                Items.insert(returnItem(collectionId, _flashcard));
                 // _items.push(returnItem(collectionId, flashcardId));
             })
 
             // console.log("_items", _items);
             // Items.insert(_items);
         }
+    },
+    newFlashcardComment: function(newFlashcardComment) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to comment");
+        _flashcard = Flashcards.findOne(newFlashcardComment.flashcardId);
+
+        if (!_flashcard)
+            throw new Meteor.Error(401, "You have to comment on existing flashcard");
+
+        var comment = _.extend(_.pick(newFlashcardComment, "comment"), {
+            _id: new Meteor.Collection.ObjectID()._str,
+            user: _user._id,
+            userName: _user.identity.nick,
+            userPicture: _user.profile.picture,
+            posted: Meteor.moment.fullNow(),
+            parent: null,
+            upVotes: [],
+            downVotes: [],
+            score: 0
+        });
+
+        Flashcards.update({_id: _flashcard._id}, {$addToSet: {comments: comment}});
+
+
+        var _opts = {
+            flashcardId: _flashcard._id,
+            userId: _user._id
+        };
+
+//        flashcardCommentNotification(_opts);
+
+
+    },
+    newFlashcardReply: function(newFlashcardComment) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to comment");
+        var _flashcard = Flashcards.findOne(newFlashcardComment.flashcardId);
+
+        if (!_flashcard)
+            throw new Meteor.Error(401, "You have to comment on existing flashcard");
+
+        var comment = _.extend(_.pick(newFlashcardComment, "comment"), {
+            _id: new Meteor.Collection.ObjectID()._str,
+            user: _user._id,
+            userName: _user.identity.nick,
+            userPicture: _user.profile.picture,
+            posted: Meteor.moment.fullNow(),
+            parent: newFlashcardComment.repliedCommentId,
+            upVotes: [],
+            downVotes: [],
+            score: 0
+        });
+
+        Flashcards.update({_id: _flashcard._id}, {$addToSet: {comments: comment}});
+
+
+        var _opts = {
+            flashcardId: _flashcard._id,
+            userId: _user._id
+        };
+
+//        flashcardCommentNotification(_opts);
+        var _opts2 = {
+            flashcardId: _flashcard._id,
+            userId: _user._id,
+            commentId: newFlashcardComment.repliedCommentId
+        };
+//        flashcardReplyNotification(_opts2);
+    },
+    flashcardCommentVoteUp: function(opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to vote on comments");
+
+        _flashcard = Flashcards.findOne(opts.flashcardId);
+
+        var _commentIndex = _.indexOf(_.pluck(_flashcard.comments, '_id'), opts.commentId);
+
+
+        var modifier = {
+            $pull: {},
+            $inc: {}
+        };
+
+        _query = {_id: _flashcard._id};
+        _query["comments." + _commentIndex + ".downVotes"] = user._id;
+
+        modifier.$pull["comments." + _commentIndex + ".downVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = 1
+
+        Flashcards.update(_query, modifier);
+
+        var modifier = {
+            $addToSet: {},
+            $inc: {}
+        };
+
+        _query = {_id: _flashcard._id};
+        _query["comments." + _commentIndex + ".upVotes"] = { $ne: user._id};
+
+        modifier.$addToSet["comments." + _commentIndex + ".upVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = 1
+
+        Flashcards.update(_query, modifier);
+        _opts = {
+            user: user._id,
+            commentId: opts.commentId,
+            flashcardId: _flashcard._id
+        };
+//        flashcardCommentUpVoteNotification(_opts);
+    },
+    flashcardCommentVoteDown: function(opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to vote on comments");
+
+        _flashcard = Flashcards.findOne(opts.flashcardId);
+
+        var _commentIndex = _.indexOf(_.pluck(_flashcard.comments, '_id'), opts.commentId);
+
+        var modifier = {
+            $pull: {},
+            $inc: {}
+        };
+
+        _query = {_id: _flashcard._id};
+        _query["comments." + _commentIndex + ".upVotes"] = user._id;
+
+        modifier.$pull["comments." + _commentIndex + ".upVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = -1;
+
+        console.log("modifier first ", modifier);
+
+        Flashcards.update(_query, modifier);
+
+
+        var modifier = {
+            $addToSet: {},
+            $inc: {}
+        };
+
+        _query = {_id: _flashcard._id};
+        _query["comments." + _commentIndex + ".downVotes"] = { $ne: user._id};
+
+        modifier.$addToSet["comments." + _commentIndex + ".downVotes"] = user._id;
+        modifier.$inc["comments." + _commentIndex + ".score"] = -1;
+
+
+        console.log("modifier second ", modifier);
+
+
+        Flashcards.update(_query, modifier);
+
+        _opts = {
+            user: user._id,
+            commentId: opts.commentId,
+            flashcardId: _flashcard._id
+        };
+//        flashcardCommentDownVoteNotification(_opts);
     }
 });
 
-returnItem = function(collectionId, flashcardId) {
+returnItem = function(collectionId, flashcard) {
     var user = Meteor.user();
     var item = {
         "collection": collectionId,
         "user": user._id,
-        "flashcard": flashcardId,
+        "flashcard": flashcard.id,
         "easinessFactor": 2.5,
         "nextRepetition": "",
         "timesRepeated": 0,
         "actualTimesRepeated": 0,
-        "previousDayChange": "",
+        "previousDaysChange": 0,
         "extraRepeatToday": false,
         "frontNote": null,
         "backNote": null,
         "previousAnswers": [
         ],
-        "personalFront": null,
-        "personalBack": null
+        "personalFront": flashcard.front,
+        "personalBack": flashcard.back,
+        "personalFrontPicture": flashcard.frontPicture,
+        "personalBackPicture": flashcard.backPicture,
+        "flashcardVersion": 1,
+        "flashcardVersionSeen": 1
+
 
     }
     return item;

@@ -4,6 +4,7 @@ Template.login.rendered = function() {
     //    _renderer = window.setTimeout(function () {
     $("#workInProgressModal").modal("show");
 
+//    $(".btn-signUpWithFacebook").fitText(1.6, {maxFontSize: '40px'});
     ////
     ////        welcomeHeight = $(".loginWelcome .box-content").height();
     ////        console.log("Welcome height " + welcomeHeight);

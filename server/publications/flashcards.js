@@ -4,6 +4,12 @@ Meteor.publish("myFlashcards", function() {
 	});
 });
 
+Meteor.publish("currentFlashcard", function(id) {
+    return Flashcards.find({
+        _id: id
+    })
+});
+
 Meteor.publish("lessonFlashcards", function(opts) {
 	// console.log("Are we doing this I mean lessonflashcards?", lessonId);
 	_query = {

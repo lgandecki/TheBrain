@@ -83,8 +83,7 @@ textarea[disabled].flashcard  {
     text-align: center !important;
 }
 
-#transition {
-    position: relative;
+.transition {
     display: none;
 }
 
@@ -324,7 +323,7 @@ h3.repeat {
     left:5px;
     right:0;
     text-align: left;
-    padding 3px 10px;
+    padding: 3px 10px;
     float: left;
     font-size: 21px;
     padding: 0;
@@ -460,4 +459,74 @@ text-align: center;
 
 .userPictureComment {
     width: 84px;
+}
+
+
+.box:not(.box-modal) {
+   -moz-box-shadow:    6px 6px 8px 2px #ccc;
+   -webkit-box-shadow: 6px 6px 8px 2px #ccc;
+   box-shadow:         6px 6px 8px 2px #ccc;
+}
+
+.btn {
+    -webkit-box-shadow: 0 8px 6px -6px #ccc;
+    -moz-box-shadow: 0 8px 6px -6px #ccc;
+    box-shadow: 8px 6px 8px -4px #CCCCCC;
+}
+
+.quickButton {
+    -webkit-box-shadow: 0 8px 6px -6px #ccc;
+    -moz-box-shadow: 0 8px 6px -6px #ccc;
+    box-shadow:8px 6px 8px -4px #CCCCCC;
+}
+
+.btn-mine {
+    -webkit-box-shadow: 0 8px 6px -6px #ccc;
+    -moz-box-shadow: 0 8px 6px -6px #ccc;
+    box-shadow: 8px 6px 8px -4px #CCCCCC;
+}
+
+li.active a {
+    background: #f2f2f2 !important;
+    border-bottom: 0 !important;
+}
+
+#navigation .main-nav > li > a {
+    padding: 11px 15px;
+}
+
+#navigation .user .icon-nav > li > a {
+    padding: 11px 10px;
+}
+
+
+#navigation .toggle-mobile {
+    padding: 11px 10px;
+}
+
+
+.icon-facebook-sign:before {
+    vertical-align: -5%;
+}
+
+
+.itemHistory {
+    text-align: center;
+}
+
+.previousAnswer {
+    line-height: 25px;
+}
+
+
+.btn-header {
+    -webkit-box-shadow: 0 0 0 0 #ccc !important;
+    -moz-box-shadow: 0 0 0 0 #ccc !important;
+    box-shadow: 0 0 0 0 #ccc !important;
+    height: 42px;
+    border: 2px solid #219BCC;
+}
+
+#login-form {
+    border-top: 1px solid #ddd;
 }
