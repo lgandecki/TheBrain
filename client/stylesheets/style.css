@@ -469,20 +469,20 @@ text-align: center;
 }
 
 .btn {
-    -webkit-box-shadow: 0 8px 6px -6px #ccc;
-    -moz-box-shadow: 0 8px 6px -6px #ccc;
+    -webkit-box-shadow: 8px 6px 8px -4px #CCCCCC;
+    -moz-box-shadow: 8px 6px 8px -4px #CCCCCC;
     box-shadow: 8px 6px 8px -4px #CCCCCC;
 }
 
 .quickButton {
-    -webkit-box-shadow: 0 8px 6px -6px #ccc;
-    -moz-box-shadow: 0 8px 6px -6px #ccc;
+    -webkit-box-shadow: 8px 6px 8px -4px #CCCCCC;
+    -moz-box-shadow: 8px 6px 8px -4px #CCCCCC;
     box-shadow:8px 6px 8px -4px #CCCCCC;
 }
 
 .btn-mine {
-    -webkit-box-shadow: 0 8px 6px -6px #ccc;
-    -moz-box-shadow: 0 8px 6px -6px #ccc;
+    -webkit-box-shadow: 8px 6px 8px -4px #CCCCCC;
+    -moz-box-shadow: 8px 6px 8px -4px #CCCCCC;
     box-shadow: 8px 6px 8px -4px #CCCCCC;
 }
 
@@ -529,4 +529,15 @@ li.active a {
 
 #login-form {
     border-top: 1px solid #ddd;
+}
+
+.note {
+   font-style: italic;
+}
+
+.flashcardPicture {
+    -webkit-box-shadow: 8px 8px 8px -4px #444;
+    -moz-box-shadow: 8px 8px 8px -4px #444;
+    box-shadow: 8px 8px 8px -4px #444;
+    border: 2px solid #219bcc;
 }

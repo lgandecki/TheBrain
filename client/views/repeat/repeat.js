@@ -4,8 +4,10 @@ Meteor.subscribe("myItems");
 //Meteor.subscribe("currentFlashcard");
 
 Deps.autorun(function() {
-    console.log("deps currentFlashcard " + Session.get("currentFlashcard"));
-    Meteor.subscribe("currentFlashcard", Session.get("currentFlashcard"));
+    console.log("deps currentFlashcard " + Session.get("currentFlashcardId"));
+    if (Session.get("currentFlashcardId")) {
+        Meteor.subscribe("currentFlashcard", Session.get("currentFlashcardId"));
+    }
 });
 //
 //function getNextItem() {
@@ -217,6 +219,14 @@ fillTemplate = function() {
     var _currentItem = Items.findOne({_id: Session.get("currentItemId")});
     front =_currentItem.personalFront;
     back =  _currentItem.personalBack;
+
+    if (_currentItem.frontNote) {
+        front = front + "<br/><span class='note'>" + _currentItem.frontNote + "</span>";
+    }
+
+    if (_currentItem.backNote) {
+        back = back + "<br/><span class='note'>" + _currentItem.backNote + "</span>";
+    }
 
     var _frontPicture, _backPicture;
     if (_currentItem.personalFrontPicture) {
@@ -438,6 +448,7 @@ Template.myCollectionsList.rendered = function() {
         $(".slider-custom").slider({value: 0}).on("slideStart", function(ev) {
             _collectionId = $(this).attr("data-id");
             itemsToLearn[_collectionId] = ev.value;
+            $(".toLearn.editable[data-id='"+ _collectionId + "']").editable("setValue", ev.value);
         }).on("slide", function(ev) {
                 if (itemsToLearn[_collectionId] !== ev.value) {
                     

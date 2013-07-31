@@ -36,25 +36,29 @@ Meteor.methods({
             "back", "source", "frontPicture", "backPicture"), {
             user: user._id,
             "previousVersions": [],
-            "suggestedVersions": [],
             "upVotes": [],
             "downVotes": [],
             "comments": [],
-            "version": 1
+            "version": 1,
+            "reason": null,
+            "score": 0,
+            "updatedBy": null
         });
 
         if (flashcardAttributes.course) {
             if (!flashcardAttributes.lesson) {
                 throw new Meteor.Error(422, "If you want to add a flashcard to a course you have to specify the lesson");
             }
-            else if(Courses.find({"lessons._id": flashcardAttributes.lesson}).count() < 1) {
+            else if (Courses.find({"lessons._id": flashcardAttributes.lesson}).count() < 1) {
                 throw new Meteor.Error(422, "You have to add a flashcard to an existing lesson");
             }
             else {
-                flashcard.lessons = [{
-                    "course": flashcardAttributes.course,
-                    "lesson": flashcardAttributes.lesson
-                }];
+                flashcard.lessons = [
+                    {
+                        "course": flashcardAttributes.course,
+                        "lesson": flashcardAttributes.lesson
+                    }
+                ];
             }
         }
 
@@ -82,7 +86,68 @@ Meteor.methods({
 
 
     },
-    addFlashcardsToCollection: function(opts) {
+    updateFlashcard: function (opts) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to update flashcard");
+        var _flashcard = Flashcards.findOne({_id: opts.flashcardId});
+
+//        if (!_user.confirmed)
+//            throw new Meteor.Error(401, "You have to be active user to update flashcards");
+
+        if (!_flashcard)
+            throw new Meteor.Error(401, "You can't edit non existing flashcard");
+
+        if (!opts.reason) {
+            throw new Meteor.Error(401, "You have to give reason for changing the flashcard");
+        }
+
+        var _previousFlashcard = {
+            _id: new Meteor.Collection.ObjectID()._str,
+            front: _flashcard.front,
+            back: _flashcard.back,
+            frontPicture: _flashcard.frontPicture,
+            backPicture: _flashcard.backPicture,
+            version: _flashcard.version,
+            reason: _flashcard.reason,
+            upVotes: _flashcard.upVotes,
+            downVotes: _flashcard.downVotes,
+            score: _flashcard.score
+        };
+
+        Flashcards.update({_id: _flashcard._id},
+            {
+                $addToSet: {previousVersions: _previousFlashcard},
+                $inc: {version: 1},
+                $set: {
+                    updatedBy: _user._id,
+                    front: opts.front || _flashcard.front,
+                    back: opts.back || _flashcard.back,
+                    frontPicture: opts.frontPicture || _flashcard.frontPicture,
+                    backPicture: opts.backPicture || _flashcard.backPicture,
+                    reason: opts.reason,
+                    upVotes: [],
+                    downVotes: [],
+                    score: 0
+                }
+            });
+
+        _flashcard = Flashcards.findOne(opts.flashcardId);
+
+        if (opts.itemOpts) {
+            opts.itemOpts.personalFront = _flashcard.front;
+            opts.itemOpts.personalBack = _flashcard.back;
+            opts.itemOpts.personalFrontPicture = _flashcard.frontPicture;
+            opts.itemOpts.personalBackPicture = _flashcard.backPicture;
+            opts.itemOpts.flashcardVersion = _flashcard.version;
+            opts.itemOpts.flashcardVersionSeen = _flashcard.version;
+            Meteor.call("updateItem", opts.itemOpts);
+        }
+
+        // TODO Notification to owner
+
+    },
+    addFlashcardsToCollection: function (opts) {
         // _flashcardsIds = _opts.flashcardsIds;
         var user = Meteor.user();
         if (!user)
@@ -108,8 +173,8 @@ Meteor.methods({
                 collectionId = Meteor.call("newCollection", collection);
             }
             var _flashcards = Flashcards.find({_id: {$all: _opts.flashcardsIds} })
-            opts.flashcardsIds.forEach(function(flashcardId) {
-              //  _flashcard = Flashcards.find({_id: flashcardId});
+            opts.flashcardsIds.forEach(function (flashcardId) {
+                //  _flashcard = Flashcards.find({_id: flashcardId});
                 Items.insert(returnItem(collectionId, _flashcard));
                 // _items.push(returnItem(collectionId, flashcardId));
             })
@@ -118,7 +183,7 @@ Meteor.methods({
             // Items.insert(_items);
         }
     },
-    newFlashcardComment: function(newFlashcardComment) {
+    newFlashcardComment: function (newFlashcardComment) {
         var _user = Meteor.user();
         if (!_user)
             throw new Meteor.Error(401, "You need to login to comment");
@@ -151,7 +216,7 @@ Meteor.methods({
 
 
     },
-    newFlashcardReply: function(newFlashcardComment) {
+    newFlashcardReply: function (newFlashcardComment) {
         var _user = Meteor.user();
         if (!_user)
             throw new Meteor.Error(401, "You need to login to comment");
@@ -188,7 +253,7 @@ Meteor.methods({
         };
 //        flashcardReplyNotification(_opts2);
     },
-    flashcardCommentVoteUp: function(opts) {
+    flashcardCommentVoteUp: function (opts) {
         var user = Meteor.user();
         if (!user)
             throw new Meteor.Error(401, "You need to login to vote on comments");
@@ -220,7 +285,7 @@ Meteor.methods({
         _query["comments." + _commentIndex + ".upVotes"] = { $ne: user._id};
 
         modifier.$addToSet["comments." + _commentIndex + ".upVotes"] = user._id;
-        modifier.$inc["comments." + _commentIndex + ".score"] = 1
+        modifier.$inc["comments." + _commentIndex + ".score"] = 1;
 
         Flashcards.update(_query, modifier);
         _opts = {
@@ -230,7 +295,7 @@ Meteor.methods({
         };
 //        flashcardCommentUpVoteNotification(_opts);
     },
-    flashcardCommentVoteDown: function(opts) {
+    flashcardCommentVoteDown: function (opts) {
         var user = Meteor.user();
         if (!user)
             throw new Meteor.Error(401, "You need to login to vote on comments");
@@ -281,7 +346,7 @@ Meteor.methods({
     }
 });
 
-returnItem = function(collectionId, flashcard) {
+returnItem = function (collectionId, flashcard) {
     var user = Meteor.user();
     var item = {
         "collection": collectionId,
@@ -303,8 +368,6 @@ returnItem = function(collectionId, flashcard) {
         "personalBackPicture": flashcard.backPicture,
         "flashcardVersion": 1,
         "flashcardVersionSeen": 1
-
-
     }
     return item;
 }

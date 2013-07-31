@@ -120,7 +120,7 @@ Meteor.Router.filters({
                 _prev.animate({
                     "left": ((_width + _off.left) * -1) + "px"
                 }, 1200, _easing, function() {
-                   this.remove();
+                   _prev.remove();
                 });
             }
 

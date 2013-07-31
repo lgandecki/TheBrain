@@ -194,9 +194,9 @@ createNewFlashcard = function() {
     _isPublic = ($("#public").val() === "true") ? true : false;
     var _newFlashcard = {
         "public": _isPublic,
-        "front": $(".flashcardFront").html(),
+        "front": $(".flashcardFront").text(),
         "frontPicture": Session.get("newFrontPicture") || null,
-        "back": $(".flashcardBack").html(),
+        "back": $(".flashcardBack").text(),
         "backPicture": Session.get("newBackPicture") || null,
         "course": $("#course").val(),
         "lesson": $("#lesson").val(),

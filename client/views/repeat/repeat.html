@@ -13,20 +13,20 @@
                             {{#isolate}}
 
                             <li class="active">
-                                <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> <span class="hidden-phone">Repetitions</span></a>
+                                <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
                             </li>
                             <li>
-                                <a href="#picture" data-toggle="tab"><i class='icon-camera'></i> <span class="hidden-phone">Picture</span></a>
+                                <a href="#picture" data-toggle="tab"><i class='icon-camera'></i> Picture</a>
                             </li>
                             <li>
-                                <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> <span class="hidden-phone">Comments </span>{{#with flashcard}}({{comments.length}}){{/with}}</a>
+                                <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> Comments {{#with flashcard}}({{comments.length}}){{/with}}</a>
                             </li>
 
                             <li>
-                                <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> <span class="hidden-phone">History</span> {{#with item}}({{previousAnswers.length}}){{/with}}</a>
+                                <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> History {{#with item}}({{previousAnswers.length}}){{/with}}</a>
                             </li>
                             <li>
-                                <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span class="hidden-phone">Edit</span></a>
+                                <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> Edit</a>
                             </li>
                             {{/isolate}}
                         </ul>
@@ -63,6 +63,9 @@
                         </div>
                         <div class="tab-pane fade" id="comments">
                             {{> flashcardComments }}
+                        </div>
+                        <div class="tab-pane fade" id="edit">
+                            {{> editFlashcard }}
                         </div>
                     </div>
                 </div>

@@ -6,9 +6,12 @@
 
                 <div class="box-title">
                     <h3><i class="icon-th-list"></i> Course: {{#isolate}}{{name}}{{/isolate}}</h3>
-                    {{#isolate}}{{#unless isCourseOwner}} <div class="pull-right"> 
-                    <button class="btn btn-primary btn-primary-main btn-courseEnrollment {{enrollBtnAction}}" data-id="{{_id}}"><i class="icon-hand-left"> {{enrollBtnText}}!</i>
-                    </button></div>
+                    {{#isolate}}{{#unless isCourseOwner}}
+                        <div class="pull-right">
+                            <button class="btn btn-primary btn-primary-main btn-courseEnrollment {{enrollBtnAction}}" data-id="{{_id}}"><i
+                                    class="icon-hand-left"> {{enrollBtnText}}!</i>
+                            </button>
+                        </div>
 
                     {{/unless}}{{/isolate}}
                 </div>
@@ -18,42 +21,42 @@
                         <ul class="tabs tabs-inline tabs-left nav">
                             <li class="active">
                                 <a href="#events" data-toggle="tab" class="tabLink"><i class="icon-calendar"></i> <span
-                                    class="hidden-phone">Timeline</span></a>
+                                        class="hidden-phone">Timeline</span></a>
                             </li>
-                                <li>
-                                    <a href="#lessons" data-toggle="tab" class="tabLink"><i class='icon-camera'></i> <span
+                            <li>
+                                <a href="#lessons" data-toggle="tab" class="tabLink"><i class='icon-camera'></i> <span
                                         class="hidden-phone">Lessons</span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> <span
-                                            class="hidden-phone">Comments </span>({{commentsLength}})</a>
-                                        </li>
+                            </li>
+                            <li>
+                                <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> <span
+                                        class="hidden-phone">Comments </span>({{#isolate}}{{commentsLength}}{{/isolate}})</a>
+                            </li>
 
-                                        <li>
-                                            <a href="#stats" data-toggle="tab"><i class="icon-edit"></i> <span
-                                                class="hidden-phone">Stats</span></a>
-                                            </li>
-                                            <li>
-                                                <a href="#students" data-toggle="tab"><i class="icon-edit"></i> <span
-                                                    class="hidden-phone">Students</span></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span
-                                                        class="hidden-phone">Edit</span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="tab-content padding tab-content-inline">
-                                                {{> courseEventsTab }}
-                                                {{> courseLessonsTab }}
-                                                {{> commentsTab }}
-                                                <div class="tab-pane" id="picture">
-                                                    awerwreaw
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
+                            <li>
+                                <a href="#stats" data-toggle="tab"><i class="icon-edit"></i> <span
+                                        class="hidden-phone">Stats</span></a>
+                            </li>
+                            <li>
+                                <a href="#students" data-toggle="tab"><i class="icon-edit"></i> <span
+                                        class="hidden-phone">Students</span></a>
+                            </li>
+                            <li>
+                                <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span
+                                        class="hidden-phone">Edit</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content padding tab-content-inline">
+                        {{#isolate}}{{> courseEventsTab }}{{/isolate}}
+                        {{#isolate}}{{> courseLessonsTab }}{{/isolate}}
+                        {{#isolate}}{{> commentsTab }}{{/isolate}}
+                        <div class="tab-pane" id="picture">
+                            awerwreaw
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 
