@@ -76,13 +76,14 @@ Template.flashcardForm.events({
         );
     },
     "click #front": function(e, template) {
-        if (e.srcElement.className !== "editableImage") {
+        console.log("e", e);
+        console.log("this", this);
+        if ((e.target.className && e.target.className !== "editableImage")) {
             $(".flashcardFront").focus();
         }
     },
     "click #back": function(e, template) {
-        if (e.srcElement.className !== "editableImage") {
-
+        if ((e.target.className && e.target.className !== "editableImage"))  {
             $(".flashcardBack").focus();
         }
     }
@@ -194,9 +195,9 @@ createNewFlashcard = function() {
     _isPublic = ($("#public").val() === "true") ? true : false;
     var _newFlashcard = {
         "public": _isPublic,
-        "front": $(".flashcardFront").text(),
+        "front": $("#front .flashcardFront").text(),
         "frontPicture": Session.get("newFrontPicture") || null,
-        "back": $(".flashcardBack").text(),
+        "back": $("#back .flashcardBack").text(),
         "backPicture": Session.get("newBackPicture") || null,
         "course": $("#course").val(),
         "lesson": $("#lesson").val(),

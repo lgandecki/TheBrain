@@ -65,6 +65,7 @@ Meteor.Router.add({
 Meteor.Router.filters({
     "postLoad": function(page) {
 
+
         var _tran = $(".transition"),
             _html = _tran.html(),
             _off = _tran.offset(),
@@ -139,6 +140,9 @@ Meteor.Router.filters({
             checkLeftNav();
             resizeContent();
 
+
+            makeModalsScrollable();
+
         }, 50);
 
 
@@ -170,3 +174,10 @@ Meteor.Router.filters({
 
 
 Meteor.Router.filter('postLoad');
+
+
+var makeModalsScrollable = function() {
+    console.log("window height", $(window).height() )
+    var _modalMaxHeight = $(window).height() - ($(window).height() / 4) - 10;
+    $(".modal-box").css({"max-height": _modalMaxHeight});
+}

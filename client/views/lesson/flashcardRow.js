@@ -2,6 +2,7 @@
 //
 //})
 
+
 Template.flashcardRow.flashcardFront = function() {
 //    var _currentItem = Items.findOne({_id: Session.get("currentItemId")});
     var front = stripHtml(this.front);
@@ -28,8 +29,7 @@ Template.flashcardRow.flashcardFront = function() {
 }
 
 Template.flashcardRow.flashcardBack = function() {
-    var back =  stripHtml($(this.back).text());
-    back = this.back;
+    var back =  stripHtml(this.back);
     var _backPicture;
 
     if (this.backPicture) {
@@ -47,6 +47,6 @@ Template.flashcardRow.flashcardBack = function() {
 
 }
 
-function stripHtml(str) {
+stripHtml = function(str) {
     return jQuery('<div />', { html: str }).text();
 }

@@ -28,7 +28,7 @@ Meteor.methods({
                 personalFrontPicture: opts.personalFrontPicture || _item.personalFrontPicture,
                 personalBackPicture: opts.personalBackPicture || _item.personalBackPicture,
                 flashcardVersion: opts.flashcardVersion || _item.flashcardVersion,
-                flashcardVersioneen: opts.flashcardVersionSeen || _item.flashcardVersionSeen
+                flashcardVersionSeen: opts.flashcardVersionSeen || _item.flashcardVersionSeen
             }
             });
 

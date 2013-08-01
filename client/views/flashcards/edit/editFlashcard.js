@@ -29,6 +29,7 @@ Template.editFlashcardForm.newFrontPicture = function () {
 Template.editFlashcardForm.newBackPicture = function () {
 
     var _newBackPicture = Session.get("newBackPicture");
+
     if (_newBackPicture) {
         return _newBackPicture;
     }
@@ -177,12 +178,12 @@ Template.editFlashcardForm.events({
         );
     },
     "click #front": function (e, template) {
-        if (e.srcElement.className !== "editableImage") {
+        if ((e.target.className && e.target.className !== "editableImage")) {
             $(".flashcardFront").focus();
         }
     },
     "click #back": function (e, template) {
-        if (e.srcElement.className !== "editableImage") {
+        if ((e.target.className && e.target.className !== "editableImage")) {
 
             $(".flashcardBack").focus();
         }

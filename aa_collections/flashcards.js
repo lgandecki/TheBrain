@@ -172,9 +172,9 @@ Meteor.methods({
                 };
                 collectionId = Meteor.call("newCollection", collection);
             }
-            var _flashcards = Flashcards.find({_id: {$all: _opts.flashcardsIds} })
+//            var _flashcards = Flashcards.find({_id: {$all: opts.flashcardsIds} })
             opts.flashcardsIds.forEach(function (flashcardId) {
-                //  _flashcard = Flashcards.find({_id: flashcardId});
+                _flashcard = Flashcards.findOne({_id: flashcardId});
                 Items.insert(returnItem(collectionId, _flashcard));
                 // _items.push(returnItem(collectionId, flashcardId));
             })
@@ -351,7 +351,7 @@ returnItem = function (collectionId, flashcard) {
     var item = {
         "collection": collectionId,
         "user": user._id,
-        "flashcard": flashcard.id,
+        "flashcard": flashcard._id,
         "easinessFactor": 2.5,
         "nextRepetition": "",
         "timesRepeated": 0,
