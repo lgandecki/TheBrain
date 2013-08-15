@@ -1,29 +1,25 @@
 Template.courseRow.events({
-	"mouseenter .badge-upVote": function(e) {
-		$(e.target).switchClass("badge-success", "badge-success-reversed");
-	},
-	"mouseleave .badge-upVote": function(e) {
-		$(e.target).switchClass("badge-success-reversed", "badge-success");
-	},
+
 	"click .badge-downVote": function(e) {
+        console.log("click downVote", this._id);
 		e.preventDefault();
 		e.stopPropagation();
 		Meteor.call("downVoteCourse", this._id);
+//        $(e.target).stop().removeClass("badge-warning").removeClass('badge-warning-reversed').removeClass("badge-downVote").addClass("badge-downVoted");;
+	},
 
-	},
-	"mouseenter .badge-downVote": function(e) {
-		$(e.target).switchClass("badge-warning", "badge-warning-reversed", 300);
-	},
-	"mouseleave .badge-downVote": function(e) {
-		$(e.target).switchClass("badge-warning-reversed", "badge-warning", 200);
-	},
 		"click .badge-upVote": function(e) {
+            console.log("click upVote");
 		e.preventDefault();
 		e.stopPropagation();
 		Meteor.call("upVoteCourse", this._id);
-		$(e.target).removeClass("badge-success-reversed").removeClass("badge-success");
+//		$(e.target).stop().removeClass("badge-success-reversed").removeClass("badge-success").removeClass("badge-upVote").addClass("badge-upVoted");
 
 	},
+    "click .clickable": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
 
 	// "mouseenter .btn-enterCourse": function(e) {
 	// 	$(e.target).switchClass("btn-primary", "btn-primary-reversed");
@@ -34,19 +30,19 @@ Template.courseRow.events({
 
 });
 
-Template.courseRow.isUpVoted = function() {
-	if (voted(this.upVotes)) {
-		return "";
+Template.courseRow.isDownVoted = function() {
+	if (voted(this.downVotes)) {
+		return "clickable badge-downVoted";
 	}
-	return "badge-downVote clickable badge-success";
+	return "badge-downVote clickable badge-warning";
 }
 
 
-Template.courseRow.isDownVoted = function() {
-	if (voted(this.downVotes)) {
-		return "";	
+Template.courseRow.isUpVoted = function() {
+	if (voted(this.upVotes)) {
+		return "clickable badge-upVoted";
 	}
-	return "badge-upVote clickable badge-warning";
+	return "badge-upVote clickable badge-success";
 }
 
 voted = function(votes) {

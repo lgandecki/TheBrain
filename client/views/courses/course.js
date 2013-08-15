@@ -7,6 +7,46 @@ Meteor.subscribe("courseEvents", Session.get("selectedCourse"));
 //     return (_selectedCourse) ? Courses.findOne({_id: _selectedCourse}) : [];
 // }
 
+
+Template.course.created = function() {
+    if (!Session.equals("courseOpened", "true")) {
+        console.log("We set it again");
+        Session.set("courseTab", "#events");
+        Session.set("courseOpened", "true");
+    }
+}
+
+Deps.autorun(function() {
+    var _courseTab = Session.get("courseTab");
+    setTimeout(function() {
+
+        $('.nav a[href="' + _courseTab + '"]').tab('show');
+    })
+
+})
+
+
+
+Handlebars.registerHelper("isCourseTabActive", function(tab) {
+    console.log("e", tab);
+    if (Session.equals("courseTab", tab)) {
+        setTimeout(function() {
+
+            console.log("are we getting here?");
+//            $('.nav a[href="' + tab + '"]').tab('show');
+        }, 100);
+        return true;
+    }
+    else if ( Session.equals("previousCourseTab", tab)) {
+        return true;
+    }
+    return false;
+    // console.log("template ", thisCache);
+    // return true;
+});
+
+
+
 Template.course.name = function() {
   var _selectedCourse = Session.get("selectedCourse");
   return _selectedCourse;
@@ -40,11 +80,19 @@ Template.course.isCourseOwner = function() {
 };
 
 Template.course.events({
-  "click .tabLink": function(e) {
-    e.preventDefault();
-    $(e.target).closest('a').tab('show');
-    Session.set("selectedCourseTab", $(e.target).closest('a').attr("href"));
-  },
+    "click .tabLink": function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        console.log("clicked on tab ", e);
+        Session.set("previousCourseTab", Session.get("courseTab"));
+        Session.set("courseTab", e.target.hash || e.target.parentElement.hash);
+
+    },
+//  "click .tabLink": function(e) {
+//    e.preventDefault();
+//    $(e.target).closest('a').tab('show');
+//    Session.set("selectedCourseTab", $(e.target).closest('a').attr("href"));
+//  },
   "click .btn-courseDropOut": function(e) {
     courseId = Session.get("selectedCourse");
     Meteor.call("dropOutFromTheCourse", courseId, function(error, id) {
@@ -74,10 +122,16 @@ Template.course.destroyed = function() {
 Template.course.rendered = function() {
   window.clearTimeout(_renderer);
   _renderer = window.setTimeout(function() {
+      $('.tabs').tabs()
+          .bind('change', function (e) {
+              $(this).next().hide().fadeIn();
+          });
     //_selectedCourseTab = Session.get("selectedCourseTab");
     //$('a[href='+_selectedCourseTab+']').tab('show');
     console.log("firing this?");
-    Meteor.tabs.setHeight();
+//      $('.nav a[href="' + Session.get("courseTab") + '"]').tab('show');
+
+      Meteor.tabs.setHeight();
   }, 50);
 };
 

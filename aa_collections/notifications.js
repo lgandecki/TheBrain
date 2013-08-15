@@ -20,12 +20,13 @@ courseEnrollmentNotification = function(opts) {
 			Notifications.insert({
 				user: adminId,
 				eventUserId: opts.userId,
-				eventUserName: _user.identity.nick,
-				eventUserPicture: _user.profile.picture,
+//				eventUserName: _user.identity.nick,
+//				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
 				message: "Signed up for your " + _course.name + " course!",
 				type: "enrollment",
+                created: Meteor.moment.fullNow(),
 				read: false
 			});
 		})
@@ -49,13 +50,14 @@ courseVoteUpNotification = function(opts) {
 			Notifications.insert({
 				user: adminId,
 				eventUserId: opts.userId,
-				eventUserName: _user.identity.nick,
-				eventUserPicture: _user.profile.picture,
+//				eventUserName: _user.identity.nick,
+//				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
 				message: "Up voted your " + _course.name + " course!",
 				type: "courseUpVote",
-				read: false
+                created: Meteor.moment.fullNow(),
+                read: false
 			});
 		})
 	}
@@ -80,13 +82,14 @@ courseVoteDownNotification = function(opts) {
 			Notifications.insert({
 				user: adminId,
 				eventUserId: opts.userId,
-				eventUserName: _user.identity.nick,
-				eventUserPicture: _user.profile.picture,
+//				eventUserName: _user.identity.nick,
+//				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
 				message: "Down voted your " + _course.name + " course",
 				type: "courseDownVote",
-				read: false
+                created: Meteor.moment.fullNow(),
+                read: false
 			});
 		})
 	}
@@ -109,13 +112,14 @@ courseCommentNotification = function(opts) {
 			Notifications.insert({
 				user: adminId,
 				eventUserId: opts.userId,
-				eventUserName: _user.identity.nick,
-				eventUserPicture: _user.profile.picture,
+//				eventUserName: _user.identity.nick,
+//				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
 				message: "Commented on your " + _course.name + " course",
 				type: "courseComment",
-				read: false
+                created: Meteor.moment.fullNow(),
+                read: false
 			});
 		})
 	}
@@ -138,13 +142,14 @@ commentUpVoteNotification = function(opts) {
 			Notifications.insert({
 				user: _commentAuthorId,
 				eventUserId: _user._id,
-				eventUserName: _user.identity.nick,
-				eventUserPicture: _user.profile.picture,
+//				eventUserName: _user.identity.nick,
+//				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
 				message: "Up voted your comment in " + _course.name + " course",
 				type: "courseCommentUpVote",
-				read: false
+                created: Meteor.moment.fullNow(),
+                read: false
 			});
 		}
 	}
@@ -168,13 +173,14 @@ commentDownVoteNotification = function(opts) {
 			Notifications.insert({
 				user: _commentAuthorId,
 				eventUserId: _user._id,
-				eventUserName: _user.identity.nick,
-				eventUserPicture: _user.profile.picture,
+//				eventUserName: _user.identity.nick,
+//				eventUserPicture: _user.profile.picture,
 				courseId: _course._id,
 				courseName: _course.name,
 				message: "Down voted your comment in " + _course.name + " course",
 				type: "courseCommentDownVote",
-				read: false
+                created: Meteor.moment.fullNow(),
+                read: false
 			});
 	}
 }

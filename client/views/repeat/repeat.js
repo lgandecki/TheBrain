@@ -3,10 +3,27 @@ var currentFlashcard, currentItemId, itemsToLearn = [], _renderer, _renderer2;
 Meteor.subscribe("myItems");
 //Meteor.subscribe("currentFlashcard");
 
+var resizeTheBar = function(opts) {
+    var _done = opts.total - opts.left;
+    console.log("resizingTheBar", opts);
+    var _newWidth = (_done / opts.total) * 100;
+    if (_newWidth) {
+        $(opts.progressBar).width(_newWidth + "%");
+    } else {
+        $(opts.progressBar).width(100 + "%");
+    }
+    $(opts.progressBar).width((_done / opts.total) * 100 + "%");
+    $(opts.progressBar).siblings("span").text("" + _done + " / " + opts.total);
+//    $(opts.progressBar).child(".progressbar-front-text").text("" + _done + " / " + opts.total);
+}
+
 Deps.autorun(function () {
     console.log("deps currentFlashcard " + Session.get("currentFlashcardId"));
     if (Session.get("currentFlashcardId")) {
         Meteor.subscribe("currentFlashcard", Session.get("currentFlashcardId"));
+    }
+    if (Session.get("currentItemId")) {
+        Meteor.subscribe("singleItem", Session.get("currentItemId"));
     }
 });
 //
@@ -23,9 +40,10 @@ function returnNextItem() {
     var _nextItem = null;
 
     // Repetition first
-    if (Items.find({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).count() > 0) {
+    if (Session.get("repetitionsLeft") > 0) {
         _nextItem = Items.findOne({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}});
-        return (_nextItem) ? _nextItem._id : false;
+        if (_nextItem)
+            return _nextItem._id;
     }
 
 
@@ -33,28 +51,22 @@ function returnNextItem() {
     for (var collectionId in itemsToLearn) {
         // console.log("collectionId " + collectionId);
         if (itemsToLearn.hasOwnProperty(collectionId) && itemsToLearn[collectionId] > 0) {
-            // console.log("second step,, items To learn " + itemsToLearn[collectionId]);
-            _currentCollectionItemsToLearn = Items.find({collection: collectionId, actualTimesRepeated: 0}).count();
-            // console.log("collections count " + _currentCollectionItemsToLearn);
-            // console.log("currentCollection " + collectionId);
-            if (_currentCollectionItemsToLearn && _currentCollectionItemsToLearn > 0) {
-                if (itemsToLearn[collectionId] > _currentCollectionItemsToLearn) {
-                    itemsToLearn[collectionId] = _currentCollectionItemsToLearn;
-                }
-                else {
-                    itemsToLearn[collectionId]--;
-                }
+
+                itemsToLearn[collectionId]--;
+
+
                 _nextItem = Items.findOne({collection: collectionId, actualTimesRepeated: 0});
                 // console.log("Items to learn");
-                return (_nextItem) ? _nextItem._id : false;
-            }
-            else {
-                delete itemsToLearn[collectionId];
-            }
+                if (_nextItem)
+                    return _nextItem._id;
         }
+        delete itemsToLearn[collectionId];
     }
 
-    _nextItem = Items.findOne({extraRepeatToday: true});
+    if (Session.get("extraRepetitionsLeft") > 0) {
+        _nextItem = Items.findOne({extraRepeatToday: true});
+    }
+
     return (_nextItem) ? _nextItem._id : false;
     // Items to reLearn
 }
@@ -74,7 +86,10 @@ Template.repeat.flashcard = function () {
 }
 
 Template.itemHistory.previousAnswer = function () {
+    console.log("ever here in previous answer?");
+
     var _item = Items.findOne({_id: Session.get("currentItemId")});
+    console.log("_item", _item);
     if (_item) {
         return _item.previousAnswers.reverse();
     }
@@ -169,16 +184,14 @@ Template.repeat.rendered = function () {
             // itemsToLearn = Session.get("itemsToLearn");
 
             if (Session.equals("showScheduleModal", true)) {
-                console.log("Are we supposed to show the modal?");
-
                 $("#scheduleModal").modal("show").on('hidden', function () {
-                    displayNextRepetition();
+                    _setAmountOfReps();
                 });
             }
             else {
-                console.log("Or not?");
-                displayNextRepetition();
+                _setAmountOfReps();
             }
+
         }
 
 
@@ -193,13 +206,111 @@ Template.repeat.destroyed = function () {
     _firstRender = true;
 }
 
+_setAmountOfReps = function() {
+    console.log("ladujemy to?");
+
+    Meteor.subscribe("itemsToRepeat");
+
+    var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+    Meteor.subscribe("itemsToRepeatCount", _now);
+    var _repetitionsLeft = ItemsToRepeatCount.findOne({_id: Meteor.userId()}).count;
+
+
+//    var _repetitionsLeft = Items.find({nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).count();
+    Session.set("repetitionsLeft", _repetitionsLeft);
+    Session.set("repetitionsTotal", _repetitionsLeft);
+
+
+    var _optsRepetitions = {
+        total: _repetitionsLeft,
+        left: _repetitionsLeft,
+        progressBar: ".barRepetitions"
+    }
+
+    resizeTheBar(_optsRepetitions);
+
+    var _newFlashcardsLeft = 0;
+
+
+
+
+    for (var collectionId in itemsToLearn) {
+        // console.log("collectionId " + collectionId);
+        if (itemsToLearn.hasOwnProperty(collectionId) && itemsToLearn[collectionId] > 0) {
+            // console.log("second step,, items To learn " + itemsToLearn[collectionId]);
+
+            Meteor.subscribe("itemsToLearnInCount", collectionId);
+
+            var _currentCollectionItemsToLearn = ItemsToLearnInCount.findOne({_id: collectionId}).count;
+
+//            var _currentCollectionItemsToLearn = Items.find({collection: collectionId, actualTimesRepeated: 0}, {limit: itemsToLearn[collectionId]}).count();
+//            _newFlashcardsLeft = _newFlashcardsLeft + _currentCollectionItemsToLearn;
+
+            if (_currentCollectionItemsToLearn && _currentCollectionItemsToLearn > 0) {
+                if (itemsToLearn[collectionId] > _currentCollectionItemsToLearn) {
+                    itemsToLearn[collectionId] = _currentCollectionItemsToLearn;
+                }
+                Meteor.subscribe("itemsToLearn", collectionId);
+                _newFlashcardsLeft = _newFlashcardsLeft + itemsToLearn[collectionId];
+            }
+            else {
+                delete itemsToLearn[collectionId];
+            }
+        }
+    }
+
+    Session.set("newFlashcardsLeft", _newFlashcardsLeft);
+    Session.set("newFlashcardsTotal", _newFlashcardsLeft);
+
+
+
+
+    var _optsNewFlashcards = {
+        total: _newFlashcardsLeft,
+        left: _newFlashcardsLeft,
+        progressBar: ".barNew"
+    }
+
+    resizeTheBar(_optsNewFlashcards);
+
+
+    Meteor.subscribe("itemsToExtraRepeat");
+
+
+    var _extraRepetitionsTotal = ItemsToReLearnCount.findOne({_id: Meteor.userId()}).count;
+
+//    var _extraRepetitionsTotal = Items.find({extraRepeatToday: true}).count();
+
+    Session.set("extraRepetitionsLeft", _extraRepetitionsTotal);
+    Session.set("extraRepetitionsTotal", _extraRepetitionsTotal);
+
+    var _optsExtraRepetitions = {
+        total: _extraRepetitionsTotal,
+        left: _extraRepetitionsTotal,
+        progressBar: ".barExtraRepetitions"
+    }
+
+    resizeTheBar(_optsExtraRepetitions);
+
+
+
+//    setTimeout(function() {
+//        $(".progress .bar").progressbar({display_text: 2,
+//            use_percentage: false})
+//    }, 200);
+    setTimeout(function() {
+        displayNextRepetition();
+    }, 500);
+
+}
+
 displayNextRepetition = function () {
-    _nextItem = returnNextItem();
+    var _nextItem = returnNextItem();
     console.log("nextItem ", _nextItem);
     if (_nextItem) {
         currentItemId = _nextItem;
         Session.set("currentItemId", currentItemId);
-        _item = Items.findOne({_id: currentItemId});
+        var _item = Items.findOne({_id: currentItemId});
         if (_item) {
             Session.set("currentFlashcardId", _item.flashcard);
         }
@@ -310,12 +421,126 @@ Template.repeat.events({
     }
 });
 
+Template.repeat.newFlashcardsDone = function() {
+   var _newFlashcardsDone = Session.get("newFlashcardsTotal") - Session.get("newFlashcardsLeft");
+   return _newFlashcardsDone;
+}
+
+Template.repeat.repetitionsDone = function() {
+    var _repetitionsDone = Session.get("repetitionsTotal") - Session.get("repetitionsLeft");
+    return _repetitionsDone;
+}
+
+Template.repeat.extraRepetitionsDone = function() {
+    var _extraRepetitionsDone = Session.get("extraRepetitionsTotal") - Session.get("extraRepetitionsLeft");
+    return _extraRepetitionsDone;
+}
+
+Template.repeat.newFlashcardsTotal = function() {
+    return Session.get("newFlashcardsTotal");
+}
+
+Template.repeat.repetitionsTotal = function() {
+    return Session.get("repetitionsTotal");
+}
+
+Template.repeat.extraRepetitionsTotal = function() {
+    return Session.get("extraRepetitionsTotal");
+}
+
+
+
+var decrementExtraRepetitionsLeft = function() {
+    var _extraRepetitionsLeft = Session.get("extraRepetitionsLeft");
+    Session.set("extraRepetitionsLeft", --_extraRepetitionsLeft);
+    var _extraRepetitionsTotal = Session.get("extraRepetitionsTotal");
+
+
+    var _opts = {
+        total: _extraRepetitionsTotal,
+        left: _extraRepetitionsLeft,
+        progressBar: ".barExtraRepetitions"
+    }
+
+    resizeTheBar(_opts);
+//    setTimeout(function() {
+//        $(".progress .bar").progressbar({display_text: 2,
+//            use_percentage: false})
+//    }, 200);
+}
+
+
+
+var incrementExtraRepetitionsTotal = function() {
+    var _extraRepetitionsTotal = Session.get("extraRepetitionsTotal");
+    var _extraRepetitionsLeft = Session.get("extraRepetitionsLeft");
+    Session.set("extraRepetitionsTotal", ++_extraRepetitionsTotal);
+    Session.set("extraRepetitionsLeft", ++_extraRepetitionsLeft);
+
+    var _opts = {
+        total: _extraRepetitionsTotal,
+        left: _extraRepetitionsLeft,
+        progressBar: ".barExtraRepetitions"
+    }
+
+    resizeTheBar(_opts);
+
+//    setTimeout(function() {
+//        $(".progress .bar").progressbar({display_text: 2,
+//            use_percentage: false})
+//    }, 200);
+}
+
+var decrementNewFlashcardsLeft = function() {
+    var _newFlashcardsLeft = Session.get("newFlashcardsLeft");
+    Session.set("newFlashcardsLeft", --_newFlashcardsLeft );
+    var _newFlashcardsTotal = Session.get("newFlashcardsTotal");
+
+    var _opts = {
+        total: _newFlashcardsTotal,
+        left: _newFlashcardsLeft,
+        progressBar: ".barNew"
+    }
+
+    resizeTheBar(_opts);
+
+
+//    setTimeout(function() {
+//        $(".progress .bar").progressbar({display_text: 2,
+//            use_percentage: false})
+//    }, 200);
+}
+
+var decrementRepetitionsLeft = function() {
+    var _repetitionsLeft = Session.get("repetitionsLeft");
+    Session.set("repetitionsLeft", --_repetitionsLeft);
+    var _repetitionsTotal = Session.get("repetitionsTotal");
+
+    var _opts = {
+        total: _repetitionsTotal,
+        left: _repetitionsLeft,
+        progressBar: ".barRepetitions"
+    }
+
+    resizeTheBar(_opts);
+
+
+
+
+//    setTimeout(function() {
+//        $(".progress .bar").progressbar({display_text: 2,
+//            use_percentage: false})
+//    }, 200);
+}
+
 setNextRepetition = function (evaluation, _item) {
     if (_item) {
+
         var _opts = {};
         if (_item.extraRepeatToday) {
             if (evaluation >= 3) {
                 _item.extraRepeatToday = false;
+                decrementExtraRepetitionsLeft();
             }
             var _opts = {
                 extraRepetition: true,
@@ -330,12 +555,21 @@ setNextRepetition = function (evaluation, _item) {
             _item.easinessFactor = newParameteres.easinessFactor;
 
             if (newParameteres.resetTimesRepeated) {
+                incrementExtraRepetitionsTotal();
                 _item.extraRepeatToday = true;
                 _item.timesRepeated = 0;
             }
             else {
                 _item.timesRepeated++;
             }
+
+            if (_item.actualTimesRepeated === 0) {
+                decrementNewFlashcardsLeft();
+            } else {
+                decrementRepetitionsLeft();
+            }
+
+
             _item.actualTimesRepeated++;
             _item.previousDaysChange = daysChange;
             _opts = {
@@ -409,9 +643,9 @@ var returnCurrentEvaluation = function (opts) {
     }
     else {
         _currentEvaluation.extraRepetition = false;
-        _currentEvaluation.easinessFactor = opts.easinessFactor;
         _currentEvaluation.daysChange = opts.daysChange;
     }
+    _currentEvaluation.easinessFactor = opts.easinessFactor;
     return _currentEvaluation;
 }
 
@@ -420,8 +654,8 @@ showBackAndEvaluation = function () {
     $(".currentFlashcard > .evaluate").focus();
 
     $(".btn-show-answer").hide();
-    $(".currentFlashcard > .back").css({"visibility": ""}).show('400', function () {
-        $(".currentFlashcard > .evaluate").css({"visibility": ""}).show('400', function () {
+    $(".currentFlashcard > .back").show('400', function () {
+        $(".currentFlashcard > .evaluate").show('400', function () {
             $(".answer").focus();
         })
     })
@@ -440,8 +674,8 @@ hideBackAndEvaluation = function () {
     _fDiv.animate({"left": (_fDiv.width() + 40) * -1}, 500, "easeInOutBack", function () {
             displayNextRepetition();
             $(".currentFlashcard > .answer").html("");
-            $(".currentFlashcard > .evaluate").css({"visibility": "hidden"}).hide('10');
-            $(".currentFlashcard > .back").css({"visibility": "hidden"}).hide('10');
+            $(".currentFlashcard > .evaluate").hide('10');
+            $(".currentFlashcard > .back").hide('10');
             _fDiv.css({"left": (_fDiv.width() + 40)}).animate({"left": 0}, 500, "easeInOutBack");
             $(".btn-show-answer").show();
         }
@@ -496,7 +730,9 @@ var checkIfFlashcardUpdated = function(opts) {
     var _flashcard = Flashcards.findOne(opts.flashcardId);
 
     if (_item && _flashcard && _item.flashcardVersionSeen < _flashcard.version) {
-        $("#newFlashcardVersionModal").modal("show");
+        $("#newFlashcardVersionModal").modal("show").on("hidden", function() {
+            console.log("are we ever here in hidden modal");
+        });
     }
 }
 

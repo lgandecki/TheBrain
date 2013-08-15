@@ -14,6 +14,17 @@ Template.topPanel.rendered = function() {
     if (_currentRoute === "/home") {
     	_currentRoute = "/";
     }
+    _currentRoute = "/" + _currentRoute.split("/")[1];
+    switch (_currentRoute) {
+        case '/lesson':
+        case '/course':
+            _currentRoute = Session.get("coursePath");
+            break;
+        case '/myCollection':
+            _currentRoute = "/myCollections";
+            break;
+    }
+//    console.log("currentRoute", _currentRoute);
     //var _link = Meteor.Router[_currentRoute + "Path"]();
     //var _element = $('a[href="'+_link+'"]');
     var _element = $('a[href="'+_currentRoute+'"]');

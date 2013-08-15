@@ -10,32 +10,44 @@
                         <thead>
                         <tr>
                             <th>&nbsp;</th>
-                            <th colspan="4">TheBrain connections</th>
+                            <th class="hiden-480" colspan="5">TheBrain connections</th>
                         </tr>
                         <tr>
                             <th>Name</th>
-                            <th>to create</th>
+                            <th class="hidden-480">to create</th>
                             <th class="hidden-480">to refresh</th>
                             <th class="hidden-480">to recreate</th>
                             <th class="hidden-480">active</th>
+                            <th class="hidden-480">enter</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody>{{#isolate}}
                             {{#each collection}}
-                            <tr>
-                                <td>{{name}}</td>
-                                <td>{{itemsToLearn}}</td>
-                                <td class="hidden-480">{{itemsToRepeat}}</td>
-                                <td class="hidden-480">{{itemsToReLearn}}</td>
-                                <td class="hidden-480">{{learnedItems}}</td>
-                            </tr>
-                            {{/each}}
+                                {{> collectionRow }}
 
+                            {{/each}}
+                        {{/isolate}}
+                        <tr>
+                            <td></td><td class="hidden-480"></td><td class="hidden-480"></td><td class="hidden-480"></td><td class="hidden-480"></td>
+                            <td><button class="btn btn-primary btn-primary-main btn-addCollectionModal btn-block"><i class="icon-plus-sign-at"></i> Add new</button></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+   {{> newCollectionModal }}
+</template>
 
+<template name="collectionRow">
+    <tr class="collectionRow" data-id="{{_id}}">
+        <td>{{name}}</td>
+        <td class="hidden-480">{{itemsToLearn}}</td>
+        <td class="hidden-480">{{itemsToRepeat}}</td>
+        <td class="hidden-480">{{itemsToReLearn}}</td>
+        <td class="hidden-480">{{learnedItems}}</td>
+        <td class="hidden-480"><button class="btn btn-primary btn-primary-main btn-enterCollection btn-block" data-id="{{_id}}"><i class="icon-hand-left"></i></button>
+        </td>
+    </tr>
 </template>

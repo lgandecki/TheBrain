@@ -1,61 +1,80 @@
 <template name="topMenu">
-<ul class="main-nav">
-    <li class="topNav dropdown">
-        <a href="{{homePath}}">
-            <span>Home</span>
-        </a>
-    </li>
-    <li class="topNav dropdown">
-        <a href="{{newFlashcardPath}}">
-            <span>Add Flashcard</span>
-        </a>
-    </li>
-    <li class="topNav dropdown">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-            <span>Learn</span>
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-custom">
-            <li>
-        <a href="{{repeatPath}}">
-            <span>Repeat</span>
-        </a>
-        </li>
-        <li>
-        <a href="/learnAndRepeat">
-            <span>Learn and Repeat</span>
-        </a>
-        </li>    
-    </ul>
-    </li>
-    <li class="topNav dropdown">
-        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-            <span>Courses</span>
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-custom ">
-            <li>
-                <a href="{{myCoursesPath}}">
-                    My Courses
-                </a>
-            </li>
-            <li>
-                <a href="/enrolledCourses">
-                    Enrolled Courses
-                </a>
-            </li>
-            <li>
-                <a href="/availableCourses">
-                    Available Courses
-                </a>
-            </li>
-        </ul>
-    </li>
+    <ul class="main-nav">
         <li class="topNav dropdown">
-        <a href="/myCollections">
-            <span>My collections</span>
-        </a>
-    </li>
+            <a href="{{homePath}}">
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="topNav dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                <span>Flashcards</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-custom">
+                <li>
+                    <a href="{{newFlashcardPath}}">
+                        <span>Add Flashcards</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/myFlashcards">
+                        <span>My Flashcards</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/availableFlashcards">
+                        <span>Look for Flashcards</span>
+                    </a>
+                </li>
+            </ul>
 
-</ul>
+        </li>
+        <li class="topNav dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                <span>Learn</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-custom">
+                <li>
+                    <a href="{{repeatPath}}">
+                        <span>Repeat</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/learnAndRepeat">
+                        <span>Learn and Repeat</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="topNav dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                <span>Courses</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-custom ">
+                <li>
+                    <a href="/myCourses">
+                        My Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="/enrolledCourses">
+                        Enrolled Courses
+                    </a>
+                </li>
+                <li>
+                    <a href="/availableCourses">
+                        Available Courses
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="topNav dropdown">
+            <a href="/myCollections">
+                <span>My collections</span>
+            </a>
+        </li>
+
+    </ul>
 </template>

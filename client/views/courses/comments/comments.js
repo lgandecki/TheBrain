@@ -106,6 +106,13 @@ createNewCourseComment = function() {
     return _newCourseComment;
 };
 
+Template.courseComments.userName = function() {
+    return Meteor.userDetails.getName(this.user);
+}
+
+Template.courseComments.userPicture = function() {
+    return Meteor.userDetails.getProfilePicture(this.user);
+}
 
 Template.courseComments.date = function() {
     return new moment(this.posted).fromNow();

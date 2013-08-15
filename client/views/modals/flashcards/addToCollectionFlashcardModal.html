@@ -1,0 +1,44 @@
+<template name="addToCollectionFlashcardModal">
+    <!-- Modal -->
+    <div id="addToCollectionFlashcardModal" class="modal hide fade" tabindex="-1" role="dialog"
+            aria-labelledby="changeItemsCollectionModal" aria-hidden="true">
+        <div class="box box-bordered box-color box-modal">
+            <div class="box-title box-modal">
+                <h3><i class="icon-th-list"></i> Add to collection </h3>
+                <button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="box-content nopadding modal-box">
+                <form action="#" class='form-horizontal form-bordered'>
+                    {{> collectionWithEmptyAndNewSelector }}
+                    <div class="form-actions pull-right modal-form-actions">
+                        <button type="button" class="btn btn-primary btn-primary-main btn-addToCollection">Add</button>
+                        <button type="button" class="btn btn-primary btn-primary-main" data-dismiss="modal" aria-hidden="true">Close</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+
+<template name="collectionWithEmptyAndNewSelector">
+
+    <div class="control-group">
+        <label class="control-label">Collection</label>
+
+        <div class="controls">
+            <select name="collectionId" id="collectionId" class="input-large select2">
+                {{#each collection}}
+                    <option value="{{_id}}" {{selectIfNew}}>{{name}}</option>
+                {{/each}}
+                {{select2 'collection'}}
+            </select>
+            <button class="btn btn-primary btn-primary-main btn-collectionModal">New</button>
+
+        </div>
+    </div>
+
+</template>

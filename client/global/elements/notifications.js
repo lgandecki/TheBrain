@@ -12,3 +12,14 @@ Template.notification.events({
     Notifications.update(this._id, {$set: {read: true}});
   }
 });
+
+Template.notification.eventUserPicture = function() {
+    return Meteor.userDetails.getProfilePicture(this.eventUserId);
+
+}
+
+Template.notification.eventUserName = function() {
+    return Meteor.userDetails.getName(this.eventUserId);
+
+}
+

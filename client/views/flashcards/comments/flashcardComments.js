@@ -136,7 +136,6 @@ Template.flashcardComments.events({
         var _commentId = this._id;
         console.log("_commentId", _commentId);
         $(".row-reply").slideUp(function() {
-            console.log("ile razy ? ");
         });
         setTimeout(function() {
             $(".row-reply[data-id='" + _commentId + "']").slideDown();

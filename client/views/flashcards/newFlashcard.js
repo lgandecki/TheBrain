@@ -229,4 +229,5 @@ Template.flashcardForm.rendered = function() {
 Template.flashcardForm.destroyed = function() {
     Session.set("newBackPicture", "");
     Session.set("newFrontPicture", "");
+    Session.set("newCollectionName", "");
 };

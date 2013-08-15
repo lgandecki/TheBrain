@@ -6,9 +6,18 @@ Meteor.publish("userData", function() {
 			'identity': 1,
 			'points': 1,
 			'achievements': 1,
-			'user.profile': 1,
+			'profile': 1,
 			'collections': 1,
 			'courses': 1
 		}
 	});
 });
+
+//Meteor.publish("otherUser", function(id){
+//    return id && Meteor.users.find({_id: id}, {fields: {
+//        'identity': 1,
+//        'points': 1,
+//        'profile': 1,
+//        'achievements': 1
+//    }})
+//})

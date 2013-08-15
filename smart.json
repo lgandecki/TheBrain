@@ -7,6 +7,7 @@
     "select2": {},
     "modernizr-meteor": {},
     "paginated-subscription": {},
-    "spin": {}
+    "spin": {},
+    "publish-with-relations": {}
   }
 }

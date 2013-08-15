@@ -1,0 +1,84 @@
+<template name="availableFlashcards">
+    <div class="row-fluid">
+        <div class="span9 center">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> Look for Flashcards</h3>
+                </div>
+                <div class="box-content padding">
+                    {{> withSelectedFlashcards }}
+                    {{#isolate}}
+                        {{#each flashcard}}
+                            {{> availableFlashcard }}
+                        {{/each}}
+                    {{/isolate}}
+                    {{#isolate}}
+                        {{#if flashcardsReady}}
+                            {{#isolate}}
+                                {{#unless allFlashcardsLoaded}}
+                                    <div class="textCenter">
+                                        <button class="btn btn-primary btn-primary-main load-more"><i class="icon-hand-down"> Load more</i></button>
+                                    </div>
+                                {{/unless}}
+                            {{/isolate}}
+                        {{else}}
+                            {{#isolate}}
+                                <div>{{> spinner}}</div>{{/isolate}}
+
+                        {{/if}}
+                    {{/isolate}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> addToCollectionFlashcardModal }}
+    {{> newCollectionModal }}
+    {{> editFlashcardModal }}
+    {{> historyFlashcardModal }}
+    {{> commentsFlashcardModal }}
+</template>
+
+<template name="withSelectedFlashcards">
+    <div class="withSelected">
+        <div class="row-fluid searchPanel">
+            <div class="span8 center">
+                <form action="" method="GET" class="search-form">
+                    <div class="search-pane">
+                        <input type="text" name="search" id="availableFlashcardsSearch" placeholder="Search here...">
+                        <button type="submit"><i class="icon-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <span class="label label-info withSelectedLabel">With {{#isolate}}{{flashcardsSelectedLength}}{{/isolate}} selected:</span>
+
+        </div>
+        <div class="withSelectedButtons">
+            <div class="row-fluid">
+                <div class="span6">
+                    <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="icon-hand-up"></i> Add to collection
+                    </button>
+                </div>
+                <div class="span6">
+                    <button class=" btn btn-primary btn-primary-main btn-addToCourse btn-block"><i class="icon-hand-up"></i> Add to course
+                    </button>
+                </div>
+
+            </div>
+            <br/>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block"><i class="icon-hand-up"></i> Select All
+                    </button>
+                </div>
+                <div class="span6">
+                    <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block"><i class="icon-hand-up"></i> Deselect All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

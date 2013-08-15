@@ -1,0 +1,25 @@
+<template name="breadCrumbs">
+    <div class="breadcrumbs">
+        <ul>
+            <li>
+                <span><strong style="display: block;
+padding: 2px 6px;
+font-size: 12px;
+float: left;">You Are Here</strong></span>
+
+
+            </li>
+            <li>
+                <i class="icon-angle-right"></i>
+                <a href="/">Home</a>
+            </li>
+            {{#each link}}
+                <li>
+                    <i class="icon-angle-right"></i>
+                    <a href="{{path}}">{{name}}</a>
+                </li>
+            {{/each}}
+
+        </ul>
+    </div>
+</template>

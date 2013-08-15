@@ -4,23 +4,36 @@ Meteor.Router.add({
 
     '/newFlashcard': "newFlashcard",
 
+    '/availableFlashcards': "availableFlashcards",
+
     '/repeat': "repeat",
 
-    '/learnAndRepeat': function() {
+    '/learnAndRepeat': function () {
         Session.set("showScheduleModal", true);
         return "repeat";
     },
 
 
-    '/myCollections': function() {
+    '/myCollections': function () {
         return "myCollections";
     },
 
-    '/myCourses': "myCourses",
+    '/myCollection/:id': function (id) {
+        Session.set("selectedCollection", id);
+        return "myCollectionsFlashcards";
+    },
 
-    '/enrolledCourses': "enrolledCourses",
+    '/myCourses': function () {
+        Session.set("coursePath", "/myCourses");
+        return "myCourses";
+    },
 
-    '/course/:id': function(id) {
+    '/enrolledCourses': function () {
+        Session.set("coursePath", "/enrolledCourses");
+        return "enrolledCourses"
+    },
+
+    '/course/:id': function (id) {
         Session.set("selectedCourse", id);
         //        if (!Session.get("selectedCourseTab")) {
         Session.set("selectedCourseTab", "#events");
@@ -28,18 +41,19 @@ Meteor.Router.add({
         return "course";
     },
 
-    '/courseLessons/:id': function(id) {
+    '/courseLessons/:id': function (id) {
         Session.set("selectedCourse", id);
         //        if (!Session.get("selectedCourseTab")) {
         Session.set("selectedCourseTab", "#events");
         //        }
         return "courseLessons";
     },
-    '/availableCourses': function() {
+    '/availableCourses': function () {
+        Session.set("coursePath", "/availableCourses");
         return "availableCourses";
     },
-    '/lesson/:courseId/:lessonId': function(courseId, lessonId) {
-        setTimeout(function() {
+    '/lesson/:courseId/:lessonId': function (courseId, lessonId) {
+        setTimeout(function () {
             Session.set("selectedCourse", courseId);
             Session.set("selectedLesson", lessonId);
         }, 50);
@@ -50,20 +64,24 @@ Meteor.Router.add({
 
     "/notificationCenter": "notificationCenter",
 
-    '/login': function() {
+    '/login': function () {
         return "login";
     },
 
 
-    "/loading": function() {
+    "/loading": function () {
         return "loading";
     },
+
+    "/calendar": function () {
+        return "calendar";
+    }
 
 
 });
 
 Meteor.Router.filters({
-    "postLoad": function(page) {
+    "postLoad": function (page) {
 
 
         var _tran = $(".transition"),
@@ -90,9 +108,9 @@ Meteor.Router.filters({
 
         $(".transition").hide();
 
-        setTimeout(function() {
+        setTimeout(function () {
             $(".transition").show();
-            if ($(".transition").length > 0 ) {
+            if ($(".transition").length > 0) {
                 console.log("_width", _width);
                 console.log("transition", $(".transition").width());
                 $(".transition").css({
@@ -100,7 +118,7 @@ Meteor.Router.filters({
                 }).show()
                     .animate({
                         "left": "0"
-                    }, 1200, _easing, function() {
+                    }, 1200, _easing, function () {
                         $(".answer").focus();
 
                     });
@@ -111,7 +129,7 @@ Meteor.Router.filters({
                 ga('send', 'pageview', window.location.pathname);
             }
             else {
-                setTimeout(function() {
+                setTimeout(function () {
                     ga('send', 'pageview', window.location.pathname);
                 }, 300);
             }
@@ -120,8 +138,8 @@ Meteor.Router.filters({
             if (_prev) {
                 _prev.animate({
                     "left": ((_width + _off.left) * -1) + "px"
-                }, 1200, _easing, function() {
-                   _prev.remove();
+                }, 1200, _easing, function () {
+                    _prev.remove();
                 });
             }
 
@@ -176,8 +194,8 @@ Meteor.Router.filters({
 Meteor.Router.filter('postLoad');
 
 
-var makeModalsScrollable = function() {
-    console.log("window height", $(window).height() )
-    var _modalMaxHeight = $(window).height() - ($(window).height() / 4) - 10;
+var makeModalsScrollable = function () {
+    console.log("window height", $(window).height())
+    var _modalMaxHeight = $(window).height() - ($(window).height() / 4) - 76;
     $(".modal-box").css({"max-height": _modalMaxHeight});
 }

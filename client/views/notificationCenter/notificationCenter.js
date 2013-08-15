@@ -23,3 +23,13 @@ Template.notificationCenter.events({
     notificationsHandle.loadNextPage();
   }
 });
+
+
+Template.notificationRow.eventUserPicture = function() {
+    return Meteor.userDetails.getProfilePicture(this.eventUserId);
+}
+
+Template.notificationRow.eventUserName = function() {
+    return Meteor.userDetails.getName(this.eventUserId);
+}
+

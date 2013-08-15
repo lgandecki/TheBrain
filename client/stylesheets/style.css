@@ -1,6 +1,7 @@
 body {
     background: #f2f2f2;
 }
+
 .flashcard {
     position: relative;
     text-align: left;
@@ -19,7 +20,8 @@ body {
 .flashcard.flashcardNoMargin {
     margin-bottom: 0px;
 }
-textarea[disabled].flashcard  {
+
+textarea[disabled].flashcard {
     background: #f2f2f2 !important;
     color: #000000 !important;
     border: 2px solid #219BCC !important;
@@ -55,11 +57,13 @@ textarea[disabled].flashcard  {
 .box-modal {
     margin-top: 0px !important;
 }
+
 .modal-box {
     border: 3px solid #219BCC !important;
     border-top: 0px !important;
     overflow-y: auto !important;
 }
+
 .modal-close {
     padding-right: 8px !important;
 }
@@ -70,16 +74,17 @@ textarea[disabled].flashcard  {
 
 @media (max-width: 767px) {
     .slider {
-    margin-bottom: 0px !important
-    margin-top: 10px;
+        margin-bottom: 0px !important margin-top : 10 px;
+    }
 }
-}
+
 @media (min-width: 768px) {
-.slider {
-    margin-bottom: 0px !important;
-    margin-top: 50px !important;
+    .slider {
+        margin-bottom: 0px !important;
+        margin-top: 50px !important;
+    }
 }
-}
+
 .centerTable > td {
     text-align: center !important;
 }
@@ -97,8 +102,15 @@ textarea[disabled].flashcard  {
     overflow: hidden;
     z-index: 5;
 }
-.flex-video.widescreen { padding-bottom: 57.25%; }
-.flex-video.vimeo { padding-top: 0; }
+
+.flex-video.widescreen {
+    padding-bottom: 57.25%;
+}
+
+.flex-video.vimeo {
+    padding-top: 0;
+}
+
 .flex-video iframe,
 .flex-video object,
 .flex-video embed {
@@ -108,8 +120,11 @@ textarea[disabled].flashcard  {
     width: 100%;
     height: 100%;
 }
+
 @media only screen and (max-device-width: 800px), only screen and (device-width: 1024px) and (device-height: 600px), only screen and (width: 1280px) and (orientation: landscape), only screen and (device-width: 800px), only screen and (max-width: 767px) {
-    .flex-video { padding-top: 0; }
+    .flex-video {
+        padding-top: 0;
+    }
 }
 
 .loginButtons {
@@ -133,25 +148,24 @@ textarea[disabled].flashcard  {
     margin-top: 5px;
 }
 
-
 html, body {
     height: 100%;
 }
+
 .push {
     margin-bottom: 40px;
 }
+
 #footer {
     position: fixed;
     width: 100%;
     bottom: 0;
-    height: 40px;/* .push must be the same height as .footer */
+    height: 40px; /* .push must be the same height as .footer */
     z-index: 150;
 }
 
-
-
 /*.modal {*/
-    /*position: absolute !important;*/
+/*position: absolute !important;*/
 /*}*/
 
 .activityDate {
@@ -159,10 +173,10 @@ html, body {
 }
 
 @media (max-width : 480px) {
-.form-actions .btn {
-    width: 100%;
-    margin-top: 1px;
-}
+    .form-actions .btn {
+        width: 100%;
+        margin-top: 1px;
+    }
 }
 
 .box-tab {
@@ -175,44 +189,26 @@ html, body {
 }
 
 @media (min-width : 768px) {
-.modal-wide {
-    width: 700px;
-    margin-left: -350px;
+    .modal-wide {
+        width: 760px;
+        margin-left: -380px;
+    }
 }
-}
+
 @media (max-width: 767px) {
     form .btn {
         display: block;
         width: 100%;
         margin-top: 1px;
     }
+
     form .pull-right {
         float: none !important;
     }
+
     form input[type='text'] {
         width: 96%;
     }
-}
-
-.badge-upVote.badge-success {
-    border: 1px solid #468847;   
-}
-
-.badge-success-reversed {
-    background-color: white;
-    border: 1px solid #468847;
-    color: #468847;
-}
-
-
-.badge-downVote.badge-warning {
-    border: 1px solid #f89406;   
-}
-
-.badge-warning-reversed {
-    background-color: white;
-    border: 1px solid #f89406;
-    color: #f89406;
 }
 
 h3.repeat {
@@ -227,12 +223,13 @@ h3.repeat {
 .repeat.last {
     padding-bottom: 0px;
 }
-.clickable { cursor: pointer; !important }
 
-.btn-primary-reversed {
-    background: #fff;
-    color: #E74C3C;
+.clickable {
+    cursor: pointer;
+!important
 }
+
+
 
 .myCollectionsList {
     text-align: center;
@@ -244,7 +241,7 @@ h3.repeat {
 }
 
 .modalInfo {
-    text-align: center; 
+    text-align: center;
     border-bottom: 1px solid #ddd;
     background: #f6f6f6;
 }
@@ -261,6 +258,7 @@ h3.repeat {
 .quickButtons {
     text-align: center;
 }
+
 .quickButton {
     margin-bottom: 20px;
     padding-right: 9px;
@@ -268,9 +266,34 @@ h3.repeat {
     height: 100px;
     display: block;
     position: relative;
+    background-color: #F2F2F2;
+    color: #204473;
+    border: 2px solid #219BCC;
 
-    
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    -moz-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    -webkit-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+
 }
+.quickButton:hover {
+    background-color: #219BCC;
+    color: #F2F2F2;
+
+
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    -moz-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    -webkit-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+/*.btn-primary {*/
+    /*transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+/*}*/
+/*.btn-primary:hover {*/
+    /*background: #fff;*/
+    /*color: #E74C3C;*/
+    /*transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+/*}*/
+
 
 .btn-mine {
     box-sizing: border-box;
@@ -296,17 +319,8 @@ h3.repeat {
     width: 100%;
 }
 
-.quickButtonHover {
-    background: #219BCC;
-    color: #F2F2F2;
-    border: 2px solid #219BCC;
-}
 
-.quickButtonNormal   {
-    background: #F2F2F2;
-    color: #204473;
-    border: 2px solid #219BCC;    
-}
+
 .quickButton span {
     padding-top: 20px;
 }
@@ -320,9 +334,9 @@ h3.repeat {
 .quickButton .name {
     display: block;
     position: absolute;
-    bottom:5px;
-    left:5px;
-    right:0;
+    bottom: 5px;
+    left: 5px;
+    right: 0;
     text-align: left;
     padding: 3px 10px;
     float: left;
@@ -333,21 +347,25 @@ h3.repeat {
 .padding-quickButtons {
     padding-bottom: 0px !important;
 }
+
 @media (min-width : 768px) {
-.btn-signUpWithFacebook, .btn-signUpWithEmailModal {
-    font-size: 25px;
-    padding-top: 7px;
-}
+    .btn-signUpWithFacebook, .btn-signUpWithEmailModal {
+        font-size: 25px;
+        padding-top: 7px;
+    }
 }
 
 @media (max-width : 767px) {
     .btn-signUpWithFacebook, .btn-signUpWithEmailModal {
-    font-size: 20px;
-    padding-top: 7px;
+        font-size: 20px;
+        padding-top: 7px;
+    }
 }
-}
+
 ul.icons {
-text-align: left; font-size: 18px; margin-bottom: 20px
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 20px
 }
 
 ul.icons > li {
@@ -357,7 +375,6 @@ ul.icons > li {
 .loginSignUp > h2 {
     margin-top: 20px;
 }
-
 
 .flashcardsList {
     text-align: center;
@@ -371,20 +388,29 @@ ul.icons > li {
 
 }
 
+.updatedFlashcardRow {
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
 .flashcardsList .row-fluid .span9, .flashcardsList .row-fluid .span3 {
-    border-top: 1px solid #ddd;   
+    border-top: 1px solid #ddd;
 }
 
 .flashcardsList .row-fluid .span9:hover {
     background: #f2f2f2;
-} 
+}
+
 .flashcardOptionsRow:hover {
     background: #f2f2f2;
 }
 
-.flashcardOptionsRow {
+.flashcardOptionsRow, .updatedFlashcardOptionsRow {
     margin-left: 0px !important;
     height: 100%;
+    padding: 3px;
 }
 
 .flashcardsOptions {
@@ -422,7 +448,6 @@ ul.icons > li {
     margin-top: 10px;
 }
 
-
 .dropdown-menu.dropdown-menu-custom {
     display: none;
 }
@@ -431,6 +456,7 @@ div.flashcardFront, div.flashcardBack {
     outline: none !important;
     border: 0px !important;
 }
+
 .flashcardText {
     margin: 2px;
 }
@@ -442,12 +468,15 @@ div.flashcardFront, div.flashcardBack {
 .new-comment > h4 {
     text-align: center;
 }
-.new-comment { 
-text-align: center;
+
+.new-comment {
+    text-align: center;
 }
+
 .new-comment > .control-group {
     text-align: center;
 }
+
 .new-comment > .btn-addNewComment {
     text-align: center;
 }
@@ -462,11 +491,10 @@ text-align: center;
     width: 84px;
 }
 
-
 .box:not(.box-modal) {
-   -moz-box-shadow:    6px 6px 8px 2px #ccc;
-   -webkit-box-shadow: 6px 6px 8px 2px #ccc;
-   box-shadow:         6px 6px 8px 2px #ccc;
+    -moz-box-shadow: 6px 6px 8px 2px #ccc;
+    -webkit-box-shadow: 6px 6px 8px 2px #ccc;
+    box-shadow: 6px 6px 8px 2px #ccc;
 }
 
 .btn {
@@ -478,7 +506,7 @@ text-align: center;
 .quickButton {
     -webkit-box-shadow: 8px 6px 8px -4px #CCCCCC;
     -moz-box-shadow: 8px 6px 8px -4px #CCCCCC;
-    box-shadow:8px 6px 8px -4px #CCCCCC;
+    box-shadow: 8px 6px 8px -4px #CCCCCC;
 }
 
 .btn-mine {
@@ -487,7 +515,7 @@ text-align: center;
     box-shadow: 8px 6px 8px -4px #CCCCCC;
 }
 
-li.active a {
+li.active > a {
     background: #f2f2f2 !important;
     border-bottom: 0 !important;
 }
@@ -500,16 +528,13 @@ li.active a {
     padding: 11px 10px;
 }
 
-
 #navigation .toggle-mobile {
     padding: 11px 10px;
 }
 
-
 .icon-facebook-sign:before {
     vertical-align: -5%;
 }
-
 
 .itemHistory {
     text-align: center;
@@ -518,7 +543,6 @@ li.active a {
 .previousAnswer {
     line-height: 25px;
 }
-
 
 .btn-header {
     -webkit-box-shadow: 0 0 0 0 #ccc !important;
@@ -533,7 +557,7 @@ li.active a {
 }
 
 .note {
-   font-style: italic;
+    font-style: italic;
 }
 
 .editableImage {
@@ -541,4 +565,180 @@ li.active a {
     -moz-box-shadow: 8px 8px 8px -4px #444;
     box-shadow: 8px 8px 8px -4px #444;
     border: 2px solid #219bcc;
+}
+
+.box-content.modal-box {
+    /*border-bottom: 1px solid #219bcc !important;*/
+}
+
+.modal-footer-mine {
+    padding: 14px 15px 15px;
+    margin-bottom: 0;
+    background-color: #f5f5f5;
+    border-right: 3px solid #219BCC;
+    border-left: 3px solid #219bcc;
+    border-bottom: 3px solid #219bcc;
+    border-top: 0px #219bcc !important;
+}
+
+.modal-footer-mine:before, .modal-footer-mine:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+
+.modal-footer-mine:after {
+    clear: both;
+}
+
+.updatedFlashcardOptionsRow .row-fluid {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.badge.badge-upVote {
+
+}
+
+.badge.badge-downVote {
+
+}
+
+.badge-upVote.badge-success {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    border: 2px solid #999;
+}
+
+.badge-success-reversed {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: black;
+    border: 2px solid #999;
+    color: white;
+}
+
+.badge-downVote.badge-warning {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    border: 2px solid #999;
+}
+
+.badge-warning-reversed {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    border: 2px solid #999;
+}
+
+.badge.badge-upVoted {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: grey;
+    color: white;
+    border: 2px solid #999;
+}
+
+.badge.badge-downVoted {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: grey;
+    color: white;
+    border: 2px solid #999;
+}
+
+.progress {
+    position: relative;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.progress .bar {
+    z-index: 1;
+    position: absolute;
+    -webkit-border-radius: 15px !important;
+    -moz-border-radius: 15px !important;
+    border-radius: 15px !important;
+}
+
+.progress span {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    color: black;
+    text-shadow: 2px 2px 3px #555;
+}
+
+.myFlashcardRow {
+    position: relative;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.myFlashcardRow:hover {
+    background: #f2f2f2;
+}
+
+.myFlashcardRow .span4 .row-fluid {
+    padding-bottom: 10px;
+}
+
+.flashcardSelected {
+    background: #ddd;
+}
+
+.myFlashcardRow.flashcardSelected:hover {
+    background: #ccc;
+}
+
+.withSelectedLabel {
+    margin-bottom: 10px;
+}
+.searchPanel {
+    margin-top: -10px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.withSelectedButtons {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #ddd;
+}
+
+.selectableFlashcard {
+    margin-top: 3%;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.lessonFlashcards {
+
+    padding: 5px !important;
+}
+
+.fc-event-inner {
+    text-align: center;
+}
+
+.fc-event-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 200%;
 }

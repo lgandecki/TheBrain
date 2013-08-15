@@ -3342,11 +3342,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 background: #F2F2F2;
 color: #204473;
 border: 2px solid #219BCC;
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
-.btn.btn-primary-reversed {
+.btn.btn-primary:hover {
 background: #219BCC;
 color: #F2F2F2;
-border: 2px solid #219BCC;
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 .btn.btn-info {
   background: #a4ccf1;

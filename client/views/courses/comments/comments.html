@@ -1,6 +1,7 @@
 <template name="commentsTab">
+
     <div class="tab-pane fade" id="comments">
-        {{> courseComments }}
+{{#isolate}}{{> courseComments }} {{/isolate}}
 
     </div>
 </template>

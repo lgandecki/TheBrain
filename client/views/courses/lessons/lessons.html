@@ -1,6 +1,6 @@
 <template name="courseLessonsTab">
     <div class="tab-pane fade" id="lessons">
-        {{> courseLessons }}
+       {{#isolate}}{{> courseLessons }}     {{/isolate}}
     </div>
 </template>
 

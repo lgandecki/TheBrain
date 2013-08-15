@@ -225,6 +225,11 @@ Template.editFlashcardButtons.events({
                         }
                         else {
                             Meteor.popUp.success("Flashcard updated", "TheBrain made the neural connections changes you asked for.");
+                            setTimeout(function() {
+                                Session.set("newFrontPicture", "");
+                                Session.set("newBackPicture", "");
+                            }, 500);
+
                         }
                     })
                     console.log("Reason: ", result);

@@ -16,41 +16,46 @@
                     {{/unless}}{{/isolate}}
                 </div>
 
-                <div class="box-content nopadding">
+                <div class="box-content nopadding tabbable">
                     <div class="tabs-container">
                         <ul class="tabs tabs-inline tabs-left nav">
                             <li class="active">
-                                <a href="#events" data-toggle="tab" class="tabLink"><i class="icon-calendar"></i> <span
+                                <a href="#events" data-toggle="tab" class="tabLink tabbable"><i class="icon-calendar"></i> <span
                                         class="hidden-phone">Timeline</span></a>
                             </li>
                             <li>
-                                <a href="#lessons" data-toggle="tab" class="tabLink"><i class='icon-camera'></i> <span
+                                <a href="#lessons" data-toggle="tab" class="tabLink tabbable"><i class='icon-camera'></i> <span
                                         class="hidden-phone">Lessons</span></a>
                             </li>
                             <li>
-                                <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> <span
+                                <a href="#comments" data-toggle="tab" class="tabLink tabbable"><i class="icon-twitter"></i> <span
                                         class="hidden-phone">Comments </span>({{#isolate}}{{commentsLength}}{{/isolate}})</a>
                             </li>
+                            {{#isolate}}
+                                {{#if isCourseOwner}}
 
                             <li>
-                                <a href="#stats" data-toggle="tab"><i class="icon-edit"></i> <span
+                                <a href="#courseStats" data-toggle="tab" class="tabLink tabbable"><i class="icon-edit"></i> <span
                                         class="hidden-phone">Stats</span></a>
                             </li>
                             <li>
-                                <a href="#students" data-toggle="tab"><i class="icon-edit"></i> <span
+                                <a href="#students" data-toggle="tab" class="tabLink tabbable"><i class="icon-edit"></i> <span
                                         class="hidden-phone">Students</span></a>
                             </li>
                             <li>
                                 <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span
                                         class="hidden-phone">Edit</span></a>
                             </li>
+                                {{/if}}
+                                {{/isolate}}
                         </ul>
                     </div>
                     <div class="tab-content padding tab-content-inline">
-                        {{#isolate}}{{> courseEventsTab }}{{/isolate}}
-                        {{#isolate}}{{> courseLessonsTab }}{{/isolate}}
-                        {{#isolate}}{{> commentsTab }}{{/isolate}}
-                        <div class="tab-pane" id="picture">
+{{#isolate}}{{> courseEventsTab }}{{/isolate}}
+                                                 {{#isolate}}{{> courseLessonsTab }}{{/isolate}}
+{{#isolate}}{{> commentsTab }}{{/isolate}}
+                        {{#isolate}}{{> courseStatsTab}} {{/isolate}}
+                        <div class="tab-pane fade" id="picture">
                             awerwreaw
                         </div>
                     </div>

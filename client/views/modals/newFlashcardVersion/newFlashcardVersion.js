@@ -2,35 +2,35 @@ Template.updatedFlashcardVersions.flashcardVersion = function () {
     var _item = Items.findOne({_id: Session.get("currentItemId")});
     var _flashcard = Flashcards.findOne({_id: Session.get("currentFlashcardId")});
     if (_item && _flashcard && _item.flashcardVersionSeen < _flashcard.version) {
-    var _updatedVersions = [];
-    if (_flashcard) {
-        var _updatedVersions = $.grep(_flashcard.previousVersions, function (previousVersion) {
-            return previousVersion.version > _item.flashcardVersionSeen;
-        });
+        var _updatedVersions = [];
+        if (_flashcard) {
+            var _updatedVersions = $.grep(_flashcard.previousVersions, function (previousVersion) {
+                return previousVersion.version > _item.flashcardVersionSeen;
+            });
 
-        var _newestVersion = {
-            front: _flashcard.front,
-            frontPicture: _flashcard.frontPicture,
-            back: _flashcard.back,
-            backPicture: _flashcard.backPicture,
-            version: _flashcard.version,
-            reason: _flashcard.reason,
-            upVotes: _flashcard.upVotes.length,
-            downVotes: _flashcard.downVotes.length
-        }
-        _updatedVersions.push(_newestVersion);
-
-        _updatedVersions.sort(function (a, b) {
-            if (a.version < b.version) {
-                return 1;
-            } else if (a.version > b.version) {
-                return -1;
+            var _newestVersion = {
+                front: _flashcard.front,
+                frontPicture: _flashcard.frontPicture,
+                back: _flashcard.back,
+                backPicture: _flashcard.backPicture,
+                version: _flashcard.version,
+                reason: _flashcard.reason,
+                upVotes: _flashcard.upVotes.length,
+                downVotes: _flashcard.downVotes.length
             }
-            return 0;
-        })
+            _updatedVersions.push(_newestVersion);
 
-        return _updatedVersions;
-    }
+            _updatedVersions.sort(function (a, b) {
+                if (a.version < b.version) {
+                    return 1;
+                } else if (a.version > b.version) {
+                    return -1;
+                }
+                return 0;
+            })
+
+            return _updatedVersions;
+        }
     }
 }
 
@@ -58,7 +58,7 @@ Template.updatedFlashcardVersions.currentItemFront = function () {
 
     if (_frontPicture) {
         console.log("in front before ", front);
-        front = '<a id="test2" href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
+        front = '<a href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
         <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
         <div name="front" class="flashcardFront">' + front + '</div>';
         console.log("front after", front);
@@ -80,7 +80,7 @@ Template.updatedFlashcardVersions.currentItemBack = function () {
     }
 
     if (_backPicture) {
-        back = '<a id="test1" href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
+        back = '<a href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
         <img src="' + _backPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
         <div name="back" class="flashcardBack">' + back + '</div>';
     }
@@ -130,3 +130,22 @@ Template.updatedFlashcardVersions.flashcardBack = function () {
 
 
 }
+
+
+Template.updatedFlashcardVersions.events({
+    "click .btn-useThisNewVersion": function () {
+        var _opts = {
+            itemId: Session.get("currentItemId"),
+            flashcardId: Session.get("currentFlashcardId"),
+            selectedVersion: this.version
+        }
+        Meteor.call("useUpdatedFlashcardVersion", _opts, function (error) {
+            if (error) {
+                Meteor.popUp.error("Updating Flashcard server error", error.reason);
+            } else {
+                Meteor.popUp.success("Updating Flashcard success", "TheBrain made neural connections you asked for.");
+                $("#newFlashcardVersionModal").modal("hide");
+            }
+        });
+    }
+})

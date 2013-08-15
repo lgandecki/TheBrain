@@ -9,11 +9,12 @@
             </div>
             <div class="box-content modal-box modalInfo">
                 {{> myCollectionsList }}
-                <div class="pull-right modal-form-actions">
 
-                    <button type="button" class="btn btn-primary btn-primary-main pull-right" data-dismiss="modal" aria-hidden="true">Start learning!</button>
-                </div>
 
+            </div>
+            <div class=" modal-form-actions modal-footer-mine">
+
+                <button type="button" class="btn btn-primary btn-primary-main pull-right" data-dismiss="modal" aria-hidden="true">Start learning!</button>
             </div>
         </div>
     </div>
@@ -24,6 +25,7 @@
     <div class="myCollectionsList">
 
         {{#each collection}}
+            {{#isolate}}
             {{#if itemsToLearn}}
                 <div class="row-fluid addBottomLine">
                     <div class="span5"><h4>{{name}}</h4>
@@ -42,9 +44,10 @@
                     </div>
                 </div>
             {{/if}}
+            {{/isolate}}
         {{/each}}
     </div>
-    {{#unless anyItemsToLearn}}
+    {{#if noItemsToLearn}}
         <div class="modalInfo">
             <p class="lead repeat">Congratulations!</p>
 
@@ -53,7 +56,7 @@
             <p class="lead repeat last">Let's do the repetitions!</p>
         </div>
         <br/>
-    {{/unless}}
+    {{/if}}
 
 
 </template>

@@ -65,7 +65,7 @@ Meteor.methods({
 
         var flashcardId = Flashcards.insert(flashcard);
 
-        flashcard.id = flashcardId;
+        flashcard._id = flashcardId;
 
         if (flashcardAttributes.collection) {
             var item = returnItem(flashcardAttributes.collection, flashcard);
@@ -149,32 +149,43 @@ Meteor.methods({
     },
     addFlashcardsToCollection: function (opts) {
         // _flashcardsIds = _opts.flashcardsIds;
-        var user = Meteor.user();
+        var user = Meteor.user(),
+            collectionId, _course;
         if (!user)
             throw new Meteor.Error(401, "You need to login to add flashcards");
 
 
         if (Meteor.isServer && opts.flashcardsIds) {
             var _items = [];
-            _course = Courses.findOne({_id: opts.courseId});
+            if (opts.courseId) {
+                _course = Courses.findOne({_id: opts.courseId});
 
-            if (!_course) {
-                throw new Meteor.Error(401, "You need to add flashcards from existing course");
+                if (!_course) {
+                    throw new Meteor.Error(401, "You need to add flashcards from existing course");
+                }
+                var _collectionIndex = _.indexOf(_.pluck(user.collections, 'name'), _course.name);
+
+                if (_collectionIndex > -1) {
+                    collectionId = user.collections[_collectionIndex]._id;
+                }
+                else {
+                    var collection = {
+                        name: _course.name
+                    };
+                    collectionId = Meteor.call("newCollection", collection);
+                }
             }
-            var _collectionIndex = _.indexOf(_.pluck(user.collections, 'name'), _course.name);
-
-            if (_collectionIndex > -1) {
-                collectionId = user.collections[_collectionIndex]._id;
+            else if(opts.collectionId) {
+                collectionId = opts.collectionId;
             }
             else {
-                collection = {
-                    name: _course.name
-                };
-                collectionId = Meteor.call("newCollection", collection);
+                throw new Meteor.Error(401, "You either have to specify the collection or add a flashcard from a course");
             }
 //            var _flashcards = Flashcards.find({_id: {$all: opts.flashcardsIds} })
+            console.log("flashcardsIds", opts.flashcardsIds);
             opts.flashcardsIds.forEach(function (flashcardId) {
-                _flashcard = Flashcards.findOne({_id: flashcardId});
+                console.log("flashcardId", flashcardId);
+                var _flashcard = Flashcards.findOne({_id: flashcardId});
                 Items.insert(returnItem(collectionId, _flashcard));
                 // _items.push(returnItem(collectionId, flashcardId));
             })

@@ -6,8 +6,8 @@
 		<td class="hidden-480">0</td>
 		<td class="hidden-480">{{lessons.length}}</td>
 		<td class="hidden-480">
-			<span class="badge badge-upVote clickable badge-success">+ {{upVotes.length}}</span> /
-			<span class="badge badge-downVote clickable badge-warning">- {{downVotes.length}}</span> {{score}}
+            <span class="badge {{isUpVoted}}"><i class="icon-thumbs-up"></i> {{upVotes.length}}</span> &nbsp;
+<span class="badge {{isDownVoted}}"><i class="icon-thumbs-down"></i> {{downVotes.length}}</span>
 		</td>
 		<td class="hidden-480"></td>
 		<td>

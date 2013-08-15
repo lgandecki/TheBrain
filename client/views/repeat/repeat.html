@@ -2,6 +2,67 @@
 
     <div class="row-fluid">
         <div class="span8 center mainBox">
+            <div class="row-fluid" style="
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+">
+
+
+                <div class="span4" style="
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+">
+                    <h4 style="text-align: center;margin-top: 20px;padding-bottom: 0px;">New Flashcards</h4>
+
+                    <div class="progress progress-striped active" style="
+    margin-top: 20px;
+    -moz-box-shadow: 6px 6px 8px 2px #ccc;
+    /* -webkit-box-shadow: 6px 6px 8px 2px #ccc; */
+    box-shadow: 5px 6px 8px -1px #ccc;
+    margin-bottom: 0px; padding-bottom: 0px;
+    border: 1px solid #219BCC;
+">
+                       {{#isolate}}<div class="bar barNew"></div>{{/isolate}}
+                        <span>0 / 0</span>
+                    </div>
+                </div>
+                <div class="span4" style="
+    margin-bottom: 0px; padding-bottom: 0px;
+">
+                    <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Repetitions</h4>
+
+                    <div class="progress progress-striped active" style="
+    margin-top: 20px;
+    -moz-box-shadow: 6px 6px 8px 2px #ccc;
+    /* -webkit-box-shadow: 6px 6px 8px 2px #ccc; */
+    box-shadow: 5px 6px 8px -1px #ccc;
+    margin-bottom: 0px; padding-bottom: 0px;
+    border: 1px solid #219BCC;
+">
+                        {{#isolate}}<div class="bar barRepetitions"></div>{{/isolate}}
+                        <span>0 / 0</span>
+                    </div>
+                </div>
+                <div class="span4" style="
+    margin-bottom: 0px; padding-bottom: 0px;
+">
+                    <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Extra Repetitions</h4>
+
+                    <div class="progress progress-striped active" style="
+    margin-top: 20px;
+    -moz-box-shadow: 6px 6px 8px 2px #ccc;
+    /* -webkit-box-shadow: 6px 6px 8px 2px #ccc; */
+    box-shadow: 5px 6px 8px -1px #ccc;
+    margin-bottom: 0px; padding-bottom: 0px;
+    border: 1px solid #219BCC;
+">
+{{#isolate}}<div class="bar barExtraRepetitions"></div>{{/isolate}}
+                        <span>0 / 0</span>
+                    </div>
+                </div>
+
+
+            </div>
             <div class="box box-bordered box-color">
                 <div class="box-title">
                     <h3><i class="icon-th-list"></i> Improve TheBrain connections!</h3>
@@ -12,22 +73,24 @@
                         <ul class="tabs tabs-inline tabs-left ">
                             {{#isolate}}
 
-                            <li class="active">
-                                <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
-                            </li>
-                            <li>
-                                <a href="#picture" data-toggle="tab"><i class='icon-camera'></i> Picture</a>
-                            </li>
-                            <li>
-                                <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> Comments {{#with flashcard}}({{comments.length}}){{/with}}</a>
-                            </li>
+                                <li class="active">
+                                    <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
+                                </li>
+                                <li>
+                                    <a href="#picture" data-toggle="tab"><i class='icon-camera'></i> Picture</a>
+                                </li>
+                                <li>
+                                    <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> Comments {{#with flashcard}}( {{comments.length}}
+                                        ){{/with}}</a>
+                                </li>
 
-                            <li>
-                                <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> History {{#with item}}({{previousAnswers.length}}){{/with}}</a>
-                            </li>
-                            <li>
-                                <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> Edit</a>
-                            </li>
+                                <li>
+                                    <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> History {{#with item}}( {{previousAnswers.length}}
+                                        ){{/with}}</a>
+                                </li>
+                                <li>
+                                    <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> Edit</a>
+                                </li>
                             {{/isolate}}
                         </ul>
                     </div>
@@ -73,17 +136,22 @@
             </div>
         </div>
     </div>
-{{> doneForTodayModal }}
-{{> scheduleModal }}
-{{> newFlashcardVersionModal }}
+
+
+
+
+    {{> doneForTodayModal }}
+    {{> scheduleModal }}
+    {{> newFlashcardVersionModal }}
 </template>
 
 
 <template name="itemHistory">
-        {{#each previousAnswer}}
+    {{#each previousAnswer}}
         <div class="row-fluid addBottomLine itemHistory">
             <div class="previousAnswer">
                 <h4>{{historyDate}}</h4>
+
                 <p>My answer: <strong>{{answer}}</strong><br/>
                     My evaluation: <strong>{{historyEvaluation}}</strong><br/>
                     {{#if extraRepetition}}
@@ -93,6 +161,6 @@
                     {{/if}}
                 </p>
             </div>
-</div>
-        {{/each}}
+        </div>
+    {{/each}}
 </template>

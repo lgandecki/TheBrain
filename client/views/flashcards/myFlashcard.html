@@ -1,0 +1,50 @@
+<template name="myFlashcard">
+    <div class="flashcardsList">
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="center">
+                    <div class="myFlashcardRow row-fluid" data-id="{{_id}}" >
+                        <div class="span4">
+                            <div class="row-fluid">
+                            <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i class="icon-thumbs-up"></i> 1 {{upVotes.length}}</span>
+                                &nbsp;
+                                <span class="badge badge-downVote clickable badge-warning"><i class="icon-thumbs-down"></i> 0 {{downVotes.length}}</span>
+                            </div>
+                            </div>
+                            <div class="row-fluid">
+                            Times Repeated: {{actualTimesRepeated}}<br/>
+                            Easiness Factor: {{easinessFactor}}<br/>
+                            Next Repetition: {{nextRepetition}}<br/>
+                            </div>
+                            <div class="row-fluid myFlashcardButtons">
+                            <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> Edit
+                            </button>
+                                <button class=" btn btn-primary btn-primary-main btn-historyFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> History ( {{previousAnswers.length}} )
+                                </button>
+                                <button class=" btn btn-primary btn-primary-main btn-commentsFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> {{#isolate}} Comments ( {{#with flashcard}} {{comments.length}}
+                                    {{/with}}){{/isolate}}
+                                </button>
+                             <button class=" btn btn-primary btn-primary-main btn-selectFlashcard btn-block" data-id="{{_id}}"><i class="icon-hand-down hidden-desktop"></i> Select
+                                </button>
+                            </div>
+                        </div>
+                        <div class="span8 selectableFlashcard">
+                            <div class="center">
+                                <div class="flashcard front">{{{currentItemFront}}}</div>
+                                <div class="flashcard back">{{{currentItemBack}}}</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div style="display: none;">{{reloadFlashcard}}</div>
+</template>

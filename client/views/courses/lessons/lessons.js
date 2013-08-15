@@ -56,6 +56,7 @@ Template.lessonsTable.events({
         e.stopPropagation();
     },
     "click .lessonRow:not(.editable), click .btn-enterLesson": function(e) {
+        Session.set("selectedLesson", this._id);
         Meteor.Router.to('/lesson/' + Session.get("selectedCourse") + "/" + this._id);
     },
     "click .btn-addLessonModal": function (e, template) {

@@ -1,12 +1,12 @@
 Meteor.startup(function(){
     var bootstrapCategories = [
-        {collectionName: "Flashcards", logMethod: "json"},
-        {collectionName: "Courses", logMethod: "json"},
-        {collectionName: "Items", logMethod: "json"},
-        {collectionName: "FlashcardVotes", logMethod: "json"},
-        {collectionName: "FlashcardCommentVotes", logMethod: "json"},
-        {collectionName: "CourseVotes", logMethod: "json"},
-        {collectionName: "CourseCommentVotes", logMethod: "json"},
+//        {collectionName: "Flashcards", logMethod: "json"},
+//        {collectionName: "Courses", logMethod: "json"},
+//        {collectionName: "Items", logMethod: "json"},
+//        {collectionName: "FlashcardVotes", logMethod: "json"},
+//        {collectionName: "FlashcardCommentVotes", logMethod: "json"},
+//        {collectionName: "CourseVotes", logMethod: "json"},
+//        {collectionName: "CourseCommentVotes", logMethod: "json"},
         {collectionName: "TheBrain", logMethod: "json"}
 
     ]
