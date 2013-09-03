@@ -487,6 +487,13 @@ div.flashcardFront, div.flashcardBack {
     border-bottom: 1px solid #ddd;
 }
 
+.new-news {
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
 .userPictureComment {
     width: 84px;
 }
@@ -742,3 +749,14 @@ li.active > a {
     padding-bottom: 10px;
     font-size: 200%;
 }
+
+.iconFace {
+    background-color: #219BCC;
+    float: left;
+    padding: 2px;
+    font-size: 24px;
+    color: #fff;
+    position: absolute;
+    left: -20px;
+    top: -10px;
+    }

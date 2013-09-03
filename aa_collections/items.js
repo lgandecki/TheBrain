@@ -40,7 +40,9 @@ Meteor.methods({
         if (!user)
             throw new Meteor.Error(401, "You need to login to update flashcards");
 
-        var _item = Items.findOne({_id: opts.itemId, user: user._id});
+        var _query = {_id: opts.itemId, user: user._id};
+        console.log("_query", _query);
+        var _item = Items.findOne(_query);
         if (!_item)
             throw new Meteor.Error(403, "You can update personal information only on your personal flashcard");
 

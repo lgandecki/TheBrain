@@ -48,7 +48,10 @@ Accounts.onCreateUser(function (options, user) {
 
     user.courses = [];
 
-    if (options.profile) {
+    if (options.profile && options.profile.picture) {
+        user.profile = options.profile;
+    }
+    else if (options.profile) {
         options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
         user.profile = options.profile;
         _fbName = user.profile.name.split(" ");

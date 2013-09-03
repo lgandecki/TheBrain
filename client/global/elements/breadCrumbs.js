@@ -35,7 +35,7 @@ Template.breadCrumbs.link = function () {
             break;
         case '/availableFlashcards':
             _breadCrumbs.push({
-                name: "Available Flashcards",
+                name: "Look For Flashcards",
                 path: _currentRoute
             });
             break;

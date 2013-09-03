@@ -1,6 +1,13 @@
 <template name="courseEventsTab">
     <div class="tab-pane active fade in" id="events">
 
+        {{#isolate}}
+        {{#if isCourseOwner}}
+            {{> addCourseNews }}
+
+        {{/if}}
+        {{/isolate}}
+
             {{> courseEvents }}
 
 
@@ -19,14 +26,14 @@
                         <div class="timeline-content">
                             {{#with eventData}}
                                 <div class="left">
-                                    <div class="icon {{color}}">
-                                        <i class="{{icon}}"></i>
+                                    <div class="iconFace">
+                                        <img style="height: 40px; width: 40px" src="{{picture}}" alt="">
                                     </div>
 
                                 </div>
                                 <div class="activity">
                                     <div class="user"><a href="#">{{user}}</a>
-                                        <span>{{event}}</span>
+                                        <span>{{shortMessage}}</span>
 
                                         <div><span class="activityDate">{{date}}</span></div>
                                     </div>
@@ -43,4 +50,19 @@
 {{/with}}
             </ul>
 
+</template>
+
+<template name="addCourseNews">
+    <div class="row-fluid">
+        <div class="new-news">
+            <h4>Add News</h4>
+
+            <div class="control-group">
+                <div class="controls">
+                    <textarea name="newNews" class="span8 newNews" rows="3"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="span6 btn btn-primary btn-primary-main center btn-addNews">Post News</button>
+        </div>
+    </div>
 </template>

@@ -52,11 +52,11 @@ Meteor.methods({
                 "type": "created",
                 "created": {
                     by: user._id,
-                    on: Meteor.moment.now()
+                    on: Meteor.moment.fullNow()
                 },
                 "lastModified": {
                     by: user._id,
-                    on: Meteor.moment.now()
+                    on: Meteor.moment.fullNow()
                 }
             }],
             flashcards: 0,
@@ -337,6 +337,43 @@ Meteor.methods({
 
         Meteor.users.update({_id: user._id}, {$pull: {courses: courseId}});
         Courses.update({_id: courseId}, {$pull: {students: user._id}});
+    },
+    addCourseNews: function(opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to add news to the course");
+
+        var _course = Courses.findOne({_id: opts.courseId, admins: user._id});
+        if (!_course)
+            throw new Meteor.Error(401, "You can't add news to someone elses course!");
+
+        var _event =  {
+            "_id": new Meteor.Collection.ObjectID()._str,
+            "user": user._id,
+            "type": "news",
+            "message": opts.news,
+            "created": {
+                by: user._id,
+                on: Meteor.moment.fullNow()
+            },
+            "lastModified": {
+                by: user._id,
+                on: Meteor.moment.fullNow()
+            }
+        };
+
+        Courses.update({_id: _course._id},{$addToSet: {events: _event}});
+        if (Meteor.isServer) {
+            var _opts = {
+                user: user._id,
+                message: opts.news,
+                courseId: _course._id
+            };
+            courseNewsNotification(_opts);
+        }
+
+
+
     }
 });
 

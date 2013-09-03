@@ -7,10 +7,15 @@ Template.availableFlashcards.created = function () {
 
 Template.availableFlashcards.flashcard = function () {
     var _flashcards;
+    var _query = {};
     if (Session.get("optsSearch")) {
-        var _opts = true;
+        var _opts = Session.get("optsSearch");
+        _query.$or = [
+            {front: new RegExp(_opts)},
+            {back: new RegExp(_opts)}
+        ]
     }
-    _flashcards = Flashcards.find({}, {limit: flashcardsHandle.limit()});
+    _flashcards = Flashcards.find(_query, {limit: flashcardsHandle.limit()});
     return _flashcards;
 }
 
@@ -50,6 +55,16 @@ Template.availableFlashcards.destroyed = function () {
 }
 
 Template.withSelectedFlashcards.events({
+    'click .btn-addToCollection': function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $("#addToCollectionFlashcardModal").modal("show");
+    },
+    'click .btn-addToCourse': function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        $("#addToCourseFlashcardModal").modal("show");
+    },
     "keyup #availableFlashcardsSearch": function (e, template) {
         console.log("e", $("#availableFlashcardsSearch").val());
         _opts.search = $("#availableFlashcardsSearch").val();
@@ -70,6 +85,11 @@ Template.withSelectedFlashcards.events({
 
         _toggleFlashcardReload();
     },
+
+    "click .search-pane": function(e) {
+        $("#availableFlashcardsSearch").focus();
+    }
+
 //    "click .btn-addToCourse ": function (e) {
 //        e.preventDefault();
 //        var _opts2 = {

@@ -1,0 +1,61 @@
+<template name="addToCourseFlashcardModal">
+    <!-- Modal -->
+    <div id="addToCourseFlashcardModal" class="modal hide fade" tabindex="-1" role="dialog"
+            aria-labelledby="addToCourseFlashcardModal" aria-hidden="true">
+        <div class="box box-bordered box-color box-modal">
+            <div class="box-title box-modal">
+                <h3><i class="icon-th-list"></i> Add to course </h3>
+                <button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="box-content nopadding modal-box">
+                <form action="#" class='form-horizontal form-bordered'>
+                    {{> courseSelector }}
+                    <div class="form-actions pull-right modal-form-actions">
+                        <button type="button" class="btn btn-primary btn-primary-main btn-addToCourse">Add</button>
+                        <button type="button" class="btn btn-primary btn-primary-main" data-dismiss="modal" aria-hidden="true">Close</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+
+<template name="courseSelector">
+
+    <div class="control-group">
+        <label class="control-label">Course</label>
+
+        <div class="controls">
+            <select name="courseId" id="courseId" class="input-large select2">
+                {{#isolate}}
+                {{#each course}}
+                    <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+                {{/isolate}}
+            </select>
+
+
+        </div>
+
+        <div class="control-group" id="lessonControlGroup" style=''>
+            <label class="control-label">Lesson</label>
+
+            <div class="controls">
+
+                <select name="lessonId" id="lessonId" class="input-large select2">
+                    <option value="">Don't add to any lessons</option>
+                    {{#isolate}}
+                        {{#each lesson}}
+                            <option value="{{_id}}" id="{{_id}}" {{selectIfSelectedLesson}}>{{name}}</option>
+                        {{/each}}
+                    {{/isolate}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+</template>

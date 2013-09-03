@@ -5,7 +5,7 @@
             <div class="box box-bordered box-color">
 
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Course: {{#isolate}}{{name}}{{/isolate}}</h3>
+                    <h3><i class="icon-th-list"></i> Course: {{#isolate}}{{courseName}}{{/isolate}}</h3>
                     {{#isolate}}{{#unless isCourseOwner}}
                         <div class="pull-right">
                             <button class="btn btn-primary btn-primary-main btn-courseEnrollment {{enrollBtnAction}}" data-id="{{_id}}"><i
@@ -24,7 +24,7 @@
                                         class="hidden-phone">Timeline</span></a>
                             </li>
                             <li>
-                                <a href="#lessons" data-toggle="tab" class="tabLink tabbable"><i class='icon-camera'></i> <span
+                                <a href="#lessons" data-toggle="tab" class="tabLink tabbable"><i class='icon-book'></i> <span
                                         class="hidden-phone">Lessons</span></a>
                             </li>
                             <li>
@@ -38,14 +38,6 @@
                                 <a href="#courseStats" data-toggle="tab" class="tabLink tabbable"><i class="icon-edit"></i> <span
                                         class="hidden-phone">Stats</span></a>
                             </li>
-                            <li>
-                                <a href="#students" data-toggle="tab" class="tabLink tabbable"><i class="icon-edit"></i> <span
-                                        class="hidden-phone">Students</span></a>
-                            </li>
-                            <li>
-                                <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> <span
-                                        class="hidden-phone">Edit</span></a>
-                            </li>
                                 {{/if}}
                                 {{/isolate}}
                         </ul>
@@ -54,7 +46,12 @@
 {{#isolate}}{{> courseEventsTab }}{{/isolate}}
                                                  {{#isolate}}{{> courseLessonsTab }}{{/isolate}}
 {{#isolate}}{{> commentsTab }}{{/isolate}}
-                        {{#isolate}}{{> courseStatsTab}} {{/isolate}}
+                        {{#isolate}}
+{{#if isCourseOwner}}
+{{> courseStatsTab}}
+
+{{/if}}
+                        {{/isolate}}
                         <div class="tab-pane fade" id="picture">
                             awerwreaw
                         </div>

@@ -91,11 +91,11 @@ Template.flashcardStats.renderGraph = function() {
                 tooltip: {
                     useHTML: true,
                     formatter: function () {
-                        var s = '<b>' + this.x + '</b>';
+                        var s = '<b style="margin-right: 10px;">' + moment(this.x).format('MMMM Do YYYY, h:mm:ss a') + '</b>';
 
                         $.each(this.points, function (i, point) {
-                            s += '<br/>' + point.series.name + ': <img class="pull-right" style="width: 90px; height: 90px" src="' + point.point.userPicture + '" alt=""><br/>' +
-                                ' easinessFactor ' + point.y + '<br/>answer ' + point.point.answer
+                            s += '<img class="pull-right" style="width: 90px; height: 90px" src="' + point.point.userPicture + '" alt=""><br/>' + point.series.name + ': <br/><br/>' +
+                                ' easinessFactor ' + point.y + '<br/>answer ' + point.point.answer + '<br/>evaluation ' + point.point.evaluation
 //                    console.log("point", point);
                         });
 
@@ -140,7 +140,7 @@ Template.flashcardStats.renderGraph = function() {
                 series: _students
 
             });
-        }, 300);
+        }, 500);
     }
 }
 

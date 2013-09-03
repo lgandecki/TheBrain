@@ -14,7 +14,7 @@
 ">
                     <h4 style="text-align: center;margin-top: 20px;padding-bottom: 0px;">New Flashcards</h4>
 
-                    <div class="progress progress-striped active" style="
+                    <div class="progress progress-striped " style="
     margin-top: 20px;
     -moz-box-shadow: 6px 6px 8px 2px #ccc;
     /* -webkit-box-shadow: 6px 6px 8px 2px #ccc; */
@@ -31,7 +31,7 @@
 ">
                     <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Repetitions</h4>
 
-                    <div class="progress progress-striped active" style="
+                    <div class="progress progress-striped " style="
     margin-top: 20px;
     -moz-box-shadow: 6px 6px 8px 2px #ccc;
     /* -webkit-box-shadow: 6px 6px 8px 2px #ccc; */
@@ -48,7 +48,7 @@
 ">
                     <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Extra Repetitions</h4>
 
-                    <div class="progress progress-striped active" style="
+                    <div class="progress progress-striped " style="
     margin-top: 20px;
     -moz-box-shadow: 6px 6px 8px 2px #ccc;
     /* -webkit-box-shadow: 6px 6px 8px 2px #ccc; */
@@ -77,16 +77,11 @@
                                     <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
                                 </li>
                                 <li>
-                                    <a href="#picture" data-toggle="tab"><i class='icon-camera'></i> Picture</a>
-                                </li>
-                                <li>
-                                    <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> Comments {{#with flashcard}}( {{comments.length}}
-                                        ){{/with}}</a>
+                                    <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> Comments {{#with flashcard}}({{comments.length}}){{/with}}</a>
                                 </li>
 
                                 <li>
-                                    <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> History {{#with item}}( {{previousAnswers.length}}
-                                        ){{/with}}</a>
+                                    <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> History {{#with item}}({{previousAnswers.length}}){{/with}}</a>
                                 </li>
                                 <li>
                                     <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> Edit</a>
@@ -118,14 +113,12 @@
 
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="picture">
-                            awerwreaw
-                        </div>
+
                         <div class="tab-pane fade" id="history">
                             {{> itemHistory }}
                         </div>
                         <div class="tab-pane fade" id="comments">
-                            {{> flashcardComments }}
+                            {{#isolate}}{{> flashcardComments }}{{/isolate}}
                         </div>
                         <div class="tab-pane fade" id="edit">
                             {{> editFlashcard }}

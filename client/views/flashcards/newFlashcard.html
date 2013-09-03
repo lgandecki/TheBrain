@@ -29,7 +29,7 @@
 
         <div class="controls">
 
-            <div name="front" id="front" class="flashcard flashcardNoMargin" contentEditable="false">
+            <div name="front" id="newFront" class="flashcard flashcardNoMargin" contentEditable="false">
                 {{#isolate}}<a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}<div name="front" class="flashcardFront"   contentEditable="true"></div>
 </div>
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront visible-phone">Add Picture</button>
@@ -41,7 +41,7 @@
                     <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack hidden-phone">Add Picture</button></label>
 
         <div class="controls">
-<div name="back" id="back" class="flashcard flashcardNoMargin" contentEditable="false">
+<div name="back" id="newBack" class="flashcard flashcardNoMargin" contentEditable="false">
                 {{#isolate}}<a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newBackPicture}}<img src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}<div name="back" class="flashcardBack"   contentEditable="true"></div>
 </div>
                     <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack visible-phone">Add Picture</button>
@@ -61,10 +61,10 @@
             <div class="controls">
 
                 <select name="course" id="course" class="input-large select2">
-                    <option value="">Don't add to any courses</option>
+                    <option>Don't add to any courses</option>
                     {{#isolate}}
                     {{#each course}}
-                    <option value="{{_id}}" id="{{_id}}" {{selectIfSelectedCourse}}>{{name}}</option>
+                    <option value="{{_id}}" {{selectIfSelectedCourse}}>{{name}}</option>
                     {{/each}}
                     {{/isolate}}
                 </select>

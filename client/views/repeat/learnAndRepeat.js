@@ -17,6 +17,7 @@ Template.myCollectionsList.itemsToLearn = function() {
     var _itemsToLearnIn = ItemsToLearnInCount.findOne({_id: this._id});
     if (_itemsToLearnIn) {
         _itemsToLearnCount += _itemsToLearnIn.count;
+        Session.set("itemsToLearnCount", _itemsToLearnCount);
         return _itemsToLearnIn.count;
     }
 
@@ -55,9 +56,10 @@ Template.myCollectionsList.learnedItems = function() {
 
 Template.myCollectionsList.noItemsToLearn = function() {
 
-        console.log(_itemsToLearnCount);
-        setTimeout(function() {
+//        setTimeout(function() {
+            var _itemsToLearnCount = Session.get("itemsToLearnCount");
+            console.log("_itemsToLearnCount", _itemsToLearnCount);
             return (_itemsToLearnCount && _itemsToLearnCount > 0) ? false : true;
-        }, 200);
+//        }, 200);
 
 }

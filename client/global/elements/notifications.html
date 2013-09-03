@@ -4,7 +4,7 @@
                 {{#if notificationCount}}<span class="label label-lightred">{{notificationCount}}</span>{{/if}}
             </a>
             <ul class="dropdown-menu dropdown-menu-custom pull-right message-ul">
-                {{#if notificationCount}}
+                {{#if totalNotificationCount}}
                 {{#each notifications}}
                     {{> notification }}
                 {{/each}}

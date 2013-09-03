@@ -1,9 +1,26 @@
 var _course, _lesson, _flashcardSubscription, _firstOpened;
 
+Deps.autorun(function () {
+    var _lessonTab = Session.get("lessonTab");
+    setTimeout(function () {
+        Meteor.tabs.setHeight();
+//        var _courseTab = Session.get("courseTab");
+        console.log("lessonTab", _lessonTab);
+        $('.nav a[href="' + _lessonTab + '"]').tab('show');
+    }, 50);
+    setTimeout(function () {
+        Meteor.tabs.setHeight();
+//        var _courseTab = Session.get("courseTab");
+        console.log("lessonTab", _lessonTab);
+        $('.nav a[href="' + _lessonTab + '"]').tab('show');
+    }, 500);
+})
+
 
 Template.lesson.created = function () {
 //    _firstOpened = true;
     Session.set("showStudentsFlashcards", false);
+    Session.set("lessonTab", "#lessonFlashcards");
 
     _course = Courses.findOne({_id: Session.get("selectedCourse")});
 
@@ -12,10 +29,23 @@ Template.lesson.created = function () {
         _lesson = _course.lessons[_lessonIndex];
         console.log("are we getting back here to render?");
         _query = {lessonId: _lesson._id, onlyAdmin: true, adminIds: _course.admins};
+        _query.adminIds.push(Meteor.userId());
         Session.set("_optionsQuery", _query);
         _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
         _firstOpened = false;
     }
+
+    setTimeout(function () {
+        Meteor.tabs.setHeight();
+//        var _courseTab = Session.get("courseTab");
+        var _lessonTab = Session.get("lessonTab", _lessonTab);
+        console.log("lessonTab", _lessonTab);
+        $('.nav a[href="' + _lessonTab + '"]').tab('show');
+    }, 500);
+}
+
+Template.lesson.destroyed = function() {
+    Session.set("lessonTab", "");
 }
 
 Template.lesson.rendered = function () {
@@ -28,6 +58,7 @@ Template.lesson.rendered = function () {
             _lesson = _course.lessons[_lessonIndex];
             console.log("are we getting back here to render?");
             _query = {lessonId: _lesson._id, onlyAdmin: true, adminIds: _course.admins};
+            _query.adminIds.push(Meteor.userId());
             Session.set("_optionsQuery", _query);
             _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
             _firstOpened = false;
@@ -168,6 +199,7 @@ Template.withSelectedFlashcards.flashcardsSelectedLength = function () {
 
 Template.lesson.destroyed = function () {
     Session.set("selectedFlashcards", "");
+    Session.set("selectedCourse", "");
     if (_flashcardSubscription) {
         _flashcardSubscription.stop();
     }
@@ -205,7 +237,7 @@ _getFlashcards = function (addTeachersFlashcards, optionsQuery) {
         var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), _lessonId);
         _lesson = _course.lessons[_lessonIndex];
 //        if (optionsQuery === true) {
-        _optionsQuery = Session.get("_optionsQuery");
+        _optionsQuery = Session.get("_optionsQuery") || {};
 //        }
         if (_lesson) {
             _query = {public: true, "lessons.lesson": _lesson._id};

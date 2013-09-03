@@ -49,5 +49,10 @@ Meteor.publish("paginatedItems", function(opts, limit) {
 })
 
 Meteor.publish("singleItem", function(id){
-    return id && Items.find({_id: id});
+    return id && Items.find({_id: id, user: this.userId});
 })
+//
+//
+//Meteor.publish("testItems", function() {
+//    return Items.find();
+//})

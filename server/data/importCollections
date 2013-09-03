@@ -1,0 +1,6 @@
+mongoimport -h 127.0.0.1 --port 3002 -d meteor -c items --file items.json
+mongoimport -h 127.0.0.1 --port 3002 -d meteor -c flashcards --file flashcards.json
+mongoimport -h 127.0.0.1 --port 3002 -d meteor -c courses --file courses.json
+mongoimport -h 127.0.0.1 --port 3002 -d meteor -c notifications --file notifications.json
+mongoimport -h 127.0.0.1 --port 3002 -d meteor -c users --file users.json
+

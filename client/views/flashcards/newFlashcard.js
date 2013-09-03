@@ -10,7 +10,7 @@ Template.flashcardForm.course = function() {
 
 Template.flashcardForm.lesson = function() {
     var _selectedCourse, _course;
-    _selectedCourse = Session.get("selectedCourse");
+    _selectedCourse = Session.get("selectedCourse") || Session.get("selectedCourseInForm");
     if (_selectedCourse) {
         _course = Courses.findOne({
             _id: _selectedCourse
@@ -75,14 +75,14 @@ Template.flashcardForm.events({
             }
         );
     },
-    "click #front": function(e, template) {
+    "click #newFront": function(e, template) {
         console.log("e", e);
         console.log("this", this);
         if ((e.target.className && e.target.className !== "editableImage")) {
             $(".flashcardFront").focus();
         }
     },
-    "click #back": function(e, template) {
+    "click #newBack": function(e, template) {
         if ((e.target.className && e.target.className !== "editableImage"))  {
             $(".flashcardBack").focus();
         }
@@ -132,7 +132,7 @@ Template.collectionGroup.selectIfNewOrMain = function() {
 };
 
 Template.flashcardForm.selectIfSelectedCourse = function() {
-    var _selectedCourse = Session.get("selectedCourse");
+    var _selectedCourse = Session.get("selectedCourse") || Session.get("selectedCourseInForm");
     if (_selectedCourse) {
         return this._id === _selectedCourse ? "selected" : "";
     }
@@ -150,8 +150,10 @@ Template.flashcardForm.selectIfSelectedLesson = function() {
 
 Template.collectionGroup.rendered = function() {
     $("#collection.select2").select2();
-    _selectedId = $("#collection option:selected").val();
+    var _selectedId = $("#collection option:selected").val();
     $("#collection").select2("val", _selectedId);
+
+
 
 }
 
@@ -184,7 +186,7 @@ addFlashcard = function(e) {
 
 validateNewFlashcard = function() {
 
-    invalids = [];
+    var invalids = [];
     if (!Session.get("newFrontPicture")) {
         Meteor.validations.checkIfEmptyDiv(".flashcardFront");
     }
@@ -192,12 +194,12 @@ validateNewFlashcard = function() {
 };
 
 createNewFlashcard = function() {
-    _isPublic = ($("#public").val() === "true") ? true : false;
+    var _isPublic = ($("#public").val() === "true") ? true : false;
     var _newFlashcard = {
         "public": _isPublic,
-        "front": $("#front .flashcardFront").text(),
+        "front": $("#newFront .flashcardFront").text(),
         "frontPicture": Session.get("newFrontPicture") || null,
-        "back": $("#back .flashcardBack").text(),
+        "back": $("#newBack .flashcardBack").text(),
         "backPicture": Session.get("newBackPicture") || null,
         "course": $("#course").val(),
         "lesson": $("#lesson").val(),
@@ -220,14 +222,31 @@ Template.publicGroup.rendered = function() {
 };
 
 
+var _renderer;
 Template.flashcardForm.rendered = function() {
+    window.clearTimeout(_renderer);
+    _renderer = window.setTimeout(function() {
+    $("#lesson.select2").select2();
+    $("#course.select2").select2().on("change", function(e) {
+        Session.set("selectedCourseInForm", e.val);
+    });
     if (Session.get("selectedCourse")) {
         $("#coursesControlGroup").hide();
     }
+    }, 100);
+
+//    var _selectedCourseId = $("#lesson option:selected").val();
+//    var _selectedCourseId = $("#course").select2("val");
+//    var _selectedLessonId
+////    var _selectedLessonId = $("#course option:selected").val();
+//    $("#course").select2("val", _selectedCourseId);
+//    $("#lesson").select2("val", _selectedLessonId);
 };
 
 Template.flashcardForm.destroyed = function() {
     Session.set("newBackPicture", "");
     Session.set("newFrontPicture", "");
     Session.set("newCollectionName", "");
+    Session.set("selectedCourseInForm", "");
+    Session.set("selectedLesson", "");
 };

@@ -3,6 +3,17 @@
 //})
 
 
+Template.flashcardRow.userName = function () {
+    var _userId = this.user;
+    console.log("_userId in userName", _userId);
+    var _user = Meteor.users.findOne(_userId);
+    console.log("_user", _user);
+    if (_user && _user.identity) {
+        return _user.identity.nick;
+    }
+
+}
+
 Template.flashcardRow.flashcardFront = function() {
 //    var _currentItem = Items.findOne({_id: Session.get("currentItemId")});
     var front = stripHtml(this.front);

@@ -1,11 +1,19 @@
 var itemsHandle;
 var _opts = {};
 Template.myCollectionsFlashcards.created = function () {
-    _opts = {
-        collectionId: Session.get("selectedCollection")
-    };
+    var _selectedCollection = Session.get("selectedCollection");
+    if (_selectedCollection) {
+        _opts = {
+            collectionId: _selectedCollection
+        };
+    }
 
     itemsHandle = Meteor.subscribeWithPagination('paginatedItems', _opts, 10);
+}
+
+Template.withSelectedItems.isCollectionSelected = function() {
+    var _collectionId = Session.get("selectedCollection");
+    return _collectionId;
 }
 
 Template.myCollectionsFlashcards.item = function () {
@@ -16,6 +24,10 @@ Template.myCollectionsFlashcards.item = function () {
     if (_collectionId) {
         _items = Items.find({collection: _collectionId}, {limit: itemsHandle.limit()});
         console.log("we are inside, so colelctionID", itemsHandle.limit());
+        return _items;
+    }
+    else {
+        _items = Items.find({}, {limit: itemsHandle.limit()});
         return _items;
     }
     return [];
@@ -44,6 +56,7 @@ Template.myCollectionsFlashcards.events({
 
 Template.myCollectionsFlashcards.collectionName = function () {
     var _collectionId = Session.get("selectedCollection");
+    if (_collectionId) {
     var _user = Meteor.user();
 
     if (_user) {
@@ -52,6 +65,10 @@ Template.myCollectionsFlashcards.collectionName = function () {
         if (_collectionIndex > -1 && _user.collections && _user.collections[_collectionIndex]) {
             return _user.collections[_collectionIndex].name;
         }
+    }
+    }
+    else {
+        return "My Flashcards";
     }
     return "";
 }
@@ -66,6 +83,7 @@ Template.withSelectedItems.flashcardsSelectedLength = function () {
 
 Template.myCollectionsFlashcards.destroyed = function () {
     Session.set("selectedFlashcards", []);
+    Session.set("selectedCollection", "");
 }
 
 Template.withSelectedItems.events({
@@ -130,6 +148,9 @@ Template.withSelectedItems.events({
 //            front: "asdfasdf"
 //        };
 //        itemsHandle = Meteor.subscribeWithPagination('paginatedItems', _opts2, 10);
+    },
+    "click .search-pane": function(e) {
+        $("#availableItemsSearch").focus();
     }
 })
 

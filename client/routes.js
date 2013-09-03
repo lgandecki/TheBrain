@@ -4,6 +4,12 @@ Meteor.Router.add({
 
     '/newFlashcard': "newFlashcard",
 
+    '/myFlashcards': function() {
+        Session.set("selectedCollection", "");
+        return "myCollectionsFlashcards"
+    },
+
+
     '/availableFlashcards': "availableFlashcards",
 
     '/repeat': "repeat",

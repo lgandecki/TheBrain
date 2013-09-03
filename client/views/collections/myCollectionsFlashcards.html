@@ -58,31 +58,31 @@
         </div>
         <div class="withSelectedButtons">
             <div class="row-fluid">
-                <div class="span3">
-                    <button class=" btn btn-primary btn-primary-main btn-changeCollection btn-block"><i class="icon-hand-up"></i> Change collection
+                {{#if isCollectionSelected}}<div class="span3" >
+                    <button class=" btn btn-primary btn-primary-main btn-changeCollection btn-block"><i class="icon-hand-right"></i> Change collection
+                    </button>
+                </div>{{/if}}
+                <div {{#if isCollectionSelected}}class="span3"{{else}}class="span4"{{/if}}>
+                    <button class=" btn btn-primary btn-primary-main btn-deactivateItems btn-block"><i class="icon-hand-right"></i> Deactivate
                     </button>
                 </div>
-                <div class="span3">
-                    <button class=" btn btn-primary btn-primary-main btn-deactivateItems btn-block"><i class="icon-hand-up"></i> Deactivate
+                <div {{#if isCollectionSelected}}class="span3"{{else}}class="span4"{{/if}}>
+                    <button class=" btn btn-primary btn-primary-main btn-extraRepeatItems btn-block"><i class="icon-hand-right"></i> Extra repeat session
                     </button>
                 </div>
-                <div class="span3">
-                    <button class=" btn btn-primary btn-primary-main btn-extraRepeatItems btn-block"><i class="icon-hand-up"></i> Extra repeat session
-                    </button>
-                </div>
-                <div class="span3">
-                    <button class=" btn btn-primary btn-primary-main btn-addItemsToCourse btn-block"><i class="icon-hand-up"></i> Add to course
+                <div {{#if isCollectionSelected}}class="span3"{{else}}class="span4"{{/if}}>
+                    <button class=" btn btn-primary btn-primary-main btn-addItemsToCourse btn-block"><i class="icon-hand-right"></i> Add to course
                     </button>
                 </div>
             </div>
             <br/>
             <div class="row-fluid">
                 <div class="span6">
-                    <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block"><i class="icon-hand-up"></i> Select All
+                    <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block"><i class="icon-hand-right"></i> Select All
                     </button>
                 </div>
                 <div class="span6">
-                    <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block"><i class="icon-hand-up"></i> Deselect All
+                    <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block"><i class="icon-hand-right"></i> Deselect All
                     </button>
                 </div>
             </div>

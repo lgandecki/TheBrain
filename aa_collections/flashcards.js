@@ -72,16 +72,14 @@ Meteor.methods({
             Items.insert(item);
         }
 
+
         if (flashcard.lessons) {
-
-            _course = Courses.findOne(flashcard.lessons[0].course);
-
-            var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), flashcard.lessons[0].lesson);
-            var modifier = {$addToSet: {}};
-            modifier.$addToSet["lessons." + _lessonIndex + ".flashcards"] = flashcardId;
-
-
-            Courses.update(_course._id, modifier);
+            var _addToLessonOpts = {
+                "course": flashcardAttributes.course,
+                "lesson": flashcardAttributes.lesson,
+                "flashcardId": flashcard._id
+            }
+            addFlashcardToLesson(_addToLessonOpts);
         }
 
 
@@ -175,7 +173,7 @@ Meteor.methods({
                     collectionId = Meteor.call("newCollection", collection);
                 }
             }
-            else if(opts.collectionId) {
+            else if (opts.collectionId) {
                 collectionId = opts.collectionId;
             }
             else {
@@ -185,8 +183,12 @@ Meteor.methods({
             console.log("flashcardsIds", opts.flashcardsIds);
             opts.flashcardsIds.forEach(function (flashcardId) {
                 console.log("flashcardId", flashcardId);
-                var _flashcard = Flashcards.findOne({_id: flashcardId});
-                Items.insert(returnItem(collectionId, _flashcard));
+                var _existingItem = Items.findOne({user: user._id, flashcard: flashcardId});
+                if (!_existingItem) {
+                    var _flashcard = Flashcards.findOne({_id: flashcardId});
+
+                    Items.insert(returnItem(collectionId, _flashcard));
+                }
                 // _items.push(returnItem(collectionId, flashcardId));
             })
 
@@ -354,6 +356,34 @@ Meteor.methods({
             flashcardId: _flashcard._id
         };
 //        flashcardCommentDownVoteNotification(_opts);
+    },
+    addFlashcardsToCourse: function (opts) {
+        var user = Meteor.user(), _course, _flashcard;
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to add flashcard to course");
+        _course = Courses.findOne({_id: opts.courseId});
+
+        if (!_course) {
+            throw new Meteor.Error(401, "You need to add flashcards from existing course");
+        }
+
+
+        opts.flashcardsIds.forEach(function (flashcardId) {
+            console.log("flashcardId", flashcardId);
+            var _flashcard = Flashcards.findOne({_id: flashcardId});
+
+            if (_flashcard) {
+                var _addToLessonOpts = {
+                    "course": opts.courseId,
+                    "lesson": opts.lessonId,
+                    "flashcardId": _flashcard._id
+                }
+                addFlashcardToLesson(_addToLessonOpts);
+                addLessonToFlashcard(_addToLessonOpts);
+            }
+
+        })
+
     }
 });
 
@@ -381,4 +411,28 @@ returnItem = function (collectionId, flashcard) {
         "flashcardVersionSeen": 1
     }
     return item;
+}
+
+var addFlashcardToLesson = function (opts) {
+    var _course = Courses.findOne(opts.course);
+
+    var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), opts.lesson);
+    var modifier = {$addToSet: {}};
+    modifier.$addToSet["lessons." + _lessonIndex + ".flashcards"] = opts.flashcardId;
+
+
+    Courses.update(_course._id, modifier);
+
+}
+
+var addLessonToFlashcard = function (opts) {
+    var _newLesson =
+        {
+            "course": opts.course,
+            "lesson": opts.lesson
+        };
+
+    Flashcards.update({_id: opts.flashcardId}, {$addToSet: {lessons: _newLesson}});
+
+
 }

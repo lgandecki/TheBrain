@@ -4,6 +4,19 @@ Notifications.allow({
 	update: ownsDocument
 });
 
+
+Meteor.methods({
+    clearNotifications: function() {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to clear notifications");
+
+        if (Meteor.isServer) {
+            Notifications.update({user: user._id}, {$set: {read: true}}, {multi: true});
+        }
+    }
+})
+
 courseEnrollmentNotification = function(opts) {
 	_course = Courses.findOne({
 		_id: opts.courseId,
@@ -184,3 +197,28 @@ commentDownVoteNotification = function(opts) {
 			});
 	}
 }
+
+
+courseNewsNotification = function(opts) {
+    _course = Courses.findOne({
+        _id: opts.courseId, admins: opts.user
+    });
+    var _user = Meteor.users.findOne({
+        _id: opts.user
+    });
+    if (_course && _user) {
+        _course.students.forEach(function(student) {
+            Notifications.insert({
+                user: student,
+                eventUserId: _user._id,
+                courseId: _course._id,
+                courseName: _course.name,
+                message: "Added news to " + _course.name + " course",
+                type: "courseNews",
+                created: Meteor.moment.fullNow(),
+                read: false
+            })
+        })
+    }
+}
+

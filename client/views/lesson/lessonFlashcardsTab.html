@@ -75,42 +75,44 @@
         <div class="withSelectedButtons">
 
             <div class="row-fluid">
-                    <div class="span6">
-                        <button class=" btn btn-primary btn-primary-main btn-addAll btn-block center"><i class="icon-hand-down"></i> Learn all teacher's
+                    <div class="span4">
+                        <button class=" btn btn-primary btn-primary-main btn-addAll btn-block "><i class="icon-briefcase"></i> Learn all teacher's
                             flashcards ( {{teachersFlashcardsCount}} )
                         </button>
                     </div>
-                    <div class="span6">
-                        <button class=" btn btn-primary btn-primary-main btn-{{#if isShowStudentsFlashcards}}hide{{else}}show{{/if}}StudentsFlashcards btn-block center"><i class="icon-group"></i> {{#if isShowStudentsFlashcards}} Hide {{else}} Show {{/if}} students
+                    <div class="span4">
+                        <button class=" btn btn-primary btn-primary-main btn-{{#if isShowStudentsFlashcards}}hide{{else}}show{{/if}}StudentsFlashcards btn-block "><i class="icon-group"></i> {{#if isShowStudentsFlashcards}} Hide {{else}} Show {{/if}} students
                             flashcards ( {{studentsFlashcardsCount}} )
                         </button>
                     </div>
+                <div class="span4">
+                    <button class=" btn btn-primary btn-primary-main btn-addFlashcardToLesson btn-block "><i class="icon-edit"></i> Add Flashcard
+                    </button>
+                </div>
 
 
             </div>
             <br/>
 
             <div class="row-fluid">
-                <div class="span4">
-                    <button class=" btn btn-primary btn-primary-main btn-addFlashcardToLesson btn-block center"><i class="icon-edit"></i> Add Flashcard
+
+                <div class="span6">
+                    <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block "><i class="icon-hand-right"></i> Select All
                     </button>
                 </div>
-                <div class="span4">
-                    <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block center"><i class="icon-hand-up"></i> Select All
-                    </button>
-                </div>
-                <div class="span4">
-                    <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block center"><i class="icon-hand-up"></i> Deselect All
+                <div class="span6">
+                    <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block "><i class="icon-hand-right"></i> Deselect All
                     </button>
                 </div>
             </div>
             <div class="row-fluid">
+                <br/>
                 <span class="label label-info withSelectedLabel">With {{#isolate}}{{flashcardsSelectedLength}}{{/isolate}} selected:</span>
 
             </div>
             <div class="row-fluid">
-                <div class="span6">
-                    <button class=" btn btn-primary btn-primary-main btn-addSelectedToCollection btn-block center"><i class="icon-hand-up"></i> Learn
+                <div class="span12">
+                    <button class=" btn btn-primary btn-primary-main btn-addSelectedToCollection btn-block "><i class="icon-hand-right"></i> Learn
                     </button>
                 </div>
             </div>

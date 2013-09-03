@@ -1,5 +1,5 @@
 Template.updatedFlashcardVersions.flashcardVersion = function () {
-    var _item = Items.findOne({_id: Session.get("currentItemId")});
+    var _item = Items.findOne({user: Meteor.userId(), _id: Session.get("currentItemId")});
     var _flashcard = Flashcards.findOne({_id: Session.get("currentFlashcardId")});
     if (_item && _flashcard && _item.flashcardVersionSeen < _flashcard.version) {
         var _updatedVersions = [];
@@ -9,6 +9,7 @@ Template.updatedFlashcardVersions.flashcardVersion = function () {
             });
 
             var _newestVersion = {
+                updatedBy: _flashcard.updatedBy,
                 front: _flashcard.front,
                 frontPicture: _flashcard.frontPicture,
                 back: _flashcard.back,
@@ -131,6 +132,17 @@ Template.updatedFlashcardVersions.flashcardBack = function () {
 
 }
 
+Template.updatedFlashcardVersions.userName = function () {
+    var _userId = this.updatedBy;
+    console.log("_userId in userName", _userId);
+    var _user = Meteor.users.findOne(_userId);
+    console.log("_user", _user);
+    if (_user && _user.identity) {
+        return _user.identity.nick;
+    }
+    return _userId;
+
+}
 
 Template.updatedFlashcardVersions.events({
     "click .btn-useThisNewVersion": function () {

@@ -45,6 +45,14 @@ Template.courseRow.isUpVoted = function() {
 	return "badge-upVote clickable badge-success";
 }
 
+Template.courseRow.flashcardsCount = function() {
+    var _flashcards = 0;
+    this.lessons.forEach(function(lesson) {
+        _flashcards += lesson.flashcards.length;
+    });
+    return _flashcards;
+}
+
 voted = function(votes) {
 	return ($.inArray(Meteor.userId(), votes) > -1)
 }

@@ -1,3 +1,3 @@
-Meteor.publish("courseEvents", function(id) {
-    return CourseEvents.find();
-});
+//Meteor.publish("courseEvents", function(id) {
+//    return CourseEvents.find();
+//});

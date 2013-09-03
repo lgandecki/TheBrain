@@ -3,6 +3,7 @@ Meteor.startup(function(){
 //        {collectionName: "Flashcards", logMethod: "json"},
 //        {collectionName: "Courses", logMethod: "json"},
 //        {collectionName: "Items", logMethod: "json"},
+//        {collectionName: "Notifications", logMethod: "json"},
 //        {collectionName: "FlashcardVotes", logMethod: "json"},
 //        {collectionName: "FlashcardCommentVotes", logMethod: "json"},
 //        {collectionName: "CourseVotes", logMethod: "json"},
@@ -12,7 +13,7 @@ Meteor.startup(function(){
     ]
 
     importCategories(bootstrapCategories);
-    importUsers();
+//    importUsers();
     bootstrapData = null;
 });
 

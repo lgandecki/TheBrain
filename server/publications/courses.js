@@ -75,6 +75,19 @@ Meteor.publish("selectedCourse", function(id) {
                     }
                 }
             },
+            {
+                key: "user",
+                nestedArray: "events",
+                collection: Meteor.users,
+                options: {
+                    fields: {
+                        'identity': 1,
+                        'points': 1,
+                        'achievements': 1,
+                        'profile': 1
+                    }
+                }
+            }
 //            {
 //                key: ""
 //            }

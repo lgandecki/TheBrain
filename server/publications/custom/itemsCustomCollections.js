@@ -217,7 +217,7 @@ Meteor.publish("calendarItemsToRepeat", function (month, year) {
         added: function (doc, idx) {
             console.log("added", idx);
             _nextRepetition = idx.nextRepetition;
-            var _date = "" + _nextRepetition.toISOString();
+            var _date = "" + _nextRepetition.toDateString();
 //            _date = 04;
             if (count[_date]) {
                 count[_date].title++;
@@ -225,7 +225,7 @@ Meteor.publish("calendarItemsToRepeat", function (month, year) {
             }
             else {
                 count[_date] = {};
-                count[_date].start = _nextRepetition.toISOString();
+                count[_date].start = _nextRepetition.toDateString();
                 count[_date].title = 1;
                 count[_date].title = "" + count[_date].title
             }
@@ -234,7 +234,7 @@ Meteor.publish("calendarItemsToRepeat", function (month, year) {
         },
         removed: function (doc, idx) {
             _nextRepetition = idx.nextRepetition;
-            var _date = "" + _nextRepetition.toISOString();
+            var _date = "" + _nextRepetition.toDateString();
             if (count[_date].title >= 1) {
                 count[_date]--;
                 count[_date].title = "" + count[_date].title

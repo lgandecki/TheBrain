@@ -1,0 +1,6 @@
+mongoexport -h 127.0.0.1 --port 3002 -d meteor -c items > items.json
+mongoexport -h 127.0.0.1 --port 3002 -d meteor -c flashcards > flashcards.json
+mongoexport -h 127.0.0.1 --port 3002 -d meteor -c courses > courses.json
+mongoexport -h 127.0.0.1 --port 3002 -d meteor -c notifications > notifications.json
+mongoexport -h 127.0.0.1 --port 3002 -d meteor -c users > users.json
+
