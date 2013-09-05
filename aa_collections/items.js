@@ -51,10 +51,10 @@ Meteor.methods({
         if (!_flashcard)
             throw new Meteor.Error(401, "Your update has to be based on existing flashcard");
 
+//        var _selectedFlashcard = returnSelectedFlashcardVersion(_flashcard, opts.selectedVersion);
         var _selectedFlashcard;
-
         if (_flashcard.version === opts.selectedVersion) {
-           _selectedFlashcard = _flashcard;
+            _selectedFlashcard = _flashcard;
         }
         else {
             _selectedFlashcard = $.grep(_flashcard.previousVersions, function (previousVersion) {
@@ -73,7 +73,7 @@ Meteor.methods({
         Meteor.call("updateItem", _opts);
 
     },
-    extraRepeatItems: function(opts) {
+    extraRepeatItems: function (opts) {
         var user = Meteor.user();
         if (!user)
             throw new Meteor.Error(401, "You need to login to update flashcards");
@@ -82,10 +82,10 @@ Meteor.methods({
             throw new Meteor.Error(401, "You have to specify the list of Flashcards");
         }
 
-        Items.update({_id: { $in : opts.items }, user: user._id}, {$set: { extraRepeatToday: true}}, {multi: true});
+        Items.update({_id: { $in: opts.items }, user: user._id}, {$set: { extraRepeatToday: true}}, {multi: true});
 
     },
-    changeItemsCollection: function(opts) {
+    changeItemsCollection: function (opts) {
         var user = Meteor.user();
         if (!user)
             throw new Meteor.Error(401, "You need to login to update flashcards");
@@ -101,3 +101,16 @@ Meteor.methods({
         Items.update({_id: {$in: opts.items}, user: user._id}, {$set: {collection: opts.newCollectionId}}, {multi: true});
     }
 })
+//
+//function returnSelectedFlashcardVersion(flashcard, selectedVersion) {
+//    var _selectedFlashcard;
+//    if (flashcard.version === selectedVersion) {
+//        _selectedFlashcard = _flashcard;
+//    }
+//    else {
+//        _selectedFlashcard = $.grep(flashcard.previousVersions, function (previousVersion) {
+//            return previousVersion.version === selectedVersion;
+//        });
+//    }
+//    return _selectedFlashcard
+//}

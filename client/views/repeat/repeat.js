@@ -171,6 +171,11 @@ Template.repeat.rendered = function () {
 
             _firstRender = false;
             Session.set("itemsToRepeat", "");
+
+            $(".evaluation.popoverUp").popover({trigger: 'hover', animation: true, placement: 'top',  delay: { show: 750, hide: 100 }});
+            $(".evaluation.popoverLeft").popover({trigger: 'hover', animation: true, placement: 'left',  delay: { show: 750, hide: 100 }});
+            $(".evaluation.popoverRight").popover({trigger: 'hover', animation: true, placement: 'right',  delay: { show: 750, hide: 100 }});
+
             // var _itemsToLearn = {};
             // myCollections = Meteor.user().collections || [];
             // myCollections.forEach(function(collection) {
@@ -760,7 +765,8 @@ setNextRepetition = function (evaluation, _item) {
                 _item.timesRepeated = 0;
             }
             else {
-                if (evaluation === 4) {
+                if (evaluation === 3) {
+                    incrementExtraRepetitionsTotal();
                     _item.extraRepeatToday = true;
                 }
                 _item.timesRepeated++;

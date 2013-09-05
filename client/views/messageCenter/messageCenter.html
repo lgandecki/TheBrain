@@ -1,0 +1,109 @@
+<template name="messageCenter">
+
+    <div class="box box-bordered box-color">
+        <div class="box-title">
+            <h3>
+                <i class="icon-envelope"></i>
+                Message Center
+            </h3>
+        </div>
+        <div class="box-content nopadding">
+            <ul class="tabs tabs-inline tabs-left">
+                <li class="active">
+                    <a href="#inbox" data-toggle="tab" class="tabLink tabbable"><i class="icon-inbox"></i> Inbox </a>
+                </li>
+                <li>
+                    <a href="#newConversation" data-toggle="tab" class="tabLink tabbable"><i class="icon-share-alt"></i> New conversation</a>
+                </li>
+            </ul>
+            <div class="tab-content tab-content-inline">
+                <div class="tab-pane active" id="inbox">
+                    <div class="highlight-toolbar">
+
+                    </div>
+                    <table class="table table-hover table-nomargin table-mail">
+                        <thead>
+                        <tr>
+                            <th>Sender</th>
+                            <th>Message</th>
+                            <th class="table-date hidden-480">Date</th>
+                            <th class="hidden-480">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each conversation}}
+                            {{> conversationRow}}
+                        {{/each}}
+
+                        </tbody>
+                    </table>
+                    <div style="text-align: center">
+                        {{#if conversationsReady}}
+                            {{#unless allConversationsLoaded}}
+                                <button class="btn btn-primary btn-primary-main btn-loadMore"><i class="icon-hand-up"> Load more</i></button>
+
+                            {{/unless}}
+                        {{else}}
+                            <div style="margin-bottom: 10px;">{{> spinner}}</div>
+                        {{/if}}
+                    </div>
+                </div>
+                {{#isolate}}{{>newConversationTab}}{{/isolate}}
+            </div>
+        </div>
+    </div>
+
+</template>
+
+<template name="conversationRow">
+    <tr class="conversationRow">
+       <td class="table-fixed-medium">
+            {{userName}}
+        </td>
+        <td>
+            {{message}}
+        </td>
+
+        <td class="table-date hidden-480">
+            {{sent}}
+        </td>
+        <td class="hidden-480">
+            <button class="btn btn-primary btn-primary-main btn-enterConversation btn-block" data-id="{{otherUserId}}"><i
+                    class="icon-hand-left"></i>
+            </button>
+        </td>
+    </tr>
+</template>
+
+<template name="newConversationTab">
+    <div class="tab-pane fade tabbablePadding" id="newConversation">
+        {{#isolate}}{{>newConversation}}{{/isolate}}
+</div>
+</template>
+
+<template name="newConversation">
+    <div class="row-fluid">
+            <div class="row-fluid searchPanel">
+                <div class="span8 center">
+                    <form action="" method="GET" class="search-form">
+                        <div class="search-pane">
+                            <input type="text" name="search" id="usersSearch" placeholder="Search here...">
+                            <button type="submit"><i class="icon-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+    <div>
+        {{#each user}}
+            {{>userRow}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="userRow">
+<div class="row-fluid addBottomLine userRow">
+    <h4>{{userName}}</h4>
+    <img src="{{userPicture}}"/>
+</div>
+</template>

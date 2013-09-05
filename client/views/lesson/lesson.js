@@ -247,6 +247,7 @@ _getFlashcards = function (addTeachersFlashcards, optionsQuery) {
                 _query.user = {$in: _optionsQuery.adminIds};
 //                _optionsQuery.addTeachersFlashcards = false;
             }
+            console.log("query ", _query);
             return Flashcards.find(_query);
         }
     }
@@ -279,6 +280,22 @@ Template.flashcardRow.downVotes = function () {
 
 
 Template.flashcardRow.events({
+    "click .badge-upVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: this._id
+        }
+        Meteor.call("flashcardVoteUp", _opts);
+    },
+    "click .badge-downVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: this._id
+        }
+        Meteor.call("flashcardVoteDown", _opts);
+    },
     'click .btn-addToCollectionFlashcard': function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();

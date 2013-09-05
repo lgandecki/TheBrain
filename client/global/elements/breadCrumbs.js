@@ -99,12 +99,38 @@ Template.breadCrumbs.link = function () {
                 path: _currentRoute
             });
             break;
+        case '/messageCenter':
+            _breadCrumbs.push(_returnMessageCenterPathBread())
+            break;
+        case '/conversation':
+            _breadCrumbs.push(_returnMessageCenterPathBread())
+            _breadCrumbs.push(_returnConversationPathBread())
+            break;
 
 
     }
     console.log("_breadCrumbs", _breadCrumbs);
     return _breadCrumbs;
 
+}
+
+var _returnMessageCenterPathBread = function() {
+    var _breadCrumb = {
+        name: "Message Center",
+        path: "/messageCenter"
+    };
+
+    return _breadCrumb;
+
+}
+
+var _returnConversationPathBread = function() {
+    var _userName = Meteor.userDetails.getName(Session.get("otherUser"));
+    var _breadCrumb = {
+        name: "Conversation with " + _userName,
+        path: window.location.pathname
+    }
+    return _breadCrumb;
 }
 
 var _returnCoursePathBread = function () {

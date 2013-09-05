@@ -15,7 +15,11 @@
 
 <div id="footer">
     <p class="hidden-phone">
-        2013 TheBrain by Łukasz "gozda" Gandecki <span class="font-grey-4">|</span> <a href="#">Contact</a> <span class="font-grey-4">|</span> <a href="#">About</a>
+        2013 TheBrain by Łukasz "gozda" Gandecki <span class="font-grey-4">|</span>
+        {{#if isLoggedIn}}<a href="/conversation/adminUser">Bug Report? Feature Request? Contact?</a>
+        {{else}}
+            Contact me at lgandecki AT css.edu
+        {{/if}}
     </p>
     <p class="visible-phone">
         TheBrain by Łukasz "gozda" Gandecki

@@ -5,6 +5,63 @@
 //});
 
 Meteor.publish("currentFlashcard", function (id) {
+
+    _query = {
+        _id: id,
+    };
+//    if (opts.onlyAdmin) {
+//        _query.user = {
+//            $in: opts.adminIds
+//        };
+//    }
+    return Meteor.publishWithRelations({
+        handle: this,
+        collection: Flashcards,
+        filter: _query,
+//        options: {
+//            limit: limit,
+//        },
+        mappings: [
+            {
+                key: 'user',
+                collection: Meteor.users,
+                options: {
+                    fields: {
+                        'identity': 1,
+                        'points': 1,
+                        'achievements': 1,
+                        'profile': 1
+                    }
+                }
+            },
+            {
+                key: 'updatedBy',
+                collection: Meteor.users,
+                options: {
+                    fields: {
+                        'identity': 1,
+                        'points': 1,
+                        'achievements': 1,
+                        'profile': 1
+                    }
+                }
+            },
+            {
+                key: "updatedBy",
+                nestedArray: "previousVersions",
+                collection: Meteor.users,
+                options: {
+                    fields: {
+                        'identity': 1,
+                        'points': 1,
+                        'achievements': 1,
+                        'profile': 1
+                    }
+                }
+            },
+        ]
+    })
+
     return id && Flashcards.find({
         _id: id
     })
@@ -15,8 +72,8 @@ Meteor.publish("paginatedFlashcards", function (opts, limit) {
     if (opts.search) {
 //        _query = {$or}
         _query.$or = [
-            {front: new RegExp(opts.search)},
-            {back: new RegExp(opts.search)}
+            {front: new RegExp(opts.search, "i")},
+            {back: new RegExp(opts.search, "i")}
         ]
     }
     console.log("_query", _query);

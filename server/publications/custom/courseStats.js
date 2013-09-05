@@ -17,8 +17,8 @@ Meteor.publish("courseStats", function (opts, limit) {
     if (opts.search) {
 //        _query = {$or}
         _query.$or = [
-            {front: new RegExp(opts.search)},
-            {back: new RegExp(opts.search)}
+            {front: new RegExp(opts.search, "i")},
+            {back: new RegExp(opts.search, "i")}
         ]
     }
     console.log("_query", _query);

@@ -22,9 +22,9 @@ if (Meteor.user()) {
         var _thirtyMinutesAgo = new Date(_now.valueOf() - 60000 * 30);
         Notifications.find({
             user: Meteor.userId(),
-            read: false,
-            created: {
-                $gte: _thirtyMinutesAgo
+            read: false
+            ,created: {
+                $gte: _thirtyMinutesAgo.valueOf()
             }
         }).observe({
                 added: function (item) {

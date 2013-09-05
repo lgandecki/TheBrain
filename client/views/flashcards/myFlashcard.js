@@ -85,11 +85,29 @@ Template.myFlashcard.flashcardSelected = function () {
 }
 
 Template.myFlashcard.events({
+    "click .badge-upVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: this.flashcard
+        }
+        Meteor.call("flashcardVoteUp", _opts);
+    },
+    "click .badge-downVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: this.flashcard
+        }
+        console.log("downVotes opts", _opts);
+        Meteor.call("flashcardVoteDown", _opts);
+    },
     "click .clickable": function (e) {
         console.log("are we seeing this clickable?");
         e.preventDefault();
         e.stopPropagation();
     },
+
     "click .btn-editFlashcard": function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();

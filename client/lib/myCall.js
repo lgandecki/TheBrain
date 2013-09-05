@@ -15,15 +15,15 @@ var _myCall = function (opts) {
         console.error("You have to specify error title");
         _error = true;
     }
-    if (!opts.successTitle) {
-        console.error("You have to specify success title");
-        _error = true;
-    }
+//    if (!opts.successTitle) {
+//        console.error("You have to specify success title");
+//        _error = true;
+//    }
     if (!_error) {
         Meteor.call(opts.function, opts.arguments, function (error) {
             if (error) {
                 Meteor.popUp.error(opts.errorTitle, error.reason);
-            } else {
+            } else if (opts.successTitle) {
                 Meteor.popUp.success(opts.successTitle, opts.successMessage);
             }
         })

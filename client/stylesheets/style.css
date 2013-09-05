@@ -760,3 +760,16 @@ li.active > a {
     left: -20px;
     top: -10px;
     }
+
+.tabbablePadding {
+    padding: 10px;
+}
+
+.userRow {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.userRow:hover {
+    background: #ccc;
+}

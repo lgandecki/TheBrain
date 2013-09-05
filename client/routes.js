@@ -81,6 +81,15 @@ Meteor.Router.add({
 
     "/calendar": function () {
         return "calendar";
+    },
+
+    "/messageCenter": function() {
+        return "messageCenter";
+    },
+
+    "/conversation/:otherUser": function(otherUser) {
+        Session.set("otherUser", otherUser);
+        return "conversation";
     }
 
 
@@ -166,6 +175,13 @@ Meteor.Router.filters({
 
 
             makeModalsScrollable();
+
+            setTimeout(function() {
+                if (!$(".transition").is(":visible")) {
+                    console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
+                    $(".transition").show().css("left", 0);
+                }
+            }, 300);
 
         }, 50);
 

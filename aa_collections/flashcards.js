@@ -35,14 +35,14 @@ Meteor.methods({
         var flashcard = _.extend(_.pick(flashcardAttributes, "public", "front",
             "back", "source", "frontPicture", "backPicture"), {
             user: user._id,
+            updatedBy: user._id,
             "previousVersions": [],
             "upVotes": [],
             "downVotes": [],
             "comments": [],
             "version": 1,
             "reason": null,
-            "score": 0,
-            "updatedBy": null
+            "score": 0
         });
 
         if (flashcardAttributes.course) {
@@ -108,6 +108,7 @@ Meteor.methods({
             backPicture: _flashcard.backPicture,
             version: _flashcard.version,
             reason: _flashcard.reason,
+            updatedBy: _flashcard.updatedBy,
             upVotes: _flashcard.upVotes,
             downVotes: _flashcard.downVotes,
             score: _flashcard.score
@@ -266,7 +267,77 @@ Meteor.methods({
         };
 //        flashcardReplyNotification(_opts2);
     },
-    flashcardCommentVoteUp: function (opts) {
+    flashcardVoteUp: function (opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to vote on comments");
+
+        var _flashcard = Flashcards.findOne(opts.flashcardId);
+        if (!_flashcard)
+            throw new Meteor.Error(401, "You need to vote on existing flashcard");
+
+        Flashcards.update({
+            _id: _flashcard._id,
+            downVotes: user._id
+        }, {
+            $pull: {
+                downVotes: user._id
+            },
+            $inc: {
+                score: 1
+            }
+        });
+        Flashcards.update({
+            _id: _flashcard._id,
+            upVotes: {
+                $ne: user._id
+            }
+        }, {
+            $addToSet: {
+                upVotes: user._id
+            },
+            $inc: {
+                score: 1
+            }
+        });
+
+
+    },
+    flashcardVoteDown: function (opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to vote on comments");
+
+        var _flashcard = Flashcards.findOne(opts.flashcardId);
+        if (!_flashcard)
+            throw new Meteor.Error(401, "You need to vote on existing flashcard");
+
+        Flashcards.update({
+            _id: _flashcard._id,
+            upVotes: user._id
+        }, {
+            $pull: {
+                upVotes: user._id
+            },
+            $inc: {
+                score: -1
+            }
+        });
+        Flashcards.update({
+            _id: _flashcard._id,
+            downVotes: {
+                $ne: user._id
+            }
+        }, {
+            $addToSet: {
+                downVotes: user._id
+            },
+            $inc: {
+                score: -1
+            }
+        });
+    },
+        flashcardCommentVoteUp: function (opts) {
         var user = Meteor.user();
         if (!user)
             throw new Meteor.Error(401, "You need to login to vote on comments");
@@ -356,6 +427,108 @@ Meteor.methods({
             flashcardId: _flashcard._id
         };
 //        flashcardCommentDownVoteNotification(_opts);
+    },
+    upVoteAFlashcardVersion: function (opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to vote on flashcard versions");
+
+        var _flashcard = Flashcards.findOne({_id: opts.flashcardId});
+        if (!_flashcard)
+            throw new Meteor.Error(401, "You need to vote on existing flashcard");
+
+        if (_flashcard.version === opts.selectedVersion) {
+            _selectedFlashcard = _flashcard;
+            var _opts = {
+                flashcardId: _flashcard._id
+            };
+            Meteor.call("flashcardVoteUp", _opts);
+        }
+        else {
+
+            var _versionIndex = _.indexOf(_.pluck(_flashcard.previousVersions, '_id'), opts.selectedVersion);
+
+            var modifier = {
+                $pull: {},
+                $inc: {}
+            };
+
+            _query = {_id: _flashcard._id};
+            _query["previousVersions." + _versionIndex + ".downVotes"] = user._id;
+
+            modifier.$pull["previousVersions." + _versionIndex + ".downVotes"] = user._id;
+            modifier.$inc["previousVersions." + _versionIndex + ".score"] = 1;
+
+            console.log("modified in up vote", modifier);
+            Flashcards.update(_query, modifier);
+
+            var modifier = {
+                $addToSet: {},
+                $inc: {}
+            };
+
+            _query = {_id: _flashcard._id};
+            _query["previousVersions." + _versionIndex + ".upVotes"] = { $ne: user._id};
+
+            modifier.$addToSet["previousVersions." + _versionIndex + ".upVotes"] = user._id;
+            modifier.$inc["previousVersions." + _versionIndex + ".score"] = 1;
+
+            Flashcards.update(_query, modifier);
+
+        }
+
+
+
+    },
+    downVoteAFlashcardVersion: function (opts) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to vote on flashcard versions");
+
+        var _flashcard = Flashcards.findOne({_id: opts.flashcardId});
+        if (_flashcard.version === opts.selectedVersion) {
+            _selectedFlashcard = _flashcard;
+            var _opts = {
+                flashcardId: _flashcard._id
+            };
+            Meteor.call("flashcardVoteDown", _opts);
+        }
+        else {
+
+            var _versionIndex = _.indexOf(_.pluck(_flashcard.previousVersions, '_id'), opts.selectedVersion);
+
+            var modifier = {
+                $pull: {},
+                $inc: {}
+            };
+
+            _query = {_id: _flashcard._id};
+            _query["previousVersions." + _versionIndex + ".upVotes"] = user._id;
+
+            modifier.$pull["previousVersions." + _versionIndex + ".upVotes"] = user._id;
+            modifier.$inc["previousVersions." + _versionIndex + ".score"] = -1;
+
+            console.log("modified in down vote", modifier);
+
+
+            Flashcards.update(_query, modifier);
+
+            var modifier = {
+                $addToSet: {},
+                $inc: {}
+            };
+
+            _query = {_id: _flashcard._id};
+            _query["previousVersions." + _versionIndex + ".downVotes"] = { $ne: user._id};
+
+            modifier.$addToSet["previousVersions." + _versionIndex + ".downVotes"] = user._id;
+            modifier.$inc["previousVersions." + _versionIndex + ".score"] = -1;
+
+            Flashcards.update(_query, modifier);
+
+        }
+
+
     },
     addFlashcardsToCourse: function (opts) {
         var user = Meteor.user(), _course, _flashcard;

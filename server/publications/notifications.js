@@ -3,9 +3,11 @@ Meteor.publish('unreadNotifications', function() {
         handle: this,
         collection: Notifications,
         filter: {user: this.userId, read: false},
-//        options: {
+        options: {
 //            limit: limit,
-//        },
+        sort: {created: -1}
+
+        },
         mappings: [
             {
                 key: 'eventUserId',
@@ -31,6 +33,7 @@ Meteor.publish('notifications', function(limit) {
         filter: {user: this.userId},
         options: {
             limit: limit,
+            sort: {created: -1}
         },
         mappings: [
             {

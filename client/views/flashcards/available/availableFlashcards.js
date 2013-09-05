@@ -11,8 +11,8 @@ Template.availableFlashcards.flashcard = function () {
     if (Session.get("optsSearch")) {
         var _opts = Session.get("optsSearch");
         _query.$or = [
-            {front: new RegExp(_opts)},
-            {back: new RegExp(_opts)}
+            {front: new RegExp(_opts, "i")},
+            {back: new RegExp(_opts, "i")}
         ]
     }
     _flashcards = Flashcards.find(_query, {limit: flashcardsHandle.limit()});

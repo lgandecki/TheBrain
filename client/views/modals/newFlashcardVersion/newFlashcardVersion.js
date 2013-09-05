@@ -17,7 +17,7 @@ Template.updatedFlashcardVersions.flashcardVersion = function () {
                 version: _flashcard.version,
                 reason: _flashcard.reason,
                 upVotes: _flashcard.upVotes.length,
-                downVotes: _flashcard.downVotes.length
+                downVotes: _flashcard.downVotes.length,
             }
             _updatedVersions.push(_newestVersion);
 
@@ -136,9 +136,8 @@ Template.updatedFlashcardVersions.userName = function () {
     var _userId = this.updatedBy;
     console.log("_userId in userName", _userId);
     var _user = Meteor.users.findOne(_userId);
-    console.log("_user", _user);
-    if (_user && _user.identity) {
-        return _user.identity.nick;
+    if (_user) {
+        return Meteor.userDetails.getName(_user._id);
     }
     return _userId;
 
@@ -159,5 +158,25 @@ Template.updatedFlashcardVersions.events({
                 $("#newFlashcardVersionModal").modal("hide");
             }
         });
+    },
+    "click .badge-upVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: Session.get("currentFlashcardId"),
+            selectedVersion: this.version
+        }
+        console.log("_opts in upVote", _opts);
+        Meteor.call("upVoteAFlashcardVersion", _opts);
+    },
+    "click .badge-downVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: Session.get("currentFlashcardId"),
+            selectedVersion: this.version
+        }
+        console.log("_opts in downVote", _opts);
+        Meteor.call("downVoteAFlashcardVersion", _opts);
     }
 })

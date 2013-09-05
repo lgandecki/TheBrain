@@ -222,3 +222,19 @@ courseNewsNotification = function(opts) {
     }
 }
 
+messageNotification = function(opts) {
+    var _from = Meteor.users.findOne({ _id: opts.from});
+    var _to = Meteor.users.findOne({_id: opts.to});
+
+    if (_from && _to) {
+        Notifications.insert({
+            user: _to._id,
+            eventUserId: _from._id,
+            message: "Sent you a message!",
+            type: "message",
+            created: Meteor.moment.fullNow(),
+            read: false
+        })
+    }
+}
+

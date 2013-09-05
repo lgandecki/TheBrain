@@ -19,8 +19,8 @@ Meteor.publish("paginatedItems", function(opts, limit) {
     }
     if (opts.search) {
         _query.$or = [
-            {personalFront: new RegExp(opts.search)},
-            {personalBack: new RegExp(opts.search)}
+            {personalFront: new RegExp(opts.search, "i")},
+            {personalBack: new RegExp(opts.search, "i")}
         ]
     }
     console.log("_query", _query);
@@ -41,6 +41,8 @@ Meteor.publish("paginatedItems", function(opts, limit) {
                 options: {
                     fields: {
                         'comments._id': 1,
+                        'upVotes': 1,
+                        'downVotes': 1
                     }
                 }
             }

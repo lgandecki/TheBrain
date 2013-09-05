@@ -1,0 +1,56 @@
+<template name="conversation">
+    <div class="row-fluid">
+        <div class="span9 center">
+            <div class="box box-bordered box-color">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> Conversation with {{userName}}</h3>
+                </div>
+                <div class="box-content padding">
+                    <div style="text-align: center">
+                        {{#if messagesReady}}
+                            {{#unless allMessagesLoaded}}
+                                <button class="btn btn-primary btn-primary-main btn-loadMore"><i class="icon-hand-up"> Load more</i></button>
+
+                            {{/unless}}
+                        {{else}}
+                            <div style="margin-bottom: 10px;">{{> spinner}}</div>
+                        {{/if}}
+                    </div>
+                    <ul class="messages">
+
+                        {{#each message}}
+                            {{> conversationMessage}}
+                        {{/each}}
+
+
+                        <li class="insert">
+                            <div class="text">
+                                <input type="text" name="sendMessage" placeholder="Write here..." class="input-block-level sendMessage">
+                            </div>
+                            <div class="submit">
+                                <button class="btn btn-primary btn-primary-main btn-sendMessage"><i class="icon-share-alt"></i> Reply</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="conversationMessage">
+    <li class="{{leftOrRight}}">
+        <div class="image">
+            <img src="{{userPicture}}" alt="">
+        </div>
+        <div class="message">
+            <span class="caret"></span>
+             											<span class="time">
+                                                            {{sent}}
+                                                        </span>
+
+            <p>{{message}}</p>
+
+        </div>
+    </li>
+</template>
