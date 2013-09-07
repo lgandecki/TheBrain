@@ -24,15 +24,20 @@ Template.lesson.created = function () {
 
     _course = Courses.findOne({_id: Session.get("selectedCourse")});
 
+    console.log("Course in created", _course);
     if (_course) {
         var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
         _lesson = _course.lessons[_lessonIndex];
+        Session.set("_lesson", _lesson);
         console.log("are we getting back here to render?");
-        _query = {lessonId: _lesson._id, onlyAdmin: true, adminIds: _course.admins};
+        _query = {lessonId: _lesson._id, courseId: Session.get("selectedCourse"), onlyAdmin: true, adminIds: _course.admins};
         _query.adminIds.push(Meteor.userId());
         Session.set("_optionsQuery", _query);
-        _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
+        _flashcardSubscription = Meteor.subscribeWithPagination("lessonFlashcards", _query, 10);
         _firstOpened = false;
+    }
+    else {
+        console.log("WHAT THE F!");
     }
 
     setTimeout(function () {
@@ -44,10 +49,19 @@ Template.lesson.created = function () {
     }, 500);
 }
 
-Template.lesson.destroyed = function() {
+Template.lesson.destroyed = function () {
     Session.set("lessonTab", "");
+    Session.set("selectedFlashcards", "");
+    Session.set("selectedCourse", "");
+    Session.set("_lesson", "");
+    if (_flashcardSubscription) {
+        _flashcardSubscription.stop();
+    }
+    _firstOpened = true;
 }
 
+
+//
 Template.lesson.rendered = function () {
 //    _course = Courses.findOne({_id: Session.get("selectedCourse")});
 //
@@ -56,24 +70,32 @@ Template.lesson.rendered = function () {
         if (_course) {
             var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
             _lesson = _course.lessons[_lessonIndex];
+            Session.set("_lesson", _lesson);
             console.log("are we getting back here to render?");
-            _query = {lessonId: _lesson._id, onlyAdmin: true, adminIds: _course.admins};
+            _query = {lessonId: _lesson._id, courseId: Session.get("selectedCourse"), onlyAdmin: true, adminIds: _course.admins};
             _query.adminIds.push(Meteor.userId());
             Session.set("_optionsQuery", _query);
-            _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
-            _firstOpened = false;
+            _flashcardSubscription = Meteor.subscribeWithPagination("lessonFlashcards", _query, 10);
         }
     }
 }
 
 Template.flashcardsOptions.studentsFlashcardsCount = function () {
-    var _flashcards = _getFlashcards(false, false);
-    console.log("_flashcards", _flashcards);
-    if (_flashcards) {
-        return _flashcards.count();
-    } else {
-        return "";
+    var _lesson = Session.get("_lesson");
+    if (_lesson && _lesson.studentsFlashcards) {
+        return _lesson.studentsFlashcards.length;
     }
+//    _course = Courses.findOne({_id: Session.get("selectedCourse")});
+//    console.log("_course in students count", _course);
+//    if (_course) {
+//        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
+//        _lesson = _course.lessons[_lessonIndex];
+//        if (_lesson.studentsFlashcards) {
+//        return _lesson.studentsFlashcards.length;
+//        }
+//    }
+//    return 0;
+
 }
 
 Template.flashcardsOptions.isShowStudentsFlashcards = function () {
@@ -83,13 +105,20 @@ Template.flashcardsOptions.isShowStudentsFlashcards = function () {
 }
 
 Template.flashcardsOptions.teachersFlashcardsCount = function () {
-    var _flashcards = _getFlashcards(true, false);
-    console.log("_flashcards", _flashcards);
-    if (_flashcards) {
-        return _flashcards.count();
-    } else {
-        return "";
+//    var _course = Courses.findOne({_id: Session.get("selectedCourse")});
+    var _lesson = Session.get("_lesson");
+    if (_lesson && _lesson.studentsFlashcards) {
+        return _lesson.teacherFlashcards.length;
     }
+    console.log("_course in teachers count", _course);
+//    if (_course) {
+//        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
+//        _lesson = _course.lessons[_lessonIndex];
+//        if (_lesson.teacherFlashcards) {
+//            return _lesson.teacherFlashcards.length;
+//        }
+//    }
+//    return 0;
 }
 
 
@@ -101,93 +130,6 @@ Template.flashcardsOptions.flashcardsSelectedLength = function () {
     return 0;
 }
 
-Template.flashcardsOptions.events({
-    "click .btn-hideStudentsFlashcards": function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        setTimeout(function () {
-            Session.set("showStudentsFlashcards", false);
-        }, 20);
-
-//        setTimeout(function () {
-//            $(".btn-hideStudentsFlashcards").addClass("btn-showStudentsFlashcards").removeClass("btn-hideStudentsFlashcards").html("Show students flashcards");
-////            $(".btn-addAll").html("Add teachers flashcards");
-//        }, 20);
-//        _flashcardSubscription.stop();
-
-        _query = {lessonId: _lesson._id, onlyAdmin: true, adminIds: _course.admins};
-        console.log("setting the _query from hideStudents", _query);
-        _query.adminIds.push(Meteor.userId());
-//        _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
-        Session.set("_optionsQuery", _query);
-
-    },
-    "click .btn-showStudentsFlashcards": function (e) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        Session.set("showStudentsFlashcards", true);
-//        $(".btn-showStudentsFlashcards").removeClass("btn-showStudentsFlashcards").addClass("btn-hideStudentsFlashcards").html("Hide students flashcards");
-//        $(".btn-addAll").html("Add students flashcards");
-//        _flashcardSubscription.stop();
-        _query = {lessonId: _lesson._id, onlyAdmin: false, adminIds: _course.admins};
-        console.log("setting the _query from showStudents", _query);
-//        _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
-        Session.set("_optionsQuery", _query);
-
-    },
-    "click .btn-addAll": function (e) {
-//        _optionsQuery.addTeachersFlashcards = true;
-        var _flashcards = _getFlashcards(true, false).fetch();
-        if (_flashcards) {
-            _flashcardsIds = _.pluck(_flashcards, '_id');
-            var _callOpts = {
-                function: "addFlashcardsToCollection",
-                arguments: {
-                    flashcardsIds: _flashcardsIds,
-                    courseId: Session.get("selectedCourse")
-                },
-                errorTitle: "Adding flashcards to learn schedule error",
-                successTitle: "Added flashcards to course collection"
-            }
-            Meteor.myCall(_callOpts);
-//            Meteor.call("addFlashcardsToCollection", _opts);
-        }
-    },
-    "click .btn-addSelectedToCollection": function (e) {
-//        var _flashcards = Session.get("selectedFlashcards");
-        var _callOpts = {
-            function: "addFlashcardsToCollection",
-            arguments: {
-                flashcardsIds: Session.get("selectedFlashcards"),
-                courseId: Session.get("selectedCourse")
-            },
-            errorTitle: "Adding flashcards to learn schedule error",
-            successTitle: "Added flashcards to course collection"
-        }
-
-        Meteor.myCall(_callOpts);
-
-    },
-    "click .btn-addFlashcardToLesson": function (e, template) {
-        e.preventDefault();
-        $("#newFlashcardModal").modal('show');
-    },
-    "click .btn-selectAll": function () {
-        var _selectedFlashcards = [];
-        $(".myFlashcardRow").each(function () {
-            _selectedFlashcards.push($(this).data("id"))
-        });
-        Session.set("selectedFlashcards", _selectedFlashcards);
-        _toggleFlashcardReload();
-    },
-    "click .btn-deSelectAll": function () {
-        Session.set("selectedFlashcards", []);
-
-        _toggleFlashcardReload();
-    }
-
-})
-
 Template.withSelectedFlashcards.flashcardsSelectedLength = function () {
     var _flashcardsSelected = Session.get("selectedFlashcards");
     if (_flashcardsSelected) {
@@ -197,70 +139,112 @@ Template.withSelectedFlashcards.flashcardsSelectedLength = function () {
 }
 
 
-Template.lesson.destroyed = function () {
-    Session.set("selectedFlashcards", "");
-    Session.set("selectedCourse", "");
-    if (_flashcardSubscription) {
-        _flashcardSubscription.stop();
-    }
-    _firstOpened = true;
-}
-
 Template.lesson.courseName = function () {
     _course = Courses.findOne({_id: Session.get("selectedCourse")});
     return _course ? _course.name : "";
 }
 
 Template.lesson.lessonName = function () {
-    _course = Courses.findOne({_id: Session.get("selectedCourse")});
-    var _lesson;
-    if (_course) {
-        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
-        _lesson = _course.lessons[_lessonIndex];
-    }
+    _lesson = Session.get("_lesson");
     return _lesson ? _lesson.name : "";
 }
 
+Template.lessonFlashcardsList.events({
+    'click .btn-loadMore': function(e) {
+        e.preventDefault();
+        _flashcardSubscription.loadNextPage();
+    }
+})
+
 Template.lessonFlashcardsList.flashcard = function () {
-    if (Session.get("_optionsQuery")) {
-        console.log("Przeladowywujemy?");
-        return _getFlashcards(false, true);
+    var _reload;
+    if (Session.get("_optionsQuery") && _flashcardSubscription) {
+        _reload = true;
+        console.log("i co z subskrypcja?");
+
+    }
+    console.log("Przeladowywujemy?");
+    _lesson = Session.get("_lesson");
+    if (_lesson) {
+        var _teacherFlashcards = _lesson.teacherFlashcards;
+        var _studentsFlashcards = [];
+        if (!Session.get("_optionsQuery").onlyAdmin) {
+            _studentsFlashcards = _lesson.studentsFlashcards;
+        }
+        _flashcardIds = $.merge(_teacherFlashcards, _studentsFlashcards);
+        _query = {
+            _id: {$in: _flashcardIds},
+            public: true,
+            "lessons.lesson": _lesson._id
+        };
+        if (_flashcardSubscription) {
+            console.log("wrzucamy flashcardy", _query);
+            return Flashcards.find(_query, {limit: _flashcardSubscription.limit(), sort: {score: -1}})
+        }
+        else {
+            console.log("nie wrzucamy flashcardow");
+        }
+
+
+
     }
 }
 
-_getFlashcards = function (addTeachersFlashcards, optionsQuery) {
-    var _courseId = Session.get("selectedCourse");
-    var _lessonId = Session.get("selectedLesson");
-    var _optionsQuery = {};
-    _course = Courses.findOne({_id: _courseId});
-    if (_course) {
-        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), _lessonId);
-        _lesson = _course.lessons[_lessonIndex];
-//        if (optionsQuery === true) {
-        _optionsQuery = Session.get("_optionsQuery") || {};
-//        }
-        if (_lesson) {
-            _query = {public: true, "lessons.lesson": _lesson._id};
-            _query._id = {$in: _lesson.flashcards};
-            if ((optionsQuery === true && _optionsQuery.onlyAdmin === true) || addTeachersFlashcards === true) {
-//                console.log("from here I'm guessing?");
-                _query.user = {$in: _optionsQuery.adminIds};
-//                _optionsQuery.addTeachersFlashcards = false;
-            }
-            console.log("query ", _query);
-            return Flashcards.find(_query);
+
+Template.lessonFlashcardsList.helpers({
+    flashcardsReady: function () {
+        if (_flashcardSubscription) {
+
+            return !_flashcardSubscription.loading();
+        }
+    },
+    allFlashcardsLoaded: function () {
+        if (_flashcardSubscription) {
+
+            return !_flashcardSubscription.loading() &&
+                Flashcards.find(_query).count() < _flashcardSubscription.loaded();
         }
     }
-//    return [];
-}
+})
 
-Template.flashcardsOptions.rendered = function () {
-//    $('#onlyByTeacher').parent().bootstrapSwitch();
+
+_getFlashcards = function (addTeachersFlashcards, optionsQuery) {
+    return [];
+
 }
+//_getFlashcards = function (addTeachersFlashcards, optionsQuery) {
+//    var _courseId = Session.get("selectedCourse");
+//    var _lessonId = Session.get("selectedLesson");
+//    var _optionsQuery = {};
+//    _course = Courses.findOne({_id: _courseId});
+//    if (_course) {
+//        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), _lessonId);
+//        _lesson = _course.lessons[_lessonIndex];
+////        if (optionsQuery === true) {
+//        _optionsQuery = Session.get("_optionsQuery") || {};
+////        }
+//        if (_lesson) {
+//            _query = {public: true, "lessons.lesson": _lesson._id};
+//            _query._id = {$in: $_lesson.flashcards};
+//            if ((optionsQuery === true && _optionsQuery.onlyAdmin === true) || addTeachersFlashcards === true) {
+////                console.log("from here I'm guessing?");
+//                _query.user = {$in: _optionsQuery.adminIds};
+////                _optionsQuery.addTeachersFlashcards = false;
+//            }
+//            console.log("query ", _query);
+//            return Flashcards.find(_query);
+//        }
+//    }
+////    return [];
+//}
+//
+//Template.flashcardsOptions.rendered = function () {
+////    $('#onlyByTeacher').parent().bootstrapSwitch();
+//}
 
 Template.flashcardRow.rendered = function () {
     var _selectedFlashcards = Session.get("selectedFlashcards");
-    console.log("how often? ", this.data._id);
+//    console.log("how often? ", this.data._id);
     if ($.inArray(this.data._id, _selectedFlashcards) > -1) {
         console.log("got it from here", this.data._id, "selectedFlashcards", _selectedFlashcards);
         var _row = this.find(".myFlashcardRow");
@@ -270,17 +254,17 @@ Template.flashcardRow.rendered = function () {
     }
 }
 
-Template.flashcardRow.upVotes = function () {
-    return this.upVotes ? this.upVotes.length : "0";
-}
-
-Template.flashcardRow.downVotes = function () {
-    return this.downVotes ? this.downVotes.length : "0";
-}
+//Template.flashcardRow.upVotes = function () {
+//    return this.upVotes ? this.upVotes.length : "0";
+//}
+//
+//Template.flashcardRow.downVotes = function () {
+//    return this.downVotes ? this.downVotes.length : "0";
+//}
 
 
 Template.flashcardRow.events({
-    "click .badge-upVote": function(e) {
+    "click .badge-upVote": function (e) {
         e.preventDefault();
         e.stopPropagation();
         _opts = {
@@ -288,7 +272,7 @@ Template.flashcardRow.events({
         }
         Meteor.call("flashcardVoteUp", _opts);
     },
-    "click .badge-downVote": function(e) {
+    "click .badge-downVote": function (e) {
         e.preventDefault();
         e.stopPropagation();
         _opts = {
@@ -317,7 +301,6 @@ Template.flashcardRow.events({
 
     },
     "click .myFlashcardRow": function (e) {
-        console.log("click");
         var _that = this;
         var _e = e.currentTarget;
         setTimeout(function () {
@@ -379,3 +362,113 @@ Template.flashcardRow.reloadFlashcard = function () {
         return false;
     }
 }
+
+
+Template.flashcardsOptions.events({
+    "click .btn-hideStudentsFlashcards": function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        setTimeout(function () {
+            Session.set("showStudentsFlashcards", false);
+        }, 20);
+
+//        setTimeout(function () {
+//            $(".btn-hideStudentsFlashcards").addClass("btn-showStudentsFlashcards").removeClass("btn-hideStudentsFlashcards").html("Show students flashcards");
+////            $(".btn-addAll").html("Add teachers flashcards");
+//        }, 20);
+//        _flashcardSubscription.stop();
+//        console.log("hide students Flashcards click", _lesson);
+
+        _lesson = Session.get("_lesson");
+        if (_lesson) {
+            _query = {lessonId: _lesson._id, courseId: Session.get("selectedCourse"), onlyAdmin: true, adminIds: _course.admins};
+//            console.log("setting the _query from hideStudents", _query);
+            _query.adminIds.push(Meteor.userId());
+            //        _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
+            Session.set("_optionsQuery", _query);
+            _flashcardSubscription.stop();
+            _flashcardSubscription = Meteor.subscribeWithPagination("lessonFlashcards", _query, 10);
+        }
+
+    },
+    "click .btn-showStudentsFlashcards": function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        Session.set("showStudentsFlashcards", true);
+//        $(".btn-showStudentsFlashcards").removeClass("btn-showStudentsFlashcards").addClass("btn-hideStudentsFlashcards").html("Hide students flashcards");
+//        $(".btn-addAll").html("Add students flashcards");
+//        _flashcardSubscription.stop();
+        _lesson = Session.get("_lesson");
+        console.log("show students Flashcards click", _lesson);
+        if (_lesson) {
+            _query = {lessonId: _lesson._id, courseId: Session.get("selectedCourse"), onlyAdmin: false, adminIds: _course.admins};
+            console.log("setting the _query from showStudents", _query);
+            //        _flashcardSubscription = Meteor.subscribe("lessonFlashcards", _query);
+            Session.set("_optionsQuery", _query);
+            _flashcardSubscription.stop();
+            _flashcardSubscription = Meteor.subscribeWithPagination("lessonFlashcards", _query, 10);
+        }
+
+    },
+    "click .btn-addAll": function (e) {
+//        _optionsQuery.addTeachersFlashcards = true;
+//        var _course = Courses.findOne({_id: Session.get("selectedCourse")});
+        var _flashcards;
+        _lesson = Session.get("_lesson");
+
+        if (_lesson) {
+            if (_lesson.teacherFlashcards) {
+                _flashcards = _lesson.teacherFlashcards;
+            }
+
+            if (_flashcards) {
+                var _flashcardsIds = _flashcards;
+                var _callOpts = {
+                    function: "addFlashcardsToCollection",
+                    arguments: {
+                        flashcardsIds: _flashcardsIds,
+                        courseId: Session.get("selectedCourse")
+                    },
+                    errorTitle: "Adding flashcards to learn schedule error",
+                    successTitle: "Added flashcards to course collection"
+                }
+                Meteor.myCall(_callOpts);
+//            Meteor.call("addFlashcardsToCollection", _opts);
+            }
+        }
+    },
+    "click .btn-addSelectedToCollection": function (e) {
+//        var _flashcards = Session.get("selectedFlashcards");
+        var _callOpts = {
+            function: "addFlashcardsToCollection",
+            arguments: {
+                flashcardsIds: Session.get("selectedFlashcards"),
+                courseId: Session.get("selectedCourse")
+            },
+            errorTitle: "Adding flashcards to learn schedule error",
+            successTitle: "Added flashcards to course collection"
+        }
+
+        Meteor.myCall(_callOpts);
+
+    },
+    "click .btn-addFlashcardToLesson": function (e, template) {
+        e.preventDefault();
+        $("#newFlashcardModal").modal('show');
+    },
+    "click .btn-selectAll": function () {
+        var _selectedFlashcards = [];
+        $(".myFlashcardRow").each(function () {
+            _selectedFlashcards.push($(this).data("id"))
+        });
+        console.log("select all flashcards ", _selectedFlashcards);
+        Session.set("selectedFlashcards", _selectedFlashcards);
+        _toggleFlashcardReload();
+    },
+    "click .btn-deSelectAll": function () {
+        Session.set("selectedFlashcards", []);
+
+        _toggleFlashcardReload();
+    }
+
+})

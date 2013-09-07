@@ -67,7 +67,7 @@ Template.newConversation.user = function() {
     var _query = {};
     if (Session.get("optsSearch")) {
         var _opts = Session.get("optsSearch");
-        _query = {"identity.nick": new RegExp(_opts, "i")};
+        _query = {_id: {$ne: Meteor.userId()}, "identity.nick": new RegExp(_opts, "i")};
     } else {
         _query = {_id: {$ne: Meteor.userId()}}
     }

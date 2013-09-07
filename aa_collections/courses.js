@@ -44,7 +44,8 @@ Meteor.methods({
                 "_id": new Meteor.Collection.ObjectID()._str,
                 name: "Day One",
                 shortDescription: "Temporary description",
-                flashcards: []
+                teacherFlashcards: [],
+                studentsFlashcards: []
             }],
             events: [{
                 "_id": new Meteor.Collection.ObjectID()._str,

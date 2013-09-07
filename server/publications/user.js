@@ -16,9 +16,13 @@ Meteor.publish("userData", function () {
 Meteor.publish("usersPaginated", function (opts, limit) {
     var _query = {};
     if (opts.search) {
-        _query = {"identity.nick": new RegExp(opts.search, "i")};
+        _query = {"_id": {$ne: this.userId}, "identity.nick": new RegExp(opts.search, "i")};
     }
-    return Meteor.users.find(_query, {options: {limit: limit}});
+    return Meteor.users.find(_query, {options: {limit: limit}, fields: {
+        'identity': 1,
+        'points': 1,
+        'profile': 1,
+        'achievements': 1}});
 });
 
 Meteor.publish("otherUser", function(id){

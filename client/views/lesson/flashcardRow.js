@@ -5,9 +5,9 @@
 
 Template.flashcardRow.userName = function () {
     var _userId = this.user;
-    console.log("_userId in userName", _userId);
+//    console.log("_userId in userName", _userId);
     var _user = Meteor.users.findOne(_userId);
-    console.log("_user", _user);
+//    console.log("_user", _user);
     if (_user && _user.identity) {
         return _user.identity.nick;
     }
@@ -30,7 +30,7 @@ Template.flashcardRow.flashcardFront = function() {
         front = '<a href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
         <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
         <div name="front" class="flashcardFront">' + front + '</div>';
-        console.log("front after", front);
+//        console.log("front after", front);
     }
 
 

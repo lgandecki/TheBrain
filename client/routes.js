@@ -44,6 +44,10 @@ Meteor.Router.add({
         //        if (!Session.get("selectedCourseTab")) {
         Session.set("selectedCourseTab", "#events");
         //        }
+        var _id = id;
+        setTimeout(function() {
+            Session.set("selectedCourse", _id);
+        }, 800);
         return "course";
     },
 
@@ -52,6 +56,10 @@ Meteor.Router.add({
         //        if (!Session.get("selectedCourseTab")) {
         Session.set("selectedCourseTab", "#events");
         //        }
+        var _id = id;
+        setTimeout(function() {
+            Session.set("selectedCourse", _id);
+        }, 800);
         return "courseLessons";
     },
     '/availableCourses': function () {
@@ -59,10 +67,14 @@ Meteor.Router.add({
         return "availableCourses";
     },
     '/lesson/:courseId/:lessonId': function (courseId, lessonId) {
+        var _courseId = courseId;
+        var _lessonId = lessonId;
+        Session.set("selectedCourse", courseId);
+        Session.set("selectedLesson", lessonId);
         setTimeout(function () {
-            Session.set("selectedCourse", courseId);
-            Session.set("selectedLesson", lessonId);
-        }, 50);
+            Session.set("selectedCourse", _courseId);
+            Session.set("selectedLesson", _lessonId);
+        }, 800);
         return "lesson";
     },
 
@@ -90,6 +102,10 @@ Meteor.Router.add({
     "/conversation/:otherUser": function(otherUser) {
         Session.set("otherUser", otherUser);
         return "conversation";
+    },
+
+    "/flashcardsOptionsNew": function() {
+        return "flashcardsOptionsNew";
     }
 
 
@@ -145,7 +161,9 @@ Meteor.Router.filters({
             }
             else {
                 setTimeout(function () {
-                    ga('send', 'pageview', window.location.pathname);
+                    if (typeof ga !== 'undefined') {
+                        ga('send', 'pageview', window.location.pathname);
+                    }
                 }, 300);
             }
 

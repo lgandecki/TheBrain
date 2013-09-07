@@ -1,19 +1,30 @@
 <template name="lessonFlashcardsTab">
     <div class="tab-pane fade lessonFlashcards" id="lessonFlashcards">
-        {{> lessonFlashcardsList }}
+{{#isolate}} {{> flashcardsOptions}}  {{/isolate}}
+        {{#isolate}}{{> lessonFlashcardsList }}{{/isolate}}
     </div>
 </template>
 
 <template name="lessonFlashcardsList">
-    {{#constant}}
-        {{> flashcardsOptions}}
-    {{/constant}}
 
-    {{#isolate}}
+
+            {{#isolate}}}
         {{#each flashcard}}
             {{> flashcardRow}}
         {{/each}}
-    {{/isolate}}
+{{/isolate}}
+
+
+    <div style="text-align: center">
+        {{#if flashcardsReady}}
+            {{#unless allFlashcardsLoaded}}
+                <button class="btn btn-primary btn-primary-main btn-loadMore"><i class="icon-hand-up"> Load more</i></button>
+
+            {{/unless}}
+        {{else}}
+            <div style="margin-bottom: 10px;">{{> spinner}}</div>
+        {{/if}}
+    </div>
 </template>
 
 <template name="flashcardRow">

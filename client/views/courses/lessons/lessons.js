@@ -1,8 +1,16 @@
 Template.lessonsTable.lesson = function () {
-    _course = Courses.findOne({_id: Session.get("selectedCourse")});
+    var _course = Courses.findOne({_id: Session.get("selectedCourse")});
     return _course ? _course.lessons : [];
 }
 
+Template.lessonsTable.flashcardsLength = function() {
+    var _flashcardsLength = 0;
+    if (this.studentsFlashcards) {
+        _flashcardsLength += this.studentsFlashcards.length;
+        _flashcardsLength += this.teacherFlashcards.length;
+    }
+    return _flashcardsLength;
+}
 
 Template.lessonsTable.rendered = function () {
 

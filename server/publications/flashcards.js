@@ -104,9 +104,23 @@ Meteor.publish("paginatedFlashcards", function (opts, limit) {
 //    return Flashcards.find(_query, {limit: limit});
 })
 
-Meteor.publish("lessonFlashcards", function (opts) {
-    // console.log("Are we doing this I mean lessonflashcards?", lessonId);
+Meteor.publish("lessonFlashcards", function (opts, limit) {
+    console.log("Are we doing this I mean lessonflashcards?", opts);
+    var _course = Courses.findOne({_id: opts.courseId});
+    if (_course) {
+    var _flashcardIds = [];
+    var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), opts.lessonId);
+    var _lesson = _course.lessons[_lessonIndex];
+    var _teacherFlashcards = _lesson.teacherFlashcards;
+    var _studentsFlashcards = [];
+    if (!opts.onlyAdmin) {
+        _studentsFlashcards = _lesson.studentsFlashcards;
+        console.log("not only admin", _studentsFlashcards);
+
+    }
+    _flashcardIds = _teacherFlashcards.concat(_studentsFlashcards);
     _query = {
+        _id: {$in: _flashcardIds},
         public: true,
         "lessons.lesson": opts.lessonId
     };
@@ -121,9 +135,10 @@ Meteor.publish("lessonFlashcards", function (opts) {
         handle: this,
         collection: Flashcards,
         filter: _query,
-//        options: {
-//            limit: limit,
-//        },
+        options: {
+            limit: limit,
+            sort: {score: -1}
+        },
         mappings: [
             {
                 key: 'user',
@@ -139,5 +154,6 @@ Meteor.publish("lessonFlashcards", function (opts) {
             }
         ]
     })
+    }
 //    return Flashcards.find(_query);
 })
