@@ -41,7 +41,7 @@ Template.availableFlashcard.flashcardFront = function () {
     }
 
 
-    return front;
+    return front.replace(/\n/g, "<br />");
 
 }
 
@@ -59,7 +59,7 @@ Template.availableFlashcard.flashcardBack = function () {
         <div name="back" class="flashcardBack">' + back + '</div>';
     }
 
-    return back;
+    return back.replace(/\n/g, "<br />");
 
 
 }

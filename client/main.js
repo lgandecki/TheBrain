@@ -12,6 +12,20 @@ Meteor.autosubscribe(function () {
     }
 });
 
+jQuery.fn.justtext = function() {
+
+    return $(this).clone()
+        .children()
+        .remove()
+        .end()
+        .text();
+
+};
+
+stripHtml = function(str) {
+    return jQuery('<div />', { html: str }).text();
+}
+
 var _renderer = null;
 
 //Meteor.autosubscribe(function () {

@@ -59,7 +59,10 @@ Template.editFlashcardForm.front = function () {
     if (_currentItemId) {
         var _currentItem = Items.findOne({_id: _currentItemId});
         if (_currentItem) {
-            return _currentItem.personalFront;
+            var  _front = splitFlashcard(_currentItem.personalFront)
+
+            return _front;
+//            return _currentItem.personalFront;
         }
     }
     else {
@@ -67,19 +70,35 @@ Template.editFlashcardForm.front = function () {
         if (_currentFlashcardId) {
             var _currentFlashcard = Flashcards.findOne({_id: _currentFlashcardId});
             if (_currentFlashcard && _currentFlashcard.front) {
-                return _currentFlashcard.front;
+                var  _front = splitFlashcard(_currentFlashcard.front)
+
+                return _front;
             }
         }
     }
     return false;
 }
 
+var splitFlashcard = function(text) {
+    text = stripHtml(text);
+    var _splittedFront = text.split("\n");
+    var _front = _splittedFront.shift();
+
+    _splittedFront.forEach(
+        function(line) {
+            _front = _front + "<div>" + line + "</div>";
+        })
+    return _front;
+
+}
 Template.editFlashcardForm.back = function () {
     var _currentItemId = Session.get("currentItemId");
     if (_currentItemId) {
         var _currentItem = Items.findOne({_id: _currentItemId});
         if (_currentItem) {
-            return _currentItem.personalBack;
+            var _back = splitFlashcard(_currentItem.personalBack);
+            return _back;
+//            return _currentItem.personalBack;
         }
     }
     else {
@@ -87,7 +106,8 @@ Template.editFlashcardForm.back = function () {
         if (_currentFlashcardId) {
             var _currentFlashcard = Flashcards.findOne({_id: _currentFlashcardId});
             if (_currentFlashcard && _currentFlashcard.back) {
-                return _currentFlashcard.back;
+                var _back = splitFlashcard(_currentFlashcard.back);
+                return _back;
             }
         }
     }
@@ -202,11 +222,23 @@ Template.editFlashcardButtons.events({
                     console.log("cancelled");
                 } else {
 
+                    var _front = $("#front .flashcardFront").justtext();
+
+                    $.each($("#front .flashcardFront").children(), function(key, value) {
+                        _front = _front + "\n" + $(value).text()
+                    })
+
+                    var _back = $("#back .flashcardBack").justtext();
+
+                    $.each($("#back .flashcardBack").children(), function(key, value) {
+                        _back = _back + "\n" + $(value).text()
+                    })
+
                     var _flashcardOpts = {
                         flashcardId: Session.get("currentFlashcardId"),
-                        "front": $("#front .flashcardFront").text(),
+                        "front": _front || null,
                         "frontPicture": Session.get("newFrontPicture") || null,
-                        "back": $("#back .flashcardBack").text(),
+                        "back": _back || null,
                         "backPicture": Session.get("newBackPicture") || null,
                         "reason": result || null
                     }

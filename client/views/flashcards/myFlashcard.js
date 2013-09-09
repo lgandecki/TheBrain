@@ -39,6 +39,8 @@ Template.myFlashcard.currentItemFront = function () {
         front = front + "<br/><span class='note'>" + this.frontNote + "</span>";
     }
 
+//    front = "<pre>" + front + "</pre>"
+    front = stripHtml(front);
 
     var _frontPicture;
     if (this.personalFrontPicture) {
@@ -54,7 +56,7 @@ Template.myFlashcard.currentItemFront = function () {
         console.log("front after", front);
     }
 
-    return front;
+    return front.replace(/\n/g, "<br />");
 }
 
 Template.myFlashcard.currentItemBack = function () {
@@ -63,7 +65,9 @@ Template.myFlashcard.currentItemBack = function () {
     if (this.backNote) {
         back = back + "<br/><span class='note'>" + this.backNote + "</span>";
     }
+    back = stripHtml(back);
 
+//    back = "<pre>" + back + "</pre>"
     var _backPicture;
     if (this.personalBackPicture) {
         _backPicture = this.personalBackPicture;
@@ -75,7 +79,7 @@ Template.myFlashcard.currentItemBack = function () {
         <div name="back" class="flashcardBack">' + back + '</div>';
     }
 
-    return back;
+    return back.replace(/\n/g, "<br />");
 }
 
 Template.myFlashcard.flashcardSelected = function () {
@@ -203,4 +207,9 @@ Template.myFlashcard.reloadFlashcard = function () {
     else {
         return false;
     }
+}
+
+Template.myFlashcard.destroyed = function() {
+    Session.set("currentItemId", null);
+    Session.set("currentFlashcardId", null);
 }

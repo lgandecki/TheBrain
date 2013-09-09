@@ -336,16 +336,17 @@ displayNextRepetition = function () {
 fillTemplate = function () {
     var _currentItem = Items.findOne({_id: Session.get("currentItemId")});
     if (_currentItem) {
-        front = _currentItem.personalFront;
-        back = _currentItem.personalBack;
+        front = stripHtml(_currentItem.personalFront);
+        back = stripHtml(_currentItem.personalBack);
 
         if (_currentItem.frontNote) {
-            front = front + "<br/><span class='note'>" + _currentItem.frontNote + "</span>";
+            front = front + "<br/><span class='note'>" + stripHtml(_currentItem.frontNote) + "</span>";
         }
 
         if (_currentItem.backNote) {
-            back = back + "<br/><span class='note'>" + _currentItem.backNote + "</span>";
+            back = back + "<br/><span class='note'>" + stripHtml(_currentItem.backNote) + "</span>";
         }
+
 
         var _frontPicture, _backPicture;
         if (_currentItem.personalFrontPicture) {
@@ -370,8 +371,8 @@ fillTemplate = function () {
         }
 
 
-        $(".currentFlashcard > .front").html(front);
-        $(".currentFlashcard > .back").html(back);
+        $(".currentFlashcard > .front").html(front.replace(/&#13;&#10;/g, "<br />"));
+        $(".currentFlashcard > .back").html(back.replace(/&#13;&#10;/g, "<br />"));
         $(".currentFlashcard > .evaluate").attr("item-id", _currentItem._id);
 // setTimeout(function() {
 // $(".currentFlashcard > .answer").focus();

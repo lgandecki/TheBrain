@@ -195,11 +195,30 @@ validateNewFlashcard = function() {
 
 createNewFlashcard = function() {
     var _isPublic = ($("#public").val() === "true") ? true : false;
+    var _front = $("#newFront .flashcardFront").justtext();
+
+    $.each($("#newFront .flashcardFront").children(), function(key, value) {
+        _front = _front + "\n" + $(value).text()
+    })
+
+    var _back = $("#newBack .flashcardBack").justtext();
+
+    $.each($("#newBack .flashcardBack").children(), function(key, value) {
+        _back = _back + "\n" + $(value).text()
+    })
+
+//    console.log("_front", _front);
+
+
+    ////    console.log("value", $(value).text()) })
+//    $("#newFront .flashcardFront").children().forEach(function(child) {
+//        _front = _front + "&#13;&#10;" + child.text();
+//    })
     var _newFlashcard = {
         "public": _isPublic,
-        "front": $("#newFront .flashcardFront").text(),
+        "front": _front || null,
         "frontPicture": Session.get("newFrontPicture") || null,
-        "back": $("#newBack .flashcardBack").text(),
+        "back": _back || null,
         "backPicture": Session.get("newBackPicture") || null,
 //        "course": $("#course").val(),
         "lesson": $("#lesson").val(),

@@ -35,7 +35,7 @@ Template.flashcardRow.flashcardFront = function() {
 
 
 
-    return front;
+    return front.replace(/\n/g, "<br />");
 
 }
 
@@ -53,11 +53,8 @@ Template.flashcardRow.flashcardBack = function() {
         <div name="back" class="flashcardBack">' + back + '</div>';
     }
 
-    return back;
+    return back.replace(/\n/g, "<br />");
 
 
 }
 
-stripHtml = function(str) {
-    return jQuery('<div />', { html: str }).text();
-}

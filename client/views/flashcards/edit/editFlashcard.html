@@ -21,7 +21,7 @@
             <div name="front" id="front" class="flashcard flashcardNoMargin" contentEditable="false">
                         {{#isolate}}<a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img
                             src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}
-            <div name="front" class="flashcardFront" contentEditable="true">{{front}}</div>
+            <div name="front" class="flashcardFront" contentEditable="true">{{{front}}}</div>
             </div>
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront visible-phone">Add Picture</button>
         </div>
@@ -42,7 +42,7 @@
             <div name="back" id="back" class="flashcard flashcardNoMargin" contentEditable="false">
                         {{#isolate}}<a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newBackPicture}}<img
                             src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}
-            <div name="back" class="flashcardBack" contentEditable="true">{{back}}</div>
+            <div name="back" class="flashcardBack" contentEditable="true">{{{back}}}</div>
             </div>
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack visible-phone">Add Picture</button>
         </div>

@@ -84,6 +84,7 @@ Template.withSelectedItems.flashcardsSelectedLength = function () {
 Template.myCollectionsFlashcards.destroyed = function () {
     Session.set("selectedFlashcards", []);
     Session.set("selectedCollection", "");
+    itemsHandle.stop();
 }
 
 Template.withSelectedItems.events({
