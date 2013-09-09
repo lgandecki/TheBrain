@@ -16,6 +16,10 @@ Template.conversation.rendered = function() {
 }
 
 
+Template.conversation.isTalkingWithAdmin = function() {
+    return Session.get("otherUser") === "adminUser";
+}
+
 Template.conversation.message = function() {
     return Messages.find({$or: [{from: Meteor.userId(), to: Session.get("otherUser")}, {to: Meteor.userId(), from: Session.get("otherUser")}]}, {limit: messagesHandle.limit(), sort: {sent: 1}});
 //    return Messages.find({$or: [{from: Meteor.userId()}, {from: Session.get("otherUser")},

@@ -170,8 +170,8 @@ addFlashcard = function(e) {
             } else {
                 _isOk = true;
                 Meteor.popUp.success("Flashcard added", "TheBrain made neural connections you asked for.");
-                $(".flashcardFront").html("");
-                $(".flashcardBack").html("");
+                $("#newFront").children(".flashcardFront").html("");
+                $("#newBack").children(".flashcardBack").html("");
                 Session.set("newBackPicture", "");
                 Session.set("newFrontPicture", "");
 
@@ -201,7 +201,7 @@ createNewFlashcard = function() {
         "frontPicture": Session.get("newFrontPicture") || null,
         "back": $("#newBack .flashcardBack").text(),
         "backPicture": Session.get("newBackPicture") || null,
-        "course": $("#course").val(),
+//        "course": $("#course").val(),
         "lesson": $("#lesson").val(),
         "collection": $("#collection").val(),
         "source": {
@@ -212,6 +212,10 @@ createNewFlashcard = function() {
             "other": $("#otherSource").val()
         }
     };
+    var _course = $("#course").val();
+    if (_course && _course != "Don't add to any courses") {
+        _newFlashcard.course = _course;
+    }
     return _newFlashcard;
 };
 

@@ -32,8 +32,8 @@
         </li>   -->
     </ul>
     <div class="dropdown">
-        <a href="#" class='dropdown-toggle visible-desktop' data-toggle="dropdown"> {{#isolate}} {{user.identity.nick}} ({{user.points}}{{/isolate}}) <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
-        <a href="#" class='dropdown-toggle hidden-desktop' data-toggle="dropdown">  <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt="">({{#isolate}}{{user.points}}{{/isolate}})</a> 
+        <a href="#" class='dropdown-toggle visible-desktop' data-toggle="dropdown"> {{#isolate}} {{user.identity.nick}} {{/isolate}} <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
+        <a href="#" class='dropdown-toggle hidden-desktop' data-toggle="dropdown">  <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
         <ul class="dropdown-menu dropdown-menu-custom pull-right">
             <li>
                 <a href="/myProfile">My Profile</a>
@@ -41,8 +41,8 @@
             <li>
                 <a href="/calendar">Repetitions Calendar</a>
             </li>
-            <li><a href="/myAchievements">My Achievements</a>
-            </li>
+            <!-- <li><a href="/myAchievements">My Achievements</a>
+            </li> -->
             <li>
                 <a id="logOut" href="javascript:">Sign out</a>
             </li>

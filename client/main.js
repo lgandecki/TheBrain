@@ -5,7 +5,7 @@ Meteor.autosubscribe(function () {
         Meteor.subscribe("myCourses");
 //Meteor.subscribe("myFlashcards");
 //Meteor.subscribe("myCollections");
-        Meteor.subscribe("myItems");
+//        Meteor.subscribe("myItems");
         Meteor.subscribe("lessons");
         Meteor.subscribe("theBrain");
         Meteor.subscribe("unreadNotifications");
@@ -15,7 +15,7 @@ Meteor.autosubscribe(function () {
 var _renderer = null;
 
 //Meteor.autosubscribe(function () {
-if (Meteor.user()) {
+if (Meteor.userId()) {
     window.clearTimeout(_renderer);
     _renderer = window.setTimeout(function () {
         var _now = Meteor.moment.fullNow();
@@ -52,7 +52,7 @@ if (Meteor.user()) {
 //});
 
 Meteor.autorun(function () {
-    if (Meteor.user()) {
+    if (Meteor.userId()) {
         Meteor.subscribe("itemsToReLearnCount");
         var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
         console.log("_now", _now);

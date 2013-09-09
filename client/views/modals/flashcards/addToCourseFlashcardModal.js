@@ -4,7 +4,8 @@ Template.courseSelector.course = function() {
 
 Template.courseSelector.lesson = function() {
     var _selectedCourse, _course;
-    _selectedCourse = Session.get("selectedCourseInForm");
+    _selectedCourse = Session.get("selectedCourseInForm") || $("#courseId.select2").val();
+    console.log("_selectedCourse", _selectedCourse);
     if (_selectedCourse) {
         _course = Courses.findOne({
             _id: _selectedCourse

@@ -1,8 +1,8 @@
 Template.availableFlashcard.userName = function () {
     var _userId = this.user;
-    console.log("_userId in userName", _userId);
+//    console.log("_userId in userName", _userId);
     var _user = Meteor.users.findOne(_userId);
-    console.log("_user", _user);
+//    console.log("_user", _user);
     if (_user && _user.identity) {
         return _user.identity.nick;
     }
@@ -11,9 +11,9 @@ Template.availableFlashcard.userName = function () {
 
 Template.availableFlashcard.rendered = function() {
     var _selectedFlashcards = Session.get("selectedFlashcards");
-    console.log("how often? ", this.data._id);
+//    console.log("how often? ", this.data._id);
     if ($.inArray(this.data._id, _selectedFlashcards) > -1) {
-        console.log("got it from here", this.data._id, "selectedFlashcards", _selectedFlashcards);
+//        console.log("got it from here", this.data._id, "selectedFlashcards", _selectedFlashcards);
         var _row = this.find(".myFlashcardRow");
         $(_row).addClass("flashcardSelected")
         var _button = this.find(".btn-selectFlashcard");
@@ -37,7 +37,7 @@ Template.availableFlashcard.flashcardFront = function () {
         front = '<a href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
         <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
         <div name="front" class="flashcardFront">' + front + '</div>';
-        console.log("front after", front);
+//        console.log("front after", front);
     }
 
 
@@ -66,6 +66,23 @@ Template.availableFlashcard.flashcardBack = function () {
 
 
 Template.availableFlashcard.events({
+    "click .badge-upVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: this._id
+        }
+        Meteor.call("flashcardVoteUp", _opts);
+    },
+    "click .badge-downVote": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        _opts = {
+            flashcardId: this._id
+        }
+//        console.log("downVotes opts", _opts);
+        Meteor.call("flashcardVoteDown", _opts);
+    },
     'click .btn-addToCollectionFlashcard': function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -79,7 +96,7 @@ Template.availableFlashcard.events({
         });
     },
     "click .myFlashcardRow": function (e) {
-        console.log("click");
+//        console.log("click");
         var _that = this;
         var _e = e.currentTarget;
         setTimeout(function () {

@@ -46,6 +46,7 @@ Meteor.methods({
         });
 
         if (flashcardAttributes.course) {
+            console.log("flashcardAttributes", flashcardAttributes);
             if (!flashcardAttributes.lesson) {
                 throw new Meteor.Error(422, "If you want to add a flashcard to a course you have to specify the lesson");
             }

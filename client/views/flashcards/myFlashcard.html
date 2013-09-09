@@ -18,14 +18,14 @@
                             Next Repetition: {{nextRepetition}}<br/>
                             </div>
                             <div class="row-fluid myFlashcardButtons">
-                            <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> Edit
+                            <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block">Edit
                             </button>
-                                <button class=" btn btn-primary btn-primary-main btn-historyFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> History ( {{previousAnswers.length}} )
+                                <button class=" btn btn-primary btn-primary-main btn-historyFlashcard btn-block">History ( {{previousAnswers.length}} )
                                 </button>
-                                <button class=" btn btn-primary btn-primary-main btn-commentsFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> {{#isolate}} Comments ( {{#with flashcard}} {{comments.length}}
+                                <button class=" btn btn-primary btn-primary-main btn-commentsFlashcard btn-block">{{#isolate}} Comments ( {{#with flashcard}} {{comments.length}}
                                     {{/with}}){{/isolate}}
                                 </button>
-                             <button class=" btn btn-primary btn-primary-main btn-selectFlashcard btn-block" data-id="{{_id}}"><i class="icon-hand-down hidden-desktop"></i> Select
+                             <button class=" btn btn-primary btn-primary-main btn-selectFlashcard btn-block" data-id="{{_id}}">Select
                                 </button>
                             </div>
                         </div>

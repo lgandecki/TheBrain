@@ -106,6 +106,10 @@ Meteor.Router.add({
 
     "/flashcardsOptionsNew": function() {
         return "flashcardsOptionsNew";
+    },
+
+    "/policy": function() {
+        return "policy";
     }
 
 
@@ -220,7 +224,7 @@ Meteor.Router.filters({
         if (Meteor.loggingIn()) {
             return "loading";
 
-        } else if (Meteor.userId() || Session.get("exploreMode")) {
+        } else if (Meteor.userId() || Session.get("exploreMode") || page === "policy") {
 
             return page;
         } else {

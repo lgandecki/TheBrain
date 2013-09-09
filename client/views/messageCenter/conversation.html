@@ -6,6 +6,16 @@
                     <h3><i class="icon-th-list"></i> Conversation with {{userName}}</h3>
                 </div>
                 <div class="box-content padding">
+                    {{#if isTalkingWithAdmin}}
+                        <div class="hero-unit" style='text-align: center'>
+                        <h4>Howdy! </h4>
+                        <p class="lead">I'm here for you!</p>
+                        <p class="lead">Please treat this conversation as a personal conversation with The Brain.</p>
+                        <p class="lead">Tell me about any problems you've experienced using it.</p>
+                        <p class="lead">Or maybe you have some ideas how to make it better?</p>
+                        <p class="lead">Can't wait to hear from you!</p>
+                        </div>
+                    {{/if}}
                     <div style="text-align: center">
                         {{#if messagesReady}}
                             {{#unless allMessagesLoaded}}

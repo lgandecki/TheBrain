@@ -285,6 +285,33 @@ h3.repeat {
     -webkit-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
+
+/*.quickButtonLogin {*/
+    /*margin-bottom: 20px;*/
+    /*padding-right: 9px;*/
+    /*width: 100%;*/
+    /*height: 100px !important;*/
+    /*display: block;*/
+    /*position: relative;*/
+    /*background-color: #F2F2F2;*/
+    /*color: #204473;*/
+    /*border: 2px solid #219BCC;*/
+
+    /*transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+    /*-moz-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+    /*-webkit-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+
+/*}*/
+/*.quickButtonLogin:hover {*/
+    /*background-color: #219BCC;*/
+    /*color: #F2F2F2;*/
+
+
+    /*transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+    /*-moz-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+    /*-webkit-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
+/*}*/
+
 /*.btn-primary {*/
     /*transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
 /*}*/
@@ -359,6 +386,7 @@ h3.repeat {
     .btn-signUpWithFacebook, .btn-signUpWithEmailModal {
         font-size: 20px;
         padding-top: 7px;
+        height: 60px !important;
     }
 }
 

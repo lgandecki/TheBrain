@@ -84,6 +84,17 @@ Meteor.publish("paginatedFlashcards", function (opts, limit) {
         filter: _query,
         options: {
             limit: limit,
+            fields: {
+                'back': 1,
+                'backPicture': 1,
+                'comments': 1,
+                'downVotes': 1,
+                'upVotes': 1,
+                'front': 1,
+                'frontPicture': 1,
+                'user': 1
+            },
+            sort: { '_id' : 1}
         },
         mappings: [
             {

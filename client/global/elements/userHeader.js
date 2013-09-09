@@ -2,6 +2,7 @@ Template.userHeader.events({
     "click #logOut": function (e, template) {
         e.preventDefault();
         Meteor.logout();
+        Meteor.Router.to('/');
     }
     , "click .toggle-mobile": function (e, template) {
         $(".mobile-nav").slideToggle(600, "easeInOutBack");

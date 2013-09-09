@@ -1,6 +1,6 @@
 var currentFlashcard, currentItemId, itemsToLearn = [], _renderer, _renderer2;
 
-Meteor.subscribe("myItems");
+//Meteor.subscribe("myItems");
 //Meteor.subscribe("testItems");
 //Meteor.subscribe("currentFlashcard");
 
@@ -79,18 +79,18 @@ Template.repeat.item = function () {
 Template.repeat.flashcard = function () {
     var _item = Items.findOne({user: Meteor.userId(), _id: Session.get("currentItemId")});
     if (_item) {
-        console.log("_item", _item);
+//        console.log("_item", _item);
         _flashcard = Flashcards.findOne({_id: _item.flashcard});
-        console.log("_flashcard", _flashcard);
+//        console.log("_flashcard", _flashcard);
         return _flashcard;
     }
 }
 
 Template.itemHistory.previousAnswer = function () {
-    console.log("ever here in previous answer?");
+//    console.log("ever here in previous answer?");
 
     var _item = Items.findOne({user: Meteor.userId(), _id: Session.get("currentItemId")});
-    console.log("_item", _item);
+//    console.log("_item", _item);
     if (_item) {
         return _item.previousAnswers.reverse();
     }
@@ -213,7 +213,7 @@ Template.repeat.destroyed = function () {
 }
 
 _setAmountOfReps = function() {
-    console.log("ladujemy to?");
+//    console.log("ladujemy to?");
 
     Meteor.subscribe("itemsToRepeat");
 
@@ -312,7 +312,7 @@ _setAmountOfReps = function() {
 
 displayNextRepetition = function () {
     var _nextItem = returnNextItem();
-    console.log("nextItem ", _nextItem);
+//    console.log("nextItem ", _nextItem);
     if (_nextItem) {
         currentItemId = _nextItem;
         Session.set("currentItemId", currentItemId);
@@ -356,11 +356,11 @@ fillTemplate = function () {
             _backPicture = _currentItem.personalBackPicture;
         }
         if (_frontPicture) {
-            console.log("in front before ", front);
+//            console.log("in front before ", front);
             front = '<a id="test2" href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
         <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
         <div name="front" class="flashcardFront">' + front + '</div>';
-            console.log("front after", front);
+//            console.log("front after", front);
         }
 
         if (_backPicture) {
@@ -765,7 +765,9 @@ setNextRepetition = function (evaluation, _item) {
                 _item.timesRepeated = 0;
             }
             else {
-                if (evaluation === 3) {
+                console.log("evaluation", evaluation);
+                if (evaluation === "3") {
+                    console.log("are we inside?");
                     incrementExtraRepetitionsTotal();
                     _item.extraRepeatToday = true;
                 }

@@ -227,14 +227,16 @@ messageNotification = function(opts) {
     var _to = Meteor.users.findOne({_id: opts.to});
 
     if (_from && _to) {
-        Notifications.insert({
+        _key = {'user': _to._id, 'eventUserId': _from._id, 'read': false};
+//        Conversations.update(_key, _newConversation, {upsert: true});
+        Notifications.update(_key, {
             user: _to._id,
             eventUserId: _from._id,
             message: "Sent you a message!",
             type: "message",
             created: Meteor.moment.fullNow(),
             read: false
-        })
+        }, {upsert: true})
     }
 }
 
