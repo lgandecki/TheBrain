@@ -31,7 +31,8 @@ Meteor.publish("itemsToRepeatInCount", function (collection, now) {
     var self = this;
     var count = 0;
     var initializing = true;
-    var handle = Items.find({user: this.userId, collection: collection, nextRepetition: {$lte: now}, actualTimesRepeated: {$gt: 0}}).observeChanges({
+    var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+    var handle = Items.find({user: this.userId, collection: collection, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}, extraRepeatToday: false}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -81,11 +82,12 @@ Meteor.publish("itemsToReLearnInCount", function (collection) {
     });
 });
 
-Meteor.publish("learnedItemsInCount", function (collection) {
+Meteor.publish("learnedItemsInCount", function (collection, now) {
     var self = this;
     var count = 0;
     var initializing = true;
-    var handle = Items.find({user: this.userId, collection: collection, extraRepeatToday: true}).observeChanges({
+    var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+    var handle = Items.find({user: this.userId, collection: collection, nextRepetition: {$gt: _now}, actualTimesRepeated: {$gt: 0}, extraRepeatToday: false}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -141,7 +143,8 @@ Meteor.publish("itemsToRepeatCount", function (now) {
     var initializing = true;
     var that = this;
     console.log("that.userId 1", that.userId);
-    var handle = Items.find({user: this.userId, nextRepetition: {$lte: now}, actualTimesRepeated: {$gt: 0}}).observeChanges({
+    var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+    var handle = Items.find({user: this.userId, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -156,8 +159,11 @@ Meteor.publish("itemsToRepeatCount", function (now) {
 
     initializing = false;
     console.log("that.userId 2", that.userId);
-    self.added("itemsToRepeatCount", that.userId, {count: count});
+    if (that.userId) {
+        self.added("itemsToRepeatCount", that.userId, {count: count});
+    }
     self.ready();
+
 
     self.onStop(function () {
         handle.stop();
@@ -189,7 +195,9 @@ Meteor.publish("itemsToReLearnCount", function () {
 
     initializing = false;
 
-    self.added("itemsToReLearnCount", that.userId, {count: count});
+    if (that.userId) {
+        self.added("itemsToReLearnCount", that.userId, {count: count});
+    }
     self.ready();
 
     self.onStop(function () {
@@ -250,7 +258,9 @@ Meteor.publish("calendarItemsToRepeat", function (month, year) {
     initializing = false;
     console.log("that.userId 2", that.userId);
     console.log("count", count);
-    self.added("calendarItemsToRepeat", that.userId, {count: count});
+    if (that.userId) {
+        self.added("calendarItemsToRepeat", that.userId, {count: count});
+    }
     self.ready();
 
     self.onStop(function () {

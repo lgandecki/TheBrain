@@ -52,6 +52,7 @@ Template.withSelectedFlashcards.flashcardsSelectedLength = function () {
 
 Template.availableFlashcards.destroyed = function () {
     Session.set("selectedFlashcards", []);
+    Session.set("optsSearch", []);
 }
 
 Template.withSelectedFlashcards.events({

@@ -1,0 +1,1 @@
+YoutubeVideoFlashcardsCount = new Meteor.Collection("youtubeVideoFlashcardsCount");

@@ -14,7 +14,7 @@ Meteor.Router.add({
 
     '/repeat': "repeat",
 
-    '/learnAndRepeat': function () {
+    '/study': function () {
         Session.set("showScheduleModal", true);
         return "repeat";
     },
@@ -110,7 +110,19 @@ Meteor.Router.add({
 
     "/policy": function() {
         return "policy";
+    },
+
+    "/khanPlaylists": function(e) {
+        return "khanPlaylists";
+    },
+
+    "/khanVideo/:playlistSlug/:videoSlug/:youtube_id": function(playlistSlug, videoSlug, youtube_id) {
+        Session.set("playlistSlug", playlistSlug);
+        Session.set("videoSlug", videoSlug);
+        Session.set("youtube_id", youtube_id);
+        return "khanVideo";
     }
+
 
 
 });

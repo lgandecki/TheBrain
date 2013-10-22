@@ -15,17 +15,28 @@ Template.flashcardStats.renderGraph = function() {
                 _repetitions = [];
                 _userName = Meteor.userDetails.getFullName(item.user);
                 _userPicture = Meteor.userDetails.getProfilePicture(item.user);
+                var _previousEasinessFactor = "";
                 item.previousAnswers.forEach(function (previousAnswer) {
                     _repetition = {
                         x: previousAnswer.date,
-                        y: previousAnswer.easinessFactor,
+//                        y: previousAnswer.easinessFactor,
                         answer: previousAnswer.answer,
                         evaluation: previousAnswer.evaluation,
                         extraRepetition: previousAnswer.extraRepetition,
                         daysChange: previousAnswer.daysChange,
                         userPicture: _userPicture
                     }
-                    _repetitions.push(_repetition);
+
+                    if (previousAnswer.easinessFactor) {
+                        _repetition.y = previousAnswer.easinessFactor;
+                        _previousEasinessFactor = previousAnswer.easinessFactor;
+                    }
+                    else {
+                        _repetition.y = previousAnswer.easinessFactor;
+                    }
+                    if (_repetition.y) {
+                        _repetitions.push(_repetition);
+                    }
                 })
                 _students.push({name: _userName, data: _repetitions})
             })
@@ -95,7 +106,7 @@ Template.flashcardStats.renderGraph = function() {
 
                         $.each(this.points, function (i, point) {
                             s += '<img class="pull-right" style="width: 90px; height: 90px" src="' + point.point.userPicture + '" alt=""><br/>' + point.series.name + ': <br/><br/>' +
-                                ' easinessFactor ' + point.y + '<br/>answer ' + point.point.answer + '<br/>evaluation ' + point.point.evaluation
+                                ' easinessFactor ' + point.y + '<br/>answer ' + point.point.answer + '<br/>evaluation ' + point.point.evaluation + '<br/>days change ' + point.point.daysChange
 //                    console.log("point", point);
                         });
 
@@ -157,44 +168,23 @@ Template.flashcardStats.userName = function () {
 
 
 Template.flashcardStats.flashcardFront = function () {
-//    var _currentItem = Items.findOne({_id: Session.get("currentItemId")});
-    var front = stripHtml(this.front);
 
-
-    var _frontPicture
-
-    if (this.frontPicture) {
-        _frontPicture = this.frontPicture;
+    var _optsFront = {
+        side: this.front,
+        picture: this.frontPicture
     }
-
-
-    if (_frontPicture) {
-        front = '<a href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
-        <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="front" class="flashcardFront">' + front + '</div>';
-        console.log("front after", front);
-    }
-
-
-    return front;
+    return Meteor.flashcard.showSide(_optsFront);
 
 }
 
 Template.flashcardStats.flashcardBack = function () {
-    var back = stripHtml(this.back);
-    var _backPicture;
 
-    if (this.backPicture) {
-        _backPicture = this.backPicture;
+    var _optsBack = {
+        side: this.back,
+        picture: this.backPicture
     }
+    return Meteor.flashcard.showSide(_optsBack);
 
-    if (_backPicture) {
-        back = '<a href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
-        <img src="' + _backPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="back" class="flashcardBack">' + back + '</div>';
-    }
-
-    return back;
 
 
 }

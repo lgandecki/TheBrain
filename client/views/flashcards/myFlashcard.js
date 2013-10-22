@@ -32,54 +32,35 @@ Template.myFlashcard.downVotes = function () {
 }
 
 Template.myFlashcard.currentItemFront = function () {
-    var front = this.personalFront;
 
-
-    if (this.frontNote) {
-        front = front + "<br/><span class='note'>" + this.frontNote + "</span>";
+    var _optsFront = {
+        side: this.personalFront,
+        note: this.frontNote,
+        picture: this.personalFrontPicture
     }
+    return Meteor.flashcard.showSide(_optsFront);
 
-//    front = "<pre>" + front + "</pre>"
-    front = stripHtml(front);
-
-    var _frontPicture;
-    if (this.personalFrontPicture) {
-        _frontPicture = this.personalFrontPicture;
-    }
-
-
-    if (_frontPicture) {
-        console.log("in front before ", front);
-        front = '<a href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
-        <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="front" class="flashcardFront">' + front + '</div>';
-        console.log("front after", front);
-    }
-
-    return front.replace(/\n/g, "<br />");
 }
 
 Template.myFlashcard.currentItemBack = function () {
-    var back = this.personalBack;
 
-    if (this.backNote) {
-        back = back + "<br/><span class='note'>" + this.backNote + "</span>";
+    var _optsBack= {
+        side: this.personalBack,
+        note: this.backNote,
+        picture: this.personalBackPicture
     }
-    back = stripHtml(back);
+    return Meteor.flashcard.showSide(_optsBack);
 
-//    back = "<pre>" + back + "</pre>"
-    var _backPicture;
-    if (this.personalBackPicture) {
-        _backPicture = this.personalBackPicture;
+}
+
+Template.myFlashcard.nextRepetition = function () {
+    var _now = moment();
+    if (_now.valueOf() >= this.nextRepetition.valueOf()) {
+        return "Today";
     }
-
-    if (_backPicture) {
-        back = '<a href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
-        <img src="' + _backPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="back" class="flashcardBack">' + back + '</div>';
+    else {
+        return new moment(this.nextRepetition).fromNow();
     }
-
-    return back.replace(/\n/g, "<br />");
 }
 
 Template.myFlashcard.flashcardSelected = function () {
@@ -105,6 +86,12 @@ Template.myFlashcard.events({
         }
         console.log("downVotes opts", _opts);
         Meteor.call("flashcardVoteDown", _opts);
+    },
+    "click .showAnswer": function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(".showAnswer."+this._id).hide();
+        $(".flashcard.back."+this._id).show();
     },
     "click .clickable": function (e) {
         console.log("are we seeing this clickable?");

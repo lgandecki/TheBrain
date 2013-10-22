@@ -29,7 +29,7 @@ Template.notificationRow.eventUserPicture = function() {
     return Meteor.userDetails.getProfilePicture(this.eventUserId);
 }
 
-Template.notificationRow.eventUserName = function() {
-    return Meteor.userDetails.getName(this.eventUserId);
+Template.notificationRow.eventUserNameWithLink = function() {
+    return Meteor.userDetails.getNameWithLink(this.eventUserId);
 }
 

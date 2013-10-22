@@ -43,7 +43,8 @@ Template.collectionRow.itemsToReLearn = function() {
 }
 
 Template.collectionRow.learnedItems = function() {
-    Meteor.subscribe("learnedItemsInCount", this._id);
+    var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+    Meteor.subscribe("learnedItemsInCount", this._id, _now);
     var _learnedItemsIn = LearnedItemsInCount.findOne({_id: this._id});
     if (_learnedItemsIn){
         return _learnedItemsIn.count;

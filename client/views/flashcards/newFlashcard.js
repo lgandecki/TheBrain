@@ -195,17 +195,23 @@ validateNewFlashcard = function() {
 
 createNewFlashcard = function() {
     var _isPublic = ($("#public").val() === "true") ? true : false;
-    var _front = $("#newFront .flashcardFront").justtext();
 
-    $.each($("#newFront .flashcardFront").children(), function(key, value) {
-        _front = _front + "\n" + $(value).text()
-    })
+    var isNew = true;
 
-    var _back = $("#newBack .flashcardBack").justtext();
+    var _front = Meteor.flashcard.returnFront(isNew);
+    var _back = Meteor.flashcard.returnBack(isNew);
 
-    $.each($("#newBack .flashcardBack").children(), function(key, value) {
-        _back = _back + "\n" + $(value).text()
-    })
+//    var _front = $("#newFront .flashcardFront").justtext();
+//
+//    $.each($("#newFront .flashcardFront").children(), function(key, value) {
+//        _front = _front + "\n" + $(value).text()
+//    })
+//
+//    var _back = $("#newBack .flashcardBack").justtext();
+//
+//    $.each($("#newBack .flashcardBack").children(), function(key, value) {
+//        _back = _back + "\n" + $(value).text()
+//    })
 
 //    console.log("_front", _front);
 
@@ -229,8 +235,21 @@ createNewFlashcard = function() {
             "link": $("#linkSource").val(),
             "khan": $("#khanSource").val(),
             "other": $("#otherSource").val()
-        }
+        },
     };
+    var _youtube_id = Session.get("youtube_id");
+    if (_youtube_id) {
+        _newFlashcard.youtube_id = _youtube_id;
+        var _playlistSlug = Session.get("playlistSlug"); // if KhanAcademy
+        if (_playlistSlug) {
+            var _videoSlug = Session.get("videoSlug");
+            _newFlashcard.khanAcademy = {
+                playlistSlug: _playlistSlug,
+                videoSlug: _videoSlug
+            }
+        }
+    }
+
     var _course = $("#course").val();
     if (_course && _course != "Don't add to any courses") {
         _newFlashcard.course = _course;

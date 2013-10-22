@@ -37,7 +37,8 @@ Deps.autorun(function () {
 
 function returnNextItem() {
     // Najpierw powtorki
-    var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+
+    var _now = moment(Session.get("serverNextDay"))._d;
     var _nextItem = null;
 
     // Repetition first
@@ -139,7 +140,7 @@ Template.itemHistory.daysChangeFormat = function () {
         return "1 day";
     }
     else if (this.daysChange) {
-        return this.daysChange + "days"
+        return this.daysChange + " days"
     }
     else {
         return "error";
@@ -214,10 +215,11 @@ Template.repeat.destroyed = function () {
 
 _setAmountOfReps = function() {
 //    console.log("ladujemy to?");
+    var _now =  moment(Session.get("serverNextDay"))._d;
+//    var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
 
-    Meteor.subscribe("itemsToRepeat");
+    Meteor.subscribe("itemsToRepeat", _now);
 
-    var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
     Meteor.subscribe("itemsToRepeatCount", _now);
     var _repetitionsLeft = ItemsToRepeatCount.findOne({_id: Meteor.userId()}).count;
 
@@ -336,46 +338,33 @@ displayNextRepetition = function () {
 fillTemplate = function () {
     var _currentItem = Items.findOne({_id: Session.get("currentItemId")});
     if (_currentItem) {
-        front = stripHtml(_currentItem.personalFront);
-        back = stripHtml(_currentItem.personalBack);
 
-        if (_currentItem.frontNote) {
-            front = front + "<br/><span class='note'>" + stripHtml(_currentItem.frontNote) + "</span>";
+        var _optsFront = {
+            side: _currentItem.personalFront,
+            note: _currentItem.frontNote,
+            picture: _currentItem.personalFrontPicture
+        }
+        var _optsBack = {
+            side: _currentItem.personalBack,
+            note: _currentItem.backNote,
+            picture: _currentItem.personalBackPicture
+
         }
 
-        if (_currentItem.backNote) {
-            back = back + "<br/><span class='note'>" + stripHtml(_currentItem.backNote) + "</span>";
-        }
-
-
-        var _frontPicture, _backPicture;
-        if (_currentItem.personalFrontPicture) {
-            _frontPicture = _currentItem.personalFrontPicture;
-        }
-
-        if (_currentItem.personalBackPicture) {
-            _backPicture = _currentItem.personalBackPicture;
-        }
-        if (_frontPicture) {
-//            console.log("in front before ", front);
-            front = '<a id="test2" href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
-        <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="front" class="flashcardFront">' + front + '</div>';
-//            console.log("front after", front);
-        }
-
-        if (_backPicture) {
-            back = '<a id="test1" href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
-        <img src="' + _backPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="back" class="flashcardBack">' + back + '</div>';
+        var _front = Meteor.flashcard.showSide(_optsFront);
+        var _back = Meteor.flashcard.showSide(_optsBack);
+        var _collectionName = "";
+        if (_currentItem.collection) {
+            _collectionName = Meteor.collections.returnName(_currentItem.collection);
         }
 
 
-        $(".currentFlashcard > .front").html(front.replace(/&#13;&#10;/g, "<br />"));
-        $(".currentFlashcard > .back").html(back.replace(/&#13;&#10;/g, "<br />"));
+
+        $(".currentFlashcard > h5.collectionName").html("Collection: " + _collectionName);
+
+        $(".currentFlashcard > .front").html(_front);
+        $(".currentFlashcard > .back").html(_back);
         $(".currentFlashcard > .evaluate").attr("item-id", _currentItem._id);
-// setTimeout(function() {
-// $(".currentFlashcard > .answer").focus();
 
 
     }
@@ -664,6 +653,7 @@ setFakeNextRepetition = function (evaluation, _item) {
     if (_item) {
         var _opts = {};
         _opts.fakeDate = _item.nextRepetition;
+        console.log("_item", _item);
         if (_item.extraRepeatToday) {
             if (evaluation >= 4) {
                 _item.extraRepeatToday = false;
@@ -675,6 +665,7 @@ setFakeNextRepetition = function (evaluation, _item) {
                 extraRepetition: true,
                 evaluation: evaluation
             }
+            console.log("_opts in extra", _opts);
         }
         else {
             var _tmpNextRepetition = _item.nextRepetition;
@@ -743,12 +734,16 @@ setNextRepetition = function (evaluation, _item) {
     if (_item) {
 
         var _opts = {};
-        if (_item.extraRepeatToday) {
+        var _now = moment(Session.get("serverNextDay"))._d;
+        var _item2 = Items.findOne({_id: _item._id, user: Meteor.userId(), nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}});
+        if (!_item2 && _item.extraRepeatToday) {
+            // check if the time..
             if (evaluation >= 4) {
                 _item.extraRepeatToday = false;
                 decrementExtraRepetitionsLeft();
             }
             _opts = {
+                easinessFactor: _item.easinessFactor,
                 extraRepetition: true,
                 evaluation: evaluation
             }
@@ -756,7 +751,7 @@ setNextRepetition = function (evaluation, _item) {
         else {
             newParameteres = calculateItem(evaluation, _item.easinessFactor, _item.timesRepeated, _item.previousDaysChange);
 
-            _item.nextRepetition = moment().add("days", newParameteres.daysChange).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+            _item.nextRepetition = moment(Session.get("serverNextDay")).add("days", newParameteres.daysChange-1).add("hours", 6)._d;
             //_item.nextRepetition = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
             _item.easinessFactor = newParameteres.easinessFactor;
 

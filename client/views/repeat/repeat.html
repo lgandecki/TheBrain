@@ -73,7 +73,7 @@
                         <ul class="tabs tabs-inline tabs-left ">
                             {{#isolate}}
 
-                                <li class="active">
+                                <li>
                                     <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
                                 </li>
                                 <li>
@@ -94,6 +94,7 @@
                             <div class="flashcards">
 
                                 <div class="currentFlashcard">
+                                    <h5 class="collectionName"></h5>
                                     <div class="flashcard front"></div>
                                     <div class="flashcard answer hidden-phone" contentEditable="true"></div>
                                     <button class="btn btn-large btn-primary btn-primary-main btn-block btn-show-answer" style="">Show answer</button>
@@ -121,7 +122,7 @@
                             {{#isolate}}{{> flashcardComments }}{{/isolate}}
                         </div>
                         <div class="tab-pane fade" id="edit">
-                            {{> editFlashcard }}
+                            {{#isolate}}{{> editFlashcard }}  {{/isolate}}
                         </div>
                     </div>
                 </div>

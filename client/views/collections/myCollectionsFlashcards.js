@@ -47,6 +47,10 @@ Template.myCollectionsFlashcards.allItemsLoaded = function () {
 }
 
 Template.myCollectionsFlashcards.events({
+    "click .btn-examModeModal": function(e) {
+        e.preventDefault();
+        $("#examModeModal").modal("show");
+    },
     'click .load-more': function (e) {
         e.preventDefault();
         itemsHandle.loadNextPage();
@@ -57,18 +61,7 @@ Template.myCollectionsFlashcards.events({
 Template.myCollectionsFlashcards.collectionName = function () {
     var _collectionId = Session.get("selectedCollection");
     if (_collectionId) {
-    var _user = Meteor.user();
-
-    if (_user) {
-        var _collectionIndex = _.indexOf(_.pluck(_user.collections, '_id'), _collectionId);
-
-        if (_collectionIndex > -1 && _user.collections && _user.collections[_collectionIndex]) {
-            return _user.collections[_collectionIndex].name;
-        }
-    }
-    }
-    else {
-        return "My Flashcards";
+        return Meteor.collections.returnName(_collectionId);
     }
     return "";
 }

@@ -43,91 +43,48 @@ Template.updatedFlashcardVersions.currentItem = function () {
 }
 
 Template.updatedFlashcardVersions.currentItemFront = function () {
-    var front = this.personalFront;
 
-
-    if (this.frontNote) {
-        front = front + "<br/><span class='note'>" + this.frontNote + "</span>";
+    var _optsFront = {
+        side: this.personalFront,
+        note: this.frontNote,
+        picture: this.personalFrontPicture
     }
+    return "";
+    return Meteor.flashcard.showSide(_optsFront);
 
 
-    var _frontPicture;
-    if (this.personalFrontPicture) {
-        _frontPicture = this.personalFrontPicture;
-    }
-
-
-    if (_frontPicture) {
-        console.log("in front before ", front);
-        front = '<a href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
-        <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="front" class="flashcardFront">' + front + '</div>';
-        console.log("front after", front);
-    }
-
-    return front;
 }
 
 Template.updatedFlashcardVersions.currentItemBack = function () {
-    var back = this.personalBack;
-
-    if (this.backNote) {
-        back = back + "<br/><span class='note'>" + this.backNote + "</span>";
+    var _optsBack = {
+        side: this.personalBack,
+        note: this.backNote,
+        picture: this.personalBackPicture
     }
+    return "";
+    return Meteor.flashcard.showSide(_optsBack);
 
-    var _backPicture;
-    if (this.personalBackPicture) {
-        _backPicture = this.personalBackPicture;
-    }
-
-    if (_backPicture) {
-        back = '<a href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
-        <img src="' + _backPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="back" class="flashcardBack">' + back + '</div>';
-    }
-
-    return back;
 }
 Template.updatedFlashcardVersions.flashcardFront = function () {
-//    var this = Items.findOne({_id: Session.get("currentItemId")});
-    var front = stripHtml(this.front);
 
-
-    var _frontPicture
-
-    if (this.frontPicture) {
-        _frontPicture = this.frontPicture;
+    var _optsFront = {
+        side: this.front,
+        picture: this.frontPicture
     }
+    return Meteor.flashcard.showSide(_optsFront);
 
 
-    if (_frontPicture) {
-        front = '<a href="' + _frontPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + front + '"> \
-        <img src="' + _frontPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="front" class="flashcardFront">' + front + '</div>';
-        console.log("front after", front);
-    }
-
-
-    return front;
 
 }
 
 
 Template.updatedFlashcardVersions.flashcardBack = function () {
-    var back = stripHtml(this.back);
-    var _backPicture;
-
-    if (this.backPicture) {
-        _backPicture = this.backPicture;
+    var _optsBack = {
+        side: this.back,
+        picture: this.backPicture
     }
+    return Meteor.flashcard.showSide(_optsBack);
 
-    if (_backPicture) {
-        back = '<a href="' + _backPicture + '" class="flashcardPicture pull-right slimboxPicture" title="' + back + '"> \
-        <img src="' + _backPicture + '/convert?h=80&w=80" class="editableImage"/></a> \
-        <div name="back" class="flashcardBack">' + back + '</div>';
-    }
-
-    return back;
 
 
 }

@@ -1,14 +1,25 @@
 var _renderer, _itemsToLearnCount = 0;
+Template.myCollectionsList.created = function() {
+    _itemsToLearnCount = 0;
+    Session.set("itemsToLearnCount", 0);
+}
+
+Template.myCollectionsList.destroyed = function() {
+    _itemsToLearnCount = 0;
+    Session.set("itemsToLearnCount", 0);
+}
+
 Template.myCollectionsList.collection = function() {
     return Meteor.user() ? Meteor.user().collections : [];
 };
 
 Template.myCollectionsList.itemsInCollection = function() {
-    Meteor.subscribe("itemsInCount", this._id);
-    var _itemsIn = ItemsInCount.findOne({_id: this._id});
-    if (_itemsIn){
-        return _itemsIn.count;
-    }
+    return Meteor.collections.returnItemsIn(this._id);
+//    Meteor.subscribe("itemsInCount", this._id);
+//    var _itemsIn = ItemsInCount.findOne({_id: this._id});
+//    if (_itemsIn){
+//        return _itemsIn.count;
+//    }
 //    return Items.find({user: Meteor.userId(), collection: this._id}).count();
 }
 
@@ -17,6 +28,10 @@ Template.myCollectionsList.itemsToLearn = function() {
     var _itemsToLearnIn = ItemsToLearnInCount.findOne({_id: this._id});
     if (_itemsToLearnIn) {
         _itemsToLearnCount += _itemsToLearnIn.count;
+        console.log("_itemsToLearnCount in itemsToLearn", _itemsToLearnCount);
+        if (_itemsToLearnCount > 0) {
+            $(".sliderInfo").show();
+        }
         Session.set("itemsToLearnCount", _itemsToLearnCount);
         return _itemsToLearnIn.count;
     }

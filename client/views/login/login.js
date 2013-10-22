@@ -2,7 +2,7 @@ var _renderer;
 Template.login.rendered = function() {
     //    window.clearTimeout(_renderer);
     //    _renderer = window.setTimeout(function () {
-    $("#workInProgressModal").modal("show");
+//    $("#workInProgressModal").modal("show");
 
 //    $(".btn-signUpWithFacebook").fitText(1.6, {maxFontSize: '40px'});
     ////

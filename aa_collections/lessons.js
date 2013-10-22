@@ -29,11 +29,14 @@ Meteor.methods({
         _newLessonId = new Meteor.Collection.ObjectID()._str;
 
         var lesson = _.extend(_.pick(lessonAttributes, "name", "shortDescription"), {
-            _id: _newLessonId
+            _id: _newLessonId,
+            studentsFlashcards: [],
+            teacherFlashcards: []
         });
 
         if (_newLessonId) {
             var event = {
+                "_id": new Meteor.Collection.ObjectID()._str,
                 "user": user._id,
                 "type": "newLesson",
                 "lessonId": _newLessonId,

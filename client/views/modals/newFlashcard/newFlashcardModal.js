@@ -23,6 +23,7 @@ Template.newFlashcardModal.selectedLessonName = function() {
 	return "";
 }
 
+
 Template.newFlashcardModal.rendered = function() {
 	$(".select2").select2();
 }

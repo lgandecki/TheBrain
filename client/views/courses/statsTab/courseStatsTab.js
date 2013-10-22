@@ -12,7 +12,9 @@ Template.courseStats.flashcard = function() {
         return;
     }
 
-    var _flashcardsIds = _.flatten(_.pluck(_selectedCourse.lessons, 'flashcards'));
+    var _studentsFlashcards = _.flatten(_.pluck(_selectedCourse.lessons, 'studentsFlashcards'));
+    var _teacherFlashcards = _.flatten(_.pluck(_selectedCourse.lessons, 'teacherFlashcards'));
+    var _flashcardsIds = _.union(_studentsFlashcards, _teacherFlashcards);
     return Flashcards.find({_id: {$in: _flashcardsIds}});
 }
 

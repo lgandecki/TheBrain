@@ -749,6 +749,11 @@ li.active > a {
     margin-bottom: 5px;
 }
 
+.examModeButton {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #ddd;
+}
 .withSelectedButtons {
     margin-bottom: 20px;
     padding-bottom: 20px;
@@ -800,4 +805,44 @@ li.active > a {
 
 .userRow:hover {
     background: #ccc;
+}
+
+.currentFlashcard > h5.collectionName{
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.khanPlaylistRow {
+    text-align: center;
+    border-top: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.khanPlaylistRow:hover {
+    background: #efefef;
+}
+.khanVideo {
+    text-align: left;
+    margin-top: 5px;
+}
+.khanVideos ul{
+    list-style: none;
+    /*text-decoration: underline;*/
+    color: #219BCC;
+
+
+}
+.khanVideo .icon-hand-right {
+    margin-top: 3px;
+    color: #000;
+}
+
+li.khanVideo:hover {
+    background: #dfdfdf;
+    cursor: pointer;
+
+}
+
+.highlighted {
+    background-color:yellow;
 }

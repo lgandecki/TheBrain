@@ -8,6 +8,10 @@ Template.messageCenter.conversation = function() {
     return Conversations.find();
 }
 
+Template.messageCenter.conversationsExist = function() {
+    return Conversations.find().count() > 0;
+}
+
 Template.messageCenter.helpers({
     conversationsReady: function() {
         return ! conversationsHandle.loading();

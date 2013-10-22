@@ -17,7 +17,7 @@
                 </li>
             </ul>
             <div class="tab-content tab-content-inline">
-                <div class="tab-pane active" id="inbox">
+                <div class="tab-pane active fade in" id="inbox">
                     <div class="highlight-toolbar">
 
                     </div>
@@ -31,9 +31,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{#each conversation}}
-                            {{> conversationRow}}
-                        {{/each}}
+                        {{#if conversationsExist}}
+                            {{#each conversation}}
+                                {{> conversationRow}}
+                            {{/each}}
+                        {{else}}
+                        <tr ><td colspan="4" style="text-align: center;">No conversations yet! Click on the "New conversation" tab to start one.</td></tr>
+
+                        {{/if}}
 
                         </tbody>
                     </table>
@@ -76,7 +81,7 @@
 </template>
 
 <template name="newConversationTab">
-    <div class="tab-pane fade tabbablePadding" id="newConversation">
+    <div class="tab-pane  fade tabbablePadding" id="newConversation">
         {{#isolate}}{{>newConversation}}{{/isolate}}
 </div>
 </template>

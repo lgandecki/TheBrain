@@ -17,6 +17,18 @@ Template.courseEvents.event = function() {
 Template.courseEvents.eventData = function (e) {
     var _event = {};
     switch (this.type) {
+        case 'newLesson':
+            var _course = Courses.findOne({_id: Session.get("selectedCourse")});
+            var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), this.lessonId);
+            var _lessonName = "";
+            if (_course.lessons[_lessonIndex]) {
+                _lessonName = _course.lessons[_lessonIndex].name;
+            }
+            _event = {
+                message: "New lesson is called " + _lessonName,
+                shortMessage: "created new lesson!"
+            }
+            break;
         case 'created':
 
             _event = {

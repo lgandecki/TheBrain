@@ -22,6 +22,10 @@
 
 <template name="myCollectionsList">
 
+    {{#constant}}<div style="display: none;" class="sliderInfo">
+        <p class="small">Use the slider to select how many new flashcards you want to learn</p>
+    </div>
+    {{/constant}}
     <div class="myCollectionsList">
 
         {{#each collection}}

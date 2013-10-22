@@ -70,6 +70,39 @@ Meteor.methods({
 
 
     },
+    makeCoursePublic: function(opts) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to change course settings");
+        var _course = Courses.findOne({_id: opts.courseId, admins: _user._id});
+        if (!_course)
+            throw new Meteor.Error(401, "You can't change settings of someone elses course!");
+
+        Courses.update({_id: opts.courseId, admins: _user._id}, {$set: {public: true}});
+
+    },
+    makeCoursePrivate: function(opts) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to change course settings");
+        var _course = Courses.findOne({_id: opts.courseId, admins: _user._id});
+        if (!_course)
+            throw new Meteor.Error(401, "You can't change settings of someone elses course!");
+
+        Courses.update({_id: opts.courseId, admins: _user._id}, {$set: {public: false}});
+
+
+    },
+    changeCourseName: function(opts) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to change course settings");
+        var _course = Courses.findOne({_id: opts.courseId, admins: _user._id});
+        if (!_course)
+            throw new Meteor.Error(401, "You can't change settings of someone elses course!");
+
+        Courses.update({_id: opts.courseId, admins: _user._id}, {$set: {name: opts.name}});
+    },
     downVoteCourse: function(courseId) {
         var user = Meteor.user();
         if (!user)

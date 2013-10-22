@@ -45,6 +45,18 @@ Meteor.methods({
             "score": 0
         });
 
+        if (flashcardAttributes.youtube_id) {
+            flashcard.youtube_id = flashcardAttributes.youtube_id;
+            if (flashcardAttributes.khanAcademy) {
+                flashcard.khanAcademy = {
+                    playlistSlug: flashcardAttributes.playlistSlug,
+                    videoSlug: flashcardAttributes.videoSlug
+                }
+            }
+
+
+        }
+
         if (flashcardAttributes.course) {
             console.log("flashcardAttributes", flashcardAttributes);
             if (!flashcardAttributes.lesson) {
@@ -143,6 +155,17 @@ Meteor.methods({
             opts.itemOpts.flashcardVersionSeen = _flashcard.version;
             Meteor.call("updateItem", opts.itemOpts);
         }
+
+        var _notificationOpts = {
+
+        }
+
+        _notificationOpts = {
+            user: _user._id,
+            flashcardId: _flashcard._id
+        };
+        updatedFlashcardNotification(_notificationOpts);
+
 
         // TODO Notification to owner
 
@@ -581,8 +604,8 @@ returnItem = function (collectionId, flashcard) {
         "personalBack": flashcard.back,
         "personalFrontPicture": flashcard.frontPicture,
         "personalBackPicture": flashcard.backPicture,
-        "flashcardVersion": 1,
-        "flashcardVersionSeen": 1
+        "flashcardVersion": flashcard.version,
+        "flashcardVersionSeen": flashcard.version
     }
     return item;
 }
@@ -591,12 +614,19 @@ var addFlashcardToLesson = function (opts) {
     var _course = Courses.findOne(opts.course);
 
     var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), opts.lesson);
-    var modifier = {$addToSet: {}};
+    var modifier = {$addToSet: {}, $pull: {}};
     if (_.indexOf(_course.admins, Meteor.user()._id) > -1) {
-        modifier.$addToSet["lessons." + _lessonIndex + ".teacherFlashcards"] = opts.flashcardId;
+        if (_.indexOf(_course.lessons[_lessonIndex].studentsFlashcards, opts.flashcardId) > -1) {
+            modifier.$addToSet["lessons." + _lessonIndex + ".teacherFlashcards"] = opts.flashcardId;
+            modifier.$pull["lessons." + _lessonIndex + ".studentsFlashcards"] = opts.flashcardId;
+        } else {
+            modifier.$addToSet["lessons." + _lessonIndex + ".teacherFlashcards"] = opts.flashcardId;
+        }
     }
     else {
-        modifier.$addToSet["lessons." + _lessonIndex + ".studentsFlashcards"] = opts.flashcardId;
+        if (_.indexOf(_course.lessons[_lessonIndex].teacherFlashcards, opts.flashcardId) === -1) {
+            modifier.$addToSet["lessons." + _lessonIndex + ".studentsFlashcards"] = opts.flashcardId;
+        }
     }
 
     Courses.update(_course._id, modifier);

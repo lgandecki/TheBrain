@@ -168,3 +168,37 @@ Meteor.publish("lessonFlashcards", function (opts, limit) {
     }
 //    return Flashcards.find(_query);
 })
+
+Meteor.publish("youtubeFlashcards", function(opts, limit) {
+
+    _query = {
+        public: true,
+        "youtube_id": opts.youtube_id
+    }
+
+    console.log("youtube query", _query);
+
+    return Meteor.publishWithRelations({
+        handle: this,
+        collection: Flashcards,
+        filter: _query,
+        options: {
+            limit: limit,
+            sort: {score: -1}
+        },
+        mappings: [
+            {
+                key: 'user',
+                collection: Meteor.users,
+                options: {
+                    fields: {
+                        'identity': 1,
+                        'points': 1,
+                        'achievements': 1,
+                        'profile': 1
+                    }
+                }
+            }
+        ]
+    })
+})

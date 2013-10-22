@@ -122,7 +122,7 @@ Template.flashcardsOptions.teachersFlashcardsCount = function () {
 }
 
 
-Template.flashcardsOptions.flashcardsSelectedLength = function () {
+Template.flashcardsDefaultOptions.flashcardsSelectedLength = function () {
     var _flashcardsSelected = Session.get("selectedFlashcards");
     if (_flashcardsSelected) {
         return _flashcardsSelected.length;
@@ -130,7 +130,7 @@ Template.flashcardsOptions.flashcardsSelectedLength = function () {
     return 0;
 }
 
-Template.withSelectedFlashcards.flashcardsSelectedLength = function () {
+Template.flashcardsDefaultOptions.flashcardsSelectedLength = function () {
     var _flashcardsSelected = Session.get("selectedFlashcards");
     if (_flashcardsSelected) {
         return _flashcardsSelected.length;
@@ -437,6 +437,17 @@ Template.flashcardsOptions.events({
             }
         }
     },
+
+    "click .btn-addFlashcardToLesson": function (e, template) {
+        e.preventDefault();
+        $("#newFlashcardModal").modal('show');
+    }
+
+
+})
+
+
+Template.flashcardsDefaultOptions.events({
     "click .btn-addSelectedToCollection": function (e) {
 //        var _flashcards = Session.get("selectedFlashcards");
         var _callOpts = {
@@ -452,10 +463,6 @@ Template.flashcardsOptions.events({
         Meteor.myCall(_callOpts);
 
     },
-    "click .btn-addFlashcardToLesson": function (e, template) {
-        e.preventDefault();
-        $("#newFlashcardModal").modal('show');
-    },
     "click .btn-selectAll": function () {
         var _selectedFlashcards = [];
         $(".myFlashcardRow").each(function () {
@@ -470,5 +477,4 @@ Template.flashcardsOptions.events({
 
         _toggleFlashcardReload();
     }
-
 })

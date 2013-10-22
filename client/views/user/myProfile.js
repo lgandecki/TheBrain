@@ -68,5 +68,20 @@ Template.myProfile.events({
 				Meteor.popUp.error("TheBrain is confused", FPError.toString());
 			}
 		);
-	}
+	},
+    'click .changePassword': function(evt) {
+        if ($(".pw1").val() === $(".pw2").val()) {
+            Accounts.changePassword($(".pw").val(), $(".pw2").val(), function(error) {
+                if (error) {
+                    console.log("changing password error", error);
+                }
+                else {
+                    console.log("password changed");
+                }
+            });
+        }
+        else {
+            console.log("Passwords don't match");
+        }
+    }
 });

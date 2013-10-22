@@ -5,8 +5,9 @@ Meteor.publish("courseStats", function (opts, limit) {
     if (!_selectedCourse) {
         return;
     }
-
-    var _flashcardsIds = _.flatten(_.pluck(_selectedCourse.lessons, 'flashcards'))
+    var _studentsFlashcards = _.flatten(_.pluck(_selectedCourse.lessons, 'studentsFlashcards'));
+    var _teacherFlashcards = _.flatten(_.pluck(_selectedCourse.lessons, 'teacherFlashcards'));
+    var _flashcardsIds = _.union(_studentsFlashcards, _teacherFlashcards);
 //    var _studentIds = _selectedCourse.students;
 //    var _adminsIds = _selectedCourse.admins;
     var _usersIds = _.union(_selectedCourse.students, _selectedCourse.admins);

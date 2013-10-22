@@ -12,6 +12,21 @@ Meteor.autosubscribe(function () {
     }
 });
 
+if (Meteor.isClient) {
+    Meteor.startup(function () {
+        Meteor.call("getServerNextDay", function (error, result) {
+            Session.set("serverNextDay", result);
+        });
+        setInterval(function () {
+            console.log("doing interval in getServer");
+            Meteor.call("getServerNextDay", function (error, result) {
+                Session.set("serverNextDay", result);
+            });
+        }, 600000);
+    });
+}
+
+
 jQuery.fn.justtext = function() {
 
     return $(this).clone()
@@ -32,8 +47,8 @@ var _renderer = null;
 if (Meteor.userId()) {
     window.clearTimeout(_renderer);
     _renderer = window.setTimeout(function () {
-        var _now = Meteor.moment.fullNow();
-        var _thirtyMinutesAgo = new Date(_now.valueOf() - 60000 * 30);
+//        var _now = Meteor.moment.fullNow();
+        var _thirtyMinutesAgo = new Date(Session.get("serverTime") - 60000 * 30);
         Notifications.find({
             user: Meteor.userId(),
             read: false

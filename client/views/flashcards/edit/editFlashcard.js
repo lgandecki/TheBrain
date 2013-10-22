@@ -82,11 +82,23 @@ Template.editFlashcardForm.front = function () {
 var splitFlashcard = function(text) {
     text = stripHtml(text);
     var _splittedFront = text.split("\n");
-    var _front = _splittedFront.shift();
+    var _firstElement = _splittedFront.shift();
+    var _front;
+    if (_firstElement !== "") {
+         _front = _firstElement;
+    }
+    else {
+        _front = "<div>&nbsp;</div>";
+    }
 
     _splittedFront.forEach(
         function(line) {
+            if (line !== "") {
             _front = _front + "<div>" + line + "</div>";
+            }
+            else {
+                _front = _front + "<div>&nbsp;</div>";
+            }
         })
     return _front;
 
@@ -222,17 +234,13 @@ Template.editFlashcardButtons.events({
                     console.log("cancelled");
                 } else {
 
-                    var _front = $("#front .flashcardFront").justtext();
 
-                    $.each($("#front .flashcardFront").children(), function(key, value) {
-                        _front = _front + "\n" + $(value).text()
-                    })
+                    var _front = Meteor.flashcard.returnFront();
+                    var _back = Meteor.flashcard.returnBack();
 
-                    var _back = $("#back .flashcardBack").justtext();
+//                    var _back = $("#back .flashcardBack").justtext();
 
-                    $.each($("#back .flashcardBack").children(), function(key, value) {
-                        _back = _back + "\n" + $(value).text()
-                    })
+
 
                     var _flashcardOpts = {
                         flashcardId: Session.get("currentFlashcardId"),

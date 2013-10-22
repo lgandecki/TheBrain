@@ -32,7 +32,7 @@ validateNewCourse = function() {
     return !!(invalids.length === 0);
 }
 createNewCourse = function() {
-    _isPublic = ($("#newCoursePublic").val() === "true") ? true : false;
+    _isPublic = $("#newCoursePublic").prop("checked") ? true : false;
     var _newCourse = {
         name: $("#newCourseName").val(),
         shortDescription: $("#newCourseShortDescription").val(),

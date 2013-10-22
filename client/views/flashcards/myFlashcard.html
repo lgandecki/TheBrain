@@ -32,7 +32,8 @@
                         <div class="span8 selectableFlashcard">
                             <div class="center">
                                 <div class="flashcard front">{{{currentItemFront}}}</div>
-                                <div class="flashcard back">{{{currentItemBack}}}</div>
+                                <button class="btn btn-primary btn-primary-main btn-block showAnswer {{_id}}" data-id="{{_id}}">Show answer</button>
+                                <div class="flashcard back {{_id}}" style="display: none;">{{{currentItemBack}}}</div>
                             </div>
                         </div>
 

@@ -1,3 +1,13 @@
+if (Meteor.isServer) {
+    Meteor.methods({
+        getServerNextDay: function () {
+            var _time = moment(Date()).add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+            console.log(_time.valueOf());
+            return _time && _time.valueOf();
+        }
+    });
+}
+
 var _audit = function() {
     var _self = this;
     console.log("I'm in audit");

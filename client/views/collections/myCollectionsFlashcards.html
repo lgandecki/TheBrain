@@ -6,6 +6,12 @@
                     <h3><i class="icon-th-list"></i> {{collectionName}}</h3>
                 </div>
                 <div class="box-content padding">
+                    <div class="row-fluid examModeButton">
+                        <div class="span12">
+                            <button class=" btn btn-primary btn-primary-main btn-examModeModal btn-block"><i class="icon-hand-right"></i> Exam mode / schedule extra repetitions
+                            </button>
+                        </div>
+                    </div>
                     {{> withSelectedItems }}
                     {{#isolate}}
                         <div id="flashcardsList">
@@ -38,6 +44,7 @@
     {{> editFlashcardModal }}
     {{> historyFlashcardModal }}
     {{> commentsFlashcardModal }}
+    {{> examModeModal }}
 </template>
 
 <template name="withSelectedItems">

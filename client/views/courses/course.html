@@ -31,13 +31,19 @@
                                 <a href="#comments" data-toggle="tab" class="tabLink tabbable"><i class="icon-twitter"></i> <span
                                         class="hidden-phone">Comments </span>({{#isolate}}{{commentsLength}}{{/isolate}})</a>
                             </li>
+
                             {{#isolate}}
                                 {{#if isCourseOwner}}
 
                             <li>
-                                <a href="#courseStats" data-toggle="tab" class="tabLink tabbable"><i class="icon-edit"></i> <span
+                                <a href="#courseStats" data-toggle="tab" class="tabLink tabbable"><i class="icon-bar-chart"></i> <span
                                         class="hidden-phone">Stats</span></a>
                             </li>
+                                    <li>
+                                        <a href="#courseSettings" data-toggle="tab" class="tabLink tabbable"><i class="icon-edit"></i><span class="hidden-phone">Settings</span></a>
+                                    </li>
+
+
                                 {{/if}}
                                 {{/isolate}}
                         </ul>
@@ -46,9 +52,12 @@
 {{#isolate}}{{> courseEventsTab }}{{/isolate}}
                                                  {{#isolate}}{{> courseLessonsTab }}{{/isolate}}
 {{#isolate}}{{> commentsTab }}{{/isolate}}
+                        {{#isolate}}{{> courseSettingsTab}}{{/isolate}}
+
                         {{#isolate}}
+
 {{#if isCourseOwner}}
-{{> courseStatsTab}}
+    {{#isolate}}{{> courseStatsTab}}    {{/isolate}}
 
 {{/if}}
                         {{/isolate}}

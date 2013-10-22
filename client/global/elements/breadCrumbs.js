@@ -45,21 +45,21 @@ Template.breadCrumbs.link = function () {
                 path: _currentRoute
             });
             break;
-        case '/learnAndRepeat':
+        case '/study':
             _breadCrumbs.push({
-                name: "Learn and Repeat",
+                name: "Study!",
                 path: _currentRoute
             });
             break;
         case '/myCourses':
             _breadCrumbs.push({
-                name: "My Courses",
+                name: "Courses I'm teaching",
                 path: _currentRoute
             });
             break;
         case '/enrolledCourses':
             _breadCrumbs.push({
-                name: "Enrolled Courses",
+                name: "Courses I'm taking",
                 path: _currentRoute
             });
             break;
@@ -70,10 +70,11 @@ Template.breadCrumbs.link = function () {
             });
             break;
         case '/myCollections':
-            _breadCrumbs.push({
-                name: "My Collections",
-                path: _currentRoute
-            });
+            _breadCrumbs.push(_returnMyCollectionsBread());
+            break;
+        case '/myCollection':
+            _breadCrumbs.push(_returnMyCollectionsBread());
+            _breadCrumbs.push(_returnMyCollectionBread());
             break;
         case '/myProfile':
             _breadCrumbs.push({
@@ -179,6 +180,27 @@ var _returnCourseBread = function () {
             path: "/course/" + _course._id,
             name: "Course: " + _courseName
         };
+    }
+    return _breadCrumb;
+}
+
+var _returnMyCollectionsBread = function() {
+    var _breadCrumb = {
+        name: "My Collections",
+        path: "/myCollections"
+    };
+    return _breadCrumb;
+}
+
+var _returnMyCollectionBread = function() {
+    var _selectedCollection = Session.get("selectedCollection");
+    var _collectionName = "";
+    if (_selectedCollection) {
+        _collectionName = Meteor.collections.returnName(_selectedCollection);
+    }
+    var _breadCrumb = {
+        name: _collectionName,
+        path: window.location.pathname
     }
     return _breadCrumb;
 }

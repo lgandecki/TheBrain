@@ -1,11 +1,16 @@
 Meteor.publish("itemsToExtraRepeat", function() {
-    return Items.find({user: this.userId, extraRepeatToday: true}, {limit: 3});
+    return Items.find({user: this.userId, extraRepeatToday: true}, {limit: 3, sort: {lastRepetition: 1}});
 //    return Items.find({user: this.userId}, {fields: {_id: 1, collection: 1, user: 1, nextRepetition: 1, actualTimesRepeated: 1, extraRepeatToday: 1}});
 });
 
-Meteor.publish("itemsToRepeat", function() {
-    var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-    return Items.find({user: this.userId, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}, {limit: 3});
+Meteor.publish("itemsToRepeat", function(now) {
+    var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+    console.log("_now", _now);
+    console.log("now", now);
+    var _query = {user: this.userId, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}};
+    console.log("_query", _query);
+    console.log("Items Found", Items.find(_query, {limit: 3}).count());
+    return Items.find(_query, {limit: 3});
 })
 
 Meteor.publish("itemsToLearn", function(collection) {

@@ -1,6 +1,6 @@
 Template.enrolledCourses.course = function () {
     if (Meteor.user()) {
-        _enrolledCourses = Meteor.user().courses || [];
+        var _enrolledCourses = Meteor.user().courses || [];
         console.log("enrolledCourses", _enrolledCourses);
         return Courses.find({_id: {$in: _enrolledCourses}, admins: {$ne: Meteor.userId()}}, {sort: {score: -1}});
     }
@@ -9,6 +9,9 @@ Template.enrolledCourses.course = function () {
     }
 };
 
+Template.enrolledCourses.amINotEnrolledInAnyCourses = function() {
+    return Meteor.user() && Meteor.user().courses && Meteor.user().courses.length === 0;
+}
 
 Template.enrolledCourses.events({
     "click .courseRow": function (e) {
