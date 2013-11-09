@@ -23,6 +23,9 @@ Template.topPanel.rendered = function() {
         case '/myCollection':
             _currentRoute = "/myCollections";
             break;
+        case '/khanVideo':
+            _currentRoute = "/khanPlaylists";
+            break;
     }
 //    console.log("currentRoute", _currentRoute);
     //var _link = Meteor.Router[_currentRoute + "Path"]();

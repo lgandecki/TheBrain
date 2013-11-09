@@ -100,6 +100,15 @@ Template.breadCrumbs.link = function () {
                 path: _currentRoute
             });
             break;
+        case '/khanPlaylists':
+            _breadCrumbs.push(_returnKhanAcademyPlaylistsPathBread());
+            break;
+        case '/khanVideo':
+            _breadCrumbs.push(_returnKhanAcademyPlaylistsPathBread());
+//            _breadCrumbs.push({
+//                name: ""
+//            })
+            break;
         case '/messageCenter':
             _breadCrumbs.push(_returnMessageCenterPathBread())
             break;
@@ -202,5 +211,13 @@ var _returnMyCollectionBread = function() {
         name: _collectionName,
         path: window.location.pathname
     }
+    return _breadCrumb;
+}
+
+var _returnKhanAcademyPlaylistsPathBread = function() {
+    var _breadCrumb = {
+        name: "KhanAcademy Playlists",
+       path: "/khanPlaylists"
+    };
     return _breadCrumb;
 }

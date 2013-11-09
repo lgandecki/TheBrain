@@ -116,6 +116,49 @@ Meteor.methods({
         }
 
         Items.update({_id: {$in: opts.items}, user: user._id}, {$set: {collection: opts.newCollectionId}}, {multi: true});
+    },
+    deactivateItems: function(opts) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to update flashcards");
+
+        if (!opts.items) {
+            throw new Meteor.Error(401, "You have to specify the list of flashcards");
+        }
+        var _deactivatedCollectionId = Meteor.collections.returnId("Deactivated");
+
+        if (!_deactivatedCollectionId) {
+            var _opts = {
+                name: "Deactivated"
+            };
+            _deactivatedCollectionId = Meteor.call("newCollection", _opts);
+        }
+
+        console.log("_deactivatedCollectionId", _deactivatedCollectionId);
+
+        opts.items.forEach(function(item) {
+            var _item = Items.findOne({_id: item, user: _user._id});
+            if (_item) {
+                Items.update({_id: _item._id}, {$set: {deactivated: true, previousCollection: _item.collection, collection: _deactivatedCollectionId}})
+            }
+        })
+
+    },
+    activateItems: function(opts) {
+        var _user = Meteor.user();
+        if (!_user)
+            throw new Meteor.Error(401, "You need to login to update flashcards");
+
+        if (!opts.items) {
+            throw new Meteor.Error(401, "You have to specify the list of flashcards");
+        }
+
+        opts.items.forEach(function(item) {
+            var _item = Items.findOne({_id: item, user: _user._id});
+            if (_item) {
+                Items.update({_id: _item._id}, {$set: {deactivated: false, collection: _item.previousCollection}})
+            }
+        })
     }
 })
 //

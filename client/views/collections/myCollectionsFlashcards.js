@@ -117,6 +117,30 @@ Template.withSelectedItems.events({
         Meteor.myCall(_callOpts);
 
     },
+    "click .btn-deactivateItems": function (e) {
+        var _callOpts = {
+            function: "deactivateItems",
+            arguments: {
+                items: Session.get("selectedFlashcards")
+            },
+            errorTitle: "Error while deactivating flashcards",
+            successTitle: "Flashcards successfully deactivated"
+        }
+        Meteor.myCall(_callOpts);
+        Session.set("selectedFlashcards", []);
+    },
+    "click .btn-activateItems": function (e) {
+        var _callOpts = {
+            function: "activateItems",
+            arguments: {
+                items: Session.get("selectedFlashcards")
+            },
+            errorTitle: "Error while activating flashcards",
+            successTitle: "Flashcards successfully activated"
+        }
+        Meteor.myCall(_callOpts);
+        Session.set("selectedFlashcards", []);
+    },
     "click .btn-changeCollection": function (e) {
         $("#changeItemsCollectionModal").modal("show").on('hidden', function () {
             var _newCollectionId = $("#newCollectionId").val()
@@ -148,6 +172,10 @@ Template.withSelectedItems.events({
     }
 })
 
+Template.withSelectedItems.deactivatedCollection = function () {
+    var _deactivatedCollectionId = Meteor.collections.returnId("Deactivated");
+    return Session.get("selectedCollection") && _deactivatedCollectionId === Session.get("selectedCollection")
+}
 
 Template.collectionSelector.collection = function () {
     return Meteor.user() ? Meteor.user().collections : [];

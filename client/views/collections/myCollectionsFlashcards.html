@@ -65,6 +65,7 @@
         </div>
         <div class="withSelectedButtons">
             <div class="row-fluid">
+                {{#unless deactivatedCollection}}
                 {{#if isCollectionSelected}}<div class="span3" >
                     <button class=" btn btn-primary btn-primary-main btn-changeCollection btn-block"><i class="icon-hand-right"></i> Change collection
                     </button>
@@ -81,6 +82,12 @@
                     <button class=" btn btn-primary btn-primary-main btn-addItemsToCourse btn-block"><i class="icon-hand-right"></i> Add to course
                     </button>
                 </div>
+                {{else}}
+                    <div class="span12">
+                        <button class=" btn btn-primary btn-primary-main btn-activateItems btn-block"><i class="icon-hand-right"></i> Reactivate
+                        </button>
+                    </div>
+                {{/unless}}
             </div>
             <br/>
             <div class="row-fluid">

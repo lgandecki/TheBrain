@@ -590,6 +590,7 @@ returnItem = function (collectionId, flashcard) {
         "collection": collectionId,
         "user": user._id,
         "flashcard": flashcard._id,
+        "deactivated": false,
         "easinessFactor": 2.5,
         "nextRepetition": "",
         "timesRepeated": 0,

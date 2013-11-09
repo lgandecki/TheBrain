@@ -18,7 +18,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#khanVideoPlaylist" data-toggle="tab">KhanVideoPlaylist</a>
+                                <a href="#khanVideoPlaylist" data-toggle="tab"><i class="icon-film"></i>Playlist</a>
                             </li>
 
                         {{/isolate}}
@@ -35,10 +35,10 @@
                                        <br/>
                         <div class="row-fluid">
                             <div class="span6">
-{{#if isNotFirstVideo}} {{#with previousVideo}} <button class="btn btn-primary btn-primary-main nextVideo btn-block" data-id="/khanVideo/{{playlistSlug}}/{{readable_id}}"><i class="icon-hand-left"></i> {{title}}</button>{{/with}}{{/if}}
+{{#if isNotFirstVideo}} {{#with previousVideo}} <button class="btn btn-primary btn-primary-main nextVideo btn-block" data-id="/khanVideo/{{playlistSlug}}/{{readable_id}}/{{youtube_id}}"><i class="icon-hand-left"></i> {{title}}</button>{{/with}}{{/if}}
                             </div>
                             <div class="span6">
-{{#if isNotLastVideo}} {{#with nextVideo}}<button class="btn btn-primary btn-primary-main nextVideo btn-block" data-id="/khanVideo/{{playlistSlug}}/{{readable_id}}">{{title}} <i class="icon-hand-right"> </i></button>{{/with}}{{/if}}
+{{#if isNotLastVideo}} {{#with nextVideo}}<button class="btn btn-primary btn-primary-main nextVideo btn-block" data-id="/khanVideo/{{playlistSlug}}/{{readable_id}}/{{youtube_id}}">{{title}} <i class="icon-hand-right"> </i></button>{{/with}}{{/if}}
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ Meteor.publish("itemsToLearnInCount", function (collection) {
     var self = this;
     var count = 0;
     var initializing = true;
-    var handle = Items.find({user: this.userId, collection: collection, actualTimesRepeated: 0}).observeChanges({
+    var handle = Items.find({user: this.userId, collection: collection, deactivated: false, actualTimesRepeated: 0}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -32,7 +32,7 @@ Meteor.publish("itemsToRepeatInCount", function (collection, now) {
     var count = 0;
     var initializing = true;
     var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-    var handle = Items.find({user: this.userId, collection: collection, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}, extraRepeatToday: false}).observeChanges({
+    var handle = Items.find({user: this.userId, collection: collection, deactivated: false, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -59,7 +59,7 @@ Meteor.publish("itemsToReLearnInCount", function (collection) {
     var self = this;
     var count = 0;
     var initializing = true;
-    var handle = Items.find({user: this.userId, collection: collection, extraRepeatToday: true}).observeChanges({
+    var handle = Items.find({user: this.userId, collection: collection, deactivated: false, extraRepeatToday: true}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -87,7 +87,7 @@ Meteor.publish("learnedItemsInCount", function (collection, now) {
     var count = 0;
     var initializing = true;
     var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-    var handle = Items.find({user: this.userId, collection: collection, nextRepetition: {$gt: _now}, actualTimesRepeated: {$gt: 0}, extraRepeatToday: false}).observeChanges({
+    var handle = Items.find({user: this.userId, collection: collection, deactivated: false, nextRepetition: {$gt: _now}, actualTimesRepeated: {$gt: 0}, extraRepeatToday: false}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -144,7 +144,7 @@ Meteor.publish("itemsToRepeatCount", function (now) {
     var that = this;
     console.log("that.userId 1", that.userId);
     var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-    var handle = Items.find({user: this.userId, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).observeChanges({
+    var handle = Items.find({user: this.userId, deactivated: false, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing)
@@ -177,7 +177,7 @@ Meteor.publish("itemsToReLearnCount", function () {
     var count = 0;
     var initializing = true;
     var that = this;
-    var handle = Items.find({user: this.userId, extraRepeatToday: true}).observeChanges({
+    var handle = Items.find({user: this.userId,deactivated: false, extraRepeatToday: true}).observeChanges({
         added: function (doc, idx) {
             count++;
             if (!initializing) {
@@ -221,7 +221,7 @@ Meteor.publish("calendarItemsToRepeat", function (month, year) {
     var _nextRepetition;
     console.log("that.userId 1 calendar", that.userId);
 //    var handle = Items.find({user: this.userId, nextRepetition: {$gte: _startDate, $lt: _endDate}, actualTimesRepeated: {$gt: 0}}).observeChanges({
-    var handle = Items.find({user: this.userId, nextRepetition: {$gte: month, $lt: year}, actualTimesRepeated: {$gt: 0}}).observeChanges({
+    var handle = Items.find({user: this.userId, deactivated: false, nextRepetition: {$gte: month, $lt: year}, actualTimesRepeated: {$gt: 0}}).observeChanges({
         added: function (doc, idx) {
             console.log("added", idx);
             _nextRepetition = idx.nextRepetition;
