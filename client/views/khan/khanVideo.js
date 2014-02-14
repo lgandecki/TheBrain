@@ -98,6 +98,10 @@ Template.khanVideo.destroyed = function () {
 }
 
 Template.khanVideo.events({
+    "click .previousVideo": function (e) {
+        var _href = $(e.target).attr("data-id");
+        Meteor.Router.to(_href);
+    },
     "click .nextVideo": function (e) {
         var _href = $(e.target).attr("data-id");
         Meteor.Router.to(_href);
