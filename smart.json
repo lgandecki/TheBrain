@@ -8,6 +8,7 @@
     "modernizr-meteor": {},
     "paginated-subscription": {},
     "spin": {},
-    "publish-with-relations": {}
+    "publish-with-relations": {},
+    "cron-tick": {}
   }
 }
