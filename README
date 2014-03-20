@@ -1,1 +1,14 @@
 Repository for TheBrain project.
+
+-------------------------------
+
+Requirements:
+Meteorite (Installer & smart package manager for Meteor)
+Meteorite can be installed via npm.
+$ sudo -H npm install -g meteorite
+
+
+First run:
+$ mrt update
+$ meteor
+
