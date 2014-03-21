@@ -70,6 +70,14 @@ Template.login.events({
         // };
 
         // Meteor.call('newCollection', _collection);
-    }
+    },
+	"click .btn-signUpWithGoogle": function (e, template) {
+		e.preventDefault();
+        	Meteor.loginWithGoogle(function(err) {
+                	if (err) {
+                        	bootbox.alert("TheBrain is confused<br/>Please make sure you are logged in to google");
+                	}
+        	});
+	}
 })
 //Accounts.createUser(user);

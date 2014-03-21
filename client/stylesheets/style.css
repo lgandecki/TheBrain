@@ -375,14 +375,14 @@ h3.repeat {
 }
 
 @media (min-width : 768px) {
-    .btn-signUpWithFacebook, .btn-signUpWithEmailModal {
+    .btn-signUpWithFacebook, .btn-signUpWithGoogle, .btn-signUpWithEmailModal {
         font-size: 25px;
         padding-top: 7px;
     }
 }
 
 @media (max-width : 767px) {
-    .btn-signUpWithFacebook, .btn-signUpWithEmailModal {
+    .btn-signUpWithFacebook, .btn-signUpWithGoogle, .btn-signUpWithEmailModal {
         font-size: 20px;
         padding-top: 7px;
         height: 60px !important;

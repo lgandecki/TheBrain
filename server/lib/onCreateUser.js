@@ -1,12 +1,11 @@
 //callback for all user creation
 Accounts.onCreateUser(function (options, user) {
 
-
     if (options._id) {
         user._id = options._id;
     }
     else {
-        // user._id = 
+        //user._id = 
     }
 
     if (options.identity) {
@@ -51,7 +50,7 @@ Accounts.onCreateUser(function (options, user) {
     if (options.profile && options.profile.picture) {
         user.profile = options.profile;
     }
-    else if (options.profile) {
+    else if (options.profile && options.profile._id) {
         options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=square";
         user.profile = options.profile;
         _fbName = user.profile.name.split(" ");
@@ -61,6 +60,17 @@ Accounts.onCreateUser(function (options, user) {
         user.identity.nick = _firstName + " " + _lastName;
         user.identity.name.firstName = _firstName;
         user.identity.name.lastName = _lastName;
+    } else if (!user.emails) {
+	_gName = options.profile.name.split(" ");
+	_gNameLength = _gName.length;
+	_firstName = _gName[0];
+	_lastName = _gName[_gNameLength-1];
+	user.identity.nick = options.profile.name;
+	user.identity.name.firstName = _firstName;
+	user.identity.name.lastName = _lastName;
+        user.profile = {
+            picture: "http://elpaso.coloradogop.us/images/ui2013/dummy_user.png"
+        };
     } else {
         user.identity.nick = user.emails[0].address.split("@")[0];
         user.profile = {
