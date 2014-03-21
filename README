@@ -12,3 +12,10 @@ First run:
 $ mrt update
 $ meteor
 
+
+-------------------------------
+
+ChangeLog
+
+2014-03-21 - add login with Google
+
