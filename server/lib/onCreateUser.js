@@ -60,19 +60,20 @@ Accounts.onCreateUser(function (options, user) {
         user.identity.nick = _firstName + " " + _lastName;
         user.identity.name.firstName = _firstName;
         user.identity.name.lastName = _lastName;
-    } else if (!user.emails) {
-	_gName = options.profile.name.split(" ");
-	_gNameLength = _gName.length;
-	_firstName = _gName[0];
-	_lastName = _gName[_gNameLength-1];
-	user.identity.nick = options.profile.name;
-	user.identity.name.firstName = _firstName;
-	user.identity.name.lastName = _lastName;
-        user.profile = {
-            picture: "http://elpaso.coloradogop.us/images/ui2013/dummy_user.png"
-        };
+    } else if (user.services.google) {
+        user.identity.nick = user.services.google.name;
+        user.identity.name.firstName = user.services.google.given_name;
+        user.identity.name.lastName = user.services.google.family_name;
+        user.profile = {};
+        if (user.services.google.picture) {
+                user.profile.picture = user.services.google.picture;
+        }
+        else {
+                user.profile.picture = "http://elpaso.coloradogop.us/images/ui2013/dummy_user.png";
+        }
     } else {
         user.identity.nick = user.emails[0].address.split("@")[0];
+	user.identity.email = true;
         user.profile = {
             picture: "http://elpaso.coloradogop.us/images/ui2013/dummy_user.png"
         };
