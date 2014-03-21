@@ -74,9 +74,8 @@ Accounts.onCreateUser(function (options, user) {
     } else {
         user.identity.nick = user.emails[0].address.split("@")[0];
 	user.identity.email = true;
-        user.profile = {
-            picture: "http://elpaso.coloradogop.us/images/ui2013/dummy_user.png"
-        };
+        user.profile = {};
+        user.profile.picture = Gravatar.imageUrl(user.emails[0].address, { d: "http://elpaso.coloradogop.us/images/ui2013/dummy_user.png", s: "190" });
     }
 
 

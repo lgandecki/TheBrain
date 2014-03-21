@@ -9,6 +9,7 @@
     "paginated-subscription": {},
     "spin": {},
     "publish-with-relations": {},
-    "cron-tick": {}
+    "cron-tick": {},
+    "gravatar": {}
   }
 }
