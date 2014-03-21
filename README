@@ -17,5 +17,7 @@ $ meteor
 
 ChangeLog
 
-2014-03-21 - add login with Google
-
+[2014-03-21]
+	- add login with Google
+	- hide change password for facebook and google accounts
+	- add Gravatar profile picture to email account
