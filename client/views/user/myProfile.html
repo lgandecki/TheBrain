@@ -48,13 +48,20 @@
 														<a href="javascript:" name="nick" data-type="text" class="user-nick editable">{{identity.nick}}</a>
 													</div>
 												</div>
+<<<<<<< HEAD
 												
 						{{#if identity.email}}
+=======
+												<div class="control-group">
+                                                    <label for="email" class="control-label right">Your current email: {{email}}</label>
+												</div>
+>>>>>>> upstream/master
                                                 <div>
                                                     <h4>Change Password</h4>
                                                 </div>
-												<div class="control-group">
+												<div class="control-group" style="display: none;">
 													<label for="pw" class="control-label right">Current Password:</label>
+                                                    <span class="small">Hint: If you don't have a password yet leave this empty</span>
 													<div class="controls">
 														<input type="password" name="pw" class="input-xlarge pw" value="">
 

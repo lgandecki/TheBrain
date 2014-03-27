@@ -10,6 +10,10 @@
     "spin": {},
     "publish-with-relations": {},
     "cron-tick": {},
+<<<<<<< HEAD
     "gravatar": {}
+=======
+    "npm": {}
+>>>>>>> upstream/master
   }
 }

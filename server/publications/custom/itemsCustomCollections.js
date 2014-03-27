@@ -267,3 +267,100 @@ Meteor.publish("calendarItemsToRepeat", function (month, year) {
         handle.stop();
     });
 });
+
+
+
+Meteor.publish("customItemsToRepeat", function (now) {
+    var self = this;
+    var that = this;
+    var _userId = this.userId;
+    console.log("that.userId 1", that.userId);
+    var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+    var handle = Items.find({user: _userId, deactivated: false, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}, {limit: 2}).observeChanges({
+        added: function (itemId, item, abc) {
+//            console.log("Add this one ", item, "idx: ", abc, "abc: ", abc);
+//                console.log("that.userId", that.userId);
+//                console.log("count here", count);
+            var _flashcardQuery = {_id: item.flashcard, $or: [{ user: _userId}, {public: true}]};
+            console.log("_flashcardQuery", _flashcardQuery);
+            var _flashcard = Flashcards.findOne(_flashcardQuery);
+            console.log("_flashcard", _flashcard);
+            if (_flashcard) {
+                item.flashcardObject = _flashcard;
+                console.log("Adding itemoflashcard", item);
+                self.added("customItemsToRepeat", itemId, item);
+            }
+
+        },
+        changed: function(itemId, item) {
+            var _flashcard = Flashcards.findOne({_id: item.flashcard, $or: [{ user: _userId}, {public: true}]});
+            if (_flashcard) {
+                item.flashcardObject = _flashcard;
+                self.changed("customItemsToRepeat", itemId, item);
+            }
+        },
+        removed: function (itemId, idx) {
+            console.log("Delete this one ", itemId);
+            self.removed("customItemsToRepeat", itemId);
+        }
+
+
+    });
+
+    self.ready();
+
+
+    self.onStop(function () {
+        handle.stop();
+    });
+});
+
+
+
+Meteor.publish("customItemsToReLearn", function () {
+    var self = this;
+    var count = 0;
+    var initializing = true;
+    var that = this;
+    var _userId = this.userId;
+    var handle = Items.find({user: _userId,deactivated: false, extraRepeatToday: true}, {limit: 2}).observeChanges({
+        added: function (itemId, item, abc) {
+//            console.log("Add this one ", item, "idx: ", abc, "abc: ", abc);
+//                console.log("that.userId", that.userId);
+//                console.log("count here", count);
+            var _flashcardQuery = {_id: item.flashcard, $or: [{ user: _userId}, {public: true}]};
+            console.log("_flashcardQuery", _flashcardQuery);
+            var _flashcard = Flashcards.findOne(_flashcardQuery);
+            console.log("_flashcard", _flashcard);
+            if (_flashcard) {
+                item.flashcardObject = _flashcard;
+                console.log("Adding itemoflashcard", item);
+                self.added("customItemsToReLearn", itemId, item);
+            }
+
+        },
+        changed: function(itemId, item) {
+            var _flashcard = Flashcards.findOne({_id: item.flashcard, $or: [{ user: _userId}, {public: true}]});
+            if (_flashcard) {
+                item.flashcardObject = _flashcard;
+                self.changed("customItemsToReLearn", itemId, item);
+            }
+        },
+        removed: function (itemId, idx) {
+            console.log("Delete this one ", itemId);
+            self.removed("customItemsToReLearn", itemId);
+        }
+        // don't care about moved or changed
+    });
+
+//    initializing = false;
+//
+//    if (that.userId) {
+//        self.added("itemsToReLearnCount", that.userId, {count: count});
+//    }
+    self.ready();
+
+    self.onStop(function () {
+        handle.stop();
+    });
+});

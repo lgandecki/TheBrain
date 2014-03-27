@@ -43,7 +43,7 @@ function returnNextItem() {
 
     // Repetition first
     if (Session.get("repetitionsLeft") > 0) {
-        _nextItem = Items.findOne({user: Meteor.userId(), nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}});
+        _nextItem = Items.findOne({user: Meteor.userId(), nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}, {sort: {lastRepetition: 1}});
         if (_nextItem)
             return _nextItem._id;
     }
@@ -406,8 +406,28 @@ Template.repeat.events({
         hideBackAndEvaluation();
         var _evaluation = $(e.target).val();
         var _itemId = $(e.target).parent().attr("item-id");
-        var _item = Items.findOne(_itemId);
-        setNextRepetition(_evaluation, _item);
+//        var _item = Items.findOne(_itemId);
+        var _now = moment(Session.get("serverNextDay"))._d;
+        var _action = Meteor.flashcard.setNextRepetition(_evaluation, _itemId, _now);
+        switch (_action) {
+            case 'decrementExtraRepetitionsLeft':
+                decrementExtraRepetitionsLeft();
+                break;
+            case 'decrementNewFlashcardsLeftAndIncrementExtraRepetitionsTotal':
+                incrementExtraRepetitionsTotal();
+            case 'decrementNewFlashcardsLeft':
+                decrementNewFlashcardsLeft();
+                break;
+            case 'decrementRepetitionsLeftAndIncrementExtraRepetitionsTotal':
+                incrementExtraRepetitionsTotal();
+            case 'decrementRepetitionsLeft':
+                decrementRepetitionsLeft();
+                break;
+            case 'incrementExtraRepetitionsTotal':
+                incrementExtraRepetitionsTotal();
+                break;
+
+        }
     },
     "click a[href='#picture']": function (e) {
         $(".mainBox").switchClass("span8", "span11", 800, "easeInOutBack");
@@ -529,342 +549,210 @@ var decrementRepetitionsLeft = function() {
 //    }, 200);
 }
 
-generateRepetitions = function() {
-    var _answers = [
-        [0, 4,
-        5,
-        5,
-        3, 4,
-        4,
-        4,
-        5,
-        2, 4,
-        3, 5,
-        5,
-        5],
-         [3, 5,
-             5,
-             5,
-             4,
-             4,
-             4,
-             2, 4,
-             1, 3, 4,
-             2, 4,
-             3, 5,
-             5,
-             5],
-        [4,
-            5,
-            5,
-            5,
-            4,
-            4,
-            4,
-            3, 4,
-            3, 4,
-            2, 3, 4,
-            2, 4,
-            3, 5,
-            5,
-            5,
-            5],
-        [4,
-            5,
-            5,
-            5,
-            4,
-            4,
-            4,
-            3, 4,
-            3, 4,
-            2, 3, 4,
-            2, 4,
-            3, 5,
-            5,
-            5,
-            5],
-        [3,
-            4,
-            5,
-            5,
-            4,
-            4,
-            4,
-            3, 4,
-            3, 4,
-            2, 3, 4,
-            2, 4,
-            3, 5,
-            5,
-            5,
-            5],
-
-    ];
-    var weight = [0.01, 0.05, 0.15, 0.5, 0.4, 0.4];
-    var list = [0, 1, 2, 3, 4, 5];
-    var rand = function(min, max) {
-        return Math.random() * (max - min) + min;
-    };
-
-    var getRandomItem = function(list, weight) {
-        var total_weight = weight.reduce(function (prev, cur, i, arr) {
-            return prev + cur;
-        });
-
-        var random_num = rand(0, total_weight);
-        var weight_sum = 0;
-        //console.log(random_num)
-
-        for (var i = 0; i < list.length; i++) {
-            weight_sum += weight[i];
-            weight_sum = +weight_sum.toFixed(2);
-
-            if (random_num <= weight_sum) {
-                return list[i];
-            }
-        }
-
-        // end of function
-    };
-    for (var i = 0; i < 100; i++) {
-    Items.find({user: {$ne: "TYMaLrb495sKhfFh4"}}, {sort: {"nextRepetition": 1}, limit: 1}).fetch().forEach(function(item) {
-
-
-        weight[0] = weight[0] + 0.01;
-        weight[1] = weight[1] + 0.02;
-
-        weight[2] = weight[2] + 0.04;
-        weight[3] = weight[3] + 0.1;
-        weight[4] = weight[4] + 0.15;
-        weight[5] = weight[5] + 0.2;
-
-
-
-        var random_evaluation = getRandomItem(list, weight);
-
-            setFakeNextRepetition(random_evaluation, item);
-    })
-    }
-}
-
-
-setFakeNextRepetition = function (evaluation, _item) {
-    if (_item) {
-        var _opts = {};
-        _opts.fakeDate = _item.nextRepetition;
-        console.log("_item", _item);
-        if (_item.extraRepeatToday) {
-            if (evaluation >= 4) {
-                _item.extraRepeatToday = false;
-                decrementExtraRepetitionsLeft();
-            }
-            _opts = {
-                easinessFactor: _item.easinessFactor,
-                fakeDate: _item.nextRepetition,
-                extraRepetition: true,
-                evaluation: evaluation
-            }
-            console.log("_opts in extra", _opts);
-        }
-        else {
-            var _tmpNextRepetition = _item.nextRepetition;
-            newParameteres = calculateItem(evaluation, _item.easinessFactor, _item.timesRepeated, _item.previousDaysChange);
-            if (_item.nextRepetition) {
-                _item.nextRepetition = moment(_item.nextRepetition).add("days", newParameteres.daysChange).add("minutes", Math.floor(Math.random() * 30) + 1).seconds(0).milliseconds(0)._d;
-
-            }
-            else {
-                _item.nextRepetition = moment().add("days", newParameteres.daysChange).add("minutes", Math.floor(Math.random() * 30) + 1).seconds(0).milliseconds(0)._d;
-            }
-            //_item.nextRepetition = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-            _item.easinessFactor = newParameteres.easinessFactor;
-
-            if (newParameteres.resetTimesRepeated) {
-                incrementExtraRepetitionsTotal();
-                _item.extraRepeatToday = true;
-                _item.timesRepeated = 0;
-            }
-            else {
-                if (evaluation === 4) {
-                    _item.extraRepeatToday = true;
-                }
-                _item.timesRepeated++;
-            }
-
-            if (_item.actualTimesRepeated === 0) {
-                decrementNewFlashcardsLeft();
-            } else {
-                decrementRepetitionsLeft();
-            }
+//generateRepetitions = function() {
+//    var _answers = [
+//        [0, 4,
+//        5,
+//        5,
+//        3, 4,
+//        4,
+//        4,
+//        5,
+//        2, 4,
+//        3, 5,
+//        5,
+//        5],
+//         [3, 5,
+//             5,
+//             5,
+//             4,
+//             4,
+//             4,
+//             2, 4,
+//             1, 3, 4,
+//             2, 4,
+//             3, 5,
+//             5,
+//             5],
+//        [4,
+//            5,
+//            5,
+//            5,
+//            4,
+//            4,
+//            4,
+//            3, 4,
+//            3, 4,
+//            2, 3, 4,
+//            2, 4,
+//            3, 5,
+//            5,
+//            5,
+//            5],
+//        [4,
+//            5,
+//            5,
+//            5,
+//            4,
+//            4,
+//            4,
+//            3, 4,
+//            3, 4,
+//            2, 3, 4,
+//            2, 4,
+//            3, 5,
+//            5,
+//            5,
+//            5],
+//        [3,
+//            4,
+//            5,
+//            5,
+//            4,
+//            4,
+//            4,
+//            3, 4,
+//            3, 4,
+//            2, 3, 4,
+//            2, 4,
+//            3, 5,
+//            5,
+//            5,
+//            5],
+//
+//    ];
+//    var weight = [0.01, 0.05, 0.15, 0.5, 0.4, 0.4];
+//    var list = [0, 1, 2, 3, 4, 5];
+//    var rand = function(min, max) {
+//        return Math.random() * (max - min) + min;
+//    };
+//
+//    var getRandomItem = function(list, weight) {
+//        var total_weight = weight.reduce(function (prev, cur, i, arr) {
+//            return prev + cur;
+//        });
+//
+//        var random_num = rand(0, total_weight);
+//        var weight_sum = 0;
+//        //console.log(random_num)
+//
+//        for (var i = 0; i < list.length; i++) {
+//            weight_sum += weight[i];
+//            weight_sum = +weight_sum.toFixed(2);
+//
+//            if (random_num <= weight_sum) {
+//                return list[i];
+//            }
+//        }
+//
+//        // end of function
+//    };
+//    for (var i = 0; i < 100; i++) {
+//    Items.find({user: {$ne: "TYMaLrb495sKhfFh4"}}, {sort: {"nextRepetition": 1}, limit: 1}).fetch().forEach(function(item) {
+//
+//
+//        weight[0] = weight[0] + 0.01;
+//        weight[1] = weight[1] + 0.02;
+//
+//        weight[2] = weight[2] + 0.04;
+//        weight[3] = weight[3] + 0.1;
+//        weight[4] = weight[4] + 0.15;
+//        weight[5] = weight[5] + 0.2;
+//
+//
+//
+//        var random_evaluation = getRandomItem(list, weight);
+//
+//            setFakeNextRepetition(random_evaluation, item);
+//    })
+//    }
+//}
 
 
-            _item.actualTimesRepeated++;
-            _item.previousDaysChange = daysChange;
-            _opts = {
-                extraRepetition: false,
-                easinessFactor: _item.easinessFactor,
-                daysChange: _item.previousDaysChange,
-                evaluation: evaluation,
-                fakeDate: _tmpNextRepetition
-            }
+//setFakeNextRepetition = function (evaluation, _item) {
+//    if (_item) {
+//        var _opts = {};
+//        _opts.fakeDate = _item.nextRepetition;
+//        console.log("_item", _item);
+//        if (_item.extraRepeatToday) {
+//            if (evaluation >= 4) {
+//                _item.extraRepeatToday = false;
+//                decrementExtraRepetitionsLeft();
+//            }
+//            _opts = {
+//                easinessFactor: _item.easinessFactor,
+//                fakeDate: _item.nextRepetition,
+//                extraRepetition: true,
+//                evaluation: evaluation
+//            }
+//            console.log("_opts in extra", _opts);
+//        }
+//        else {
+//            var _tmpNextRepetition = _item.nextRepetition;
+//            newParameteres = calculateItem(evaluation, _item.easinessFactor, _item.timesRepeated, _item.previousDaysChange);
+//            if (_item.nextRepetition) {
+//                _item.nextRepetition = moment(_item.nextRepetition).add("days", newParameteres.daysChange).add("minutes", Math.floor(Math.random() * 30) + 1).seconds(0).milliseconds(0)._d;
+//
+//            }
+//            else {
+//                _item.nextRepetition = moment().add("days", newParameteres.daysChange).add("minutes", Math.floor(Math.random() * 30) + 1).seconds(0).milliseconds(0)._d;
+//            }
+//            //_item.nextRepetition = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
+//            _item.easinessFactor = newParameteres.easinessFactor;
+//
+//            if (newParameteres.resetTimesRepeated) {
+//                incrementExtraRepetitionsTotal();
+//                _item.extraRepeatToday = true;
+//                _item.timesRepeated = 0;
+//            }
+//            else {
+//                if (evaluation === 4) {
+//                    _item.extraRepeatToday = true;
+//                }
+//                _item.timesRepeated++;
+//            }
+//
+//            if (_item.actualTimesRepeated === 0) {
+//                decrementNewFlashcardsLeft();
+//            } else {
+//                decrementRepetitionsLeft();
+//            }
+//
+//
+//            _item.actualTimesRepeated++;
+//            _item.previousDaysChange = daysChange;
+//            _opts = {
+//                extraRepetition: false,
+//                easinessFactor: _item.easinessFactor,
+//                daysChange: _item.previousDaysChange,
+//                evaluation: evaluation,
+//                fakeDate: _tmpNextRepetition
+//            }
+//
+//        }
+//        Items.update(_item._id, {$set: {
+//            nextRepetition: _item.nextRepetition,
+//            easinessFactor: _item.easinessFactor,
+//            extraRepeatToday: _item.extraRepeatToday,
+//            timesRepeated: _item.timesRepeated,
+//            actualTimesRepeated: _item.actualTimesRepeated,
+//            previousDaysChange: _item.previousDaysChange}
+//        }, function (err) {
+//            if (err) {
+//                console.log("err ", err);
+//            }
+//        });
+//
+//        var _currentEvaluation = returnCurrentEvaluation(_opts);
+//        Items.update({_id: _item._id}, {$addToSet: {previousAnswers: _currentEvaluation}});
+//    }
+//
+//}
 
-        }
-        Items.update(_item._id, {$set: {
-            nextRepetition: _item.nextRepetition,
-            easinessFactor: _item.easinessFactor,
-            extraRepeatToday: _item.extraRepeatToday,
-            timesRepeated: _item.timesRepeated,
-            actualTimesRepeated: _item.actualTimesRepeated,
-            previousDaysChange: _item.previousDaysChange}
-        }, function (err) {
-            if (err) {
-                console.log("err ", err);
-            }
-        });
-
-        var _currentEvaluation = returnCurrentEvaluation(_opts);
-        Items.update({_id: _item._id}, {$addToSet: {previousAnswers: _currentEvaluation}});
-    }
-
-}
 
 
-setNextRepetition = function (evaluation, _item) {
-    if (_item) {
-
-        var _opts = {};
-        var _now = moment(Session.get("serverNextDay"))._d;
-        var _item2 = Items.findOne({_id: _item._id, user: Meteor.userId(), nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}});
-        if (!_item2 && _item.extraRepeatToday) {
-            // check if the time..
-            if (evaluation >= 4) {
-                _item.extraRepeatToday = false;
-                decrementExtraRepetitionsLeft();
-            }
-            _opts = {
-                easinessFactor: _item.easinessFactor,
-                extraRepetition: true,
-                evaluation: evaluation
-            }
-        }
-        else {
-            newParameteres = calculateItem(evaluation, _item.easinessFactor, _item.timesRepeated, _item.previousDaysChange);
-
-            _item.nextRepetition = moment(Session.get("serverNextDay")).add("days", newParameteres.daysChange-1).add("hours", 6)._d;
-            //_item.nextRepetition = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-            _item.easinessFactor = newParameteres.easinessFactor;
-
-            if (newParameteres.resetTimesRepeated) {
-                incrementExtraRepetitionsTotal();
-                _item.extraRepeatToday = true;
-                _item.timesRepeated = 0;
-            }
-            else {
-                console.log("evaluation", evaluation);
-                if (evaluation === "3") {
-                    console.log("are we inside?");
-                    incrementExtraRepetitionsTotal();
-                    _item.extraRepeatToday = true;
-                }
-                _item.timesRepeated++;
-            }
-
-            if (_item.actualTimesRepeated === 0) {
-                decrementNewFlashcardsLeft();
-            } else {
-                decrementRepetitionsLeft();
-            }
 
 
-            _item.actualTimesRepeated++;
-            _item.previousDaysChange = daysChange;
-            _opts = {
-                extraRepetition: false,
-                easinessFactor: _item.easinessFactor,
-                daysChange: _item.previousDaysChange,
-                evaluation: evaluation
-            }
-
-        }
-        var _now = Meteor.moment.fullNow();
-        Items.update(_item._id, {$set: {
-            nextRepetition: _item.nextRepetition,
-            easinessFactor: _item.easinessFactor,
-            extraRepeatToday: _item.extraRepeatToday,
-            timesRepeated: _item.timesRepeated,
-            actualTimesRepeated: _item.actualTimesRepeated,
-            previousDaysChange: _item.previousDaysChange,
-            lastRepetition: _now}
-        }, function (err) {
-            if (err) {
-                console.log("err ", err);
-            }
-        });
-
-        var _currentEvaluation = returnCurrentEvaluation(_opts);
-        Items.update({_id: _item._id}, {$addToSet: {previousAnswers: _currentEvaluation}});
-    }
-
-}
-
-calculateItem = function (evaluation, easinessFactor, timesRepeated, previousDaysChange) {
-    resetTimesRepeated = false;
-    easinessFactor = calculateEasinessFactor(evaluation, easinessFactor);
-    if (evaluation < 3) {
-        daysChange = 1;
-        resetTimesRepeated = true;
-    }
-    else if (timesRepeated === 0) {
-        daysChange = 1;
-    }
-    else if (timesRepeated === 1) {
-        daysChange = 5;
-    }
-    else {
-        daysChange = Math.round(previousDaysChange * easinessFactor);
-    }
-    return {
-        'daysChange': daysChange,
-        'easinessFactor': easinessFactor,
-        'resetTimesRepeated': resetTimesRepeated
-    }
-};
-
-calculateEasinessFactor = function (evaluation, easinessFactor) {
-    easinessFactor = roundToTwo(easinessFactor - 0.8 + (0.28 * evaluation) - (0.02 * evaluation * evaluation));
-    if (easinessFactor <= 1.3 ) {
-        return 1.3;
-    }
-    else if (easinessFactor >= 3.0 ) {
-        return 3.0;
-    }
-    else {
-        return easinessFactor;
-    }
-}
-
-roundToTwo = function (value) {
-    return(Math.round(value * 100) / 100);
-}
-
-var returnCurrentEvaluation = function (opts) {
-    var _now = Meteor.moment.fullNow();
-    var _currentEvaluation = {
-        evaluation: opts.evaluation,
-        date: opts.fakeDate || _now,
-        answer: $(".currentFlashcard > .answer").text() || "No answer provided"
-    }
-    if (opts.extraRepetition) {
-        _currentEvaluation.extraRepetition = true;
-    }
-    else {
-        _currentEvaluation.extraRepetition = false;
-        _currentEvaluation.daysChange = opts.daysChange;
-    }
-    _currentEvaluation.easinessFactor = opts.easinessFactor;
-    return _currentEvaluation;
-}
 
 showBackAndEvaluation = function () {
     $(".currentFlashcard > .answer").blur();

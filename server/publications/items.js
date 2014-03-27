@@ -10,6 +10,7 @@ Meteor.publish("itemsToRepeat", function(now) {
     var _query = {user: this.userId, deactivated: false, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}};
     console.log("_query", _query);
     console.log("Items Found", Items.find(_query, {limit: 3}).count());
+    var _itemsToRepeat = Items.find(_query, {limit: 3});
     return Items.find(_query, {limit: 3});
 })
 
