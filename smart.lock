@@ -12,11 +12,8 @@
       "spin": {},
       "publish-with-relations": {},
       "cron-tick": {},
-<<<<<<< HEAD
-      "gravatar": {}
-=======
+      "gravatar": {},
       "npm": {}
->>>>>>> upstream/master
     },
     "packages": {
       "jquery-ui": {
@@ -69,17 +66,15 @@
         "tag": "v0.0.4",
         "commit": "44cff9116af510fe53704fdeeff57c444ceb75ba"
       },
-<<<<<<< HEAD
       "gravatar": {
         "git": "https://github.com/tmeasday/meteor-gravatar.git",
         "tag": "v0.0.4",
         "commit": "d1052ff4401725c23fb199c0e0a36e29b926bc22"
-=======
+      },
       "npm": {
         "git": "https://github.com/arunoda/meteor-npm.git",
         "tag": "v0.2.6",
         "commit": "177ab6118de5bf8cffb19481343d5762ff7a2aaf"
->>>>>>> upstream/master
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
@@ -90,7 +85,6 @@
         "git": "https://github.com/tmeasday/meteor-HTML5-History-API.git",
         "tag": "v4.0.0",
         "commit": "dc4965f1424cfca625ec3fbea17eace03f8e32c5"
-<<<<<<< HEAD
       },
       "crypto-md5": {
         "git": "https://github.com/oortcloud/meteor-crypto-md5.git",
@@ -101,8 +95,6 @@
         "git": "https://github.com/oortcloud/meteor-crypto-base.git",
         "tag": "v3.1.2.1",
         "commit": "5df8d82a0595553415bbfae2930c6ecbeece5794"
-=======
->>>>>>> upstream/master
       }
     }
   }
