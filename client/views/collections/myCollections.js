@@ -7,6 +7,25 @@ Template.myCollections.collection = function() {
 
 
 Template.collectionRow.rendered = function() {
+    
+    $.fn.editable.defaults.mode = 'inline';
+
+    $('.collection-name.editable:not(.editable-click)').editable('destroy').editable({
+        success: function (response, newName) {
+            collectionAttributes = {
+                collectionId: $(this).attr("data-id"),
+                name: newName
+            }
+            Meteor.call("updateCollectionName", collectionAttributes, function (error, id) {
+                if (error) {
+                    Meteor.popUp.error("TheBrain is confused", error.reason);
+                }
+                else {
+                    Meteor.popUp.success("Collection name updated", "TheBrain made the neural connections changes you asked for.");
+                }
+            });
+        }});    
+    
     console.log("this", this);
 //    Meteor.subscribe("itemsToLearnIn", this._id);
 }
@@ -62,6 +81,10 @@ Template.myCollections.events({
 
 });
 Template.collectionRow.events({
+    "click .collectionRow .editable": function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    },    
     "click .collectionRow": function(e) {
         Meteor.Router.to('/myCollection/' + this._id);
     },

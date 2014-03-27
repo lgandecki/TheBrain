@@ -7,6 +7,14 @@ Template.logInForm.events({
             }
         });
     },
+    "click .btn-signUpWithGoogle": function(e, template) {
+        e.preventDefault();
+        Meteor.loginWithGoogle(function(err) {
+            if (err) {
+                bootbox.alert("TheBrain is confused<br/>Please make sure you are logged in to google");
+            }
+        });
+    },
     "mouseenter .btn-mine": function(e) {
         $(e.target).switchClass("quickButtonNormal", "quickButtonHover");
     },

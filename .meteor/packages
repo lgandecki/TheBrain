@@ -1,0 +1,19 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+standard-app-packages
+preserve-inputs
+bootstrap
+accounts-password
+accounts-facebook
+paginated-subscription
+router
+publish-with-relations
+jquery-ui
+select2
+spin
+cron-tick
+accounts-google
+gravatar
