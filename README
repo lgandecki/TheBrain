@@ -17,6 +17,9 @@ $ meteor
 
 ChangeLog
 
+[2014-03-27]
+	- add change collection name
+
 [2014-03-21]
 	- add login with Google
 	- hide change password for facebook and google accounts
