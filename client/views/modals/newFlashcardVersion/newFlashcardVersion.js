@@ -49,7 +49,6 @@ Template.updatedFlashcardVersions.currentItemFront = function () {
         note: this.frontNote,
         picture: this.personalFrontPicture
     }
-    return "";
     return Meteor.flashcard.showSide(_optsFront);
 
 
@@ -61,7 +60,6 @@ Template.updatedFlashcardVersions.currentItemBack = function () {
         note: this.backNote,
         picture: this.personalBackPicture
     }
-    return "";
     return Meteor.flashcard.showSide(_optsBack);
 
 }
