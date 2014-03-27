@@ -63,6 +63,19 @@ Template.login.events({
         Meteor.loginWithFacebook(function(err) {
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you are logged in to facebook");
+            } else {
+                console.log("sign up with facebook")
+                var _user = Meteor.user();
+                if (_user && ((_user.emails && _user.emails.length === 0) || !_user.emails)) {
+                    console.log("before the call");
+                    Meteor.call("addEmailFromFacebook", "", function(error, id) {
+                        if (error) {
+                            Meteor.popUp.error("TheBrain is confused", error.reason);
+                        } else {
+                            Meteor.popUp.success("Email updated", "TheBrain made the neural connections changes you asked for.");
+                        }
+                    });
+                }
             }
         });
         // _collection = {

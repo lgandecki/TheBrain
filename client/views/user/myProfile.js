@@ -47,6 +47,11 @@ Template.myProfile.rendered = function() {
 
 };
 
+Template.myProfile.email = function() {
+    var _user = Meteor.user();
+    return _user.emails && _user.emails[0] && _user.emails[0].address;
+}
+
 Template.myProfile.events({
 	'click .changeProfilePicture': function(evt) {
 		filepicker.pick({
@@ -71,7 +76,7 @@ Template.myProfile.events({
 	},
     'click .changePassword': function(evt) {
         if ($(".pw1").val() === $(".pw2").val()) {
-            Accounts.changePassword($(".pw").val(), $(".pw2").val(), function(error) {
+            Meteor.call("addMyPassword", $(".pw2").val(), function(error){
                 if (error) {
                     console.log("changing password error", error);
                 }
@@ -79,6 +84,14 @@ Template.myProfile.events({
                     console.log("password changed");
                 }
             });
+//            Accounts.changePassword($(".pw").val(), $(".pw2").val(), function(error) {
+//                if (error) {
+//                    console.log("changing password error", error);
+//                }
+//                else {
+//                    console.log("password changed");
+//                }
+//            });
         }
         else {
             console.log("Passwords don't match");
