@@ -42,7 +42,7 @@
 
 <template name="collectionRow">
     <tr class="collectionRow" data-id="{{_id}}">
-        <td><a href="javascript:" name="name" data-id="{{_id}}" data-type="text" class="collection-name editable">{{name}}</a></td>
+<td>{{#if isRestricted}}{{name}}{{else}}<a href="javascript:" name="name" data-id="{{_id}}" data-type="text" class="collection-name editable">{{name}}</a>{{/if}}</td>
         <td class="hidden-480">{{itemsToLearn}}</td>
         <td class="hidden-480">{{itemsToRepeat}}</td>
         <td class="hidden-480">{{itemsToReLearn}}</td>

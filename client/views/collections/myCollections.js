@@ -84,7 +84,10 @@ Template.collectionRow.events({
     "click .collectionRow .editable": function(e) {
         e.preventDefault();
         e.stopPropagation();
-    },     
+    },
+    "click .collectionRow .btn": function(e) {
+        e.stopPropagation();
+    },
     "click .collectionRow": function(e) {
         Meteor.Router.to('/myCollection/' + this._id);
     },
@@ -93,3 +96,7 @@ Template.collectionRow.events({
         e.stopPropagation();
     }
 })
+
+Template.collectionRow.isRestricted = function() {
+    return (this.name === "Main collection" || this.name === "Deactivated");
+}
