@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /jquery-ui
 /jquery-ui-bootstrap
 /accounts-ui-bootstrap-dropdown
@@ -14,25 +13,8 @@
 /gravatar
 /crypto-md5
 /crypto-base
-=======
-jquery-ui
-jquery-ui-bootstrap
-bootstrap-updated
-accounts-ui-bootstrap-dropdown
-router
-page-js-ie-support
-select2
-modernizr-meteor
-paginated-subscription
-spin
-fancybox
-publish-with-relations
-jquery-csv
-HTML5-History-API
-/accounts-ui-bootstrap-dropdown
-/router
-/select2
-/spin
-/cron-tick
+/bootstrap-updated
+/page-js-ie-support
+/fancybox
+/jquery-csv
 /npm
->>>>>>> upstream/master
