@@ -23,9 +23,7 @@ if (Meteor.isClient) {
                 Session.set("serverNextDay", result);
             });
         }, 600000);
-        Meteor.call("getServerTime", function (error, result) {
-            Session.set("serverTime", result);
-        })
+
     });
 
 }
@@ -52,35 +50,40 @@ if (Meteor.userId()) {
     window.clearTimeout(_renderer);
     _renderer = window.setTimeout(function () {
 //        var _now = Meteor.moment.fullNow();
-        var _thirtyMinutesAgo = new Date(Session.get("serverTime") - 60000 * 30);
-        console.log("_thirtyMinutesAgo", _thirtyMinutesAgo);
-        Notifications.find({
-            user: Meteor.userId(),
-            read: false
-            ,created: {
-                $gte: _thirtyMinutesAgo
-            }
-        }).observe({
-                added: function (item) {
+        Meteor.call("getServerTime", function (error, result) {
+            var _serverTime = result;
+            var _thirtyMinutesAgo = new Date(_serverTime - 60000 * 30);
+            console.log("_thirtyMinutesAgo", _thirtyMinutesAgo);
+            Notifications.find({
+                user: Meteor.userId(),
+                read: false
+                ,created: {
+                    $gte: _thirtyMinutesAgo
+                }
+            }).observe({
+                    added: function (item) {
 
-                    console.log("added again ", item);
+                        console.log("added again ", item);
 
-                    var _eventUserName = Meteor.userDetails.getName(item.eventUserId);
-                    var _eventUserPicture = Meteor.userDetails.getProfilePicture(item.eventUserId);
-                    if (!_eventUserName) {
-                        setTimeout(function () {
-                            _eventUserName = Meteor.userDetails.getName(item.eventUserId);
-                            _eventUserPicture = Meteor.userDetails.getProfilePicture(item.eventUserId);
-                            console.log("from timeout username ", _eventUserName, "item", item);
+                        var _eventUserName = Meteor.userDetails.getName(item.eventUserId);
+                        var _eventUserPicture = Meteor.userDetails.getProfilePicture(item.eventUserId);
+                        if (!_eventUserName) {
+                            setTimeout(function () {
+                                _eventUserName = Meteor.userDetails.getName(item.eventUserId);
+                                _eventUserPicture = Meteor.userDetails.getProfilePicture(item.eventUserId);
+                                console.log("from timeout username ", _eventUserName, "item", item);
+
+                                Meteor.popUp.notification(_eventUserName, item.message, _eventUserPicture);
+                            }, 2000);
+                        } else {
 
                             Meteor.popUp.notification(_eventUserName, item.message, _eventUserPicture);
-                        }, 2000);
-                    } else {
-
-                        Meteor.popUp.notification(_eventUserName, item.message, _eventUserPicture);
+                        }
                     }
-                }
-            });
+                });
+
+        });
+
     }, 300);
 }
 //});
