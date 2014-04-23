@@ -26,10 +26,13 @@ Meteor.publish("usersPaginated", function (opts, limit) {
 });
 
 Meteor.publish("otherUser", function(id){
-    return id && Meteor.users.find({_id: id}, {fields: {
-        'identity': 1,
-        'points': 1,
-        'profile': 1,
-        'achievements': 1
-    }})
+    if (id) {
+        return  Meteor.users.find({_id: id}, {fields: {
+            'identity': 1,
+            'points': 1,
+            'profile': 1,
+            'achievements': 1
+        }})
+    }
+    return Meteor.users.find({}, {fields: {_id: 1}, limit: 1});
 })

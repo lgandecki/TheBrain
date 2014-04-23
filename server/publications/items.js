@@ -60,7 +60,11 @@ Meteor.publish("paginatedItems", function(opts, limit) {
 })
 
 Meteor.publish("singleItem", function(id){
-    return id && Items.find({_id: id, user: this.userId});
+    if (id) {
+        return Items.find({_id: id, user: this.userId});
+    } else {
+        return Items.find({}, {fields: {_id: 1}, limit: 1});
+    }
 })
 //
 //

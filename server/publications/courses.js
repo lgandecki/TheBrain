@@ -43,7 +43,8 @@ Meteor.publish("myCourses", function() {
 
 Meteor.publish("selectedCourse", function(id) {
                             console.log("publishing? " + id);
-    return id && Meteor.publishWithRelations({
+    if (id) {
+        return Meteor.publishWithRelations({
         handle: this,
         collection: Courses,
         filter: {_id: id},
@@ -93,6 +94,10 @@ Meteor.publish("selectedCourse", function(id) {
 //            }
         ]
     })
+    }
+    else {
+        return Courses.find({}, {fields: {_id: 1}, limit: 1});
+    }
 //    return Notifications.find({user: this.userId}, {limit: limit});
 
 //

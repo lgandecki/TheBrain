@@ -23,7 +23,11 @@ if (Meteor.isClient) {
                 Session.set("serverNextDay", result);
             });
         }, 600000);
+        Meteor.call("getServerTime", function (error, result) {
+            Session.set("serverTime", result);
+        })
     });
+
 }
 
 
@@ -49,11 +53,12 @@ if (Meteor.userId()) {
     _renderer = window.setTimeout(function () {
 //        var _now = Meteor.moment.fullNow();
         var _thirtyMinutesAgo = new Date(Session.get("serverTime") - 60000 * 30);
+        console.log("_thirtyMinutesAgo", _thirtyMinutesAgo);
         Notifications.find({
             user: Meteor.userId(),
             read: false
             ,created: {
-                $gte: _thirtyMinutesAgo.valueOf()
+                $gte: _thirtyMinutesAgo
             }
         }).observe({
                 added: function (item) {

@@ -47,12 +47,15 @@ Template.courseRow.isUpVoted = function () {
 
 Template.courseRow.flashcardsCount = function () {
     var _flashcards = 0;
-    this.lessons.forEach(function (lesson) {
-        if (lesson.studentsFlashcards) {
-            _flashcards += lesson.studentsFlashcards.length;
-            _flashcards += lesson.teacherFlashcards.length;
-        }
-    });
+    if (this.lessons) {
+        this.lessons.forEach(function (lesson) {
+            if (lesson.studentsFlashcards) {
+                _flashcards += lesson.studentsFlashcards.length;
+                _flashcards += lesson.teacherFlashcards.length;
+            }
+        });
+    }
+
     return _flashcards;
 }
 

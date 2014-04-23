@@ -4,6 +4,11 @@ if (Meteor.isServer) {
             var _time = moment(Date()).add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
             console.log(_time.valueOf());
             return _time && _time.valueOf();
+        },
+
+        getServerTime: function() {
+            var _time = new Date();
+            return _time && _time.valueOf();
         }
     });
 }

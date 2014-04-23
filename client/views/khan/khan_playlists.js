@@ -73,6 +73,7 @@ Template.khanVideoRow.events({
 
 //        console.log("this", e.target.attr);
         Router.go('/khanVideo/' + _playlistSlug + "/" + this.readable_id + "/" + this.youtube_id);
+
     }
 //    'click .khanPlaylistRow': function(e) {
 //        console.log("clicked", this.slug);

@@ -49,5 +49,9 @@ Meteor.publish("paginatedKhanPlaylists", function (opts, limit) {
 
 Meteor.publish("khanPlaylist", function(slug) {
     console.log("slug", slug);
-    return slug && KhanPlaylists.find({slug: slug});
+    if(slug) {
+        return KhanPlaylists.find({slug: slug});
+    } else {
+        return KhanPlaylists.find({}, {fields: {_id: 1}, limit: 1});
+    }
 })
