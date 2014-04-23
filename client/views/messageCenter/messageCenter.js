@@ -44,7 +44,7 @@ Template.conversationRow.sent = function() {
 
 Template.conversationRow.events({
     "click .conversationRow": function(e) {
-        Meteor.Router.to('/conversation/' + this.otherUser);
+        Router.go('/conversation/' + this.otherUser);
     }
 })
 
@@ -111,6 +111,6 @@ Template.userRow.userPicture = function() {
 
 Template.userRow.events({
     "click .userRow": function(e) {
-        Meteor.Router.to('/conversation/' + this._id);
+        Router.go('/conversation/' + this._id);
     }
 })

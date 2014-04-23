@@ -174,6 +174,27 @@ _toggleFlashcard = function (flashcardId) {
     }
 }
 
+Template.myFlashcard.isFlashcardSelected = function() {
+    var _selectedFlashcards = Session.get("selectedFlashcards");
+    console.log("how often? ", this._id);
+    if ($.inArray(this._id, _selectedFlashcards) > -1) {
+//        console.log("got it from here", this.data._id, "selectedFlashcards", _selectedFlashcards);
+        return "flashcardSelected";
+//        var _button = this.find(".btn-selectFlashcard");
+//        $(_button).text("Deselect");
+    }
+    return "";
+}
+
+Template.myFlashcard.isFlashcardSelectedButton = function() {
+    var _selectedFlashcards = Session.get("selectedFlashcards");
+    if ($.inArray(this._id, _selectedFlashcards) > -1) {
+        return "Deselect";
+    }
+    return "Select";
+}
+
+
 Template.myFlashcard.rendered = function () {
     var _selectedFlashcards = Session.get("selectedFlashcards");
     console.log("how often? ", this.data._id);
@@ -188,6 +209,7 @@ Template.myFlashcard.rendered = function () {
 }
 
 Template.myFlashcard.reloadFlashcard = function () {
+    console.log("in myFlashcard.reloadFlashcard");
     if (Session.get("reloadFlashcards")) {
         return true;
     }

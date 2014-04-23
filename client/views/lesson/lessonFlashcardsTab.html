@@ -1,5 +1,5 @@
 <template name="lessonFlashcardsTab">
-    <div class="tab-pane fade lessonFlashcards" id="lessonFlashcards">
+    <div class="tab-pane active lessonFlashcards" id="lessonFlashcards">
         {{#isolate}} {{> flashcardsOptions}}  {{/isolate}}
         {{#isolate}}{{> lessonFlashcardsList }}{{/isolate}}
     </div>
@@ -8,11 +8,9 @@
 <template name="lessonFlashcardsList">
 
 
-    {{#isolate}}}
         {{#each flashcard}}
             {{> flashcardRow}}
         {{/each}}
-    {{/isolate}}
 
 
     <div style="text-align: center">
@@ -36,7 +34,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="center">
-                    <div class="myFlashcardRow row-fluid" data-id="{{_id}}">
+                    <div class="myFlashcardRow row-fluid {{isFlashcardSelected}}" data-id="{{_id}}">
                         <div class="span4">
                             <div class="row-fluid">
                                 <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i
@@ -60,7 +58,7 @@
                                 <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> Edit
                                 </button>
                                 <button class=" btn btn-primary btn-primary-main btn-selectFlashcard btn-block" data-id="{{_id}}"><i
-                                        class="icon-hand-down hidden-desktop"></i> Select
+                                        class="icon-hand-down hidden-desktop"></i> {{isFlashcardSelectedButton}}
                                 </button>
                             </div>
                         </div>

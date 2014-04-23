@@ -9,7 +9,7 @@ Template.myCourses.lessonsLength = function() {
 
 Template.myCourses.events({
     "click .courseRow": function(e) {
-        Meteor.Router.to('/course/' + this._id);
+        Router.go('/course/' + this._id);
     },
     "click .btn-addCourseModal": function (e, template) {
         e.preventDefault();

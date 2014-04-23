@@ -26,8 +26,6 @@ Template.collectionRow.rendered = function() {
             });
         }});
     
-    console.log("this", this);
-//    Meteor.subscribe("itemsToLearnIn", this._id);
 }
 
 Template.collectionRow.itemsToLearn = function() {
@@ -89,7 +87,7 @@ Template.collectionRow.events({
         e.stopPropagation();
     },
     "click .collectionRow": function(e) {
-        Meteor.Router.to('/myCollection/' + this._id);
+        Router.go('/myCollection/' + this._id);
     },
     "click .clickable": function(e) {
         e.preventDefault();

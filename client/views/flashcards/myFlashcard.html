@@ -4,7 +4,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="center">
-                    <div class="myFlashcardRow row-fluid" data-id="{{_id}}" >
+                    <div class="myFlashcardRow row-fluid {{isFlashcardSelected}}" data-id="{{_id}}" >
                         <div class="span4">
                             <div class="row-fluid">
                             <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i class="icon-thumbs-up"></i> {{upVotes.length}}</span>
@@ -25,7 +25,7 @@
                                 <button class=" btn btn-primary btn-primary-main btn-commentsFlashcard btn-block">{{#isolate}} Comments ( {{#with flashcard}} {{comments.length}}
                                     {{/with}}){{/isolate}}
                                 </button>
-                             <button class=" btn btn-primary btn-primary-main btn-selectFlashcard btn-block" data-id="{{_id}}">Select
+                             <button class=" btn btn-primary btn-primary-main btn-selectFlashcard btn-block" data-id="{{_id}}">{{isFlashcardSelectedButton}}
                                 </button>
                             </div>
                         </div>

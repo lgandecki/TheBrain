@@ -115,7 +115,7 @@ Template.course.events({
 });
 
 Template.course.destroyed = function () {
-    Session.set("selectedCourse", "");
+//    Session.set("selectedCourse", "");
     Session.set("courseOpened", false);
 };
 
@@ -156,7 +156,3 @@ _isUserEnrolled = function () {
         return false;
     }
 };
-
-Template.course.rendered = function () {
-    console.log("rendered course");
-}

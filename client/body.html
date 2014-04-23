@@ -5,7 +5,7 @@
     {{#isolate}}{{#if isLoggedIn}}{{> topPanel }}{{/if}}{{/isolate}}
         <div class="transition" style="position: relative; display: none;">
             <div class="container">
-    {{renderPage}}
+    {{> yield }}
             </div>
             </div>
     <div class="push"></div>

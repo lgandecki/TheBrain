@@ -11,10 +11,14 @@ Template.flashcardForm.course = function() {
 Template.flashcardForm.lesson = function() {
     var _selectedCourse, _course;
     _selectedCourse = Session.get("selectedCourse") || Session.get("selectedCourseInForm");
-    if (_selectedCourse) {
-        _course = Courses.findOne({
-            _id: _selectedCourse
-        });
+    var _currentRoute = window.location.pathname;
+    _currentRoute = "/" + _currentRoute.split("/")[1];
+        if (_currentRoute === "/lesson" || _currentRoute === "/course" || Session.get("selectedCourseInForm")) {
+            if (_selectedCourse) {
+            _course = Courses.findOne({
+                _id: _selectedCourse
+            });
+        }
     }
     return _course ? _course.lessons : [];
 }
@@ -133,17 +137,26 @@ Template.collectionGroup.selectIfNewOrMain = function() {
 
 Template.flashcardForm.selectIfSelectedCourse = function() {
     var _selectedCourse = Session.get("selectedCourse") || Session.get("selectedCourseInForm");
-    if (_selectedCourse) {
-        return this._id === _selectedCourse ? "selected" : "";
+    var _currentRoute = window.location.pathname;
+    _currentRoute = "/" + _currentRoute.split("/")[1];
+    if (_currentRoute === "/lesson" || _currentRoute === "/course" || Session.get("selectedCourseInForm")) {
+        if (_selectedCourse) {
+            return this._id === _selectedCourse ? "selected" : "";
+        }
     }
     return "";
 
 };
 
 Template.flashcardForm.selectIfSelectedLesson = function() {
-    var _selectedLesson = Session.get("selectedLesson");
-    if (_selectedLesson) {
-        return this._id === _selectedLesson ? "selected" : "";
+    var _currentRoute = window.location.pathname;
+    _currentRoute = "/" + _currentRoute.split("/")[1];
+    if (_currentRoute === "/lesson" || _currentRoute === "/course") {
+
+        var _selectedLesson = Session.get("selectedLesson");
+        if (_selectedLesson) {
+            return this._id === _selectedLesson ? "selected" : "";
+        }
     }
     return "";
 }
@@ -152,9 +165,6 @@ Template.collectionGroup.rendered = function() {
     $("#collection.select2").select2();
     var _selectedId = $("#collection option:selected").val();
     $("#collection").select2("val", _selectedId);
-
-
-
 }
 
 addFlashcard = function(e) {
@@ -254,6 +264,8 @@ createNewFlashcard = function() {
     if (_course && _course != "Don't add to any courses") {
         _newFlashcard.course = _course;
     }
+
+    Session.set("reloadFlashcards", Math.floor(Math.random()*16777215).toString(16));
     return _newFlashcard;
 };
 
@@ -290,5 +302,5 @@ Template.flashcardForm.destroyed = function() {
     Session.set("newFrontPicture", "");
     Session.set("newCollectionName", "");
     Session.set("selectedCourseInForm", "");
-    Session.set("selectedLesson", "");
+//    Session.set("selectedLesson", "");
 };

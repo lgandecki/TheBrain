@@ -90,7 +90,7 @@ Meteor.autorun(function () {
 });
 
 Deps.autorun(function () {
-    console.log("deps selectedCourse " + Session.get("selectedCourse"));
+    console.log("deps selectedCourse ", Session.get("selectedCourse"));
     Meteor.subscribe("selectedCourse", Session.get("selectedCourse"));
     setTimeout(function () {
         $("#transition").css("display", "block");

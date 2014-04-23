@@ -72,7 +72,7 @@ Template.khanVideoRow.events({
         }
 
 //        console.log("this", e.target.attr);
-        Meteor.Router.to('/khanVideo/' + _playlistSlug + "/" + this.readable_id + "/" + this.youtube_id);
+        Router.go('/khanVideo/' + _playlistSlug + "/" + this.readable_id + "/" + this.youtube_id);
     }
 //    'click .khanPlaylistRow': function(e) {
 //        console.log("clicked", this.slug);
@@ -88,7 +88,6 @@ Template.khanPlaylistRow.rendered = function () {
         searchAndHighlight(_searchTerm, ".khanTitle[data-id=\"" + this.data.slug + "\"]", false);
         searchAndHighlight(_searchTerm, ".khanDescription[data-id=\"" + this.data.slug + "\"]", false);
         searchAndHighlight(_searchTerm, ".khanVideosListing[data-id=\"" + this.data.slug + "\"] li .khanTitle", true);
-
     }
 }
 

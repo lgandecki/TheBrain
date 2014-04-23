@@ -16,6 +16,11 @@ Template.withSelectedItems.isCollectionSelected = function() {
     return _collectionId;
 }
 
+Template.withSelectedItems.isShortSpan = function() {
+    var _collectionId = Session.get("selectedCollection");
+    return _collectionId ? "span3" : "span4";
+}
+
 Template.myCollectionsFlashcards.item = function () {
     var _collectionId = Session.get("selectedCollection"),
         _items;

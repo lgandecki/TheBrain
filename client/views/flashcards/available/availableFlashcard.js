@@ -1,3 +1,4 @@
+var _selected = false;
 Template.availableFlashcard.userName = function () {
     var _userId = this.user;
 //    console.log("_userId in userName", _userId);
@@ -8,6 +9,29 @@ Template.availableFlashcard.userName = function () {
     }
 
 }
+
+Template.availableFlashcard.isFlashcardSelected = function() {
+    var _selectedFlashcards = Session.get("selectedFlashcards");
+    console.log("how often? ", this._id);
+    if ($.inArray(this._id, _selectedFlashcards) > -1) {
+//        console.log("got it from here", this.data._id, "selectedFlashcards", _selectedFlashcards);
+        return "flashcardSelected";
+//        var _button = this.find(".btn-selectFlashcard");
+//        $(_button).text("Deselect");
+    }
+    return "";
+}
+
+Template.availableFlashcard.isFlashcardSelectedButton = function() {
+    var _selectedFlashcards = Session.get("selectedFlashcards");
+    if ($.inArray(this._id, _selectedFlashcards) > -1) {
+        return "Deselect";
+    }
+    return "Select";
+}
+
+
+
 
 Template.availableFlashcard.rendered = function() {
     var _selectedFlashcards = Session.get("selectedFlashcards");
@@ -132,6 +156,7 @@ stripHtml = function (str) {
 }
 
 Template.availableFlashcard.reloadFlashcard = function () {
+    console.log("in reload Flashcard");
     if (Session.get("reloadFlashcards")) {
         return true;
     }

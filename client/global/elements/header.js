@@ -1,6 +1,6 @@
 Template.header.isLoggedIn = function() {
     console.log("logged in from the header");
-    return Meteor.userId;
+    return Meteor.userId();
 };
 
 Template.header.isLoggedInOrExplore = function() {

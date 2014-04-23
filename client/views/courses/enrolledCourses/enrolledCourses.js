@@ -15,6 +15,6 @@ Template.enrolledCourses.amINotEnrolledInAnyCourses = function() {
 
 Template.enrolledCourses.events({
     "click .courseRow": function (e) {
-        Meteor.Router.to('/course/' + this._id);
+        Router.go('/course/' + this._id);
     }
 });

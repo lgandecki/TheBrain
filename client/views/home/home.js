@@ -9,7 +9,7 @@ Template.quickButtons.events({
     "click .quickButton": function(e) {
         var _link = $(e.target).closest(".quickButton").attr("data-target");
         if (_link) {
-            Meteor.Router.to(_link);
+            Router.go(_link);
         }
     }
 })

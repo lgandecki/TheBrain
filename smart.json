@@ -10,6 +10,7 @@
     "spin": {},
     "publish-with-relations": {},
     "cron-tick": {},
-    "npm": {}
+    "npm": {},
+    "iron-router": {}
   }
 }

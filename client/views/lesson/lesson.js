@@ -23,9 +23,9 @@ Template.lesson.created = function () {
     Session.set("lessonTab", "#lessonFlashcards");
 
     _course = Courses.findOne({_id: Session.get("selectedCourse")});
-
+    var _lessonId = Session.get("selectedLesson");
     console.log("Course in created", _course);
-    if (_course) {
+    if (_course && _lessonId) {
         var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
         _lesson = _course.lessons[_lessonIndex];
         Session.set("_lesson", _lesson);
@@ -50,10 +50,10 @@ Template.lesson.created = function () {
 }
 
 Template.lesson.destroyed = function () {
-    Session.set("lessonTab", "");
-    Session.set("selectedFlashcards", "");
-    Session.set("selectedCourse", "");
-    Session.set("_lesson", "");
+//    Session.set("lessonTab", "");
+//    Session.set("selectedFlashcards", "");
+//    Session.set("selectedCourse", "");
+//    Session.set("_lesson", "");
     if (_flashcardSubscription) {
         _flashcardSubscription.stop();
     }
@@ -65,6 +65,8 @@ Template.lesson.destroyed = function () {
 Template.lesson.rendered = function () {
 //    _course = Courses.findOne({_id: Session.get("selectedCourse")});
 //
+    var _reloadFlashcards = Session.get("reloadFlashcards");
+    console.log("back in lesson rendered");
     if (!_course) {
         _course = Courses.findOne({_id: Session.get("selectedCourse")});
         if (_course) {
@@ -241,6 +243,26 @@ _getFlashcards = function (addTeachersFlashcards, optionsQuery) {
 //Template.flashcardsOptions.rendered = function () {
 ////    $('#onlyByTeacher').parent().bootstrapSwitch();
 //}
+
+Template.flashcardRow.isFlashcardSelected = function() {
+    var _selectedFlashcards = Session.get("selectedFlashcards");
+    console.log("how often? ", this._id);
+    if ($.inArray(this._id, _selectedFlashcards) > -1) {
+//        console.log("got it from here", this.data._id, "selectedFlashcards", _selectedFlashcards);
+        return "flashcardSelected";
+//        var _button = this.find(".btn-selectFlashcard");
+//        $(_button).text("Deselect");
+    }
+    return "";
+}
+
+Template.flashcardRow.isFlashcardSelectedButton = function() {
+    var _selectedFlashcards = Session.get("selectedFlashcards");
+    if ($.inArray(this._id, _selectedFlashcards) > -1) {
+        return "Deselect";
+    }
+    return "Select";
+}
 
 Template.flashcardRow.rendered = function () {
     var _selectedFlashcards = Session.get("selectedFlashcards");

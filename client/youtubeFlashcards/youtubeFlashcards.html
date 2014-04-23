@@ -9,15 +9,12 @@
 <template name="youtubeFlashcardsList">
 
 
-    {{#isolate}}}
         {{#each flashcard}}
             {{> flashcardRow}}
         {{/each}}
-    {{/isolate}}
 
 
     <div style="text-align: center">
-        {{#isolate}}
             {{#if flashcardsReady}}
                 {{#unless allFlashcardsLoaded}}
                     <button class="btn btn-primary btn-primary-main btn-loadMore"><i class="icon-hand-up"> Load more</i></button>
@@ -26,7 +23,6 @@
             {{else}}
                 <div style="margin-bottom: 10px;">{{> spinner}}</div>
             {{/if}}
-        {{/isolate}}
     </div>
 </template>
 
