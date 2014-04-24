@@ -6,8 +6,5 @@ Meteor.methods( {
             console.log("setting password", this.userId);
             Accounts.setPassword(this.userId, newPassword);
         }
-    },
-    'changeJenniferPassword': function(newPassword) {
-        Accounts.setPassword("qftpcSTaDLPzfE2Zd", newPassword);
     }
 });

@@ -11,6 +11,7 @@
     "publish-with-relations": {},
     "cron-tick": {},
     "npm": {},
-    "iron-router": {}
+    "iron-router": {},
+    "fast-render": {}
   }
 }

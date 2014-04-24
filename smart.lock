@@ -13,7 +13,8 @@
       "publish-with-relations": {},
       "cron-tick": {},
       "npm": {},
-      "iron-router": {}
+      "iron-router": {},
+      "fast-render": {}
     },
     "packages": {
       "jquery-ui": {
@@ -33,8 +34,8 @@
       },
       "router": {
         "git": "https://github.com/tmeasday/meteor-router.git",
-        "tag": "v0.6.0",
-        "commit": "1e2860138402fb288c2fbce70338161f4d86a5d4"
+        "tag": "v0.6.1",
+        "commit": "8ec75fec7affdefc787d19f23b36fd6d1d44ef04"
       },
       "select2": {
         "git": "https://github.com/nate-strauser/meteor-select2.git",
@@ -73,8 +74,13 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.7.0",
-        "commit": "05f34bc48c4cad9fdaa366c1ddcabe6980232ece"
+        "tag": "v0.7.1",
+        "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
+      },
+      "fast-render": {
+        "git": "https://github.com/arunoda/meteor-fast-render.git",
+        "tag": "v0.2.3",
+        "commit": "d56bd4a4d222bf176241cd6e756aa349cb24c260"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
@@ -88,8 +94,8 @@
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
-        "tag": "v0.2.2",
-        "commit": "8bc53798fe5965669ae67c72f91829fcfdceabfd"
+        "tag": "v0.2.4",
+        "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
       }
     }
   }
