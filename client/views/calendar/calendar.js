@@ -68,4 +68,5 @@ Template.calendar.rendered = function() {
 //
 //    $oldTable.remove();
 
+    _tour.resume();
 }

@@ -23,3 +23,39 @@ Template.quickButtons.itemsToStudy = function() {
         return _itemsToReLearn.count + _itemsToRepeat.count;
     }
 }
+
+var _tour;
+Template.home.rendered = function() {
+    setTimeout(function() {
+    _tour = new Tour({
+        backdrop: true,
+        orphan: true,
+        redirect: function(link) {
+            console.log("running redirect");
+            Session.set("tour", link);
+            Router.go(link);
+        }
+    });
+    _tour.addStep({
+        title: "quick",
+        element: "#quickButtons",
+        content: "quick buttons"
+    });
+    _tour.addStep({
+        title: "hey",
+        element: '[data-target="/myCourses"]',
+        content: "your courses"
+    });
+    _tour.addStep({
+        title: "next page",
+        content: "next page",
+        path: "/calendar"
+    });
+    _tour.addStep({
+        title: "siemka",
+        content: "siemka2"
+    })
+    _tour.init();
+    _tour.start();
+    }, 600);
+}
