@@ -35,42 +35,42 @@ Router.map(function () {
 
     this.route('newFlashcard', {
         path: '/newFlashcard',
-        before: function() {
+        onBeforeAction: function() {
             Session.set("selectedCourse", "");
         }
     });
 
     this.route('repeat', {
         path: '/study',
-        before: function () {
+        onBeforeAction: function () {
             Session.set("showScheduleModal", true);
         }
     });
 
     this.route('myCollectionsFlashcards', {
         path: '/myCollection/:id',
-        before: function () {
+        onBeforeAction: function () {
             Session.set("selectedCollection", this.params.id);
         }
     });
 
     this.route('myCourses', {
         path: '/myCourses',
-        before: function () {
+        onBeforeAction: function () {
             Session.set("coursePath", "/myCourses");
         }
     })
 
     this.route("enrolledCourses", {
         path: "/enrolledCourses",
-        before: function () {
+        onBeforeAction: function () {
             Session.set("coursePath", "/enrolledCourses");
         }
     })
 
     this.route("course", {
         path: "/course/:id",
-        before: function () {
+        onBeforeAction: function () {
             Session.set("selectedCourse", this.params.id);
             Session.set("selectedCourseTab", "#events");
             var _id = this.params.id;
@@ -82,7 +82,7 @@ Router.map(function () {
 
     this.route("courseLessons", {
         path: "/courseLessons/:id",
-        before: function () {
+        onBeforeAction: function () {
             var _id = this.params.id;
             Session.set("selectedCourse", _id);
             //        if (!Session.get("selectedCourseTab")) {
@@ -96,14 +96,14 @@ Router.map(function () {
 
     this.route("availableCourses", {
         path: "/availableCourses",
-        before: function () {
+        onBeforeAction: function () {
             Session.set("coursePath", "/availableCourses");
         }
     })
 
     this.route("lesson", {
         path: "/lesson/:courseId/:lessonId",
-        before: function () {
+        onBeforeAction: function () {
             console.log("params in before", this);
             var _courseId = this.params.courseId;
             var _lessonId = this.params.lessonId;
@@ -118,14 +118,14 @@ Router.map(function () {
 
     this.route("conversation", {
         path: "/conversation/:otherUser",
-        before: function () {
+        onBeforeAction: function () {
             Session.set("otherUser", this.params.otherUser);
         }
     })
 
     this.route("khanVideo", {
         path: "/khanVideo/:playlistSlug/:videoSlug/:youtube_id",
-        before: function () {
+        onBeforeAction: function () {
             Session.set("playlistSlug", this.params.playlistSlug);
             Session.set("videoSlug", this.params.videoSlug);
             Session.set("youtube_id", this.params.youtube_id);
@@ -240,36 +240,27 @@ var postLoad = function (page) {
     // }
     $(".dropdown-menu").hide('normal', "easeInOutCubic");
 
-    return _navigate(this);
-
-
-}
-
-var _navigate = function (req) {
-    //no loading if we are doing an external site
-
-//    req.render("login");
-//    req.stop();
-    var _name = req.route.name;
+    var _name = this.route.name;
     if (_name === "login" && Meteor.userId()) {
-        req.redirect("/");
+        this.redirect("/");
     }
-    if (!(_name === "policy" || _name === "login" || _name === "loading")) {
+    if (!(_name === "policy" || _name === "login" || _name === "loading" || _name === "googleb12b936a60a9aed4.html")) {
         if (Meteor.loggingIn()) {
             console.log("loading");
-            req.render("loading");
+            this.render("loading");
 
         } else if (Meteor.userId() || Session.get("exploreMode") || _name === "policy") {
             console.log("logged in", _name);
-            req.render(_name);
-//        req.stop();
+
         } else {
             console.log("show login");
-            req.redirect("login");
-//        req.pause();
-//        req.stop();
+            this.redirect("/login");
+
         }
     }
+
+
+
 }
 
 Router.onBeforeAction(postLoad);

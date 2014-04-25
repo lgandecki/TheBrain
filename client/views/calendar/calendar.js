@@ -67,6 +67,4 @@ Template.calendar.rendered = function() {
 //        .append($fcButtons);
 //
 //    $oldTable.remove();
-
-    _tour.resume();
 }
