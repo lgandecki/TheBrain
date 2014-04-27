@@ -1,0 +1,75 @@
+<template name="flashcard">
+    <div class="row-fluid">
+        <div class="span6 center">
+            <div class="box box-bordered box-color flashcardDetails">
+                <div class="box-title">
+                    <h3><i class="icon-th-list"></i> Flashcard Details</h3>
+                </div>
+                <div class="box-content padding">
+                    {{> flashcardDetails }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+
+<template name="flashcardDetails">
+    <div class="inCourses khanVideos">
+        <h3>Flashcard available in courses:</h3>
+        <ul class="khanVideosListing">
+            {{#each availableInCourse}}
+                {{> inCourseRow}}
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="inKhan khanVideos">
+        <h3>Flashcard available in Khan Videos:</h3>
+        <ul class="khanVideosListing">
+            {{#each availableInKhan}}
+                {{> inKhanRow}}
+            {{/each}}
+        </ul>
+    </div>
+
+    <h3>Versions:</h3>
+    {{#each flashcardVersion}}
+        <div class="flashcardsList">
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="updatedFlashcardRow center">
+                        <div class="updatedFlashcardOptionsRow">
+                            <div class="row-fluid">
+                                <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i
+                                        class="icon-thumbs-up"></i> {{upVotes.length}}</span> &nbsp;
+                                    <span class="badge badge-downVote clickable badge-warning"><i class="icon-thumbs-down"></i> {{downVotes.length}}</span>
+                                </div>
+                            </div>
+                            <div class="row-fluid"><h5>By: {{userName}} </h5></div>
+                            {{#if isUpdatedVersion}}
+                                <div class="row-fluid"><h5>Reason for update: {{reason}}</h5></div>{{/if}}
+
+                        </div>
+                        <div class="flashcard front">{{{flashcardFront}}}</div>
+                        <div class="flashcard back">{{{flashcardBack}}}</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    {{/each}}
+</template>
+
+<template name="inCourseRow">
+    <li class="inCourseRow khanVideo" data-id="{{_id}}"><i class="icon-hand-right pull-left"></i><span class="khanTitle" data-id="{{_id}}">{{name}} </span></li>
+</template>
+
+<template name="inKhanRow">
+    <li class="inKhanRow khanVideo" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}"><i class="icon-hand-right pull-left"></i><span class="khanTitle" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}">{{playlistTitle}} / {{videoTitle}} </span></li>
+</template>

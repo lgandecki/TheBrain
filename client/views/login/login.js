@@ -28,6 +28,8 @@ Template.signUpWithEmailModal.events({
 
         _id = Accounts.createUser(_user);
 
+        $('#signUpWithEmailModal').modal('hide');
+
 
         Meteor.loginWithPassword(_email, _password, function(err) {
             if (err) {
@@ -36,7 +38,6 @@ Template.signUpWithEmailModal.events({
 
             }
         });
-        $('#signUpWithEmailModal').modal('hide');
         // setTimeout(function() {
         //     _collection = {
         //         "name": "Main collection"

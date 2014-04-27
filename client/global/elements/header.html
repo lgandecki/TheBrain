@@ -2,9 +2,7 @@
 <div id="navigation" class="navbar-fixed-top">
     <div class="{{containerType}}">
         <a href="/" id="brand">TheBrain</a>
-        {{#if isLoggedInOrExplore}}
             {{#isolate}}{{> topMenu }}{{/isolate}}
-        {{/if}}
         {{#if isLoggedIn}}
             {{#isolate}}{{> userHeader }}{{/isolate}}
         {{else}}
@@ -13,12 +11,11 @@
             {{/unless}}
             {{> logInHeader }}
        {{/if}}
-        {{#if isExplore}}
-            <button type="button" class="pull-right btn btn-primary btn-header btn-exitExplore"><i class="icon-hand-right"></i> Sign up!</button>
+        {{#unless isLoggedIn}}
             <div class="user">
                 <a href="#" class="toggle-mobile hidden-desktop"><i class="icon-reorder"></i></a>
             </div>
-        {{/if}}
+        {{/unless}}
         </div>
     </div>
 </template>

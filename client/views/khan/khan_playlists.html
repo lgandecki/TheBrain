@@ -58,6 +58,9 @@
 </template>
 
 <template name="khanVideoRow">
+    {{#if currentKhanVideo}}
+    <li class="khanVideo" data-id="{{readable_id}}"><i class="icon-hand-right pull-left"></i><b style="color: black">{{title}} </b></li>
+    {{else}}
     <li class="khanVideo" data-id="{{readable_id}}"><i class="icon-hand-right pull-left"></i><span class="khanTitle">{{title}} </span></li>
-
+    {{/if}}
 </template>

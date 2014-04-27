@@ -1,15 +1,15 @@
 Meteor.autosubscribe(function () {
-    if (Meteor.user() || Session.get("exploreMode")) {
+//    if (Meteor.user() || Session.get("exploreMode")) {
         Meteor.subscribe("userData");
         Meteor.subscribe("publicCourses");
         Meteor.subscribe("myCourses");
 //Meteor.subscribe("myFlashcards");
 //Meteor.subscribe("myCollections");
 //        Meteor.subscribe("myItems");
-        Meteor.subscribe("lessons");
+//        Meteor.subscribe("lessons");
         Meteor.subscribe("theBrain");
         Meteor.subscribe("unreadNotifications");
-    }
+//    }
 });
 
 if (Meteor.isClient) {
@@ -129,8 +129,10 @@ Template.body.events({
 //        $(e.target).stop(true, true).switchClass("btn-primary-reversed", "btn-primary-main", 400);
 //    },
     "click .mobile-nav li a[href!='#']": function (e, template) {
-        console.log("test");
         $(".mobile-nav").stop().slideToggle(600, "easeInOutBack");
+    },
+    "click .toggle-mobile": function (e, template) {
+        $(".mobile-nav").slideToggle(600, "easeInOutBack");
     },
     'mouseenter li.dropdown': function (e, template) {
         $(e.target).stop(true, true).addClass("open");

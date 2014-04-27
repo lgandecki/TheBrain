@@ -12,6 +12,7 @@
     "cron-tick": {},
     "npm": {},
     "iron-router": {},
-    "fast-render": {}
+    "fast-render": {},
+    "sitemaps": {}
   }
 }

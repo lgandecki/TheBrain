@@ -1,6 +1,6 @@
-var _youtubeFlashcardsHandle = null;
+//var _youtubeFlashcardsHandle = null;
 
-Template.youtubeFlashcardsList.created = function() {
+Template.youtubeFlashcardsList.rendered = function() {
     var _youtube_id = Session.get("youtube_id");
     var _opts = {
         youtube_id: _youtube_id
@@ -16,6 +16,7 @@ Template.youtubeFlashcardsList.created = function() {
 //
 //    Session.set("youtube_id", _youtube_id);
 //    if (_video) {
+    console.log("doing subscription again");
         _youtubeFlashcardsHandle = Meteor.subscribeWithPagination("youtubeFlashcards", _opts, 10);
 //    }
 //    else {
@@ -23,26 +24,36 @@ Template.youtubeFlashcardsList.created = function() {
 //    }
 }
 
-Template.youtubeFlashcardsList.rendered = function () {
-//    var _videoSlug = Session.get("videoSlug");
-//    var _youtube_id;
-//    if (_videoSlug) {
-//        var _video = Meteor.khan.returnVideo(_videoSlug);
-//        if (_video) {
-//            _youtube_id = _video.youtube_id;
-//        }
-//    }
-//
-//    Session.set("youtube_id", _youtube_id);
-//    if (_video) {
-//        _youtubeFlashcardsHandle = Meteor.subscribeWithPagination("youtubeFlashcards", _video.youtube_id);
-//    }
+Template.youtubeFlashcardsList.created = function() {
+    var _youtube_id = Session.get("youtube_id");
+    var _opts = {
+        youtube_id: _youtube_id
+    }
 
-
+    console.log("doing subscription again");
+    _youtubeFlashcardsHandle = Meteor.subscribeWithPagination("youtubeFlashcards", _opts, 10);
+//    }
+//    else {
+//        _youtubeFlashcardsHandle = Meteor.subscribeWithPagination("youtubeFlashcards", "");
+//    }
 }
+
 
 Template.youtubeFlashcardsList.flashcard = function () {
     var _youtube_id = Session.get("youtube_id");
+    var _opts = {
+        youtube_id: _youtube_id
+    }
+    if (Session.get("previousYoutube_id")) {
+        if (_youtube_id !== Session.get("previousYoutube_id")) {
+            _youtubeFlashcardsHandle = Meteor.subscribeWithPagination("youtubeFlashcards", _opts, 10);
+        }
+    } else {
+        Session.set("previousYoutube_id", _youtube_id);
+    }
+
+
+    console.log("doing subscription again");
     return Flashcards.find({youtube_id: _youtube_id}, {limit: _youtubeFlashcardsHandle.limit(), sort: {score: -1}})
 }
 

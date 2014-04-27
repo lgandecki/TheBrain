@@ -92,7 +92,9 @@ Meteor.publish("paginatedFlashcards", function (opts, limit) {
                 'upVotes': 1,
                 'front': 1,
                 'frontPicture': 1,
-                'user': 1
+                'user': 1,
+                'khanAcademy': 1,
+                'youtube_id': 1
             },
             sort: { '_id' : 1}
         },

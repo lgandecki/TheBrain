@@ -49,8 +49,8 @@ Meteor.methods({
             flashcard.youtube_id = flashcardAttributes.youtube_id;
             if (flashcardAttributes.khanAcademy) {
                 flashcard.khanAcademy = {
-                    playlistSlug: flashcardAttributes.playlistSlug,
-                    videoSlug: flashcardAttributes.videoSlug
+                    playlistSlug: flashcardAttributes.khanAcademy.playlistSlug,
+                    videoSlug: flashcardAttributes.khanAcademy.videoSlug
                 }
             }
 

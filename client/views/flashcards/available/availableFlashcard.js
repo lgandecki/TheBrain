@@ -148,6 +148,13 @@ Template.availableFlashcard.events({
         e.stopImmediatePropagation();
         Session.set("currentFlashcardId", this._id);
         $("#commentsFlashcardModal").modal("show");
+    },
+
+    "click .btn-flashcardDetails": function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        Session.set("flashcardId", this._id);
+        $("#flashcardDetailsModal").modal("show");
     }
 });
 

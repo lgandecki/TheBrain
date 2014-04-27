@@ -4,9 +4,10 @@ Router.configure({
 
 var _routes = [
     {name: "home", path: "/"},
+    {name: "home", path: "/home"},
     {name: "login", path: "/login"},
     {name: "loading", path: "/loading"},
-    {name: "availableFlashcards", path: "availableFlashcards"},
+    {name: "availableFlashcards", path: "/availableFlashcards"},
     {name: "repeat", path: "/repeat"},
     {name: "myCollections", path: "/myCollections"},
     {name: "myProfile", path: "/myProfile"},
@@ -129,6 +130,24 @@ Router.map(function () {
             Session.set("playlistSlug", this.params.playlistSlug);
             Session.set("videoSlug", this.params.videoSlug);
             Session.set("youtube_id", this.params.youtube_id);
+            var _youtube_id = Session.get(this.params.youtube_id);
+            var _opts = {
+                youtube_id: _youtube_id
+            }
+
+            console.log("doing subscription again");
+            _youtubeFlashcardsHandle = Meteor.subscribeWithPagination("youtubeFlashcards", _opts, 10);
+            setTimeout(function() {
+                $('a[href="#khanVideo"]').tab('show');
+            }, 500);
+        }
+    })
+
+    this.route("flashcard", {
+        path: "/flashcard/:flashcardId",
+        waitOn: function() { return Meteor.subscribe('currentFlashcard', this.params.flashcardId)},
+        onBeforeAction: function () {
+            Session.set("flashcardId", this.params.flashcardId);
         }
     })
 
@@ -241,10 +260,11 @@ var postLoad = function (page) {
     $(".dropdown-menu").hide('normal', "easeInOutCubic");
 
     var _name = this.route.name;
+console.log("_name", _name);
     if (_name === "login" && Meteor.userId()) {
         this.redirect("/");
     }
-    if (!(_name === "policy" || _name === "login" || _name === "loading" || _name === "googleb12b936a60a9aed4.html")) {
+    if (!(_name === "policy" || _name === "login" || _name === "loading")) {
         if (Meteor.loggingIn()) {
             console.log("loading");
             this.render("loading");
@@ -252,10 +272,15 @@ var postLoad = function (page) {
         } else if (Meteor.userId() || Session.get("exploreMode") || _name === "policy") {
             console.log("logged in", _name);
 
-        } else {
+        } else if (_name === "home") {
             console.log("show login");
             this.redirect("/login");
 
+        } else {
+            if (!Session.get("exploreModeOnModal")) {
+                $("#workInProgressModal").modal("show");
+                Session.set("exploreModeOnModal", true);
+            }
         }
     }
 
@@ -268,7 +293,7 @@ Router.onBeforeAction(postLoad);
 Router.onAfterAction(function() {
     $('li.active').removeClass('active');
     var _currentRoute = window.location.pathname;
-    if (_currentRoute === "/home") {
+    if (_currentRoute === "/home" || _currentRoute === "/login") {
         _currentRoute = "/";
     }
     _currentRoute = "/" + _currentRoute.split("/")[1];

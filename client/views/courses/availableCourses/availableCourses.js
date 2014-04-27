@@ -1,5 +1,5 @@
 Template.availableCourses.course = function() {
-    return Courses.find({admins: {$ne: Meteor.userId()}}, {sort: {score: -1}});
+    return Courses.find({admins: {$ne: Meteor.userId()}, }, {sort: {score: -1}});
 };
 
 

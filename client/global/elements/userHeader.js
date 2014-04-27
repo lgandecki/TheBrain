@@ -4,9 +4,6 @@ Template.userHeader.events({
         Meteor.logout();
         Router.go('/');
     }
-    , "click .toggle-mobile": function (e, template) {
-        $(".mobile-nav").slideToggle(600, "easeInOutBack");
-    }
 });
 
 Template.userHeader.user = function() {

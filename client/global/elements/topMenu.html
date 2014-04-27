@@ -2,20 +2,23 @@
     <ul class="main-nav">
         <li class="topNav dropdown">
             <a href="/">
-                <span>Home</span>
+                <span>{{#if isLoggedIn}}Home{{else}}Sign up!{{/if}}</span>
             </a>
         </li>
+        {{#if isLoggedIn}}
         <li class="topNav dropdown">
             <a href="/study">
                 <span>Study!</span>
             </a>
         </li>
+        {{/if}}
         <li class="topNav dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                 <span>Flashcards</span>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-custom">
+                {{#if isLoggedIn}}
                 <li>
                     <a href="/newFlashcard">
                         <span>Add Flashcards</span>
@@ -26,6 +29,7 @@
                         <span>My Flashcards</span>
                     </a>
                 </li>
+                {{/if}}
                 <li>
                     <a href="/availableFlashcards">
                         <span>Look for Flashcards</span>
@@ -41,6 +45,7 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-custom ">
+                {{#if isLoggedIn}}
                 <li>
                     <a href="/myCourses">
                         ... I'm teaching
@@ -51,6 +56,7 @@
                         ... I'm taking
                     </a>
                 </li>
+                {{/if}}
                 <li>
                     <a href="/availableCourses">
                         Available Courses
@@ -58,21 +64,25 @@
                 </li>
             </ul>
         </li>
+        {{#if isLoggedIn}}
         <li class="topNav dropdown">
             <a href="/myCollections">
                 <span>My collections</span>
             </a>
         </li>
+        {{/if}}
         <li class="topNav">
             <a href="/khanPlaylists">
                 <span>KhanAcademy Playlists</span>
             </a>
         </li>
+        {{#if isLoggedIn}}
         <li class="topNav dropdown">
             <a href="/messageCenter">
                 <span>Message center</span>
             </a>
         </li>
+        {{/if}}
 
     </ul>
 </template>

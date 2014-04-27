@@ -15,5 +15,7 @@ Meteor.startup(function() {
 
     Conversations._ensureIndex({"me": 1, "sent": 1});
 
+    KhanPlaylists._ensureIndex({"slug": 1});
+
 
 })

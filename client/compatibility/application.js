@@ -193,7 +193,8 @@ function getNav(current){
 }
 
 function createSubNav(){
-    if($(".mobile-nav").length == 0){
+//    if($(".mobile-nav").length < 2){
+        $("#navigation > ul.mobile-nav").remove();
         var original = $("#navigation .main-nav");
         // loop
         var current = original;
@@ -217,7 +218,7 @@ function createSubNav(){
                 el.find("i").toggleClass('icon-angle-left').toggleClass("icon-angle-down");
             }
         });
-    }
+//    }
 }
 
 function hideNav(){

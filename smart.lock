@@ -14,7 +14,8 @@
       "cron-tick": {},
       "npm": {},
       "iron-router": {},
-      "fast-render": {}
+      "fast-render": {},
+      "sitemaps": {}
     },
     "packages": {
       "jquery-ui": {
@@ -82,6 +83,11 @@
         "tag": "v0.2.3",
         "commit": "d56bd4a4d222bf176241cd6e756aa349cb24c260"
       },
+      "sitemaps": {
+        "git": "https://github.com/gadicohen/meteor-sitemaps.git",
+        "tag": "v0.0.16",
+        "commit": "ed4d908c581071d1302b37c6ba77dbce55333dd3"
+      },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
         "tag": "v1.3.5",
@@ -96,6 +102,11 @@
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
         "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      },
+      "robots-txt": {
+        "git": "https://github.com/gadicohen/meteor-robots.txt.git",
+        "tag": "v0.0.8",
+        "commit": "dc1be195b8c0cf7d6263235484218911e1bf27d9"
       }
     }
   }

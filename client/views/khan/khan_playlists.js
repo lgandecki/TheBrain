@@ -117,3 +117,8 @@ function searchAndHighlight(searchTerm, selector, isList) {
     }
     return false;
 }
+
+Template.khanVideoRow.currentKhanVideo = function() {
+    var _youtube_id = Session.get("youtube_id");
+    return _youtube_id === this.youtube_id;
+}

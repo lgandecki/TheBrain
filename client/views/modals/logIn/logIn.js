@@ -1,6 +1,7 @@
 Template.logInForm.events({
     "click .btn-signUpWithFacebook": function(e, template) {
         e.preventDefault();
+        $("#logInModal").modal("hide");
         Meteor.loginWithFacebook(function(err) {
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you are logged in to facebook");
@@ -18,12 +19,12 @@ Template.logInForm.events({
         // retrieve the input field values
         var email = t.find('#login-email').value,
             password = t.find('#login-password').value;
+        $("#logInModal").modal("hide");
 
         Meteor.loginWithPassword(email, password, function(err) {
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you provided the correct username and password!");
             } else {
-                $("#logInModal").modal("hide");
             }
         });
         return false;
