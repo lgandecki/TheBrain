@@ -278,8 +278,11 @@ console.log("_name", _name);
 
         } else {
             if (!Session.get("exploreModeOnModal")) {
-                $("#workInProgressModal").modal("show");
                 Session.set("exploreModeOnModal", true);
+                setTimeout(function() {
+                    $("#workInProgressModal").modal("show");
+                }, 500);
+
             }
         }
     }
