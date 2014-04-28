@@ -56,12 +56,16 @@ Template.editFlashcardForm.newBackPicture = function () {
 
 Template.editFlashcardForm.front = function () {
     var _currentItemId = Session.get("currentItemId");
+
     if (_currentItemId) {
         var _currentItem = Items.findOne({_id: _currentItemId});
         if (_currentItem) {
-            var  _front = splitFlashcard(_currentItem.personalFront)
-
+            var _front = splitFlashcard(_currentItem.personalFront);
+            setTimeout(function() {
+                _originalFront = $("#front").html();
+            }, 200);
             return _front;
+
 //            return _currentItem.personalFront;
         }
     }
@@ -70,31 +74,35 @@ Template.editFlashcardForm.front = function () {
         if (_currentFlashcardId) {
             var _currentFlashcard = Flashcards.findOne({_id: _currentFlashcardId});
             if (_currentFlashcard && _currentFlashcard.front) {
-                var  _front = splitFlashcard(_currentFlashcard.front)
-
+                var _front = splitFlashcard(_currentFlashcard.front)
+                setTimeout(function() {
+                    _originalFront = $("#front").html();
+                }, 200);
                 return _front;
+
             }
         }
     }
+
     return false;
 }
 
-var splitFlashcard = function(text) {
+var splitFlashcard = function (text) {
     text = stripHtml(text);
     var _splittedFront = text.split("\n");
     var _firstElement = _splittedFront.shift();
     var _front;
     if (_firstElement !== "") {
-         _front = _firstElement;
+        _front = _firstElement;
     }
     else {
         _front = "<div>&nbsp;</div>";
     }
 
     _splittedFront.forEach(
-        function(line) {
+        function (line) {
             if (line !== "") {
-            _front = _front + "<div>" + line + "</div>";
+                _front = _front + "<div>" + line + "</div>";
             }
             else {
                 _front = _front + "<div>&nbsp;</div>";
@@ -109,6 +117,9 @@ Template.editFlashcardForm.back = function () {
         var _currentItem = Items.findOne({_id: _currentItemId});
         if (_currentItem) {
             var _back = splitFlashcard(_currentItem.personalBack);
+            setTimeout(function() {
+                _originalBack = $("#back").html();
+            }, 200);
             return _back;
 //            return _currentItem.personalBack;
         }
@@ -119,7 +130,11 @@ Template.editFlashcardForm.back = function () {
             var _currentFlashcard = Flashcards.findOne({_id: _currentFlashcardId});
             if (_currentFlashcard && _currentFlashcard.back) {
                 var _back = splitFlashcard(_currentFlashcard.back);
+                setTimeout(function() {
+                    _originalBack = $("#back").html();
+                }, 200);
                 return _back;
+
             }
         }
     }
@@ -227,7 +242,7 @@ Template.editFlashcardButtons.events({
     "click .btn-submit": function (e, template) {
         e.preventDefault();
         if (isFrontChanged() || isBackChanged() || Session.get("newFrontPicture") || Session.get("newBackPicture")) {
-            bootbox.prompt("You are about to change the FlashCard, your changes will affect all TheBrain users. " +
+            bootbox.prompt("<h3>Are You sure?</h3>You are about to change the FlashCard, your changes will affect all TheBrain users. " +
                 "If you want to add personal information to the FlashCard please use the 'notes' fields. " +
                 "If you do want to change the FlashCard, please provide a reason for change.", function (result) {
                 if (result === null) {

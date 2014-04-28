@@ -266,6 +266,7 @@ updatedFlashcardNotification = function (opts) {
                     Notifications.insert({
                         user: author,
                         eventUserId: _user._id,
+                        flashcardId: opts.flashcardId,
                         message: "Updated one of flashcards that you've updated/created",
                         type: "flashcardUpdated",
                         created: Meteor.moment.fullNow(),
