@@ -1,6 +1,6 @@
 Template.khanVideo.created = function () {
-    var _playlistSlug = Session.get("playlistSlug");
-    Meteor.subscribe("khanPlaylist", _playlistSlug);
+//    var _playlistSlug = Session.get("playlistSlug");
+//    Meteor.subscribe("khanPlaylist", _playlistSlug);
 }
 
 Template.khanVideo.youtubeVideoFlashcardsCount = function() {

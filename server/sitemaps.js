@@ -2,7 +2,8 @@ sitemaps.add('/sitemap.xml', function() {
     var _out = [], _flashcards = Flashcards.find({public: true}).fetch();
     _.each(_flashcards, function(flashcard) {
         _out.push({
-            page: 'flashcard/' + flashcard._id
+            page: 'flashcard/' + flashcard._id,
+            lastmod: new Date().getTime()
 //            lastmod: page.lastUpdated
         });
     });
@@ -16,7 +17,8 @@ sitemaps.add('/sitemap.xml', function() {
     ]
     _sitemapabbleRoutes.forEach(function(route) {
         _out.push({
-            page: route.path
+            page: route.path,
+            lastmod: new Date().getTime()
 
         });
     });
@@ -24,7 +26,8 @@ sitemaps.add('/sitemap.xml', function() {
     var _courses = Courses.find({public: true}).fetch();
     _.each(_courses, function(course) {
         _out.push({
-            page: 'course/' + course._id
+            page: 'course/' + course._id,
+            lastmod: new Date().getTime()
 //            lastmod: page.lastUpdated
         });
         if (course.lessons && course.lessons.length > 0) {
@@ -41,7 +44,8 @@ sitemaps.add('/sitemap.xml', function() {
         if (khanPlaylist.videos && khanPlaylist.videos.length > 0) {
              khanPlaylist.videos.forEach(function(video) {
                  _out.push({
-                     page: '/khanVideo/' + khanPlaylist.slug + "/" + video.readable_id + "/" + video.youtube_id
+                     page: '/khanVideo/' + khanPlaylist.slug + "/" + video.readable_id + "/" + video.youtube_id,
+                     lastmod: new Date().getTime()
                  })
              })
         }

@@ -126,6 +126,9 @@ Router.map(function () {
 
     this.route("khanVideo", {
         path: "/khanVideo/:playlistSlug/:videoSlug/:youtube_id",
+        waitOn: function() {
+            Meteor.subscribe("khanPlaylist", this.params.playlistSlug);
+        },
         onBeforeAction: function () {
             Session.set("playlistSlug", this.params.playlistSlug);
             Session.set("videoSlug", this.params.videoSlug);
@@ -137,9 +140,15 @@ Router.map(function () {
 
             console.log("doing subscription again");
             _youtubeFlashcardsHandle = Meteor.subscribeWithPagination("youtubeFlashcards", _opts, 10);
-            setTimeout(function() {
-                $('a[href="#khanVideo"]').tab('show');
-            }, 500);
+//            setTimeout(function() {
+//                $('a[href="#khanVideo"]').tab('show');
+//            }, 500);
+//            setTimeout(function() {
+//                $('a[href="#khanVideo"]').tab('show');
+//            }, 50);
+//            setTimeout(function() {
+//                $('a[href="#khanVideo"]').tab('show');
+//            }, 100);
         }
     })
 
@@ -277,11 +286,14 @@ console.log("_name", _name);
             this.redirect("/login");
 
         } else {
-            if (!Session.get("exploreModeOnModal")) {
+            var _location = window.location.href.toString();
+            console.log("location", _location.indexOf("_escaped_fragment"));
+            console.log("location2", _location);
+            if (!Session.get("exploreModeOnModal") && _location.indexOf("_escaped_fragment") === -1) {
                 Session.set("exploreModeOnModal", true);
                 setTimeout(function() {
                     $("#workInProgressModal").modal("show");
-                }, 500);
+                }, 5000);
 
             }
         }

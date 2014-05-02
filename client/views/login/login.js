@@ -65,6 +65,7 @@ Template.login.events({
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you are logged in to facebook");
             } else {
+                Router.go("/");
                 console.log("sign up with facebook")
                 var _user = Meteor.user();
                 if (_user && ((_user.emails && _user.emails.length === 0) || !_user.emails)) {
