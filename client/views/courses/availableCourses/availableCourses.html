@@ -19,12 +19,25 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {{#if showFeatured}}
+                        <tr class="featuredCourse">
+                            <td colspan="7" class="tableDetails">TheBrain.Pro Featured Courses</td>
+                        </tr>
+                            {{#each featuredCourse}}
+                                {{> courseRow }}
+                            {{/each}}
+                        <tr class="courseRow">
+                            <td colspan="7" class="tableDetails">TheBrain.Pro Community Courses</td>
+                        </tr>
+                        {{/if}}
                                 {{#each course}}
                             {{> courseRow }}
                             {{/each}}
 
                         </tbody>
                     </table>
+
+
                 </div>
             </div>
         </div>

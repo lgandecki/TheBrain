@@ -132,14 +132,6 @@ Template.flashcardsDefaultOptions.flashcardsSelectedLength = function () {
     return 0;
 }
 
-Template.flashcardsDefaultOptions.flashcardsSelectedLength = function () {
-    var _flashcardsSelected = Session.get("selectedFlashcards");
-    if (_flashcardsSelected) {
-        return _flashcardsSelected.length;
-    }
-    return 0;
-}
-
 
 Template.lesson.courseName = function () {
     _course = Courses.findOne({_id: Session.get("selectedCourse")});
@@ -152,7 +144,7 @@ Template.lesson.lessonName = function () {
 }
 
 Template.lessonFlashcardsList.events({
-    'click .btn-loadMore': function(e) {
+    'click .btn-loadMore': function (e) {
         e.preventDefault();
         _flashcardSubscription.loadNextPage();
     }
@@ -170,12 +162,12 @@ Template.lessonFlashcardsList.flashcard = function () {
     if (_lesson) {
         var _teacherFlashcards = _lesson.teacherFlashcards;
         var _studentsFlashcards = [];
-        if (!Session.get("_optionsQuery").onlyAdmin) {
-            _studentsFlashcards = _lesson.studentsFlashcards;
-        }
-        _flashcardIds = $.merge(_teacherFlashcards, _studentsFlashcards);
+//        if (!Session.get("_optionsQuery").onlyAdmin) {
+//            _studentsFlashcards = _lesson.studentsFlashcards;
+//        }
+//        _flashcardIds = $.merge(_teacherFlashcards, _studentsFlashcards);
         _query = {
-            _id: {$in: _flashcardIds},
+//            _id: {$in: _flashcardIds},
             public: true,
             "lessons.lesson": _lesson._id
         };
@@ -186,7 +178,6 @@ Template.lessonFlashcardsList.flashcard = function () {
         else {
             console.log("nie wrzucamy flashcardow");
         }
-
 
 
     }
@@ -244,7 +235,7 @@ _getFlashcards = function (addTeachersFlashcards, optionsQuery) {
 ////    $('#onlyByTeacher').parent().bootstrapSwitch();
 //}
 
-Template.flashcardRow.isFlashcardSelected = function() {
+Template.flashcardRow.isFlashcardSelected = function () {
     var _selectedFlashcards = Session.get("selectedFlashcards");
     console.log("how often? ", this._id);
     if ($.inArray(this._id, _selectedFlashcards) > -1) {
@@ -256,7 +247,7 @@ Template.flashcardRow.isFlashcardSelected = function() {
     return "";
 }
 
-Template.flashcardRow.isFlashcardSelectedButton = function() {
+Template.flashcardRow.isFlashcardSelectedButton = function () {
     var _selectedFlashcards = Session.get("selectedFlashcards");
     if ($.inArray(this._id, _selectedFlashcards) > -1) {
         return "Deselect";
@@ -455,6 +446,7 @@ Template.flashcardsOptions.events({
                     successTitle: "Added flashcards to course collection"
                 }
                 Meteor.myCall(_callOpts);
+                Meteor.tour.showIfNeeded("clickHereToStudyTour");
 //            Meteor.call("addFlashcardsToCollection", _opts);
             }
         }
@@ -470,33 +462,69 @@ Template.flashcardsOptions.events({
 
 
 Template.flashcardsDefaultOptions.events({
-    "click .btn-addSelectedToCollection": function (e) {
-//        var _flashcards = Session.get("selectedFlashcards");
-        var _callOpts = {
-            function: "addFlashcardsToCollection",
-            arguments: {
-                flashcardsIds: Session.get("selectedFlashcards"),
-                courseId: Session.get("selectedCourse")
-            },
-            errorTitle: "Adding flashcards to learn schedule error",
-            successTitle: "Added flashcards to course collection"
+
+    "click .btn-addAllInLesson": function (e) {
+        var _lesson = Session.get("_lesson");
+        if (_lesson.youtube_id) {
+            var _callOpts = {
+                function: "addVideoFlashcardsToCollection",
+                arguments: {
+                    youtube_id: Session.get("youtube_id"),
+                    courseId: Session.get("selectedCourse")
+                },
+                errorTitle: "Adding flashcards to learn schedule error",
+                successTitle: "Added flashcards to course collection"
+            }
+            Meteor.myCall(_callOpts);
+        } else {
+
+            if (_lesson.teacherFlashcards && _lesson.studentsFlashcards) {
+                _flashcards = _lesson.teacherFlashcards.concat(_lesson.studentsFlashcards);
+            }
+
+            if (_flashcards) {
+                var _flashcardsIds = _flashcards;
+                var _callOpts = {
+                    function: "addFlashcardsToCollection",
+                    arguments: {
+                        flashcardsIds: _flashcardsIds,
+                        courseId: Session.get("selectedCourse")
+                    },
+                    errorTitle: "Adding flashcards to learn schedule error",
+                    successTitle: "Added flashcards to course collection"
+                }
+                Meteor.myCall(_callOpts);
+                Meteor.tour.showIfNeeded("clickHereToStudyTour");
+
+//            Meteor.call("addFlashcardsToCollection", _opts);
+            }
+
         }
-
-        Meteor.myCall(_callOpts);
-
-    },
-    "click .btn-selectAll": function () {
-        var _selectedFlashcards = [];
-        $(".myFlashcardRow").each(function () {
-            _selectedFlashcards.push($(this).data("id"))
-        });
-        console.log("select all flashcards ", _selectedFlashcards);
-        Session.set("selectedFlashcards", _selectedFlashcards);
-        _toggleFlashcardReload();
-    },
-    "click .btn-deSelectAll": function () {
-        Session.set("selectedFlashcards", []);
-
-        _toggleFlashcardReload();
     }
 })
+
+Template.flashcardsDefaultOptions.destroyed = function () {
+//    Session.set("")
+}
+
+Template.flashcardsDefaultOptions.flashcardsAvailable = function () {
+    var _lesson = Session.get("_lesson");
+    var _count = 0;
+    if (!_lesson) {
+        _course = Courses.findOne({_id: Session.get("selectedCourse")});
+        var _lessonId = Session.get("selectedLesson");
+        console.log("Course in created", _course);
+        if (_course && _lessonId) {
+            var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
+            _lesson = _course.lessons[_lessonIndex];
+        }
+    }
+    if (_lesson.youtube_id) {
+        _count = YoutubeVideoFlashcardsCount.findOne({_id: Session.get("youtube_id")});
+    } else {
+        if (_lesson.teacherFlashcards && _lesson.studentsFlashcards) {
+            _count = _lesson.teacherFlashcards.length + _lesson.studentsFlashcards.length;
+        }
+    }
+    return _count;
+}

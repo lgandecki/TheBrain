@@ -6,7 +6,7 @@
             </a>
         </li>
         {{#if isLoggedIn}}
-        <li class="topNav dropdown">
+        <li id="studyLink" class="topNav dropdown">
             <a href="/study">
                 <span>Study!</span>
             </a>
@@ -76,13 +76,6 @@
                 <span>KhanAcademy Playlists</span>
             </a>
         </li>
-        {{#if isLoggedIn}}
-        <li class="topNav dropdown">
-            <a href="/messageCenter">
-                <span>Message center</span>
-            </a>
-        </li>
-        {{/if}}
 
     </ul>
 </template>

@@ -824,7 +824,7 @@ li.active > a {
     text-align: left;
     margin-top: 5px;
 }
-.khanVideos ul, #khanVideoPlaylist ul{
+.khanVideos ul, #khanVideoPlaylist ul, #coursePlaylist ul {
     list-style: none;
     /*text-decoration: underline;*/
     color: #219BCC;
@@ -844,4 +844,12 @@ li.khanVideo:hover {
 
 .highlighted {
     background-color:yellow;
+}
+
+.tableDetails {
+    background: #eee;
+    text-align: center !important;
+    border-top: 1px solid black !important;
+    border-bottom: 1px solid black !important;
+    font-weight: bold;
 }

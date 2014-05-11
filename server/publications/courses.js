@@ -13,7 +13,8 @@ Meteor.publish("publicCourses", function() {
 			'downVotes': 1,
 			'lessons': 1,
 			'score': 1,
-			'comments._id': 1
+			'comments._id': 1,
+            'featured': 1
 		}
 	});
 });
@@ -35,7 +36,8 @@ Meteor.publish("myCourses", function() {
 			'downVotes': 1,
 			'lessons': 1,
 			'comments._id': 1,
-			'score': 1
+			'score': 1,
+            'featured': 1
 		}
 	});
 });
@@ -59,7 +61,8 @@ Meteor.publish("selectedCourse", function(id) {
                 'lessons': 1,
                 'events': 1,
                 'comments': 1,
-                'score': 1
+                'score': 1,
+                'featured': 1
             }
         },
         mappings: [

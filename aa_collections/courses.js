@@ -70,6 +70,56 @@ Meteor.methods({
 
 
     },
+    newVideoCourse: function(courseAttributes) {
+        var user = Meteor.user();
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to add new course");
+
+        if (!courseAttributes.name)
+            throw new Meteor.Error(422, "Please fill the name of your course");
+
+        var course = _.extend(_.pick(courseAttributes, "name", "shortDescription"), {
+            admins: [user._id],
+            public: true,
+            upVotes: [],
+            downVotes: [],
+            videoCourse: true,
+            featured: true,
+            score: 0,
+            lessons: [],
+            events: [{
+                "_id": new Meteor.Collection.ObjectID()._str,
+                "user": user._id,
+                "type": "created",
+                "created": {
+                    by: user._id,
+                    on: Meteor.moment.fullNow()
+                },
+                "lastModified": {
+                    by: user._id,
+                    on: Meteor.moment.fullNow()
+                }
+            }],
+            flashcards: 0,
+            comments: [],
+            students: []
+        });
+
+        if (courseAttributes.khanPlaylistSlug) {
+            course.khanPlaylistSlug = courseAttributes.khanPlaylistSlug;
+        }
+        if (courseAttributes.lessons) {
+            courseAttributes.lessons.forEach(function(lesson) {
+                lesson._id = new Meteor.Collection.ObjectID()._str;
+                course.lessons.push(lesson);
+            })
+        }
+
+        Courses.insert(course);
+        Meteor.theBrain.addConnections(15);
+
+
+    },
     makeCoursePublic: function(opts) {
         var _user = Meteor.user();
         if (!_user)

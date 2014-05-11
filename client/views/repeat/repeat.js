@@ -193,7 +193,47 @@ Template.repeat.rendered = function () {
             if (Session.equals("showScheduleModal", true)) {
                 $("#scheduleModal").modal("show").on('hidden', function () {
                     _setAmountOfReps();
-                });
+                    $('#setStudyFirstTour').crumble("clear");
+
+                }).on("shown", function() {
+
+                        _collectionId = "";
+                        $(".slider-custom").slider({value: 0}).on("slideStart",function (ev) {
+                            _collectionId = $(this).attr("data-id");
+                            itemsToLearn[_collectionId] = ev.value;
+                            $(".toLearn.editable[data-id='" + _collectionId + "']").editable("setValue", ev.value);
+                        }).on("slide", function (ev) {
+                                if (itemsToLearn[_collectionId] !== ev.value) {
+
+                                    $(".toLearn.editable[data-id='" + _collectionId + "']").editable("setValue", ev.value);
+                                    itemsToLearn[_collectionId] = ev.value;
+                                }
+                            });
+
+//        $.fn.editable.defaults.mode = 'inline';
+                        $(".toLearn.editable:not(.editable-click)").editable('destroy').editable({
+                            anim: '100',
+                            mode: 'inline',
+                            showbuttons: false,
+                            success: function (response, newValue) {
+                                _collectionId = $(this).attr("data-id");
+                                $(".slider-custom[data-id='" + _collectionId + "']").slider("setValue", newValue);
+
+                                itemsToLearn[_collectionId] = newValue;
+                            },
+                            validate: function (value) {
+                                _value = parseFloat(value);
+                                var intRegex = /^\d+$/;
+                                if (!intRegex.test(_value)) {
+                                    return "Has to be decimal";
+                                }
+                            }
+
+                        })
+
+
+                        Meteor.tour.showIfNeeded("setStudyFirstTour");
+                    });
             }
             else {
                 _setAmountOfReps();
@@ -792,41 +832,9 @@ Template.myCollectionsList.rendered = function () {
     window.clearTimeout(_renderer2);
     _renderer2 = window.setTimeout(function () {
         var _sliderTimeout;
-        _collectionId = "";
-        $(".slider-custom").slider({value: 0}).on("slideStart",function (ev) {
-            _collectionId = $(this).attr("data-id");
-            itemsToLearn[_collectionId] = ev.value;
-            $(".toLearn.editable[data-id='" + _collectionId + "']").editable("setValue", ev.value);
-        }).on("slide", function (ev) {
-                if (itemsToLearn[_collectionId] !== ev.value) {
 
-                    $(".toLearn.editable[data-id='" + _collectionId + "']").editable("setValue", ev.value);
-                    itemsToLearn[_collectionId] = ev.value;
-                }
-            });
+    }, 500);
 
-//        $.fn.editable.defaults.mode = 'inline';
-        $(".toLearn.editable:not(.editable-click)").editable('destroy').editable({
-            anim: '100',
-            mode: 'inline',
-            showbuttons: false,
-            success: function (response, newValue) {
-                _collectionId = $(this).attr("data-id");
-                $(".slider-custom[data-id='" + _collectionId + "']").slider("setValue", newValue);
-
-                itemsToLearn[_collectionId] = newValue;
-            },
-            validate: function (value) {
-                _value = parseFloat(value);
-                var intRegex = /^\d+$/;
-                if (!intRegex.test(_value)) {
-                    return "Has to be decimal";
-                }
-            }
-
-        })
-
-    }, 150);
 }
 
 

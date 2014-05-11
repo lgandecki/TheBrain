@@ -31,8 +31,8 @@
                         {{#isolate}}
                             {{#each lesson}}
                             <tr class="lessonRow" data-id="{{_id}}">
-                                <td>{{#if isCourseOwner}}<a href="javascript:" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a>{{else}}{{name}}{{/if}}</td>
-                                <td class="hidden-phone">{{#if isCourseOwner}}<a href="javascript;" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a>{{else}}{{shortDescription}}{{/if}}</td>
+                                <td>{{#if isCourseOwner}}<a href="" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a>{{else}}{{name}}{{/if}}</td>
+                                <td class="hidden-phone">{{#if isCourseOwner}}<a href="" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a>{{else}}{{shortDescription}}{{/if}}</td>
                                 <td class="hidden-phone">{{flashcardsLength}}</td>
                                 <td>
                                     <button class="btn btn-primary btn-primary-main btn-enterLesson btn-block" data-id="{{_id}}"><i class="icon-hand-left"></i>
@@ -57,3 +57,5 @@
         </div>
     </div>
 </template>
+
+

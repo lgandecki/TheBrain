@@ -68,6 +68,7 @@ Accounts.onCreateUser(function (options, user) {
         };
     }
 
+    user.profile.tours = [];
 
     return user;
 });

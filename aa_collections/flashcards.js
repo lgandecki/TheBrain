@@ -221,6 +221,55 @@ Meteor.methods({
             // Items.insert(_items);
         }
     },
+    addVideoFlashcardsToCollection: function (opts) {
+        // _flashcardsIds = _opts.flashcardsIds;
+        var user = Meteor.user(),
+            collectionId, _course;
+        if (!user)
+            throw new Meteor.Error(401, "You need to login to add flashcards");
+
+        if (!opts.youtube_id)
+            throw new Meteor.Error(403, "You need to specify youtube id");
+
+        if (!opts.courseId)
+            throw new Meteor.Error(403, "You need to specify course id");
+
+        if (Meteor.isServer) {
+            var _items = [];
+                _course = Courses.findOne({_id: opts.courseId});
+
+                if (!_course) {
+                    throw new Meteor.Error(401, "You need to add flashcards from existing course");
+                }
+                var _collectionIndex = _.indexOf(_.pluck(user.collections, 'name'), _course.name);
+
+                if (_collectionIndex > -1) {
+                    collectionId = user.collections[_collectionIndex]._id;
+                }
+                else {
+                    var collection = {
+                        name: _course.name
+                    };
+                    collectionId = Meteor.call("newCollection", collection);
+                }
+
+//            var _flashcards = Flashcards.find({_id: {$all: opts.flashcardsIds} })
+            console.log("flashcardsIds", opts.flashcardsIds);
+            var _flashcards = Flashcards.find({youtube_id: opts.youtube_id})
+            _flashcards.forEach(function (flashcard) {
+                console.log("flashcard", flashcard);
+                var _existingItem = Items.findOne({user: user._id, flashcard: flashcard._id});
+                if (!_existingItem) {
+
+                    Items.insert(returnItem(collectionId, flashcard));
+                }
+                // _items.push(returnItem(collectionId, flashcardId));
+            })
+
+            // console.log("_items", _items);
+            // Items.insert(_items);
+        }
+    },
     newFlashcardComment: function (newFlashcardComment) {
         var _user = Meteor.user();
         if (!_user)

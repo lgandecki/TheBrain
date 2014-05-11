@@ -230,6 +230,30 @@ createNewFlashcard = function() {
 //    $("#newFront .flashcardFront").children().forEach(function(child) {
 //        _front = _front + "&#13;&#10;" + child.text();
 //    })
+
+    var _course, _lesson, _khanPlaylistSlug, _khanVideoSlug;
+
+    var _currentRoute = window.location.pathname;
+    _currentRoute = "/" + _currentRoute.split("/")[1];
+    if (_currentRoute === "/videoLesson") {
+        _course = Session.get("selectedCourse");
+
+        var _selectedCourse = Courses.findOne({_id: Session.get("selectedCourse")});
+        var _youtube_id = Session.get("youtube_id");
+        console.log("Course in created", _selectedCourse);
+        if (_selectedCourse && _youtube_id) {
+            _lessonIndex = _.indexOf(_.pluck(_selectedCourse.lessons, 'youtube_id'), _youtube_id);
+            if (_selectedCourse.khanPlaylistSlug) {
+                _khanPlaylistSlug = _selectedCourse.khanPlaylistSlug;
+                _khanVideoSlug = _selectedCourse.lessons[_lessonIndex].videoSlug;
+            }
+        }
+        _lesson = _selectedCourse.lessons[_lessonIndex]._id;
+    } else {
+        _lesson = $("#lesson").val();
+        _course = $("#course").val();
+    }
+
     var _newFlashcard = {
         "public": _isPublic,
         "front": _front || null,
@@ -237,7 +261,7 @@ createNewFlashcard = function() {
         "back": _back || null,
         "backPicture": Session.get("newBackPicture") || null,
 //        "course": $("#course").val(),
-        "lesson": $("#lesson").val(),
+        "lesson": _lesson,
         "collection": $("#collection").val(),
         "source": {
             "youtube": $("#youtubeSource").val(),
@@ -250,9 +274,20 @@ createNewFlashcard = function() {
     var _youtube_id = Session.get("youtube_id");
     if (_youtube_id) {
         _newFlashcard.youtube_id = _youtube_id;
-        var _playlistSlug = Session.get("playlistSlug"); // if KhanAcademy
+        var _playlistSlug;
+        if (_khanPlaylistSlug) {
+            _playlistSlug = _khanPlaylistSlug
+        } else {
+            _playlistSlug = Session.get("playlistSlug");
+        }
         if (_playlistSlug) {
-            var _videoSlug = Session.get("videoSlug");
+            var _videoSlug;
+            if (_khanVideoSlug)  {
+                _videoSlug = _khanVideoSlug
+            } else {
+                _videoSlug = Session.get("videoSlug");
+            }
+
             _newFlashcard.khanAcademy = {
                 playlistSlug: _playlistSlug,
                 videoSlug: _videoSlug
@@ -260,7 +295,7 @@ createNewFlashcard = function() {
         }
     }
 
-    var _course = $("#course").val();
+
     if (_course && _course != "Don't add to any courses") {
         _newFlashcard.course = _course;
     }

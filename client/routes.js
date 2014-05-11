@@ -117,6 +117,14 @@ Router.map(function () {
         }
     })
 
+    this.route("videoLesson", {
+        path: "/videoLesson/:courseId/:youtubeId",
+        onBeforeAction: function() {
+            Session.set("selectedCourse", this.params.courseId);
+            Session.set("youtube_id", this.params.youtubeId);
+      }
+    })
+
     this.route("conversation", {
         path: "/conversation/:otherUser",
         onBeforeAction: function () {

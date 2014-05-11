@@ -57,9 +57,7 @@
                                 </button>
                                 <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> Edit
                                 </button>
-                                <button class=" btn btn-primary btn-primary-main btn-selectFlashcard btn-block" data-id="{{_id}}"><i
-                                        class="icon-hand-down hidden-desktop"></i> {{isFlashcardSelectedButton}}
-                                </button>
+
                             </div>
                         </div>
                         {{#isolate}}
@@ -116,25 +114,10 @@
 </template>
 
 <template name="flashcardsDefaultOptions">
-    <div class="row-fluid">
 
-        <div class="span6">
-            <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block "><i class="icon-hand-right"></i> Select All
-            </button>
-        </div>
-        <div class="span6">
-            <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block "><i class="icon-hand-right"></i> Deselect All
-            </button>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <br/>
-        <span class="label label-info withSelectedLabel">With {{#isolate}}{{flashcardsSelectedLength}}{{/isolate}} selected:</span>
-
-    </div>
     <div class="row-fluid">
         <div class="span12">
-            <button class=" btn btn-primary btn-primary-main btn-addSelectedToCollection btn-block "><i class="icon-hand-right"></i> Learn
+            <button class=" btn btn-primary btn-primary-main btn-addAllInLesson btn-block "><i class="icon-hand-right"></i> Learn All ({{flashcardsAvailable}})
             </button>
         </div>
     </div>

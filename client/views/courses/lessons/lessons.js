@@ -65,7 +65,11 @@ Template.lessonsTable.events({
     },
     "click .lessonRow:not(.editable), click .btn-enterLesson": function(e) {
         Session.set("selectedLesson", this._id);
-        Router.go('/lesson/' + Session.get("selectedCourse") + "/" + this._id);
+        if (this.youtube_id) {
+            Router.go('/videoLesson/' + Session.get("selectedCourse") + "/" + this.youtube_id);
+        } else {
+            Router.go('/lesson/' + Session.get("selectedCourse") + "/" + this._id);
+        }
     },
     "click .btn-addLessonModal": function (e, template) {
         e.preventDefault();
