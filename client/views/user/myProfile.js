@@ -6,6 +6,7 @@ Template.myProfile.rendered = function() {
 
 	$.fn.editable.defaults.mode = 'inline';
 
+    window.setTimeout(function() {
 	$('.user-firstName.editable:not(.editable-click)').editable('destroy').editable({
 		success: function(response, newFirstName) {
 			Meteor.call("updateUserFirstName", newFirstName, function(error, id) {
@@ -41,6 +42,7 @@ Template.myProfile.rendered = function() {
 			});
 		}
 	});
+    }, 1000);
 
 	// filepicker.constructWidget(document.getElementById('attachment'));
 
@@ -76,11 +78,14 @@ Template.myProfile.events({
 	},
     'click .changePassword': function(evt) {
         if ($(".pw1").val() === $(".pw2").val()) {
+
             Meteor.call("addMyPassword", $(".pw2").val(), function(error){
                 if (error) {
+                    Meteor.popUp.error("TheBrain is confused", error.reason);
                     console.log("changing password error", error);
                 }
                 else {
+                    Meteor.popUp.success("Password changed", "TheBrain made the neural connections changes you asked for.");
                     console.log("password changed");
                 }
             });

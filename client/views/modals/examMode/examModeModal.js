@@ -17,6 +17,10 @@ Template.examModeModal.collectionName = function () {
     return _collectionName;
 }
 
+Template.examModeModal.collectionId = function() {
+    return Session.get("selectedCollection");
+}
+
 Template.examModeModal.itemsInCollection = function () {
     var _selectedCollection = Session.get("selectedCollection");
     return Meteor.collections.returnItemsIn(_selectedCollection);

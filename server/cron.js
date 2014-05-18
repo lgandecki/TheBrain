@@ -122,25 +122,29 @@ MyCron.addJob(720, function() {
 //            }
 //        });
 
-        Parse.Push.send({
-            channels: [ user._id ],
-            data: {
-                alert: "You have " + _repCount + " repetitions due! Wanna get a couple done?",
-                badge: _repCount,
-                title: "TheBrain is bored!"
-            }
-        }, {
-            success: function() {
-                console.log("push successful for user", user._id);
-                // Push was successful
-            },
-            error: function(error) {
-                console.log("push unsuccessful for user", user._id);
+        if (_repCount && _repCount > 0) {
 
-                // Handle error
-            }
-        });
+            Parse.Push.send({
+                channels: [ user._id ],
+                data: {
+                    alert: "You have " + _repCount + " repetitions due! Wanna get a couple done?",
+                    badge: _repCount,
+                    title: "TheBrain is bored!"
+                }
+            }, {
+                success: function() {
+                    console.log("push successful for user", user._id);
+                    // Push was successful
+                },
+                error: function(error) {
+                    console.log("push unsuccessful for user", user._id);
+
+                    // Handle error
+                }
+            });
+        }
         console.log("User", user._id, "has so many reps ", _repCount);
     })
+
     console.log('tick');
 });

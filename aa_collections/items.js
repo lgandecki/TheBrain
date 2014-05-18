@@ -82,7 +82,7 @@ Meteor.methods({
             throw new Meteor.Error(401, "You have to specify the list of Flashcards");
         }
 
-        Items.update({_id: { $in: opts.items }, user: user._id}, {$set: { extraRepeatToday: true}}, {multi: true});
+        Items.update({_id: { $in: opts.items }, user: user._id, actualTimesRepeated: {$gt: 0}}, {$set: { extraRepeatToday: true}}, {multi: true});
 
     },
     examModeSchedule: function(opts) {
@@ -90,7 +90,7 @@ Meteor.methods({
         if (!user)
             throw new Meteor.Error(401, "You need to login to update flashcards");
         if (Meteor.isServer) {
-            var _items = Items.find({user: user._id, collection: opts.collectionId}, {limit: opts.items, sort: {easinessFactor: 1}}).fetch();
+            var _items = Items.find({user: user._id, collection: opts.collectionId, actualTimesRepeated: {$gt: 0}}, {limit: opts.items, sort: {easinessFactor: 1}}).fetch();
             var _itemIds = [];
             _items.forEach(function(item) {
                 _itemIds.push(item._id);
