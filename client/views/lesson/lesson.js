@@ -352,7 +352,13 @@ Template.flashcardRow.events({
         e.stopImmediatePropagation();
 //        Session.get("currentItemId");
         Session.set("currentFlashcardId", this._id);
-        $("#editFlashcardModal").modal("show");
+        $("#editFlashcardModal").modal("show").on("show", function() {
+            console.log("set to false");
+            Session.set("noRender", false);
+        }).on("hidden", function() {
+                console.log("set to true");
+                Session.set("noRender", true);
+            });;
     },
 
     "click .btn-commentsFlashcard": function (e) {
@@ -519,8 +525,9 @@ Template.flashcardsDefaultOptions.flashcardsAvailable = function () {
             _lesson = _course.lessons[_lessonIndex];
         }
     }
-    if (_lesson.youtube_id) {
-        _count = YoutubeVideoFlashcardsCount.findOne({_id: Session.get("youtube_id")});
+    if (!_lesson || !_lesson.youtube_id) {
+        var _countObject = YoutubeVideoFlashcardsCount.findOne({_id: Session.get("youtube_id")});
+        _count = _countObject && _countObject.count;
     } else {
         if (_lesson.teacherFlashcards && _lesson.studentsFlashcards) {
             _count = _lesson.teacherFlashcards.length + _lesson.studentsFlashcards.length;

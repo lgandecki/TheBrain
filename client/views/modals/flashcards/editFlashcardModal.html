@@ -12,8 +12,9 @@
 
                 <form action="#" class='form-horizontal form-bordered'>
                     <div class="box-content nopadding modal-box">
-
-                    {{> editFlashcardForm }}
+                    {{#unless noRender}}
+                        {{> editFlashcardForm }}
+                    {{/unless}}
                         </div>
                     <div class="modal-footer-mine">
 

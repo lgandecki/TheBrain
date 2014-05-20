@@ -105,7 +105,13 @@ Template.myFlashcard.events({
 //        Session.get("currentItemId");
         Session.set("currentItemId", this._id);
         Session.set("currentFlashcardId", this.flashcard);
-        $("#editFlashcardModal").modal("show");
+        $("#editFlashcardModal").modal("show").on("show", function() {
+            console.log("set to false");
+            Session.set("noRender", false);
+        }).on("hidden", function() {
+                console.log("set to true");
+                Session.set("noRender", true);
+            });
     },
     "click .btn-historyFlashcard": function (e) {
         e.preventDefault();

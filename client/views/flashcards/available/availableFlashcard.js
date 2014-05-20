@@ -140,7 +140,13 @@ Template.availableFlashcard.events({
         e.stopImmediatePropagation();
 //        Session.get("currentItemId");
         Session.set("currentFlashcardId", this._id);
-        $("#editFlashcardModal").modal("show");
+        $("#editFlashcardModal").modal("show").on("show", function() {
+            console.log("set to false");
+            Session.set("noRender", false);
+        }).on("hidden", function() {
+                console.log("set to true");
+                Session.set("noRender", true);
+            });;
     },
 
     "click .btn-commentsFlashcard": function(e) {

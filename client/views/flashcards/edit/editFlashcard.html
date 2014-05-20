@@ -53,11 +53,13 @@
             <div name="backNote" id="backNote" class="flashcard flashcardNoMargin" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{#isolate}}{{backNote}}{{/isolate}}</div>
         </div>
     </div>
-
+    <div id="advancedSettings" style='display: none;'>
+    {{> publicGroup }}
+    </div>
 </template>
 
 
 <template name="editFlashcardButtons">
         <button type="submit" class="btn btn-primary btn-primary-main btn-submit">Update Flashcard</button>
-        <button class="btn btn-primary btn-primary-main btn-showAdvanced">Show advanced settings</button>
+        <button class="btn btn-primary btn-primary-main btn-showAdvanced" style="display: none;">Show advanced settings</button>
 </template>
