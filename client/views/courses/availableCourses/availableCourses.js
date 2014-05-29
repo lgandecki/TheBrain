@@ -12,7 +12,7 @@ Template.availableCourses.events({
 
 
 Template.availableCourses.showFeatured = function() {
-    return Meteor.userId() === "5rufb3jGQHgouZWAy";
+    return Meteor.userId() === "5rufb3jGQHgouZWAy" || Meteor.userId() === "pdidkBRmhPbhDuNhJ" || Meteor.userId() === "L2vK3r4MdZJaKB4N2";
 }
 
 Template.availableCourses.featuredCourse = function() {

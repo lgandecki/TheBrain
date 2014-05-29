@@ -342,6 +342,6 @@ Router.onAfterAction(function() {
 })
 var makeModalsScrollable = function () {
     console.log("window height", $(window).height())
-    var _modalMaxHeight = $(window).height() - ($(window).height() / 4) - 76;
+    var _modalMaxHeight = $(window).height() - 80;
     $(".modal-box").css({"max-height": _modalMaxHeight});
 }
