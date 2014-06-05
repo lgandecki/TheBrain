@@ -68,7 +68,7 @@ Template.examModeModal.rendered = function () {
 
         })
 
-    }, 150);
+    }, 500);
 }
 
 Template.examModeModal.events({
