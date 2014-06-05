@@ -1,1 +1,11 @@
 Repository for TheBrain project.
+
+Copyright 2014, Łukasz Gandecki
+
+I put the code on the public github repository so everyone can look around and see how a mature Meteor project might be constructed and organized. 
+I use a lot of advanced Meteor features that are not covered in the meteor.com examples.
+Feel free to use it for learning purposes, fork, play around, but please DO NOT start up a project like mine using my code.
+
+If you want to contribute or invest - great! Email me at lgandecki@thebrain.pro . 
+
+PR more than welcome!
