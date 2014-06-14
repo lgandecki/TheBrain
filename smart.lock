@@ -15,7 +15,8 @@
       "npm": {},
       "iron-router": {},
       "fast-render": {},
-      "sitemaps": {}
+      "sitemaps": {},
+      "phonegap-oauth": {}
     },
     "packages": {
       "jquery-ui": {
@@ -50,8 +51,8 @@
       },
       "paginated-subscription": {
         "git": "https://github.com/tmeasday/meteor-paginated-subscription.git",
-        "tag": "v0.1.2",
-        "commit": "35e0c6112df2b4cfeb60b559276a93cac5ee2dd6"
+        "tag": "v0.2.2",
+        "commit": "2133a2163575f569f90253f81314f21b2bf08d20"
       },
       "spin": {
         "git": "https://github.com/SachaG/meteor-spin.git",
@@ -80,13 +81,18 @@
       },
       "fast-render": {
         "git": "https://github.com/arunoda/meteor-fast-render.git",
-        "tag": "v0.2.3",
-        "commit": "d56bd4a4d222bf176241cd6e756aa349cb24c260"
+        "tag": "v0.2.5",
+        "commit": "93e2fb334e55fbe9b5ebb2a2e65964018658f43e"
       },
       "sitemaps": {
         "git": "https://github.com/gadicohen/meteor-sitemaps.git",
         "tag": "v0.0.16",
         "commit": "ed4d908c581071d1302b37c6ba77dbce55333dd3"
+      },
+      "phonegap-oauth": {
+        "git": "https://github.com/AdamBrodzinski/meteor-phonegap-oauth.git",
+        "tag": "v0.1.4",
+        "commit": "09de9417967381153218ad4393bd63981e22756c"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",
@@ -95,8 +101,8 @@
       },
       "HTML5-History-API": {
         "git": "https://github.com/tmeasday/meteor-HTML5-History-API.git",
-        "tag": "v4.0.0",
-        "commit": "dc4965f1424cfca625ec3fbea17eace03f8e32c5"
+        "tag": "v4.1.2",
+        "commit": "b5fca79f9ae8936e5f748a04f475295f4fa1cc7a"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

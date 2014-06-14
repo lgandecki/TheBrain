@@ -5,6 +5,8 @@ Template.logInForm.events({
         Meteor.loginWithFacebook(function(err) {
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you are logged in to facebook");
+            } else {
+                Router.go("/");
             }
         });
     },
@@ -25,6 +27,7 @@ Template.logInForm.events({
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you provided the correct username and password!");
             } else {
+                Router.go("/");
             }
         });
         return false;

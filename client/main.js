@@ -107,19 +107,15 @@ Deps.autorun(function () {
 
 Meteor.startup(function () {
     filepicker.setKey("AHkjyUnfjQku2SL4OTQbxz");
+    new GA(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    window.ga('create', 'UA-33043573-4', 'thebrain.pro');
+    console.log("creating GA");
 });
 
 
 $.fn.modal.Constructor.prototype.enforceFocus = function () {
 }; // Fix to enable stacking modals
-_runOnce = true;
-Template.body.rendered = function () {
-    if (_runOnce === true) {
-        new GA(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-33043573-4', 'thebrain.pro');
-        _runOnce = false;
-    }
-}
+
 
 Template.body.events({
 //    "mouseenter .btn-primary": function(e) {

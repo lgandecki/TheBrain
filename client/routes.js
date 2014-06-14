@@ -198,6 +198,46 @@ var postLoad = function (page) {
 
     $(".transition").hide();
 
+    if (window.woopra) {
+        var _user = Meteor.user();
+
+
+        if (_user) {
+            if (_user.identity) {
+                var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
+                window.woopra.identify({
+                    email: _email || _user._id,
+                    name: _user.identity.nick,
+                    avatar: _user.profile && _user.profile.picture
+                })
+            } else {
+                setTimeout(function() {
+                    var _user = Meteor.user();
+                    var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
+                    window.woopra.identify({
+                        email: _email || _user._id,
+                        name: _user.identity && _user.identity.nick || _user._id,
+                        avatar: _user.profile && _user.profile.picture
+                    })
+
+                }, 500);
+            }
+
+        }
+        window.woopra.track();
+    }
+
+    if (window.ga) {
+        console.log("sending pageView without timeout")
+        window.ga('send', 'pageview', window.location.pathname);
+    }
+    else {
+        setTimeout(function () {
+            console.log("sending pageView with timeout")
+                window.ga && window.ga('send', 'pageview', window.location.pathname);
+        }, 300);
+    }
+
     setTimeout(function () {
         $(".transition").show();
         if ($(".transition").length > 0) {
@@ -215,16 +255,7 @@ var postLoad = function (page) {
         }
 
 
-        if (typeof ga !== 'undefined') {
-            ga('send', 'pageview', window.location.pathname);
-        }
-        else {
-            setTimeout(function () {
-                if (typeof ga !== 'undefined') {
-                    ga('send', 'pageview', window.location.pathname);
-                }
-            }, 300);
-        }
+
 
 
         if (_prev) {

@@ -18,15 +18,15 @@ Template.login.rendered = function() {
 Template.signUpWithEmailModal.events({
     'submit #signUp': function(e, t) {
         e.preventDefault();
-        _email = $(".newEmail").val();
-        _password = $(".newPassword").val();
+        var _email = $(".newEmail").val();
+        var _password = $(".newPassword").val();
 
-        _user = {
+        var _user = {
             "email": _email,
             "password": _password
         };
 
-        _id = Accounts.createUser(_user);
+        var _id = Accounts.createUser(_user);
 
         $('#signUpWithEmailModal').modal('hide');
 
@@ -35,7 +35,7 @@ Template.signUpWithEmailModal.events({
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you are not trying to register account with the same email address again!");
             } else {
-
+                Router.go("/");
             }
         });
         // setTimeout(function() {
@@ -65,7 +65,6 @@ Template.login.events({
             if (err) {
                 bootbox.alert("TheBrain is confused<br/>Please make sure you are logged in to facebook");
             } else {
-                Router.go("/");
                 console.log("sign up with facebook")
                 var _user = Meteor.user();
                 if (_user && ((_user.emails && _user.emails.length === 0) || !_user.emails)) {
@@ -78,6 +77,7 @@ Template.login.events({
                         }
                     });
                 }
+                Router.go("/");
             }
         });
         // _collection = {
