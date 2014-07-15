@@ -1,8 +1,31 @@
+var _lesson;
+var _autorunHandle = null;
 
+var _setLessonSession = function() {
+    var _selectedCourse = Session.get("selectedCourse");
+    var _youtube_id = Session.get("youtube_id");
+    var _course = Courses.findOne({_id: _selectedCourse});
+    var _lesson;
+    if (_course && _youtube_id) {
+        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, 'youtube_id'), _youtube_id);
+        _lesson = _course.lessons[_lessonIndex];
+        Session.set("_lesson", _lesson);
+    }
+};
+Template.videoLesson.created = function() {
+    _autorunHandle = Deps.autorun(function () {
+        _setLessonSession();
+    })
+};
+
+Template.videoLesson.destroyed = function() {
+    _autorunHandle.stop();
+};
 Template.videoLesson.rendered = function() {
     window.setTimeout(function() {
         Meteor.tour.showIfNeeded("featuredCourseClickForFlashcards");
     }, 5000)
+    _setLessonSession();
 }
 
 Template.videoLesson.youtubeVideoFlashcardsCount = function() {
@@ -26,28 +49,13 @@ Template.videoLesson.videos = function() {
 
 
 Template.videoLesson.lessonTitle = function () {
-
-    var _course = Courses.findOne({_id: Session.get("selectedCourse")});
-    var _youtube_id = Session.get("youtube_id");
-    var _lesson;
-    console.log("Course in created", _course);
-    if (_course && _youtube_id) {
-        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, 'youtube_id'), _youtube_id);
-       _lesson = _course.lessons[_lessonIndex];
-    }
+    var _lesson = Session.get("_lesson");
     return _lesson && _lesson.name;
 
 }
 
 Template.videoLesson.videoDescription = function () {
-    var _course = Courses.findOne({_id: Session.get("selectedCourse")});
-    var _youtube_id = Session.get("youtube_id");
-    var _lesson;
-    console.log("Course in created", _course);
-    if (_course && _youtube_id) {
-        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, 'youtube_id'), _youtube_id);
-        _lesson = _course.lessons[_lessonIndex];
-    }
+    var _lesson = Session.get("_lesson");
     return _lesson && _lesson.shortDescription;
 }
 
@@ -106,12 +114,12 @@ Template.videoLesson.nextVideo = function () {
 
     return _course && _course.lessons && _course.lessons[_lessonIndex + 1];
 
-}
+};
 
 Template.videoLesson.destroyed = function () {
     Session.set("selectedCourse", "");
     Session.set("youtube_id", "");
-}
+};
 
 Template.videoLesson.events({
     "click .previousVideo": function (e) {
@@ -122,7 +130,7 @@ Template.videoLesson.events({
         var _href = $(e.target).attr("data-id");
         Router.go(_href);
     }
-})
+});
 
 
 Template.videoLessonRow.currentLessonVideo = function() {

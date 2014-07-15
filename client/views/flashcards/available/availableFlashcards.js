@@ -3,7 +3,7 @@ var flashcardsHandle;
 var _opts = {};
 Template.availableFlashcards.created = function () {
     flashcardsHandle = Meteor.subscribeWithPagination('paginatedFlashcards', _opts, 10);
-}
+};
 
 Template.availableFlashcards.flashcard = function () {
     var _flashcards;

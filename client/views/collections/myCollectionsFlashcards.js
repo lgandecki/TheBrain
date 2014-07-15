@@ -148,7 +148,7 @@ Template.withSelectedItems.events({
     },
     "click .btn-changeCollection": function (e) {
         $("#changeItemsCollectionModal").modal("show").on('hidden', function () {
-            var _newCollectionId = $("#newCollectionId").val()
+            var _newCollectionId = $("#newCollectionId").val();
             if (_newCollectionId !== Session.get("selectedCollection")) {
                 var _callOpts = {
                     function: "changeItemsCollection",
