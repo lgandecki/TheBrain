@@ -72,28 +72,35 @@ Meteor.methods({
                         "lesson": flashcardAttributes.lesson
                     }
                 ];
+                flashcard._id = Flashcards.insert(flashcard);
+
+
+                var _opts = {
+                    flashcardsIds: [flashcard._id],
+                    courseId: flashcardAttributes.course
+                };
+                Meteor.call("addFlashcardsToCollection", _opts);
+
+                var _addToLessonOpts = {
+                    "course": flashcardAttributes.course,
+                    "lesson": flashcardAttributes.lesson,
+                    "flashcardId": flashcard._id
+                };
+                addFlashcardToLesson(_addToLessonOpts);
             }
+
+
         }
 
 
-        var flashcardId = Flashcards.insert(flashcard);
-
-        flashcard._id = flashcardId;
-
-        if (flashcardAttributes.collection) {
+        else if (flashcardAttributes.collection) {
+            flashcard._id = Flashcards.insert(flashcard);
             var item = returnItem(flashcardAttributes.collection, flashcard);
             Items.insert(item);
         }
 
 
-        if (flashcard.lessons) {
-            var _addToLessonOpts = {
-                "course": flashcardAttributes.course,
-                "lesson": flashcardAttributes.lesson,
-                "flashcardId": flashcard._id
-            }
-            addFlashcardToLesson(_addToLessonOpts);
-        }
+
 
 
     },
@@ -678,7 +685,6 @@ var addFlashcardToLesson = function (opts) {
             modifier.$addToSet["lessons." + _lessonIndex + ".studentsFlashcards"] = opts.flashcardId;
         }
     }
-
     Courses.update(_course._id, modifier);
 
 }

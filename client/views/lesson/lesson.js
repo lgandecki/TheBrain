@@ -1,4 +1,4 @@
-var _course, _lesson, _flashcardSubscription, _firstOpened;
+var _course, _lesson, _flashcardSubscription, _firstOpened, _query;
 var _depsHandle = null;
 
 
@@ -538,7 +538,7 @@ Template.flashcardsDefaultOptions.flashcardsAvailable = function () {
             _lesson = _course.lessons[_lessonIndex];
         }
     }
-    if (!_lesson || !_lesson.youtube_id) {
+    if (_lesson.youtube_id) {
         var _countObject = YoutubeVideoFlashcardsCount.findOne({_id: _youtube_id});
         _count = _countObject && _countObject.count;
     } else {

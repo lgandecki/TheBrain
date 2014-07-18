@@ -19,6 +19,7 @@ var _returnSide = function(side, isNew) {
 
     var html = $(_selector).html();
     var justText = $(_selector).justtext();
+    justText = justText.trim();
     var html2 = html.replace(justText, "<div>"+justText+"</div>")
     $(_selector).html(html2);
     var _side = "";
