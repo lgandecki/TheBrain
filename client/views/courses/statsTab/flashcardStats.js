@@ -106,7 +106,7 @@ Template.flashcardStats.renderGraph = function() {
 
                         $.each(this.points, function (i, point) {
                             s += '<img class="pull-right" style="width: 90px; height: 90px" src="' + point.point.userPicture + '" alt=""><br/>' + point.series.name + ': <br/><br/>' +
-                                ' easinessFactor ' + point.y + '<br/>answer ' + point.point.answer + '<br/>evaluation ' + point.point.evaluation + '<br/>days change ' + point.point.daysChange
+                                ' easinessFactor ' + point.y + '<br/>answer ' + point.point.answer + '<br/>evaluation ' + Meteor.flashcard.returnEvaluationName(point.point.evaluation) + '<br/>days change ' + point.point.daysChange
 //                    console.log("point", point);
                         });
 

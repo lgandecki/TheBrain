@@ -111,28 +111,7 @@ Template.itemHistory.extraRepetition = function () {
 }
 
 Template.itemHistory.historyEvaluation = function () {
-    var _evaluationName = "";
-    switch (this.evaluation) {
-        case '0':
-            _evaluationName = "Blackout";
-            break;
-        case '1':
-            _evaluationName = "Terrible";
-            break;
-        case '2':
-            _evaluationName = "Bad";
-            break;
-        case '3':
-            _evaluationName = "Hardly";
-            break;
-        case '4':
-            _evaluationName = "Good";
-            break;
-        case '5':
-            _evaluationName = "Perfect!";
-            break;
-    }
-    return _evaluationName;
+    return Meteor.flashcard.returnEvaluationName(this.evaluation);
 }
 
 Template.itemHistory.daysChangeFormat = function () {
@@ -488,7 +467,7 @@ Template.repeat.events({
                 }
                 if (_evaluation || _evaluation === 0) {
                     var _itemId = $('#evaluate').attr("item-id");
-                    console.log("_evaluation");
+                    console.log("_evaluation", _evaluation);
                     _parseEvaluation(_evaluation, _itemId)
                 }
                 return;
@@ -500,7 +479,7 @@ Template.repeat.events({
         showBackAndEvaluation();
     },
     "click .evaluation": function (e) {
-        var _evaluation = $(e.target).val();
+        var _evaluation = parseInt($(e.target).val());
         var _itemId = $('#evaluate').attr("item-id");
         _parseEvaluation(_evaluation, _itemId)
     },
