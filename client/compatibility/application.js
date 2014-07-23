@@ -75,8 +75,8 @@ function slimScrollUpdate(elem, toBottom) {
     }
 }
 
-function destroySlimscroll(elem) { 
-    elem.parent().replaceWith(elem); 
+function destroySlimscroll(elem) {
+    elem.parent().replaceWith(elem);
 }
 
 function initSidebarScroll(){
@@ -180,6 +180,35 @@ function getNavElement(current){
     return element;
 }
 
+function returnPersonalMenu() {
+    var _menu = '<li><a href="#">Personal menu</a><ul>';
+    var _links = [
+
+        {
+            link: "/myProfile",
+            name: "My Profile"
+        },
+        {
+            link: "/calendar",
+            name: "Repetitions Calendar"
+        },
+        {
+            link: "/messageCenter",
+            name: "Message center"
+        },
+        {
+            link: "/notificationCenter",
+            name: "Notification center"
+        }
+    ]
+    _links.forEach(function(link) {
+        _menu += '<li><a href="' + link.link + '">' + link.name + '</a></li>';
+    })
+    _menu += '</ul></li>';
+    _menu += '<li><a class="logOut" href="javascript:">Logout</a></li>';
+    return _menu;
+}
+
 var nav = "";
 function getNav(current){
     var currentNav = "";
@@ -187,6 +216,7 @@ function getNav(current){
     current.find(">li").each(function(){
         currentNav += getNavElement($(this));
     });
+    currentNav += returnPersonalMenu();
     currentNav += "</ul>";
     nav = currentNav;
     return currentNav;
@@ -199,8 +229,11 @@ function createSubNav(){
         // loop
         var current = original;
         getNav(current);
+
+        console.log("nav ", nav);
         $("#navigation").append(nav);
-        $("#navigation > ul").last().addClass("mobile-nav");
+
+    $("#navigation > ul").last().addClass("mobile-nav");
 
         $(".mobile-nav > li > a").click(function(e){
             var el = $(this);
@@ -284,8 +317,8 @@ $(document).ready(function () {
 
     $(".gototop").click(function(e){
         e.preventDefault();
-        $("html, body").animate({ 
-            scrollTop: 0 
+        $("html, body").animate({
+            scrollTop: 0
         }, 600);
     });
 
@@ -310,19 +343,19 @@ $(document).ready(function () {
         });
     }
 
-    $('.main-nav > li, .subnav-menu > li').hover(function() { 
+    $('.main-nav > li, .subnav-menu > li').hover(function() {
         if($(this).attr("data-trigger") == "hover"){
             if($(this).parents(".subnav-menu").length > 0 && $("#left").hasClass("sidebar-fixed")){
                 $(this).find(">a").trigger("click");
             } else {
-                $(this).closest('.dropdown-menu').stop(true, true).show(); 
-                $(this).addClass('open'); 
+                $(this).closest('.dropdown-menu').stop(true, true).show();
+                $(this).addClass('open');
             }
         }
-    }, function() { 
+    }, function() {
         if($(this).attr("data-trigger") == "hover"){
-            $(this).closest('.dropdown-menu').stop(true, true).hide(); 
-            $(this).removeClass('open'); 
+            $(this).closest('.dropdown-menu').stop(true, true).hide();
+            $(this).removeClass('open');
         }
     });
 
@@ -507,7 +540,7 @@ createSubNav();
 
    if($("#new-task .select2-me").length > 0){
     function formatIcons(option){
-        if (!option.id) return option.text; 
+        if (!option.id) return option.text;
         return "<i class='" + option.text +"'></i> ." + option.text;
     }
     $("#new-task .select2-me").select2({
@@ -630,7 +663,7 @@ $(".new-task-form").submit(function(e){
             }
         } else {
             $tasklist.prepend(elementToAdd);
-        }  
+        }
 
         icheck();
         $tasklist.find("[rel=tooltip]").tooltip();
@@ -727,7 +760,7 @@ $('.table-mail > tbody > tr').click(function(e){
     var $el = $(this);
     var checkbox = $el.find('.table-checkbox > input');
     $el.toggleClass('warning');
-    
+
     if(e.target.nodeName != 'INPUT')
     {
         checkbox.prop('checked', !(checkbox.prop('checked')));
@@ -750,7 +783,7 @@ $(".table .alpha").click(function (e) {
     elements += "<li class='active'><span>All</span></li>";
 
     for(var i=0; i<str.length; i++)
-    {   
+    {
         var active = ($.inArray(str.charAt(i), available) != -1) ? " class='active'" : "";
         elements += "<li"+active+"><span>"+str.charAt(i)+"</span></li>";
     }
@@ -825,7 +858,7 @@ $(".sidebar-toggle > a").click(function(e){
     if(!$el.hasClass("active")){
         $parent.find(".active").removeClass("active");
         $el.addClass("active");
-    }  
+    }
 
     $(".search-form .search-pane input").attr("style", "");
     $("#main").attr("style","");
@@ -863,8 +896,8 @@ if($("body").attr("data-layout-sidebar") == "fixed"){
 }
 });
 
-$.fn.scrollBottom = function() { 
-  return $(document).height() - this.scrollTop() - this.height(); 
+$.fn.scrollBottom = function() {
+  return $(document).height() - this.scrollTop() - this.height();
 };
 
 $(window).scroll(function(e){
@@ -893,7 +926,7 @@ $(window).scroll(function(e){
     }
 
 
-    
+
     getSidebarScrollHeight();
     resizeHandlerHeight();
 });

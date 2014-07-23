@@ -4,36 +4,11 @@
         {{> notifications }}
 
         
-        <!-- <li class='dropdown colo visible-desktop'>
-            <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
-            <ul class="dropdown-menu dropdown-menu-custom pull-right theme-colors">
-                <li class="subtitle">
-                    Predefined colors
-                </li>
-                <li>
-                    <span class='red'></span>
-                    <span class='orange'></span>
-                    <span class='green'></span>
-                    <span class="brown"></span>
-                    <span class="blue"></span>
-                    <span class='lime'></span>
-                    <span class="teal"></span>
-                    <span class="purple"></span>
-                    <span class="pink"></span>
-                    <span class="magenta"></span>
-                    <span class="grey"></span>
-                    <span class="darkblue"></span>
-                    <span class="lightred"></span>
-                    <span class="lightgrey"></span>
-                    <span class="satblue"></span>
-                    <span class="satgreen"></span>
-                </li>
-            </ul>
-        </li>   -->
+
     </ul>
     <div class="dropdown">
-        <a href="#" class='dropdown-toggle visible-desktop' data-toggle="dropdown"> {{#isolate}} {{user.identity.nick}} {{/isolate}} <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
-        <a href="#" class='dropdown-toggle hidden-desktop' data-toggle="dropdown">  <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
+        <a href="#" class='dropdown-toggle hidden-phone' data-toggle="dropdown"> {{user.identity.nick}}  <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
+        <a href="#" class='dropdown-toggle hidden-desktop' data-toggle="dropdown"> <img class="visible-phone" style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt="{{user.identity.nick}}"></a>
         <ul class="dropdown-menu dropdown-menu-custom pull-right">
             <li>
                 <a href="/myProfile">My Profile</a>
@@ -51,6 +26,7 @@
             </li>
         </ul>
     </div>
-    <a href="#" class="toggle-mobile hidden-desktop"><i class="icon-reorder"></i></a>
+    <a href="#" class="toggle-mobile visible-phone"><i class="icon-reorder"></i></a>
 </div>
+
 </template>

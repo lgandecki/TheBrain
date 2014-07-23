@@ -430,45 +430,79 @@ Template.repeat.currentFlashcard = function () {
 
 };
 
+var _parseEvaluation = function(evaluation, itemId) {
+    hideBackAndEvaluation();
+    var _now = moment(Session.get("serverNextDay"))._d;
+    var _action = Meteor.flashcard.setNextRepetition(evaluation, itemId, _now);
+    switch (_action) {
+        case 'decrementExtraRepetitionsLeft':
+            decrementExtraRepetitionsLeft();
+            break;
+        case 'decrementNewFlashcardsLeftAndIncrementExtraRepetitionsTotal':
+            incrementExtraRepetitionsTotal();
+        case 'decrementNewFlashcardsLeft':
+            decrementNewFlashcardsLeft();
+            break;
+        case 'decrementRepetitionsLeftAndIncrementExtraRepetitionsTotal':
+            incrementExtraRepetitionsTotal();
+        case 'decrementRepetitionsLeft':
+            decrementRepetitionsLeft();
+            break;
+        case 'incrementExtraRepetitionsTotal':
+            incrementExtraRepetitionsTotal();
+            break;
+
+    }
+}
 Template.repeat.events({
 
-    "keyup .answer": function (e) {
+    "keydown #answer": function (e) {
         if (e.keyCode === 13 || e.keyCode === 10) {
             e.preventDefault();
             showBackAndEvaluation();
+        } else {
+            if ($('#evaluate').is(':visible')) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                var _evaluation;
+                switch (e.keyCode) {
+                    case 49:  // 1 - blackout
+                        _evaluation = 0;
+                        break;
+                    case 50: // 2 - terrible
+                        _evaluation = 1;
+                        break;
+                    case 51: // 3 - Bad
+                        _evaluation = 2;
+                        break;
+                    case 52: // 4 - Hardly
+                        _evaluation = 3;
+                        break;
+                    case 53: // 5 - Good
+                        _evaluation = 4;
+                        break;
+                    case 54: // 6 - Perfect
+                        _evaluation = 5;
+                        break;
+
+                }
+                if (_evaluation || _evaluation === 0) {
+                    var _itemId = $('#evaluate').attr("item-id");
+                    console.log("_evaluation");
+                    _parseEvaluation(_evaluation, _itemId)
+                }
+                return;
+            }
         }
     },
     "click .btn-show-answer": function (e) {
         e.preventDefault();
-//        $(".btn-show-answer").removeClass("visible-phone").hide();
         showBackAndEvaluation();
     },
     "click .evaluation": function (e) {
-        hideBackAndEvaluation();
         var _evaluation = $(e.target).val();
-        var _itemId = $(e.target).parent().attr("item-id");
-//        var _item = Items.findOne(_itemId);
-        var _now = moment(Session.get("serverNextDay"))._d;
-        var _action = Meteor.flashcard.setNextRepetition(_evaluation, _itemId, _now);
-        switch (_action) {
-            case 'decrementExtraRepetitionsLeft':
-                decrementExtraRepetitionsLeft();
-                break;
-            case 'decrementNewFlashcardsLeftAndIncrementExtraRepetitionsTotal':
-                incrementExtraRepetitionsTotal();
-            case 'decrementNewFlashcardsLeft':
-                decrementNewFlashcardsLeft();
-                break;
-            case 'decrementRepetitionsLeftAndIncrementExtraRepetitionsTotal':
-                incrementExtraRepetitionsTotal();
-            case 'decrementRepetitionsLeft':
-                decrementRepetitionsLeft();
-                break;
-            case 'incrementExtraRepetitionsTotal':
-                incrementExtraRepetitionsTotal();
-                break;
-
-        }
+        var _itemId = $('#evaluate').attr("item-id");
+        _parseEvaluation(_evaluation, _itemId)
     },
     "click a[href='#picture']": function (e) {
         $(".mainBox").switchClass("span8", "span11", 800, "easeInOutBack");
@@ -796,13 +830,10 @@ var decrementRepetitionsLeft = function() {
 
 
 showBackAndEvaluation = function () {
-    $(".currentFlashcard > .answer").blur();
-    $(".currentFlashcard > .evaluate").focus();
-
     $(".btn-show-answer").hide();
     $(".currentFlashcard > .back").show('400', function () {
         $(".currentFlashcard > .evaluate").show('400', function () {
-            $(".answer").focus();
+//            $("#answer").focus();
         })
     })
     var _item = Items.findOne({_id: Session.get("currentItemId")});
@@ -816,7 +847,7 @@ showBackAndEvaluation = function () {
 };
 
 hideBackAndEvaluation = function () {
-    _fDiv = $(".flashcards");
+    var _fDiv = $(".flashcards");
     _fDiv.animate({"left": (_fDiv.width() + 40) * -1}, 500, "easeInOutBack", function () {
             displayNextRepetition();
             $(".currentFlashcard > .answer").html("");
