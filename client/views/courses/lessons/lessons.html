@@ -1,13 +1,13 @@
 <template name="courseLessonsTab">
     <div class="tab-pane fade" id="lessons">
-       {{#isolate}}{{> courseLessons }}     {{/isolate}}
+       {{> courseLessons }}
     </div>
 </template>
 
 <template name="courseLessons">
-    {{#isolate}} {{> lessonsTable }} {{/isolate}}
-    {{#isolate}} {{> newLessonModal }} {{/isolate}}
-    {{#isolate}} {{> newFlashcardModal }} {{/isolate}}
+     {{> lessonsTable }}
+     {{> newLessonModal }}
+     {{> newFlashcardModal }}
     {{> newCollectionModal }}
 </template>
 
@@ -28,7 +28,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{#isolate}}
+
                             {{#each lesson}}
                             <tr class="lessonRow" data-id="{{_id}}">
                                 <td>{{#if isCourseOwner}}<a href="" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a>{{else}}{{name}}{{/if}}</td>
@@ -44,7 +44,7 @@
                                 </td>
                             </tr>
                             {{/each}}
-                        {{/isolate}}
+
                         <tr>
                             <td></td><td class="hidden-phone"></td><td class="hidden-phone"></td><td></td>
                             <td><button class="btn btn-primary btn-primary-main btn-addLessonModal btn-block" data-id="{{_id}}"><i class="icon-plus-sign-at"></i> New Lesson</button></td>

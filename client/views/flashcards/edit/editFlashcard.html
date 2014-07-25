@@ -19,8 +19,8 @@
         <div class="controls">
 
             <div name="front" id="front" class="flashcard flashcardNoMargin" contentEditable="false">
-                        {{#isolate}}<a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img
-                            src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}
+                        <a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img
+                            src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>
             <div name="front" class="flashcardFront" contentEditable="true">{{{front}}}</div>
             </div>
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront visible-phone">Add Picture</button>
@@ -29,7 +29,7 @@
     <div class="control-group itemSpecific">
         <label for="frontNote" class="control-label">Front note<br/></label>
         <div class="controls">
-            <div name="frontNote" id="frontNote" class="flashcard flashcardNoMargin" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{#isolate}}{{frontNote}}{{/isolate}}</div>
+            <div name="frontNote" id="frontNote" class="flashcard flashcardNoMargin" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{frontNote}}</div>
         </div>
     </div>
     <div class="control-group">
@@ -40,8 +40,8 @@
 
         <div class="controls">
             <div name="back" id="back" class="flashcard flashcardNoMargin" contentEditable="false">
-                        {{#isolate}}<a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newBackPicture}}<img
-                            src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>{{/isolate}}
+                        <a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newBackPicture}}<img
+                            src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>
             <div name="back" class="flashcardBack" contentEditable="true">{{{back}}}</div>
             </div>
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack visible-phone">Add Picture</button>
@@ -50,7 +50,7 @@
     <div class="control-group itemSpecific">
         <label for="frontNote" class="control-label">Back note</label>
         <div class="controls">
-            <div name="backNote" id="backNote" class="flashcard flashcardNoMargin" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{#isolate}}{{backNote}}{{/isolate}}</div>
+            <div name="backNote" id="backNote" class="flashcard flashcardNoMargin" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{backNote}}</div>
         </div>
     </div>
     <div id="advancedSettings" style='display: none;'>

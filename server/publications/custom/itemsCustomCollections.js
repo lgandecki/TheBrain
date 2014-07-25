@@ -26,6 +26,40 @@ Meteor.publish("itemsToLearnInCount", function (collection) {
     });
 });
 
+Meteor.publish("itemsToLearnCount", function() {
+    var self = this;
+    var counts = {};
+    var initializing = true;
+    var handle = Items.find({user: this.userId, deactivated: false, actualTimesRepeated: 0}).observeChanges({
+        added: function (idx, doc) {
+            console.log("added doc.collection", doc.collection)
+            if (!counts[doc.collection]) {
+                counts[doc.collection] = 0;
+            }
+            counts[doc.collection]++;
+            if (!initializing)
+                self.changed("itemsToLearnCount", doc.collection, {count: counts[doc.collection]});
+        },
+        removed: function (doc, idx) {
+            if (counts[doc.collection]) {
+                counts[doc.collection]--;
+                self.changed("itemsToLearnCount", doc.collection, {count: counts[doc.collection]});
+            }
+        }
+        // don't care about moved or changed
+    });
+
+    initializing = false;
+    Object.keys(counts).forEach(function (collection) {
+        console.log("self collection", collection);
+        self.added("itemsToLearnCount", collection, {count: counts[collection]});
+    });
+    self.ready();
+    self.onStop(function () {
+        handle.stop();
+    });
+});
+
 // server: publish the current size of a collection
 Meteor.publish("itemsToRepeatInCount", function (collection, now) {
     var self = this;

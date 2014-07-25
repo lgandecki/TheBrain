@@ -22,7 +22,7 @@
     margin-bottom: 0px; padding-bottom: 0px;
     border: 1px solid #219BCC;
 ">
-                       {{#isolate}}<div class="bar barNew"></div>{{/isolate}}
+                       <div class="bar barNew"></div>
                         <span>0 / 0</span>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
     margin-bottom: 0px; padding-bottom: 0px;
     border: 1px solid #219BCC;
 ">
-                        {{#isolate}}<div class="bar barRepetitions"></div>{{/isolate}}
+                        <div class="bar barRepetitions"></div>
                         <span>0 / 0</span>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
     margin-bottom: 0px; padding-bottom: 0px;
     border: 1px solid #219BCC;
 ">
-{{#isolate}}<div class="bar barExtraRepetitions"></div>{{/isolate}}
+<div class="bar barExtraRepetitions"></div>
                         <span>0 / 0</span>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                 <div class="box-content nopadding">
                     <div class="tabs-container">
                         <ul class="tabs tabs-inline tabs-left ">
-                            {{#isolate}}
+
 
                                 <li>
                                     <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
@@ -86,7 +86,7 @@
                                 <li>
                                     <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> Edit</a>
                                 </li>
-                            {{/isolate}}
+
                         </ul>
                     </div>
                     <div class="tab-content padding tab-content-inline">
@@ -119,10 +119,10 @@
                             {{> itemHistory }}
                         </div>
                         <div class="tab-pane fade" id="comments">
-                            {{#isolate}}{{> flashcardComments }}{{/isolate}}
+                            {{> flashcardComments }}
                         </div>
                         <div class="tab-pane fade" id="edit">
-                            {{#isolate}}{{> editFlashcard }}  {{/isolate}}
+                            {{> editFlashcard }}
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,7 @@
                         {{/if}}
                     </div>
                 </div>
-                {{#isolate}}{{>newConversationTab}}{{/isolate}}
+                {{>newConversationTab}}
             </div>
         </div>
     </div>
@@ -82,7 +82,7 @@
 
 <template name="newConversationTab">
     <div class="tab-pane  fade tabbablePadding" id="newConversation">
-        {{#isolate}}{{>newConversation}}{{/isolate}}
+        {{>newConversation}}
 </div>
 </template>
 
@@ -100,11 +100,11 @@
             </div>
     </div>
     <div>
-       {{#isolate}}
+
         {{#each user}}
             {{>userRow}}
         {{/each}}
-       {{/isolate}}
+
     </div>
 </template>
 

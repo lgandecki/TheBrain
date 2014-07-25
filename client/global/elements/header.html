@@ -2,9 +2,9 @@
 <div id="navigation" class="navbar-fixed-top">
     <div class="{{containerType}}">
         <a href="/" id="brand">TheBrain</a>
-            {{#isolate}}{{> topMenu }}{{/isolate}}
+            {{> topMenu }}
         {{#if isLoggedIn}}
-            {{#isolate}}{{> userHeader }}{{/isolate}}
+            {{> userHeader }}
         {{else}}
             {{#unless isExplore}}
                 <!-- <button type="button" class="pull-right btn btn-primary btn-header btn-explore"><i class="icon-hand-right"></i> Explore</button> -->

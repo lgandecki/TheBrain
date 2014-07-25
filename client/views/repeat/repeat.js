@@ -171,48 +171,17 @@ Template.repeat.rendered = function () {
 
             if (Session.equals("showScheduleModal", true)) {
                 $("#scheduleModal").modal("show").on('hidden', function () {
+                    itemsToLearn = Session.get("itemsToLearn");
                     _setAmountOfReps();
                     $('#setStudyFirstTour').crumble("clear");
 
                 }).on("shown", function() {
-                        setTimeout(function() {
-                            var _collectionId = "";
-                            $(".slider-custom").slider({value: 0}).on("slideStart", function (ev) {
-                                _collectionId = $(this).attr("data-id");
-                                itemsToLearn[_collectionId] = ev.value;
-                                $(".toLearn.editable[data-id='" + _collectionId + "']").editable("setValue", ev.value);
-                            }).on("slide", function (ev) {
-                                if (itemsToLearn[_collectionId] !== ev.value) {
+//                        setTimeout(function() {
 
-                                    $(".toLearn.editable[data-id='" + _collectionId + "']").editable("setValue", ev.value);
-                                    itemsToLearn[_collectionId] = ev.value;
-                                }
-                            });
-
-//        $.fn.editable.defaults.mode = 'inline';
-                            $(".toLearn.editable:not(.editable-click)").editable('destroy').editable({
-                                anim: '100',
-                                mode: 'inline',
-                                showbuttons: false,
-                                success: function (response, newValue) {
-                                    _collectionId = $(this).attr("data-id");
-                                    $(".slider-custom[data-id='" + _collectionId + "']").slider("setValue", newValue);
-
-                                    itemsToLearn[_collectionId] = newValue;
-                                },
-                                validate: function (value) {
-                                    _value = parseFloat(value);
-                                    var intRegex = /^\d+$/;
-                                    if (!intRegex.test(_value)) {
-                                        return "Has to be decimal";
-                                    }
-                                }
-
-                            })
 
 
                             Meteor.tour.showIfNeeded("setStudyFirstTour");
-                        }, 500);
+//                        }, 500);
                     });
             }
             else {
@@ -267,9 +236,8 @@ _setAmountOfReps = function() {
         if (itemsToLearn.hasOwnProperty(collectionId) && itemsToLearn[collectionId] > 0) {
             // console.log("second step,, items To learn " + itemsToLearn[collectionId]);
 
-            Meteor.subscribe("itemsToLearnInCount", collectionId);
-
-            var _currentCollectionItemsToLearn = ItemsToLearnInCount.findOne({_id: collectionId}).count;
+            var _itemsToLearnCount = ItemsToLearnCount.findOne({_id: collectionId});
+            var _currentCollectionItemsToLearn = _itemsToLearnCount.count;
 
 //            var _currentCollectionItemsToLearn = Items.find({collection: collectionId, actualTimesRepeated: 0}, {limit: itemsToLearn[collectionId]}).count();
 //            _newFlashcardsLeft = _newFlashcardsLeft + _currentCollectionItemsToLearn;
@@ -837,17 +805,6 @@ hideBackAndEvaluation = function () {
         }
     )
 };
-
-
-Template.myCollectionsList.rendered = function () {
-    window.clearTimeout(_renderer2);
-    _renderer2 = window.setTimeout(function () {
-        var _sliderTimeout;
-
-    }, 500);
-
-}
-
 
 var checkIfFlashcardUpdated = function(opts) {
     var _item = Items.findOne({user: Meteor.userId(), _id: opts.itemId});

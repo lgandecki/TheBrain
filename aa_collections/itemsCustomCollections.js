@@ -10,3 +10,5 @@ ItemsToReLearnCount = new Meteor.Collection("itemsToReLearnCount");
 CalendarItemsToRepeat = new Meteor.Collection("calendarItemsToRepeat");
 
 CustomItemsToReLearn = new Meteor.Collection("customItemsToReLearn");
+
+ItemsToLearnCount = new Meteor.Collection("itemsToLearnCount");

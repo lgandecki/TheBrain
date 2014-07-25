@@ -12,8 +12,8 @@
     "cron-tick": {},
     "npm": {},
     "iron-router": {},
-    "fast-render": {},
     "sitemaps": {},
-    "phonegap-oauth": {}
+    "phonegap-oauth": {},
+    "fast-render": {}
   }
 }

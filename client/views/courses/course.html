@@ -5,15 +5,15 @@
             <div class="box box-bordered box-color">
 
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Course: {{#isolate}}{{courseName}}{{/isolate}}</h3>
-                    {{#isolate}}{{#unless isCourseOwner}}
+                    <h3><i class="icon-th-list"></i> Course: {{courseName}}</h3>
+                    {{#unless isCourseOwner}}
                         <div class="pull-right">
                             <button class="btn btn-primary btn-primary-main btn-courseEnrollment {{enrollBtnAction}}" data-id="{{_id}}"><i
                                     class="icon-hand-left"> {{enrollBtnText}}!</i>
                             </button>
                         </div>
 
-                    {{/unless}}{{/isolate}}
+                    {{/unless}}
                 </div>
 
                 <div class="box-content nopadding tabbable">
@@ -29,10 +29,10 @@
                             </li>
                             <li>
                                 <a href="#comments" data-toggle="tab" class="tabLink tabbable"><i class="icon-twitter"></i> <span
-                                        class="hidden-phone">Comments </span>({{#isolate}}{{commentsLength}}{{/isolate}})</a>
+                                        class="hidden-phone">Comments </span>({{commentsLength}})</a>
                             </li>
 
-                            {{#isolate}}
+
                                 {{#if isCourseOwner}}
 
                             <li>
@@ -45,22 +45,22 @@
 
 
                                 {{/if}}
-                                {{/isolate}}
+
                         </ul>
                     </div>
                     <div class="tab-content padding tab-content-inline">
-{{#isolate}}{{> courseEventsTab }}{{/isolate}}
-                                                 {{#isolate}}{{> courseLessonsTab }}{{/isolate}}
-{{#isolate}}{{> commentsTab }}{{/isolate}}
-                        {{#isolate}}{{> courseSettingsTab}}{{/isolate}}
+{{> courseEventsTab }}
+                                                 {{> courseLessonsTab }}
+{{> commentsTab }}
+                        {{> courseSettingsTab}}
 
-                        {{#isolate}}
+
 
 {{#if isCourseOwner}}
-    {{#isolate}}{{> courseStatsTab}}    {{/isolate}}
+    {{> courseStatsTab}}
 
 {{/if}}
-                        {{/isolate}}
+
                         <div class="tab-pane fade" id="picture">
                             awerwreaw
                         </div>

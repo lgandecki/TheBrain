@@ -16,26 +16,26 @@
                             </form>
                         </div>
                     </div>
-                    {{#isolate}}
+
                         {{#each khanPlaylist}}
                             {{> khanPlaylistRow }}
                         {{/each}}
-                    {{/isolate}}
-                    {{#isolate}}
+
+
                         {{#if khanPlaylistsReady}}
-                            {{#isolate}}
+
                                 {{#unless allKhanPlaylistsLoaded}}
                                     <div class="textCenter">
                                         <button class="btn btn-primary btn-primary-main load-more"><i class="icon-hand-down"> Load more</i></button>
                                     </div>
                                 {{/unless}}
-                            {{/isolate}}
+
                         {{else}}
-                            {{#isolate}}
-                                <div>{{> spinner}}</div>{{/isolate}}
+
+                                <div>{{> spinner}}</div>
 
                         {{/if}}
-                    {{/isolate}}
+
                 </div>
             </div>
         </div>

@@ -12,7 +12,6 @@ Template.availableFlashcard.userName = function () {
 
 Template.availableFlashcard.isFlashcardSelected = function() {
     var _selectedFlashcards = Session.get("selectedFlashcards");
-    console.log("how often? ", this._id);
     if ($.inArray(this._id, _selectedFlashcards) > -1) {
 //        console.log("got it from here", this.data._id, "selectedFlashcards", _selectedFlashcards);
         return "flashcardSelected";
@@ -101,7 +100,6 @@ Template.availableFlashcard.events({
         });
     },
     "click .myFlashcardRow": function (e) {
-//        console.log("click");
         var _that = this;
         var _e = e.currentTarget;
         setTimeout(function () {

@@ -13,28 +13,28 @@
                         </div>
                     </div>
                     {{> withSelectedItems }}
-                    {{#isolate}}
+
                         <div id="flashcardsList">
                             {{#each item}}
                                 {{> myFlashcard }}
                             {{/each}}
                         </div>
-                    {{/isolate}}
-                    {{#isolate}}
+
+
                         {{#if itemsReady}}
-                            {{#isolate}}
+
                                 {{#unless allItemsLoaded}}
                                     <div class="textCenter">
                                         <button class="btn btn-primary btn-primary-main load-more"><i class="icon-hand-down"> Load more</i></button>
                                     </div>
                                 {{/unless}}
-                            {{/isolate}}
+
                         {{else}}
-                            {{#isolate}}
-                                <div>{{> spinner}}</div>{{/isolate}}
+
+                                <div>{{> spinner}}</div>
 
                         {{/if}}
-                    {{/isolate}}
+
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="row-fluid">
-            <span class="label label-info withSelectedLabel">With {{#isolate}}{{flashcardsSelectedLength}}{{/isolate}} selected:</span>
+            <span class="label label-info withSelectedLabel">With {{flashcardsSelectedLength}} selected:</span>
 
         </div>
         <div class="withSelectedButtons">

@@ -1,8 +1,8 @@
 <template name="body">
 <div id="wrapper">
-{{#isolate}}{{> header }}{{/isolate}}
+{{> header }}
 <div id="main">
-    {{#isolate}}{{#if isLoggedIn}}{{> topPanel }}{{/if}}{{/isolate}}
+    {{#if isLoggedIn}}{{> topPanel }}{{/if}}
         <div class="transition" style="position: relative; display: none;">
             <div class="container">
     {{> yield }}

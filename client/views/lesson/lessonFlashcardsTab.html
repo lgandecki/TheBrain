@@ -1,7 +1,7 @@
 <template name="lessonFlashcardsTab">
     <div class="tab-pane active lessonFlashcards" id="lessonFlashcards">
-        {{#isolate}} {{> flashcardsOptions}}  {{/isolate}}
-        {{#isolate}}{{> lessonFlashcardsList }}{{/isolate}}
+         {{> flashcardsOptions}}
+        {{> lessonFlashcardsList }}
     </div>
 </template>
 
@@ -50,22 +50,22 @@
                                         class="icon-hand-down hidden-desktop"></i> Learn
                                 </button>
                                 <button class=" btn btn-primary btn-primary-main btn-commentsFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i>
-                                    Comments ( {{#isolate}}{{comments.length}}{{/isolate}} )
+                                    Comments ( {{comments.length}} )
                                 </button>
                                 <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> Edit
                                 </button>
 
                             </div>
                         </div>
-                        {{#isolate}}
+
                             <div class="span8 selectableFlashcard">
                                 <div class="center">
-                                    <div class="flashcard front">{{#constant}}{{{flashcardFront}}}{{/constant}}</div>
-                                    <div class="flashcard back">{{#constant}}{{{flashcardBack}}}{{/constant}}</div>
+                                    <div class="flashcard front">{{{flashcardFront}}}</div>
+                                    <div class="flashcard back">{{{flashcardBack}}}</div>
                                 </div>
                             </div>
 
-                        {{/isolate}}
+
 
                     </div>
 

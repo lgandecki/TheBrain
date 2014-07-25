@@ -1,12 +1,12 @@
 <template name="courseEventsTab">
     <div class="tab-pane active fade in" id="events">
 
-        {{#isolate}}
+
         {{#if isCourseOwner}}
             {{> addCourseNews }}
 
         {{/if}}
-        {{/isolate}}
+
 
             {{> courseEvents }}
 

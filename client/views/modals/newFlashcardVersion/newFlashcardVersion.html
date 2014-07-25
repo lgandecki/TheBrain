@@ -8,7 +8,7 @@
                 <button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="box-content modal-box modalInfo">
-                {{#isolate}}{{> updatedFlashcardVersions }}{{/isolate}}
+                {{> updatedFlashcardVersions }}
 
 
             </div>
@@ -27,14 +27,14 @@
         Before you evaluate your answer,
         <h3>TheBrain would like to say that this FlashCard has been updated!</h3>
         <h4>This is your current version:</h4>
-        {{#isolate}}
+
             {{#with currentItem}}
                 <div class="flashcardRow center">
                     <div class="flashcard front">{{{currentItemFront}}}</div>
                     <div class="flashcard back">{{{currentItemBack}}}</div>
                 </div>
             {{/with}}
-        {{/isolate}}
+
         <h3>And below are new versions.</h3><br/>
         <small>You can use any of them, or, if you feel inspired, close this window and go to the "edit" tab, to make your own changes</small>
         <br/>
@@ -42,7 +42,7 @@
         <br/>
         <small>If you change your mind later on, you can always change your flashcard version back!</small>
         <br/><br/>
-        {{#isolate}}
+
             {{#each flashcardVersion}}
                 <div class="flashcardsList">
 
@@ -74,6 +74,6 @@
 
 
             {{/each}}
-        {{/isolate}}
+
     </div>
 </template>

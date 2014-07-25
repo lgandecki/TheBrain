@@ -32,11 +32,9 @@
         <div class="controls">
             <select name="courseId" id="courseId" class="input-large select2">
                 <option value="">Select Course</option>
-                {{#isolate}}
                 {{#each course}}
                     <option value="{{_id}}">{{name}}</option>
                 {{/each}}
-                {{/isolate}}
             </select>
 
 
@@ -49,11 +47,9 @@
 
                 <select name="lessonId" id="lessonId" class="input-large select2">
                     <option value="">Select Lesson</option>
-                    {{#isolate}}
                         {{#each lesson}}
                             <option value="{{_id}}" id="{{_id}}" {{selectIfSelectedLesson}}>{{name}}</option>
                         {{/each}}
-                    {{/isolate}}
                 </select>
             </div>
         </div>

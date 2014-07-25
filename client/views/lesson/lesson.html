@@ -5,7 +5,7 @@
             <div class="box box-bordered box-color">
 
                     <div class="box-title">
-                        <h3><i class="icon-th-list"></i> Course: {{#isolate}}{{courseName}}{{/isolate}} Lesson: {{#isolate}} {{lessonName}}{{/isolate}}</h3>
+                        <h3><i class="icon-th-list"></i> Course: {{courseName}} Lesson:  {{lessonName}}</h3>
                     </div>
 
                     <div class="box-content nopadding">
@@ -24,8 +24,8 @@
                             </ul>
                         </div>
                         <div class="tab-content padding tab-content-inline">
-                            {{#isolate}}{{> lessonFlashcardsTab }}{{/isolate}}
-                            {{#isolate}}{{> lessonCommentsTab }}{{/isolate}}
+                            {{> lessonFlashcardsTab }}
+                            {{> lessonCommentsTab }}
                         </div>
                     </div>
             </div>
