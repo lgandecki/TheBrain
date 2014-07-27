@@ -1,10 +1,10 @@
 <template name="newCourseModal">
     <!-- Modal -->
-    <div id="newCourseModal" class="modal hide fade" tabindex="-1" role="dialog"
+    <div id="newCourseModal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="newCourseModal" aria-hidden="true">
-    <div class="box box-bordered box-color box-modal">
+    <div class="box box-bordered box-color box-modal modal-dialog">
         <div class="box-title box-modal">
-            <h3><i class="icon-th-list"></i> New Course</h3><button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3><i class="fa fa-th-list"></i> New Course</h3><button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
         </div>
         <div class="box-content nopadding modal-box">
 
@@ -21,20 +21,20 @@
 </template>
 
 <template name="courseForm">
-    <div class="control-group" id="NameControlGroup">
+    <div class="form-group" id="NameControlGroup">
         <label class="control-label">Name</label>
 
         <div class="controls">
             <input type="text" name="newCourseName" id="newCourseName" placeholder="Course Name"/><br/>
         </div>
     </div>
-    <div class="control-group" id="shortDescriptionControlGroup">
+    <div class="form-group" id="shortDescriptionControlGroup">
         <label class="control-label">Short Description</label>
         <div class="controls">
             <textarea name="newCourseShortDescription" id="newCourseShortDescription" rows="3" class="input-block-level"></textarea>
         </div>
     </div>
-    <div class="control-group">
+    <div class="form-group">
         <label class="control-label">Public?</label>
 
         <div class="controls">

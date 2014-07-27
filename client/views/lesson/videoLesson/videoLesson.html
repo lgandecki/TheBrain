@@ -1,8 +1,8 @@
 <template name="videoLesson">
-    <div class="row-fluid">
+    <div class="row">
         <div class="box box-bordered box-color">
             <div class="box-title">
-                <h3><i class="icon-th-list"></i> Course: {{courseTitle}} | {{lessonTitle}}</h3>
+                <h3><i class="fa fa-th-list"></i> Course: {{courseTitle}} | {{lessonTitle}}</h3>
             </div>
 
             <div class="box-content nopadding">
@@ -10,14 +10,14 @@
                     <ul class="tabs tabs-inline tabs-left ">
 
                         <li class="active">
-                            <a href="#videoLesson" data-toggle="tab"><i class="icon-road"></i> Lesson</a>
+                            <a href="#videoLesson" data-toggle="tab"><i class="fa fa-road"></i> Lesson</a>
                         </li>
                         <li>
-                            <a id="flashcardsLink" href="#youtubeFlashcards" data-toggle="tab"><i class="icon-twitter"></i> Flashcards ({{youtubeVideoFlashcardsCount}})
+                            <a id="flashcardsLink" href="#youtubeFlashcards" data-toggle="tab"><i class="fa fa-comments-o"></i> Flashcards ({{youtubeVideoFlashcardsCount}})
                             </a>
                         </li>
                         <li>
-                            <a href="#coursePlaylist" data-toggle="tab"><i class="icon-film"></i> Other lessons</a>
+                            <a href="#coursePlaylist" data-toggle="tab"><i class="fa fa-film"></i> Other lessons</a>
                         </li>
 
                     </ul>
@@ -31,12 +31,12 @@
                                     frameborder="0" allowfullscreen=""></iframe>
                         </div>
                         <br/>
-                        <div class="row-fluid">
-                            <div class="span6">
-                                {{#if isNotFirstVideo}} {{#with previousVideo}} <button class="btn btn-primary btn-primary-main previousVideo btn-block" data-id="/videoLesson/{{courseId}}/{{youtube_id}}"><i class="icon-hand-left"></i> {{shortDescription}}</button>{{/with}}{{/if}}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{#if isNotFirstVideo}} {{#with previousVideo}} <button class="btn btn-primary btn-primary-main previousVideo btn-block" data-id="/videoLesson/{{courseId}}/{{youtube_id}}"><i class="fa fa-hand-o-left"></i> {{shortDescription}}</button>{{/with}}{{/if}}
                             </div>
-                            <div class="span6">
-                                {{#if isNotLastVideo}} {{#with nextVideo}}<button class="btn btn-primary btn-primary-main nextVideo btn-block" data-id="/videoLesson/{{courseId}}/{{youtube_id}}">{{shortDescription}} <i class="icon-hand-right"> </i></button>{{/with}}{{/if}}
+                            <div class="col-md-6">
+                                {{#if isNotLastVideo}} {{#with nextVideo}}<button class="btn btn-primary btn-primary-main nextVideo btn-block" data-id="/videoLesson/{{courseId}}/{{youtube_id}}">{{shortDescription}} <i class="fa fa-hand-o-right"> </i></button>{{/with}}{{/if}}
                             </div>
                         </div>
                     </div>
@@ -63,8 +63,8 @@
 
 <template name="videoLessonRow">
     {{#if currentLessonVideo}}
-        <li class="khanVideo" data-id="{{youtube_id}}"><i class="icon-hand-right pull-left"></i><b style="color: black">{{shortDescription}} </b></li>
+        <li class="khanVideo" data-id="{{youtube_id}}"><i class="fa fa-hand-o-right pull-left"></i><b style="color: black">{{shortDescription}} </b></li>
     {{else}}
-        <li class="khanVideo" data-id="{{youtube_id}}"><i class="icon-hand-right pull-left"></i><span class="khanTitle">{{shortDescription}} </span></li>
+        <li class="khanVideo" data-id="{{youtube_id}}"><i class="fa fa-hand-o-right pull-left"></i><span class="khanTitle">{{shortDescription}} </span></li>
     {{/if}}
 </template>

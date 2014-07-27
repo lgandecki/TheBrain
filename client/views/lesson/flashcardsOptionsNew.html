@@ -1,21 +1,21 @@
 <template name="flashcardsOptionsNew">
-    <div class="flashcardsOptions span12">
+    <div class="flashcardsOptions col-md-12">
         <div class="withSelectedButtons">
 
-            <div class="row-fluid">
-                <div class="span4">
-                    <button class=" btn btn-primary btn-primary-main btn-addAll btn-block "><i class="icon-briefcase"></i> Learn all teacher's
+            <div class="row">
+                <div class="col-md-4">
+                    <button class=" btn btn-primary btn-primary-main btn-addAll btn-block "><i class="fa fa-briefcase"></i> Learn all teacher's
                         flashcards ( {{teachersFlashcardsCount}} )
                     </button>
                 </div>
-                <div class="span4">
+                <div class="col-md-4">
                     <button class=" btn btn-primary btn-primary-main btn-{{#if isShowStudentsFlashcards}}hide{{else}}show{{/if}}StudentsFlashcards btn-block ">
-                        <i class="icon-group"></i> {{#if isShowStudentsFlashcards}} Hide {{else}} Show {{/if}} students
+                        <i class="fa fa-group"></i> {{#if isShowStudentsFlashcards}} Hide {{else}} Show {{/if}} students
                         flashcards ( {{studentsFlashcardsCount}} )
                     </button>
                 </div>
-                <div class="span4">
-                    <button class=" btn btn-primary btn-primary-main btn-addFlashcardToLesson btn-block "><i class="icon-edit"></i> Add Flashcard
+                <div class="col-md-4">
+                    <button class=" btn btn-primary btn-primary-main btn-addFlashcardToLesson btn-block "><i class="fa fa-edit"></i> Add Flashcard
                     </button>
                 </div>
 
@@ -23,7 +23,7 @@
             </div>
             <br/>
 
-            <div class="row-fluid">
+            <div class="row">
 
 
             </div>

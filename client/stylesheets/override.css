@@ -3,6 +3,14 @@
     margin-bottom: 1px !important;
 }
 
+.h2 {
+    font-weight: bold;
+}
+
+.fa-ul {
+    text-align: left;
+    font-size: 18px;
+}
 #main {
     margin-top: 50px !important;
     margin-left: 0px !important;
@@ -37,3 +45,4 @@
 .tabs-top {
     background-color: #f2f2f2;
 }
+

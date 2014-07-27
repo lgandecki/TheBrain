@@ -28,37 +28,37 @@
 
     <div class="flashcardsList">
 
-        <div class="row-fluid">
-            <div class="span12">
+        <div class="row">
+            <div class="col-md-12">
                 <div class="center">
-                    <div class="myFlashcardRow row-fluid {{isFlashcardSelected}}" data-id="{{_id}}">
-                        <div class="span4">
-                            <div class="row-fluid">
+                    <div class="myFlashcardRow row {{isFlashcardSelected}}" data-id="{{_id}}">
+                        <div class="col-md-4">
+                            <div class="row">
                                 <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i
-                                        class="icon-thumbs-up"></i> {{upVotes.length}}</span>
+                                        class="fa fa-thumbs-o-up"></i> {{upVotes.length}}</span>
                                     &nbsp;
-                                    <span class="badge badge-downVote clickable badge-warning"><i class="icon-thumbs-down"></i> {{downVotes.length}}</span>
+                                    <span class="badge badge-downVote clickable badge-warning"><i class="fa fa-thumbs-o-down"></i> {{downVotes.length}}</span>
                                 </div>
                             </div>
-                            <div class="row-fluid">
+                            <div class="row">
                                 Author: {{userName}}<br/>
 
                                 <div style="display: none">{{reloadFlashcard}}</div>
                             </div>
-                            <div class="row-fluid myFlashcardButtons">
+                            <div class="row myFlashcardButtons">
                                 <button class=" btn btn-primary btn-primary-main btn-addToCollectionFlashcard btn-block"><i
-                                        class="icon-hand-down hidden-desktop"></i> Learn
+                                        class="fa fa-hand-o-down hidden-lg"></i> Learn
                                 </button>
-                                <button class=" btn btn-primary btn-primary-main btn-commentsFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i>
+                                <button class=" btn btn-primary btn-primary-main btn-commentsFlashcard btn-block"><i class="fa fa-hand-o-down hidden-lg"></i>
                                     Comments ( {{comments.length}} )
                                 </button>
-                                <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="icon-hand-down hidden-desktop"></i> Edit
+                                <button class=" btn btn-primary btn-primary-main btn-editFlashcard btn-block"><i class="fa fa-hand-o-down hidden-lg"></i> Edit
                                 </button>
 
                             </div>
                         </div>
 
-                            <div class="span8 selectableFlashcard">
+                            <div class="col-md-8 selectableFlashcard">
                                 <div class="center">
                                     <div class="flashcard front">{{{flashcardFront}}}</div>
                                     <div class="flashcard back">{{{flashcardBack}}}</div>
@@ -79,23 +79,23 @@
 </template>
 
 <template name="flashcardsOptions">
-    <div class="flashcardsOptions span12">
+    <div class="flashcardsOptions col-md-12">
         <div class="withSelectedButtons">
 
-            <div class="row-fluid">
-                <div class="span4">
-                    <button class=" btn btn-primary btn-primary-main btn-addAll btn-block "><i class="icon-briefcase"></i> Learn all teacher's
+            <div class="row">
+                <div class="col-md-4">
+                    <button class=" btn btn-primary btn-primary-main btn-addAll btn-block "><i class="fa fa-briefcase"></i> Learn all teacher's
                         flashcards ( {{teachersFlashcardsCount}} )
                     </button>
                 </div>
-                <div class="span4">
+                <div class="col-md-4">
                     <button class=" btn btn-primary btn-primary-main btn-{{#if isShowStudentsFlashcards}}hide{{else}}show{{/if}}StudentsFlashcards btn-block ">
-                        <i class="icon-group"></i> {{#if isShowStudentsFlashcards}} Hide {{else}} Show {{/if}} students
+                        <i class="fa fa-group"></i> {{#if isShowStudentsFlashcards}} Hide {{else}} Show {{/if}} students
                         flashcards ( {{studentsFlashcardsCount}} )
                     </button>
                 </div>
-                <div class="span4">
-                    <button class=" btn btn-primary btn-primary-main btn-addFlashcardToLesson btn-block "><i class="icon-edit"></i> Add Flashcard
+                <div class="col-md-4">
+                    <button class=" btn btn-primary btn-primary-main btn-addFlashcardToLesson btn-block "><i class="fa fa-edit"></i> Add Flashcard
                     </button>
                 </div>
 
@@ -112,9 +112,9 @@
 
 <template name="flashcardsDefaultOptions">
 
-    <div class="row-fluid">
-        <div class="span12">
-            <button class=" btn btn-primary btn-primary-main btn-addAllInLesson btn-block "><i class="icon-hand-right"></i> Learn All ({{flashcardsAvailable}})
+    <div class="row">
+        <div class="col-md-12">
+            <button class=" btn btn-primary btn-primary-main btn-addAllInLesson btn-block "><i class="fa fa-hand-o-right"></i> Learn All ({{flashcardsAvailable}})
             </button>
         </div>
     </div>

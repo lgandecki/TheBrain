@@ -169,6 +169,10 @@ Router.map(function () {
         }
     })
 
+    this.route('notFound', {
+        path: '*'
+    });
+
 });
 var _enoughTimePassedSinceLastTransition = function() {
     var _now = new Date().valueOf();
@@ -280,10 +284,10 @@ Router.onBeforeAction(function (pause) {
             //                    $(".make-pretty").prettyCheckable();
 
             checkLeftNav();
-            resizeContent();
+//            resizeContent();
 
 
-            makeModalsScrollable();
+//            makeModalsScrollable();
 
             setTimeout(function () {
                 if (!$(".transition").is(":visible")) {

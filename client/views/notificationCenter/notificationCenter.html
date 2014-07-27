@@ -1,9 +1,9 @@
 <template name="notificationCenter">
-    <div class="row-fluid">
-        <div class="span6 center">
+    <div class="row">
+        <div class="col-md-6 center">
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Notification center</h3>
+                    <h3><i class="fa fa-th-list"></i> Notification center</h3>
                 </div>
                 <div class="box-content nopadding" style="text-align: center">
 
@@ -12,7 +12,7 @@
                             {{/each}}
 {{#if notificationsReady}}
       {{#unless allNotificationsLoaded}}
-                            <button class="btn btn-primary btn-primary-main btn-loadMore"><i class="icon-hand-down"> Load more</i></button>
+                            <button class="btn btn-primary btn-primary-main btn-loadMore"><i class="fa fa-hand-o-down"> Load more</i></button>
 
       {{/unless}}
     {{else}}

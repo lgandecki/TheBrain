@@ -452,10 +452,10 @@ Template.repeat.events({
         _parseEvaluation(_evaluation, _itemId)
     },
     "click a[href='#picture']": function (e) {
-        $(".mainBox").switchClass("span8", "span11", 800, "easeInOutBack");
+        $(".mainBox").switchClass("col-md-8", "col-md-11", 800, "easeInOutBack");
     },
     "click a[href='#repeatFlashcards']": function (e) {
-        $(".mainBox").switchClass("span11", "span8", 800, "easeInOutBack");
+        $(".mainBox").switchClass("col-md-11", "col-md-8", 800, "easeInOutBack");
     }
 });
 

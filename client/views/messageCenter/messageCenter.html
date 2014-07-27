@@ -3,17 +3,17 @@
     <div class="box box-bordered box-color">
         <div class="box-title">
             <h3>
-                <i class="icon-envelope"></i>
+                <i class="fa fa-envelope-o"></i>
                 Message Center
             </h3>
         </div>
         <div class="box-content nopadding">
             <ul class="tabs tabs-inline tabs-left">
                 <li class="active">
-                    <a href="#inbox" data-toggle="tab" class="tabLink tabbable"><i class="icon-inbox"></i> Inbox </a>
+                    <a href="#inbox" data-toggle="tab" class="tabLink tabbable"><i class="fa fa-inbox"></i> Inbox </a>
                 </li>
                 <li>
-                    <a href="#newConversation" data-toggle="tab" class="tabLink tabbable"><i class="icon-share-alt"></i> New conversation</a>
+                    <a href="#newConversation" data-toggle="tab" class="tabLink tabbable"><i class="fa fa-share-alt"></i> New conversation</a>
                 </li>
             </ul>
             <div class="tab-content tab-content-inline">
@@ -36,7 +36,7 @@
                                 {{> conversationRow}}
                             {{/each}}
                         {{else}}
-                        <tr ><td colspan="4" style="text-align: center;">No conversations yet! Click on the "New conversation" tab to start one.</td></tr>
+                        <tr ><td colcol-md-="4" style="text-align: center;">No conversations yet! Click on the "New conversation" tab to start one.</td></tr>
 
                         {{/if}}
 
@@ -74,7 +74,7 @@
         </td>
         <td class="hidden-480">
             <button class="btn btn-primary btn-primary-main btn-enterConversation btn-block" data-id="{{otherUserId}}"><i
-                    class="icon-hand-left"></i>
+                    class="fa fa-hand-o-left"></i>
             </button>
         </td>
     </tr>
@@ -87,13 +87,13 @@
 </template>
 
 <template name="newConversation">
-    <div class="row-fluid">
-            <div class="row-fluid searchPanel">
-                <div class="span8 center">
+    <div class="row">
+            <div class="row searchPanel">
+                <div class="col-md-8 center">
                     <form action="" method="GET" class="search-form">
                         <div class="search-pane">
                             <input type="text" name="search" id="usersSearch" placeholder="Search here...">
-                            <button type="submit"><i class="icon-search"></i></button>
+                            <button type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </form>
                 </div>
@@ -109,7 +109,7 @@
 </template>
 
 <template name="userRow">
-<div class="row-fluid addBottomLine userRow">
+<div class="row addBottomLine userRow">
     <h4>{{userName}}</h4>
     <img src="{{userPicture}}"/>
 </div>

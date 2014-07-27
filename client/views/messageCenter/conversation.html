@@ -1,9 +1,9 @@
 <template name="conversation">
-    <div class="row-fluid">
-        <div class="span9 center">
+    <div class="row">
+        <div class="col-md-9 center">
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Conversation with {{userName}}</h3>
+                    <h3><i class="fa fa-th-list"></i> Conversation with {{userName}}</h3>
                 </div>
                 <div class="box-content padding">
                     {{#if isTalkingWithAdmin}}
@@ -38,7 +38,7 @@
                                 <input type="text" name="sendMessage" placeholder="Write here..." class="input-block-level sendMessage">
                             </div>
                             <div class="submit">
-                                <button class="btn btn-primary btn-primary-main btn-sendMessage"><i class="icon-share-alt"></i> Send</button>
+                                <button class="btn btn-primary btn-primary-main btn-sendMessage"><i class="fa fa-share-alt"></i> Send</button>
                             </div>
                         </li>
                     </ul>

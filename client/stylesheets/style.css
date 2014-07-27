@@ -85,6 +85,16 @@ textarea[disabled].flashcard {
     }
 }
 
+
+.container {
+    padding: 0;
+}
+
+
+#navigation > .container {
+    padding: 0 10px;
+}
+
 .centerTable > td {
     text-align: center !important;
 }
@@ -397,6 +407,7 @@ ul.icons {
 
 ul.icons > li {
     margin-bottom: 5px;
+    list-style-type: none;
 }
 
 .loginSignUp > h2 {
@@ -422,11 +433,11 @@ ul.icons > li {
     border-top: 1px solid #ddd;
 }
 
-.flashcardsList .row-fluid .span9, .flashcardsList .row-fluid .span3 {
+.flashcardsList .row .span9, .flashcardsList .row .span3 {
     border-top: 1px solid #ddd;
 }
 
-.flashcardsList .row-fluid .span9:hover {
+.flashcardsList .row .span9:hover {
     background: #f2f2f2;
 }
 
@@ -625,7 +636,7 @@ li.active > a {
     clear: both;
 }
 
-.updatedFlashcardOptionsRow .row-fluid {
+.updatedFlashcardOptionsRow .row{
     margin-top: 3px;
     margin-bottom: 3px;
 }
@@ -727,7 +738,7 @@ li.active > a {
     background: #f2f2f2;
 }
 
-.myFlashcardRow .span4 .row-fluid {
+.myFlashcardRow .span4 .row {
     padding-bottom: 10px;
 }
 
@@ -831,7 +842,7 @@ li.active > a {
 
 
 }
-.khanVideo .icon-hand-right {
+.khanVideo .fa .fa-hand-o-right {
     margin-top: 3px;
     color: #000;
 }
@@ -852,4 +863,47 @@ li.khanVideo:hover {
     border-top: 1px solid black !important;
     border-bottom: 1px solid black !important;
     font-weight: bold;
+}
+
+
+.loginList > p {
+
+    line-height: 1.6;
+    font-size: 130%;
+}
+
+
+    .loginList, .loginList > li > i  {
+        line-height: 56px;
+    font-size: 20px;
+    }
+
+    .loginListPhone {
+        line-height: 30px;
+        font-size: 15px;
+    }
+
+    .modal-content {
+        border: 3px solid #219BCC;
+    }
+
+    .modal-header {
+        background: #219BCC;
+        color: white;
+    }
+
+    .modal-body-form {
+        padding: 0px
+    }
+
+.btn.btn-primary-main {
+    background: #F2F2F2;
+    color: #204473;
+    border: 2px solid #219BCC;
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+.btn.btn-primary:hover {
+    background: #219BCC;
+    color: #F2F2F2;
+    transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }

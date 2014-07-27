@@ -16,7 +16,10 @@
       "iron-router": {},
       "sitemaps": {},
       "phonegap-oauth": {},
-      "fast-render": {}
+      "fast-render": {},
+      "bootstrap-3": {},
+      "font-awesome": {},
+      "x-editable-bootstrap3": {}
     },
     "packages": {
       "jquery-ui": {
@@ -93,6 +96,21 @@
         "git": "https://github.com/arunoda/meteor-fast-render.git",
         "tag": "v0.2.8",
         "commit": "149984b1aff3a5642a270aff9bd9006872c8302e"
+      },
+      "bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
+        "tag": "v3.2.0-1",
+        "commit": "17a63902fc6cf1096c5289d963c66cf28b474727"
+      },
+      "font-awesome": {
+        "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
+        "tag": "v4.1.0",
+        "commit": "ce6b1e92715d1938babc5d69c655c17e387f5926"
+      },
+      "x-editable-bootstrap3": {
+        "git": "https://github.com/JustinSGray/meteor-x-editable-bootstrap.git",
+        "tag": "v1.5.2",
+        "commit": "1e5e6d7bddf0b17cc6ea2fc1f50c3f9fd2cfc3f3"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

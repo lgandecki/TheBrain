@@ -8,7 +8,7 @@
 
 <template name="courseComments">
 
-    <div class='row-fluid'>
+    <div class='row'>
 
         {{> addCourseComment }}
 
@@ -27,21 +27,21 @@
                             <p>{{comment}}</p>
 
                             <div class="media-actions">
-                                <button class="btn btn-small btn-primary btn-primary-main btn-reply" data-id="{{_id}}"><i class="icon-reply"></i></button>
+                                <button class="btn btn-small btn-primary btn-primary-main btn-reply" data-id="{{_id}}"><i class="fa fa-reply"></i></button>
                                 |
                                 <span class="badge badge-success badge-upVote">+ {{upVotes.length}}</span> /
                                 <span class="badge badge-warning badge-downVote">- {{downVotes.length}}</span>
                             </div>
                         </div>
 
-                        <div class="row-fluid row-reply" data-id="{{_id}}" style="display: none;">
+                        <div class="row row-reply" data-id="{{_id}}" style="display: none;">
                             <div class='new-comment'>
-                                <div class="control-group">
+                                <div class="form-group">
                                     <div class="controls">
-                                        <textarea name="newReply" class="span8 newReply" rows="3" data-id="{{_id}}"></textarea>
+                                        <textarea name="newReply" class="col-md-8 newReply" rows="3" data-id="{{_id}}"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="span6 btn btn-primary btn-primary-main center btn-addReply" data-id="{{_id}}">Post Reply</button>
+                                <button type="submit" class="col-md-6 btn btn-primary btn-primary-main center btn-addReply" data-id="{{_id}}">Post Reply</button>
                             </div>
                         </div>
 
@@ -59,7 +59,7 @@
                                         <p>{{comment}}</p>
 
                                         <div class="media-actions">
-                                            <button class="btn btn-small btn-primary btn-primary-main btn-reply" data-id="{{_id}}"><i class="icon-reply"></i>
+                                            <button class="btn btn-small btn-primary btn-primary-main btn-reply" data-id="{{_id}}"><i class="fa fa-reply"></i>
                                             </button>
                                             |
                                             <span class="badge badge-success badge-upVote">+ {{upVotes.length}}</span> /
@@ -68,14 +68,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row-fluid row-reply" data-id="{{_id}}" style="display: none;">
+                                <div class="row row-reply" data-id="{{_id}}" style="display: none;">
                                     <div class='new-comment'>
-                                        <div class="control-group">
+                                        <div class="form-group">
                                             <div class="controls">
-                                                <textarea name="newReply" class="span8 newReply" rows="3" data-id="{{_id}}"></textarea>
+                                                <textarea name="newReply" class="col-md-8 newReply" rows="3" data-id="{{_id}}"></textarea>
                                             </div>
                                         </div>
-                                        <button type="submit" class="span6 btn btn-primary btn-primary-main center btn-addReply" data-id="{{_id}}" data-parentId="{{../_id}}">Post Reply
+                                        <button type="submit" class="col-md-6 btn btn-primary btn-primary-main center btn-addReply" data-id="{{_id}}" data-parentId="{{../_id}}">Post Reply
                                         </button>
                                     </div>
                                 </div>
@@ -90,16 +90,16 @@
 
 
 <template name="addCourseComment">
-    <div class="row-fluid">
+    <div class="row">
         <div class="new-comment">
             <h4>Add a new comment</h4>
 
-            <div class="control-group">
+            <div class="form-group">
                 <div class="controls">
-                    <textarea name="newComment" class="span8 newComment" rows="3"></textarea>
+                    <textarea name="newComment" class="col-md-8 newComment" rows="3"></textarea>
                 </div>
             </div>
-            <button type="submit" class="span6 btn btn-primary btn-primary-main center btn-addNewComment">Post Comment</button>
+            <button type="submit" class="col-md-6 btn btn-primary btn-primary-main center btn-addNewComment">Post Comment</button>
         </div>
     </div>
 

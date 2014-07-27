@@ -1,9 +1,9 @@
 <template name="flashcard">
-    <div class="row-fluid">
-        <div class="span6 center">
+    <div class="row">
+        <div class="col-md-6 center">
             <div class="box box-bordered box-color flashcardDetails">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Flashcard Details</h3>
+                    <h3><i class="fa fa-th-list"></i> Flashcard Details</h3>
                 </div>
                 <div class="box-content padding">
                     {{> flashcardDetails }}
@@ -38,19 +38,19 @@
     {{#each flashcardVersion}}
         <div class="flashcardsList">
 
-            <div class="row-fluid">
-                <div class="span12">
+            <div class="row">
+                <div class="col-md-12">
                     <div class="updatedFlashcardRow center">
                         <div class="updatedFlashcardOptionsRow">
-                            <div class="row-fluid">
+                            <div class="row">
                                 <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i
-                                        class="icon-thumbs-up"></i> {{upVotes.length}}</span> &nbsp;
-                                    <span class="badge badge-downVote clickable badge-warning"><i class="icon-thumbs-down"></i> {{downVotes.length}}</span>
+                                        class="fa fa-thumbs-o-up"></i> {{upVotes.length}}</span> &nbsp;
+                                    <span class="badge badge-downVote clickable badge-warning"><i class="fa fa-thumbs-o-down"></i> {{downVotes.length}}</span>
                                 </div>
                             </div>
-                            <div class="row-fluid"><h5>By: {{userName}} </h5></div>
+                            <div class="row"><h5>By: {{userName}} </h5></div>
                             {{#if isUpdatedVersion}}
-                                <div class="row-fluid"><h5>Reason for update: {{reason}}</h5></div>{{/if}}
+                                <div class="row"><h5>Reason for update: {{reason}}</h5></div>{{/if}}
 
                         </div>
                         <div class="flashcard front">{{{flashcardFront}}}</div>
@@ -67,9 +67,9 @@
 </template>
 
 <template name="inCourseRow">
-    <li class="inCourseRow khanVideo" data-id="{{_id}}"><i class="icon-hand-right pull-left"></i><span class="khanTitle" data-id="{{_id}}">{{name}} </span></li>
+    <li class="inCourseRow khanVideo" data-id="{{_id}}"><i class="fa fa-hand-o-right pull-left"></i><span class="khanTitle" data-id="{{_id}}">{{name}} </span></li>
 </template>
 
 <template name="inKhanRow">
-    <li class="inKhanRow khanVideo" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}"><i class="icon-hand-right pull-left"></i><span class="khanTitle" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}">{{playlistTitle}} / {{videoTitle}} </span></li>
+    <li class="inKhanRow khanVideo" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}"><i class="fa fa-hand-o-right pull-left"></i><span class="khanTitle" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}">{{playlistTitle}} / {{videoTitle}} </span></li>
 </template>

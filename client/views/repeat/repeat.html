@@ -1,14 +1,14 @@
 <template name="repeat">
 
-    <div class="row-fluid">
-        <div class="span8 center mainBox">
-            <div class="row-fluid" style="
+    <div class="row">
+        <div class="col-md-8 center mainBox">
+            <div class="row" style="
     margin-bottom: 0px;
     padding-bottom: 0px;
 ">
 
 
-                <div class="span4" style="
+                <div class="col-md-4" style="
     margin-bottom: 0px;
     padding-bottom: 0px;
 ">
@@ -26,7 +26,7 @@
                         <span>0 / 0</span>
                     </div>
                 </div>
-                <div class="span4" style="
+                <div class="col-md-4" style="
     margin-bottom: 0px; padding-bottom: 0px;
 ">
                     <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Repetitions</h4>
@@ -43,7 +43,7 @@
                         <span>0 / 0</span>
                     </div>
                 </div>
-                <div class="span4" style="
+                <div class="col-md-4" style="
     margin-bottom: 0px; padding-bottom: 0px;
 ">
                     <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Extra Repetitions</h4>
@@ -65,7 +65,7 @@
             </div>
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Improve TheBrain connections!</h3>
+                    <h3><i class="fa fa-th-list"></i> Improve TheBrain connections!</h3>
                 </div>
 
                 <div class="box-content nopadding">
@@ -74,17 +74,17 @@
 
 
                                 <li>
-                                    <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
+                                    <a href="#repeatFlashcards" data-toggle="tab"><i class="fa fa-road"></i> Repetitions</a>
                                 </li>
                                 <li>
-                                    <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> Comments {{#with flashcard}}({{comments.length}}){{/with}}</a>
+                                    <a href="#comments" data-toggle="tab"><i class="fa fa-comments-o"></i> Comments {{#with flashcard}}({{comments.length}}){{/with}}</a>
                                 </li>
 
                                 <li>
-                                    <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> History {{#with item}}({{previousAnswers.length}}){{/with}}</a>
+                                    <a href="#history" data-toggle="tab"><i class="fa fa-calendar-o"></i> History {{#with item}}({{previousAnswers.length}}){{/with}}</a>
                                 </li>
                                 <li>
-                                    <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> Edit</a>
+                                    <a href="#edit" data-toggle="tab"><i class="fa fa-edit"></i> Edit</a>
                                 </li>
 
                         </ul>
@@ -96,7 +96,7 @@
                                 <div class="currentFlashcard">
                                     <h5 class="collectionName"></h5>
                                     <div class="flashcard front"></div>
-                                    <div id="answer" class="flashcard answer hidden-phone" contentEditable="true"></div>
+                                    <div id="answer" class="flashcard answer hidden-sm" contentEditable="true"></div>
                                     <button class="btn btn-large btn-primary btn-primary-main btn-block btn-show-answer" style="">Show answer</button>
                                     <div class="flashcard back" style="display: none;"></div>
 
@@ -142,7 +142,7 @@
 
 <template name="itemHistory">
     {{#each previousAnswer}}
-        <div class="row-fluid addBottomLine itemHistory">
+        <div class="row addBottomLine itemHistory">
             <div class="previousAnswer">
                 <h4>{{historyDate}}</h4>
 

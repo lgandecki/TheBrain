@@ -1,14 +1,14 @@
 <template name="myCollectionsFlashcards">
-    <div class="row-fluid">
-        <div class="span9 center">
+    <div class="row">
+        <div class="col-md-9 center">
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> {{collectionName}}</h3>
+                    <h3><i class="fa fa-th-list"></i> {{collectionName}}</h3>
                 </div>
                 <div class="box-content padding">
-                    <div class="row-fluid examModeButton">
-                        <div class="span12">
-                            <button class=" btn btn-primary btn-primary-main btn-examModeModal btn-block"><i class="icon-hand-right"></i> Exam mode / schedule extra repetitions
+                    <div class="row examModeButton">
+                        <div class="col-md-12">
+                            <button class=" btn btn-primary btn-primary-main btn-examModeModal btn-block"><i class="fa fa-hand-o-right"></i> Exam mode / schedule extra repetitions
                             </button>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
 
                                 {{#unless allItemsLoaded}}
                                     <div class="textCenter">
-                                        <button class="btn btn-primary btn-primary-main load-more"><i class="icon-hand-down"> Load more</i></button>
+                                        <button class="btn btn-primary btn-primary-main load-more"><i class="fa fa-hand-o-down"> Load more</i></button>
                                     </div>
                                 {{/unless}}
 
@@ -49,54 +49,54 @@
 
 <template name="withSelectedItems">
     <div class="withSelected">
-        <div class="row-fluid searchPanel">
-            <div class="span8 center">
+        <div class="row searchPanel">
+            <div class="col-md-8 center">
                 <form action="" method="GET" class="search-form">
                     <div class="search-pane">
                         <input type="text" name="search" id="availableItemsSearch"  placeholder="Search here...">
-                        <button type="submit"><i class="icon-search"></i></button>
+                        <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="row-fluid">
+        <div class="row ">
             <span class="label label-info withSelectedLabel">With {{flashcardsSelectedLength}} selected:</span>
 
         </div>
         <div class="withSelectedButtons">
-            <div class="row-fluid">
+            <div class="row">
                 {{#unless deactivatedCollection}}
-                {{#if isCollectionSelected}}<div class="span3" >
-                    <button class=" btn btn-primary btn-primary-main btn-changeCollection btn-block"><i class="icon-hand-right"></i> Change collection
+                {{#if isCollectionSelected}}<div class="col-md-3" >
+                    <button class=" btn btn-primary btn-primary-main btn-changeCollection btn-block"><i class="fa fa-hand-o-right"></i> Change collection
                     </button>
                 </div>{{/if}}
                 <div class="{{isShortSpan}}">
-                    <button class=" btn btn-primary btn-primary-main btn-deactivateItems btn-block"><i class="icon-hand-right"></i> Deactivate
+                    <button class=" btn btn-primary btn-primary-main btn-deactivateItems btn-block"><i class="fa fa-hand-o-right"></i> Deactivate
                     </button>
                 </div>
                 <div class="{{isShortSpan}}">
-                    <button class=" btn btn-primary btn-primary-main btn-extraRepeatItems btn-block"><i class="icon-hand-right"></i> Extra repeat session
+                    <button class=" btn btn-primary btn-primary-main btn-extraRepeatItems btn-block"><i class="fa fa-hand-o-right"></i> Extra repeat session
                     </button>
                 </div>
                 <div class="{{isShortSpan}}">
-                    <button class=" btn btn-primary btn-primary-main btn-addItemsToCourse btn-block"><i class="icon-hand-right"></i> Add to course
+                    <button class=" btn btn-primary btn-primary-main btn-addItemsToCourse btn-block"><i class="fa fa-hand-o-right"></i> Add to course
                     </button>
                 </div>
                 {{else}}
-                    <div class="span12">
-                        <button class=" btn btn-primary btn-primary-main btn-activateItems btn-block"><i class="icon-hand-right"></i> Reactivate
+                    <div class="col-md-12">
+                        <button class=" btn btn-primary btn-primary-main btn-activateItems btn-block"><i class="fa fa-hand-o-right"></i> Reactivate
                         </button>
                     </div>
                 {{/unless}}
             </div>
             <br/>
-            <div class="row-fluid">
-                <div class="span6">
-                    <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block"><i class="icon-hand-right"></i> Select All
+            <div class="row">
+                <div class="col-md-6">
+                    <button class=" btn btn-primary btn-primary-main btn-selectAll btn-block"><i class="fa fa-hand-o-right"></i> Select All
                     </button>
                 </div>
-                <div class="span6">
-                    <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block"><i class="icon-hand-right"></i> Deselect All
+                <div class="col-md-6">
+                    <button class="btn btn-primary btn-primary-main btn-deSelectAll btn-block"><i class="fa fa-hand-o-right"></i> Deselect All
                     </button>
                 </div>
             </div>
@@ -107,11 +107,11 @@
 
 <template name="changeItemsCollectionModal">
     <!-- Modal -->
-    <div id="changeItemsCollectionModal" class="modal hide fade" tabindex="-1" role="dialog"
+    <div id="changeItemsCollectionModal" class="modal fade" tabindex="-1" role="dialog"
             aria-labelledby="changeItemsCollectionModal" aria-hidden="true">
-        <div class="box box-bordered box-color box-modal">
+        <div class="box box-bordered box-color box-modal modal-dialog">
             <div class="box-title box-modal">
-                <h3><i class="icon-th-list"></i> Change collection for selected items </h3>
+                <h3><i class="fa fa-th-list"></i> Change collection for selected items </h3>
                 <button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="box-content nopadding modal-box">
@@ -132,11 +132,11 @@
 
 <template name="collectionSelector">
 
-    <div class="control-group">
+    <div class="form-group">
         <label class="control-label">Collection</label>
 
         <div class="controls">
-            <select name="newCollectionId" id="newCollectionId" class="input-large select2">
+            <select name="newCollectionId" id="newCollectionId" class="input-lg select2">
                 {{#each collection}}
                     <option value="{{_id}}" {{selectIfCurrent}}>{{name}}</option>
                 {{/each}}
