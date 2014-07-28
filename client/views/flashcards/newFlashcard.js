@@ -43,7 +43,7 @@ Template.flashcardForm.newBackPicture = function() {
 Template.flashcardForm.events({
     "click .btn-collectionModal": function(e, template) {
         e.preventDefault();
-        $('#newCollectionModal').modal('show');
+        Meteor.theBrain.modals.newCollection();
     },
     "click .btn-addPictureToFront": function(e, template) {
         e.preventDefault();

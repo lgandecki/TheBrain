@@ -211,7 +211,7 @@ Router.onBeforeAction(function() {
 Router.onBeforeAction(function (pause) {
     var _randomLogNumber = Math.random();
     var _name = this.route.name;
-
+    console.log("in onBeforeAction");
 
     $("html, body").animate({
         scrollTop: 0
@@ -226,6 +226,7 @@ Router.onBeforeAction(function (pause) {
     var _width = $(window).width()/1.2;
 
     if (_html && _off && !Meteor.loggingIn() && _enoughTimePassedSinceLastTransition() ) {
+        console.log("robimy to przejscie");
         _timePassedSinceLast = new Date().valueOf();
         if (_off.top === 0) {
         }
@@ -366,8 +367,26 @@ Router.onBeforeAction(function (pause) {
             if (!Session.get("exploreModeOnModal") && _location.indexOf("_escaped_fragment") === -1) {
                 Session.set("exploreModeOnModal", true);
                 setTimeout(function() {
-                    $("#workInProgressModal").modal("show");
-                }, 5000);
+                    var workInProgressModal = {
+                        template: Template.workInProgressReactiveModal,
+                        title: "Not logged in!",
+                        buttons: {
+                            "ok": {
+                                closeModalOnClick: true, // if this is false, dialog doesnt close automatically on click
+                                class: 'btn btn-primary btn-primary-main',
+                                label: 'Got ya!'
+                            }
+
+                        }
+                    };
+
+                    var rd = ReactiveModal.initDialog(workInProgressModal);
+                    rd.buttons.ok.on('click', function(button) {
+                        console.log("clicked in modal");
+                    });
+
+                    rd.show();
+                }, 1000);
 
             }
         }

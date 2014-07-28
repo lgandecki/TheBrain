@@ -907,3 +907,8 @@ li.khanVideo:hover {
     color: #F2F2F2;
     transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
+
+.facebookLoginGroup {
+    margin-left: 10px;
+    margin-riht: 10px;
+}

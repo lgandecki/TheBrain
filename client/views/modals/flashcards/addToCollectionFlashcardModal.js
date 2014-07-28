@@ -18,7 +18,7 @@ Template.collectionWithEmptyAndNewSelector.rendered = function() {
 Template.collectionWithEmptyAndNewSelector.events({
     "click .btn-collectionModal": function(e, template) {
         e.preventDefault();
-        $('#newCollectionModal').modal('show');
+        Meteor.theBrain.modals.newCollection();
     }
 })
 

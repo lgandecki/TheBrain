@@ -1,38 +1,46 @@
-Template.newCourseModal.events({
-    "click .addCourse": function (e, template) {
-        e.preventDefault();
-        Meteor.validations.clearErrors();
-        $(e.target).attr("disabled", true).html("Adding...");
-        if (validateNewCourse()) {
-            newCourse = createNewCourse();
-            Meteor.call('newCourse', newCourse, function (error, id) {
-                if (error) {
-                    Meteor.popUp.error("TheBrain is confused", "Course adding server error: " + error.reason);
-                }
-                else {
-                    Meteor.popUp.success("Course added", "TheBrain prepared new neural path you asked for.");
-                    $("#newCourseModal").modal("hide");
-                    $("#newCourseName").val("");
-                    $("#newCourseShortDescription").val("");
-                }
-            });
-        }
-        else {
-            Meteor.validations.markInvalids();
-            Meteor.popUp.error("TheBrain is confused", " Course adding error. Make sure you provided all the required information!");
-        }
-        $(e.target).removeAttr("disabled").html("Add Course");
-    }
-});
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
 
-validateNewCourse = function() {
+var _newCourse = function (button) {
+    Meteor.validations.clearErrors();
+    if (validateNewCourse()) {
+        var newCourse = createNewCourse();
+        Meteor.call('newCourse', newCourse, function (error, id) {
+            if (error) {
+                Meteor.popUp.error("TheBrain is confused", "Course adding server error: " + error.reason);
+            }
+            else {
+                Meteor.popUp.success("Course added", "TheBrain prepared new neural path you asked for.");
+                Meteor.modal.hideClosestTo("#newCourseName");
+            }
+        });
+    }
+    else {
+        Meteor.validations.markInvalids();
+        Meteor.popUp.error("TheBrain is confused", " Course adding error. Make sure you provided all the required information!");
+    }
+}
+
+
+Meteor.theBrain.modals.newCourse = function() {
+    var _title;
+    var _opts = {
+        withCancel: true,
+        closeOnOk: false,
+        okLabel: "Add Course"
+    };
+
+    var _modal = Meteor.modal.initAndShow(Template.courseForm, _title = "New Course", _opts);
+    _modal.buttons.ok.on('click', function(button) {_newCollection(button)});
+}
+
+var validateNewCourse = function () {
     invalids = [];
     Meteor.validations.checkIfEmpty("#newCourseName");
     Meteor.validations.checkIfUniqueNameForUser("#newCourseName", Courses);
     return !!(invalids.length === 0);
 }
-createNewCourse = function() {
-    _isPublic = $("#newCoursePublic").prop("checked") ? true : false;
+var createNewCourse = function () {
+    var _isPublic = $("#newCoursePublic").prop("checked") ? true : false;
     var _newCourse = {
         name: $("#newCourseName").val(),
         shortDescription: $("#newCourseShortDescription").val(),

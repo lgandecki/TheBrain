@@ -17,6 +17,7 @@
     "fast-render": {},
     "bootstrap-3": {},
     "font-awesome": {},
-    "x-editable-bootstrap3": {}
+    "x-editable-bootstrap3": {},
+    "reactive-modal": {}
   }
 }

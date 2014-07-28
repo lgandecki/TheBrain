@@ -19,7 +19,8 @@
       "fast-render": {},
       "bootstrap-3": {},
       "font-awesome": {},
-      "x-editable-bootstrap3": {}
+      "x-editable-bootstrap3": {},
+      "reactive-modal": {}
     },
     "packages": {
       "jquery-ui": {
@@ -111,6 +112,11 @@
         "git": "https://github.com/JustinSGray/meteor-x-editable-bootstrap.git",
         "tag": "v1.5.2",
         "commit": "1e5e6d7bddf0b17cc6ea2fc1f50c3f9fd2cfc3f3"
+      },
+      "reactive-modal": {
+        "git": "https://github.com/pahans/reactive-modal.git",
+        "tag": "v0.1.3",
+        "commit": "4ec97d8558136730b6178e3f5e470689da6b36a5"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

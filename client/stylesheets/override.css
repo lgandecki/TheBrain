@@ -46,3 +46,7 @@
     background-color: #f2f2f2;
 }
 
+
+.modal-body {
+    padding: 0px !important;
+}

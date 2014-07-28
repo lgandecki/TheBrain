@@ -1,47 +1,36 @@
-<template name="newCourseModal">
-    <!-- Modal -->
-    <div id="newCourseModal" class="modal fade" tabindex="-1" role="dialog"
-    aria-labelledby="newCourseModal" aria-hidden="true">
-    <div class="box box-bordered box-color box-modal modal-dialog">
-        <div class="box-title box-modal">
-            <h3><i class="fa fa-th-list"></i> New Course</h3><button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
-        </div>
-        <div class="box-content nopadding modal-box">
-
-            <form action="#" class='form-horizontal form-bordered'>
-                {{> courseForm }}
-                <div class="form-actions pull-right modal-form-actions">
-                    <button type="submit" class="btn btn-primary btn-primary-main addCourse">Add Course</button>
-                    <button type="button" class="btn btn-primary btn-primary-main" data-dismiss="modal" aria-hidden="true">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</template>
-
 <template name="courseForm">
-    <div class="form-group" id="NameControlGroup">
-        <label class="control-label">Name</label>
+    <form class="form-validate form-horizontal form-bordered">
 
-        <div class="controls">
-            <input type="text" name="newCourseName" id="newCourseName" placeholder="Course Name"/><br/>
-        </div>
-    </div>
-    <div class="form-group" id="shortDescriptionControlGroup">
-        <label class="control-label">Short Description</label>
-        <div class="controls">
-            <textarea name="newCourseShortDescription" id="newCourseShortDescription" rows="3" class="input-block-level"></textarea>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label">Public?</label>
+        <div class="form-group" id="NameControlGroup">
+            <label class="control-label hidden-xs col-sm-4">Name</label>
 
-        <div class="controls">
-            <label class='checkbox'>
-                <input type="checkbox" name="newCoursePublic" id="newCoursePublic" value="true" checked> Do you want this course to be searchable?<br/>
-                <small>If not, you can provide your students with direct link that works as a password</small>
-            </label>
+            <div class="input-group col-sm-8">
+                <span class="input-group-addon"><i class="fa fa-folder-open-o"></i></span>
+                <input type="text" name="newCourseName" id="newCourseName" placeholder="Course Name"/><br/>
+
+            </div>
         </div>
-    </div>
+        <div class="form-group" id="shortDescriptionControlGroup">
+            <label class="control-label hidden-xs col-sm-4">Short Description</label>
+
+            <div class="input-group col-sm-8">
+                <span class="input-group-addon"><i class="fa fa-folder-open-o"></i></span>
+                <textarea name="newCourseShortDescription" id="newCourseShortDescription" rows="3" ></textarea>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4">Public?</label>
+
+            <div class="input-group col-sm-8">
+                <label class='checkbox'>
+                    <input type="checkbox" name="newCoursePublic" id="newCoursePublic" value="true" checked> Do you want this course to be searchable?<br/>
+                    <small>If not, you can provide your students with direct link that works as a password</small>
+                </label>
+            </div>
+        </div>
+    </form>
+
+
 </template>

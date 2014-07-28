@@ -536,14 +536,14 @@ Template.flashcardsDefaultOptions.flashcardsAvailable = function () {
         if (_course && _lessonId) {
             var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
             _lesson = _course.lessons[_lessonIndex];
-        }
-    }
-    if (_lesson.youtube_id) {
-        var _countObject = YoutubeVideoFlashcardsCount.findOne({_id: _youtube_id});
-        _count = _countObject && _countObject.count;
-    } else {
-        if (_lesson.teacherFlashcards && _lesson.studentsFlashcards) {
-            _count = _lesson.teacherFlashcards.length + _lesson.studentsFlashcards.length;
+            if (_lesson.teacherFlashcards && _lesson.studentsFlashcards) {
+                _count = _lesson.teacherFlashcards.length + _lesson.studentsFlashcards.length;
+            } else {
+                console.log("this shouldnt happen, found th elesson but not associated flashcards");
+            }
+        } else if (_youtube_id) {
+            var _countObject = YoutubeVideoFlashcardsCount.findOne({_id: _youtube_id});
+            _count = _countObject && _countObject.count;
         }
     }
     return _count;

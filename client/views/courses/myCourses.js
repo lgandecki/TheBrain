@@ -13,6 +13,6 @@ Template.myCourses.events({
     },
     "click .btn-addCourseModal": function (e, template) {
         e.preventDefault();
-        $('#newCourseModal').modal('show');
+        Meteor.theBrain.modals.newCourse();
     }
 });

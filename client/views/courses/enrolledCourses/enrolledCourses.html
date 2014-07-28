@@ -20,7 +20,7 @@
                         </thead>
                         <tbody>
                         {{#if amINotEnrolledInAnyCourses}}
-                            <tr><th style="text-align: center;" colcol-md-="7">You are not taking any courses yet! Go to <a href="/availableCourses">available courses</a> to enroll in one!</th></tr>
+                            <tr><th style="text-align: center;" colspan="7">You are not taking any courses yet! Go to <a href="/availableCourses">available courses</a> to enroll in one!</th></tr>
                         {{else}}
                                 {{#each course}}
                             {{> courseRow }}
