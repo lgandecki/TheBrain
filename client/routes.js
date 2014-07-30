@@ -223,7 +223,7 @@ Router.onBeforeAction(function (pause) {
         _originalWidth = _tran.width(),
         _prev = null,
         _easing = "easeInOutBack";
-    var _width = $(window).width()/1.2;
+    var _width = $(window).width()/1.1;
 
     if (_html && _off && !Meteor.loggingIn() && _enoughTimePassedSinceLastTransition() ) {
         console.log("robimy to przejscie");
