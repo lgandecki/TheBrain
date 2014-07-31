@@ -817,3 +817,20 @@ var checkIfFlashcardUpdated = function(opts) {
     }
 }
 
+
+var _editFlashcardHandler, _editFlashcardFormHandler;
+Template.editFlashcard.created = function() {
+    _editFlashcardHandler = Deps.autorun( function() {
+        var _currentItemId = Session.set("currentItemId");
+        var _currentFlashcardId = Session.get("currentFlashcardId");
+        console.log("_currentItemId", _currentItemId);
+        console.log("_currentFlashcardId", _currentFlashcardId);
+        UI.remove(_editFlashcardFormHandler);
+        _editFlashcardFormHandler = UI.render(Template.editFlashcardForm);
+        Ui.insert(_editFlashcardFormHandler, "#editFlashcardForm", ".form-actions");
+    };
+};
+
+Template.editFlashcard.destroyed = function() {
+    _editFlashcardHandler.stop();
+}
