@@ -810,14 +810,16 @@ Template.editFlashcard.created = function () {
         var _currentFlashcardId = Session.get("currentFlashcardId");
         console.log("_currentItemId", _currentItemId);
         console.log("_currentFlashcardId", _currentFlashcardId);
-        if (_editFlashcardFormHandler) {
-            UI.remove(_editFlashcardFormHandler);
-        }
-        _editFlashcardFormHandler = UI.render(Template.editFlashcardForm);
-        var _form = $("#editFlashcardForm");
-        var _formActions = $(".form-actions");
-        if (_form && _formActions) {
-            UI.insert(_editFlashcardFormHandler, _form, _formActions);
+        if (_currentItemId ||_currentFlashcardId ) {
+            if (_editFlashcardFormHandler) {
+                UI.remove(_editFlashcardFormHandler);
+            }
+            _editFlashcardFormHandler = UI.render(Template.editFlashcardForm);
+            var _form = $("#editFlashcardForm");
+            var _formActions = $(".form-actions");
+            if (_form && _formActions) {
+                UI.insert(_editFlashcardFormHandler, _form, _formActions);
+            }
         }
     });
 };
