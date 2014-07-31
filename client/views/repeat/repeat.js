@@ -816,7 +816,9 @@ Template.editFlashcard.created = function () {
         _editFlashcardFormHandler = UI.render(Template.editFlashcardForm);
         var _form = $("#editFlashcardForm");
         var _formActions = $(".form-actions");
-        UI.insert(_editFlashcardFormHandler, _form, _formActions);
+        if (_form && _formActions) {
+            UI.insert(_editFlashcardFormHandler, _form, _formActions);
+        }
     });
 };
 
