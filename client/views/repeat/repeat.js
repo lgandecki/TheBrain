@@ -833,4 +833,5 @@ Template.editFlashcard.created = function() {
 
 Template.editFlashcard.destroyed = function() {
     _editFlashcardHandler.stop();
+    UI.remove(_editFlashcardFormHandler);
 }
