@@ -223,7 +223,7 @@ Router.onBeforeAction(function (pause) {
         _originalWidth = _tran.width(),
         _prev = null,
         _easing = "easeInOutBack";
-    var _width = $(window).width()/1.1;
+    var _width = $(window).width()/1.2;
 
     if (_html && _off && !Meteor.loggingIn() && _enoughTimePassedSinceLastTransition() ) {
         console.log("robimy to przejscie");
@@ -290,18 +290,19 @@ Router.onBeforeAction(function (pause) {
 
 //            makeModalsScrollable();
 
-            setTimeout(function () {
-                if (!$(".transition").is(":visible")) {
-                    console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
-                    $(".transition").show().css("left", 0);
-                }
-            }, 300);
+
 
         }, 500);
 
 
     }
 
+    setTimeout(function () {
+        if (!$(".transition").is(":visible")) {
+            console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
+            $(".transition").show().css("left", 0);
+        }
+    }, 500);
 
 
     if (window.woopra) {

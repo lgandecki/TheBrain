@@ -4,7 +4,7 @@ var currentFlashcard, currentItemId, itemsToLearn = [], _renderer, _renderer2;
 //Meteor.subscribe("testItems");
 //Meteor.subscribe("currentFlashcard");
 
-var resizeTheBar = function (opts) {
+var resizeTheBar = function(opts) {
     var _done = opts.total - opts.left;
     console.log("resizingTheBar", opts);
     var _newWidth = (_done / opts.total) * 100;
@@ -54,13 +54,13 @@ function returnNextItem() {
         // console.log("collectionId " + collectionId);
         if (itemsToLearn.hasOwnProperty(collectionId) && itemsToLearn[collectionId] > 0) {
 
-            itemsToLearn[collectionId]--;
+                itemsToLearn[collectionId]--;
 
 
-            _nextItem = Items.findOne({user: Meteor.userId(), collection: collectionId, actualTimesRepeated: 0});
-            // console.log("Items to learn");
-            if (_nextItem)
-                return _nextItem._id;
+                _nextItem = Items.findOne({user: Meteor.userId(), collection: collectionId, actualTimesRepeated: 0});
+                // console.log("Items to learn");
+                if (_nextItem)
+                    return _nextItem._id;
         }
         delete itemsToLearn[collectionId];
     }
@@ -152,9 +152,9 @@ Template.repeat.rendered = function () {
             _firstRender = false;
             Session.set("itemsToRepeat", "");
 
-            $(".evaluation.popoverUp").popover({trigger: 'hover', animation: true, placement: 'top', delay: { show: 750, hide: 100 }});
-            $(".evaluation.popoverLeft").popover({trigger: 'hover', animation: true, placement: 'left', delay: { show: 750, hide: 100 }});
-            $(".evaluation.popoverRight").popover({trigger: 'hover', animation: true, placement: 'right', delay: { show: 750, hide: 100 }});
+            $(".evaluation.popoverUp").popover({trigger: 'hover', animation: true, placement: 'top',  delay: { show: 750, hide: 100 }});
+            $(".evaluation.popoverLeft").popover({trigger: 'hover', animation: true, placement: 'left',  delay: { show: 750, hide: 100 }});
+            $(".evaluation.popoverRight").popover({trigger: 'hover', animation: true, placement: 'right',  delay: { show: 750, hide: 100 }});
 
             // var _itemsToLearn = {};
             // myCollections = Meteor.user().collections || [];
@@ -175,13 +175,14 @@ Template.repeat.rendered = function () {
                     _setAmountOfReps();
                     $('#setStudyFirstTour').crumble("clear");
 
-                }).on("shown", function () {
+                }).on("shown", function() {
 //                        setTimeout(function() {
 
 
-                    Meteor.tour.showIfNeeded("setStudyFirstTour");
+
+                            Meteor.tour.showIfNeeded("setStudyFirstTour");
 //                        }, 500);
-                });
+                    });
             }
             else {
                 _setAmountOfReps();
@@ -201,9 +202,9 @@ Template.repeat.destroyed = function () {
     _firstRender = true;
 }
 
-_setAmountOfReps = function () {
+_setAmountOfReps = function() {
 //    console.log("ladujemy to?");
-    var _now = moment(Session.get("serverNextDay"))._d;
+    var _now =  moment(Session.get("serverNextDay"))._d;
 //    var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
 
     Meteor.subscribe("itemsToRepeat", _now);
@@ -226,6 +227,8 @@ _setAmountOfReps = function () {
     resizeTheBar(_optsRepetitions);
 
     var _newFlashcardsLeft = 0;
+
+
 
 
     for (var collectionId in itemsToLearn) {
@@ -256,6 +259,8 @@ _setAmountOfReps = function () {
     Session.set("newFlashcardsTotal", _newFlashcardsLeft);
 
 
+
+
     var _optsNewFlashcards = {
         total: _newFlashcardsLeft,
         left: _newFlashcardsLeft,
@@ -284,11 +289,12 @@ _setAmountOfReps = function () {
     resizeTheBar(_optsExtraRepetitions);
 
 
+
 //    setTimeout(function() {
 //        $(".progress .bar").progressbar({display_text: 2,
 //            use_percentage: false})
 //    }, 200);
-    setTimeout(function () {
+    setTimeout(function() {
         displayNextRepetition();
     }, 500);
 
@@ -341,6 +347,7 @@ fillTemplate = function () {
         }
 
 
+
         $(".currentFlashcard > h5.collectionName").html("Collection: " + _collectionName);
 
         $(".currentFlashcard > .front").html(_front);
@@ -370,7 +377,7 @@ Template.repeat.currentFlashcard = function () {
 
 };
 
-var _parseEvaluation = function (evaluation, itemId) {
+var _parseEvaluation = function(evaluation, itemId) {
     hideBackAndEvaluation();
     var _now = moment(Session.get("serverNextDay"))._d;
     var _action = Meteor.flashcard.setNextRepetition(evaluation, itemId, _now);
@@ -452,35 +459,36 @@ Template.repeat.events({
     }
 });
 
-Template.repeat.newFlashcardsDone = function () {
-    var _newFlashcardsDone = Session.get("newFlashcardsTotal") - Session.get("newFlashcardsLeft");
-    return _newFlashcardsDone;
+Template.repeat.newFlashcardsDone = function() {
+   var _newFlashcardsDone = Session.get("newFlashcardsTotal") - Session.get("newFlashcardsLeft");
+   return _newFlashcardsDone;
 }
 
-Template.repeat.repetitionsDone = function () {
+Template.repeat.repetitionsDone = function() {
     var _repetitionsDone = Session.get("repetitionsTotal") - Session.get("repetitionsLeft");
     return _repetitionsDone;
 }
 
-Template.repeat.extraRepetitionsDone = function () {
+Template.repeat.extraRepetitionsDone = function() {
     var _extraRepetitionsDone = Session.get("extraRepetitionsTotal") - Session.get("extraRepetitionsLeft");
     return _extraRepetitionsDone;
 }
 
-Template.repeat.newFlashcardsTotal = function () {
+Template.repeat.newFlashcardsTotal = function() {
     return Session.get("newFlashcardsTotal");
 }
 
-Template.repeat.repetitionsTotal = function () {
+Template.repeat.repetitionsTotal = function() {
     return Session.get("repetitionsTotal");
 }
 
-Template.repeat.extraRepetitionsTotal = function () {
+Template.repeat.extraRepetitionsTotal = function() {
     return Session.get("extraRepetitionsTotal");
 }
 
 
-var decrementExtraRepetitionsLeft = function () {
+
+var decrementExtraRepetitionsLeft = function() {
     var _extraRepetitionsLeft = Session.get("extraRepetitionsLeft");
     Session.set("extraRepetitionsLeft", --_extraRepetitionsLeft);
     var _extraRepetitionsTotal = Session.get("extraRepetitionsTotal");
@@ -500,7 +508,8 @@ var decrementExtraRepetitionsLeft = function () {
 }
 
 
-var incrementExtraRepetitionsTotal = function () {
+
+var incrementExtraRepetitionsTotal = function() {
     var _extraRepetitionsTotal = Session.get("extraRepetitionsTotal");
     var _extraRepetitionsLeft = Session.get("extraRepetitionsLeft");
     Session.set("extraRepetitionsTotal", ++_extraRepetitionsTotal);
@@ -520,9 +529,9 @@ var incrementExtraRepetitionsTotal = function () {
 //    }, 200);
 }
 
-var decrementNewFlashcardsLeft = function () {
+var decrementNewFlashcardsLeft = function() {
     var _newFlashcardsLeft = Session.get("newFlashcardsLeft");
-    Session.set("newFlashcardsLeft", --_newFlashcardsLeft);
+    Session.set("newFlashcardsLeft", --_newFlashcardsLeft );
     var _newFlashcardsTotal = Session.get("newFlashcardsTotal");
 
     var _opts = {
@@ -540,7 +549,7 @@ var decrementNewFlashcardsLeft = function () {
 //    }, 200);
 }
 
-var decrementRepetitionsLeft = function () {
+var decrementRepetitionsLeft = function() {
     var _repetitionsLeft = Session.get("repetitionsLeft");
     Session.set("repetitionsLeft", --_repetitionsLeft);
     var _repetitionsTotal = Session.get("repetitionsTotal");
@@ -552,6 +561,8 @@ var decrementRepetitionsLeft = function () {
     }
 
     resizeTheBar(_opts);
+
+
 
 
 //    setTimeout(function() {
@@ -761,6 +772,10 @@ var decrementRepetitionsLeft = function () {
 //}
 
 
+
+
+
+
 showBackAndEvaluation = function () {
     $(".btn-show-answer").hide();
     $(".currentFlashcard > .back").show('400', function () {
@@ -791,42 +806,14 @@ hideBackAndEvaluation = function () {
     )
 };
 
-var checkIfFlashcardUpdated = function (opts) {
+var checkIfFlashcardUpdated = function(opts) {
     var _item = Items.findOne({user: Meteor.userId(), _id: opts.itemId});
     var _flashcard = Flashcards.findOne(opts.flashcardId);
 
     if (_item && _flashcard && _item.flashcardVersionSeen < _flashcard.version) {
-        $("#newFlashcardVersionModal").modal("show").on("hidden", function () {
+        $("#newFlashcardVersionModal").modal("show").on("hidden", function() {
 //            console.log("are we ever here in hidden modal");
         });
     }
 }
 
-
-var _editFlashcardHandler, _editFlashcardFormHandler;
-Template.editFlashcard.created = function () {
-    _editFlashcardHandler = Deps.autorun(function () {
-        var _currentItemId = Session.set("currentItemId");
-        var _currentFlashcardId = Session.get("currentFlashcardId");
-        console.log("_currentItemId", _currentItemId);
-        console.log("_currentFlashcardId", _currentFlashcardId);
-        if (_currentItemId ||_currentFlashcardId ) {
-            if (_editFlashcardFormHandler) {
-                UI.remove(_editFlashcardFormHandler);
-            }
-            _editFlashcardFormHandler = UI.render(Template.editFlashcardForm);
-            var _form = $("#editFlashcardForm");
-            var _formActions = $(".form-actions");
-            if (_form && _formActions) {
-                UI.insert(_editFlashcardFormHandler, _form, _formActions);
-            }
-        }
-    });
-};
-
-Template.editFlashcard.destroyed = function () {
-    _editFlashcardHandler.stop();
-    if (_editFlashcardFormHandler) {
-        UI.remove(_editFlashcardFormHandler);
-    }
-}
