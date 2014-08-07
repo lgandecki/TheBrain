@@ -321,7 +321,7 @@ Router.onBeforeAction(function (pause) {
 
                     });
             }
-        }, 500);
+        }, 1000);
     }
 
 
