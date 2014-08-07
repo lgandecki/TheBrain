@@ -300,19 +300,31 @@ Router.onBeforeAction(function (pause) {
 
 //            makeModalsScrollable();
 
-
+            setTimeout(function () {
+                if (!$(".transition").is(":visible")) {
+                    console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
+                    $(".transition").show().css("left", 0);
+                }
+            }, 300);
 
         }, 500);
 
 
+    } else {
+        setTimeout(function () {
+            if (!$(".transition").is(":visible")) {
+                console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
+                $(".transition").show()
+                    .animate({
+                        "left": "0px"
+                    }, 1200, _easing, function () {
+
+                    });
+            }
+        }, 500);
     }
 
-    setTimeout(function () {
-        if (!$(".transition").is(":visible")) {
-            console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
-            $(".transition").show().css("left", 0);
-        }
-    }, 500);
+
 
 
     if (window.woopra) {
