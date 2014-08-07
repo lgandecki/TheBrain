@@ -314,7 +314,8 @@ Router.onBeforeAction(function (pause) {
         setTimeout(function () {
             if (!$(".transition").is(":visible")) {
                 console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
-                $(".transition").show()
+                var _transitionWidth =  $(".transition").width();
+                $(".transition").css("left", _transitionWidth).show()
                     .animate({
                         "left": "0px"
                     }, 1200, _easing, function () {
