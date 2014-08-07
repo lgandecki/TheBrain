@@ -181,6 +181,16 @@ var _enoughTimePassedSinceLastTransition = function() {
 
 
 Router.onBeforeAction(function() {
+    if ($(".transition").length > 0) {
+        _setMenuActive();
+    } else {
+        setTimeout(function() {
+                _setMenuActive();
+        }, 500);
+    }
+});
+
+var _setMenuActive = function() {
     $('li.active').removeClass('active');
     var _currentRoute = window.location.pathname;
     if (_currentRoute === "/home" || _currentRoute === "/login") {
@@ -206,7 +216,7 @@ Router.onBeforeAction(function() {
     _element.closest('li').addClass('active');
     _element.closest('li.topNav').addClass('active');
     Session.set("isNewPage", _currentRoute);
-})
+}
 
 Router.onBeforeAction(function (pause) {
     var _randomLogNumber = Math.random();
