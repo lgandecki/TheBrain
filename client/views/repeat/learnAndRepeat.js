@@ -16,7 +16,7 @@ Template.myCollectionsList.destroyed = function() {
     Session.set("itemsToLearnCount", 0);
 }
 
-Template.collectionStudyRow.rendered = function() {
+Template.myCollectionsList.rendered = function() {
     var _collectionId = "";
 
     $(".slider-custom").slider({value: 0}).on("slideStart", function (ev) {
