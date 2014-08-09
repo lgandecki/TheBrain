@@ -181,6 +181,16 @@ var _enoughTimePassedSinceLastTransition = function() {
 
 
 Router.onBeforeAction(function() {
+    if ($(".transition").length > 0) {
+        _setMenuActive();
+    } else {
+        setTimeout(function() {
+                _setMenuActive();
+        }, 500);
+    }
+});
+
+var _setMenuActive = function() {
     $('li.active').removeClass('active');
     var _currentRoute = window.location.pathname;
     if (_currentRoute === "/home" || _currentRoute === "/login") {
@@ -206,7 +216,7 @@ Router.onBeforeAction(function() {
     _element.closest('li').addClass('active');
     _element.closest('li.topNav').addClass('active');
     Session.set("isNewPage", _currentRoute);
-})
+}
 
 Router.onBeforeAction(function (pause) {
     var _randomLogNumber = Math.random();
@@ -300,7 +310,20 @@ Router.onBeforeAction(function (pause) {
         }, 500);
 
 
+    } else {
+        setTimeout(function () {
+            if (!$(".transition").is(":visible")) {
+                console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
+                $(".transition").css("left", _width).show()
+                    .animate({
+                        "left": "0px"
+                    }, 1200, _easing, function () {
+
+                    });
+            }
+        }, 1000);
     }
+
 
 
 
