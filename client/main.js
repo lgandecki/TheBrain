@@ -163,7 +163,8 @@ Template.body.events({
 //    },
     "click .slimboxPicture": function (e) {
         e.preventDefault();
-        _convert = 640
+        e.stopImmediatePropagation();
+        var _convert = 640;
         if ($(window).width() < 640) {
             _convert = $(window).width() - 50;
         }

@@ -3,7 +3,7 @@
         <div class="col-md-8 center">
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="fa fa-th-list"></i> New FlashCard</h3>
+                    <h3><i class="fa fa-th-list"></i> New Flashard</h3>
                 </div>
                 <div class="box-content nopadding">
 
@@ -21,29 +21,52 @@
 
 <template name="flashcardForm">
     <div class="form-group">
-        <label for="front" class="control-label">Front
-            
-            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront hidden-sm">Add Picture</button>
-</label>
+        <label for="front" class="control-label col-sm-4">Front
 
-        <div class="controls">
+            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront hidden-xs">Add Picture
+            </button>
+        </label>
 
-            <div name="front" id="newFront" class="flashcard flashcardNoMargin" contentEditable="false">
-                <a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a><div name="front" class="flashcardFront"   contentEditable="true"></div>
-</div>
-            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront visible-sm">Add Picture</button>
+        <div class="input-group col-sm-8">
+            <span class="formSpanReplacement"></span>
+
+            <div name="front" id="newFront" class="flashcard flashcardNoMargin formSpanAdjustment"
+                 contentEditable="false">
+                <a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img
+                        src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>
+
+                <div name="front" class="flashcardFront" contentEditable="true"></div>
+            </div>
+
+        </div>
+        <div class="col-sm-8 visible-xs">
+            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront">
+                Add Picture
+            </button>
         </div>
     </div>
     <div class="form-group">
 
-        <label for="back" class="control-label">Back
-                    <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack hidden-sm">Add Picture</button></label>
+        <label for="back" class="control-label col-sm-4">Back
+            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack hidden-xs">Add Picture
+            </button>
+        </label>
 
-        <div class="controls">
-<div name="back" id="newBack" class="flashcard flashcardNoMargin" contentEditable="false">
-                <a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newBackPicture}}<img src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a><div name="back" class="flashcardBack"   contentEditable="true"></div>
-</div>
-                    <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack visible-sm">Add Picture</button>
+        <div class="input-group col-sm-8">
+            <span class="formSpanReplacement"></span>
+
+            <div name="back" id="newBack" class="flashcard flashcardNoMargin formSpanAdjustment"
+                 contentEditable="false">
+                <a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if
+                    newBackPicture}}<img src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>
+
+                <div name="back" class="flashcardBack" contentEditable="true"></div>
+            </div>
+
+        </div>
+        <div class="col-sm-8 visible-xs">
+            <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack">Add Picture
+            </button>
         </div>
     </div>
     <div id="advancedSettings" style='display: none;'>
@@ -63,7 +86,8 @@
                     <option>Don't add to any courses</option>
 
                     {{#each course}}
-                    <option value="{{_id}}" {{selectIfSelectedCourse}}>{{name}}</option>
+                    <option value="{{_id}}"
+                    {{selectIfSelectedCourse}}>{{name}}</option>
                     {{/each}}
 
                 </select>
@@ -78,7 +102,8 @@
                     <option value="">Don't add to any lessons</option>
 
                     {{#each lesson}}
-                    <option value="{{_id}}" id="{{_id}}" {{selectIfSelectedLesson}}>{{name}}</option>
+                    <option value="{{_id}}" id="{{_id}}"
+                    {{selectIfSelectedLesson}}>{{name}}</option>
                     {{/each}}
 
                 </select>
@@ -91,11 +116,11 @@
             <div class="controls">
                 <input type="text" name="youtubeSource" id="youtubeSource" placeholder="Youtube Link"/><br/>
                 <input type="text" name="wikipediaSource" id="wikipediaSource"
-                placeholder="Wikipedia Link"/><br/>
+                       placeholder="Wikipedia Link"/><br/>
                 <input type="text" name="linkSource" id="linkSource" placeholder="Other Link"/> <br/>
                 <input type="text" name="khanSource" id="khanSource" placeholder="KhanAcademy Video"/> <br/>
                 <input type="text" name="otherSource" id="otherSource"
-                placeholder="Other source (bk, movie, article, common knowledge)"/> <br/>
+                       placeholder="Other source (bk, movie, article, common knowledge)"/> <br/>
             </div>
         </div>
     </div>
@@ -110,14 +135,15 @@
 
 <template name="publicGroup">
     <div class="form-group">
-        <label class="control-label">Public?</label>
+        <label class="control-label col-sm-4">Public?</label>
 
         <div class="controls">
             <label class='switch'>
 
                 <div class="switch switch-small" data-on-label="Yes" data-off-label="No">
-                    <input type="checkbox" name="public" id="public" value="true" checked="checked" />
-                </div> <br/>Do you want this flashcard to be searchable?<br/>
+                    <input type="checkbox" name="public" id="public" value="true" checked="checked"/>
+                </div>
+                <br/>Do you want this flashcard to be searchable?<br/>
                 <small>Is it specific only to you or could it make sense to other TheBrain users?</small>
 
             </label>
@@ -134,9 +160,9 @@
             <select name="collection" id="collection" class="input-lg select2">
                 {{#each collection}}
 
-                <option value="{{_id}}" {{selectIfNewOrMain}}>{{name}}</option>
+                <option value="{{_id}}"
+                {{selectIfNewOrMain}}>{{name}}</option>
                 {{/each}}
-                {{select2 'collection'}}
                 <option value="">Don't add to any collections</option>
             </select>
             <button class="btn btn-primary btn-primary-main btn-collectionModal">Add new</button>

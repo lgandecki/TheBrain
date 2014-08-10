@@ -1,11 +1,3 @@
-/**
- * Created with JetBrains WebStorm.
- * User: lukaszgandecki
- * Date: 7/9/13
- * Time: 10:04 PM
- * To change this template use File | Settings | File Templates.
- */
-
 Template.newFlashcardModal.newFlashcardModalTitle = function() {
     var _currentRoute = window.location.pathname;
     _currentRoute = "/" + _currentRoute.split("/")[1];

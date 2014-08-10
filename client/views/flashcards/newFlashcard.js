@@ -162,9 +162,9 @@ Template.flashcardForm.selectIfSelectedLesson = function() {
 }
 
 Template.collectionGroup.rendered = function() {
-    $("#collection.select2").select2();
-    var _selectedId = $("#collection option:selected").val();
-    $("#collection").select2("val", _selectedId);
+//    $("#collection.select2").Select2();
+//    var _selectedId = $("#collection option:selected").val();
+//    $("#collection").Select2("val", _selectedId);
 }
 
 addFlashcard = function(e) {
@@ -314,22 +314,22 @@ Template.publicGroup.rendered = function() {
 var _renderer;
 Template.flashcardForm.rendered = function() {
     window.clearTimeout(_renderer);
-    _renderer = window.setTimeout(function() {
-    $("#lesson.select2").select2();
-    $("#course.select2").select2().on("change", function(e) {
-        Session.set("selectedCourseInForm", e.val);
-    });
-    if (Session.get("selectedCourse")) {
-        $("#coursesControlGroup").hide();
-    }
-    }, 100);
+//    _renderer = window.setTimeout(function() {
+//    $("#lesson.select2").Select2();
+//    $("#course.select2").Select2().on("change", function(e) {
+//        Session.set("selectedCourseInForm", e.val);
+//    });
+//    if (Session.get("selectedCourse")) {
+//        $("#coursesControlGroup").hide();
+//    }
+//    }, 100);
 
 //    var _selectedCourseId = $("#lesson option:selected").val();
-//    var _selectedCourseId = $("#course").select2("val");
+//    var _selectedCourseId = $("#course").Select2("val");
 //    var _selectedLessonId
 ////    var _selectedLessonId = $("#course option:selected").val();
-//    $("#course").select2("val", _selectedCourseId);
-//    $("#lesson").select2("val", _selectedLessonId);
+//    $("#course").Select2("val", _selectedCourseId);
+//    $("#lesson").Select2("val", _selectedLessonId);
 };
 
 Template.flashcardForm.destroyed = function() {

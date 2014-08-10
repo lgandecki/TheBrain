@@ -912,3 +912,14 @@ li.khanVideo:hover {
     margin-left: 10px;
     margin-riht: 10px;
 }
+
+.formSpanReplacement {
+    padding: 2px 12px;
+    width: 1%;
+    display: table-cell;
+}
+
+
+.formSpanAdjustment {
+    margin-left: -24px;
+}

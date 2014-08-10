@@ -6,7 +6,7 @@
 
             <div class="input-group col-sm-8">
                 <span class="input-group-addon"><i class="fa fa-folder-open-o"></i></span>
-                <input type="text" name="newCourseName" id="newCourseName" placeholder="Course Name"/><br/>
+                <input class="form-control" type="text" name="newCourseName" id="newCourseName" placeholder="Course Name" required/><br/>
 
             </div>
         </div>
@@ -15,7 +15,7 @@
 
             <div class="input-group col-sm-8">
                 <span class="input-group-addon"><i class="fa fa-folder-open-o"></i></span>
-                <textarea name="newCourseShortDescription" id="newCourseShortDescription" rows="3" ></textarea>
+                <textarea class="form-control" name="newCourseShortDescription" id="newCourseShortDescription" rows="3" placeholder="Short Description"></textarea>
 
             </div>
         </div>
@@ -25,7 +25,7 @@
 
             <div class="input-group col-sm-8">
                 <label class='checkbox'>
-                    <input type="checkbox" name="newCoursePublic" id="newCoursePublic" value="true" checked> Do you want this course to be searchable?<br/>
+                    <input type="checkbox" class="myCheckbox" name="newCoursePublic" id="newCoursePublic" value="true" checked> Do you want this course to be searchable?<br/>
                     <small>If not, you can provide your students with direct link that works as a password</small>
                 </label>
             </div>

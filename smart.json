@@ -4,7 +4,6 @@
     "jquery-ui-bootstrap": {},
     "accounts-ui-bootstrap-dropdown": {},
     "router": {},
-    "select2": {},
     "modernizr-meteor": {},
     "paginated-subscription": {},
     "spin": {},
@@ -18,6 +17,9 @@
     "bootstrap-3": {},
     "font-awesome": {},
     "x-editable-bootstrap3": {},
-    "reactive-modal": {}
+    "reactive-modal": {
+        "branch": "master",
+        "git": "https://github.com/lgandecki/reactive-modal.git"
+    }
   }
 }

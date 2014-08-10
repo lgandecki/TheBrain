@@ -50,3 +50,8 @@
 .modal-body {
     padding: 0px !important;
 }
+
+.myCheckbox {
+   position: inherit !important;
+   margin-left: 0px !important;
+}

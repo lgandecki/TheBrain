@@ -1,6 +1,6 @@
 if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
 
-var _newCourse = function (button) {
+var _newCourse = function () {
     Meteor.validations.clearErrors();
     if (validateNewCourse()) {
         var newCourse = createNewCourse();
@@ -30,7 +30,7 @@ Meteor.theBrain.modals.newCourse = function() {
     };
 
     var _modal = Meteor.modal.initAndShow(Template.courseForm, _title = "New Course", _opts);
-    _modal.buttons.ok.on('click', function(button) {_newCollection(button)});
+    _modal.buttons.ok.on('click', function(button) {_newCourse()});
 }
 
 var validateNewCourse = function () {
