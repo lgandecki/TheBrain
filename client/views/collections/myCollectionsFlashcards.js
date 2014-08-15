@@ -54,7 +54,7 @@ Template.myCollectionsFlashcards.allItemsLoaded = function () {
 Template.myCollectionsFlashcards.events({
     "click .btn-examModeModal": function(e) {
         e.preventDefault();
-        $("#examModeModal").modal("show");
+        Meteor.theBrain.modals.examMode();
     },
     'click .load-more': function (e) {
         e.preventDefault();

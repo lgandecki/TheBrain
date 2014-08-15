@@ -327,34 +327,34 @@ Router.onBeforeAction(function (pause) {
 
 
 
-    if (window.woopra) {
-        var _user = Meteor.user();
-
-
-        if (_user) {
-            if (_user.identity) {
-                var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
-                window.woopra.identify({
-                    email: _email || _user._id,
-                    name: _user.identity.nick,
-                    avatar: _user.profile && _user.profile.picture
-                })
-            } else {
-                setTimeout(function() {
-                    var _user = Meteor.user();
-                    var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
-                    window.woopra.identify({
-                        email: _email || _user._id,
-                        name: _user.identity && _user.identity.nick || _user._id,
-                        avatar: _user.profile && _user.profile.picture
-                    })
-
-                }, 500);
-            }
-
-        }
-        window.woopra.track();
-    }
+//    if (window.woopra) {
+//        var _user = Meteor.user();
+//
+//
+//        if (_user) {
+//            if (_user.identity) {
+//                var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
+//                window.woopra.identify({
+//                    email: _email || _user._id,
+//                    name: _user.identity.nick,
+//                    avatar: _user.profile && _user.profile.picture
+//                })
+//            } else {
+//                setTimeout(function() {
+//                    var _user = Meteor.user();
+//                    var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
+//                    window.woopra.identify({
+//                        email: _email || _user._id,
+//                        name: _user.identity && _user.identity.nick || _user._id,
+//                        avatar: _user.profile && _user.profile.picture
+//                    })
+//
+//                }, 500);
+//            }
+//
+//        }
+//        window.woopra.track();
+//    }
 
     if (window.ga) {
         window.ga('send', 'pageview', window.location.pathname);

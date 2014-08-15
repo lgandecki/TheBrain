@@ -78,8 +78,8 @@ Template.lessonsTable.events({
     },
     "click .btn-addFlashcardToLesson": function (e, template) {
         e.preventDefault();
-        $("#newFlashcardModal").modal('show');
         Session.set("selectedLesson", this._id);
+        Meteor.theBrain.modals.newFlashcard();
 
     }
 });

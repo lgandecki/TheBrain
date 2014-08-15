@@ -1,14 +1,14 @@
 Meteor.autosubscribe(function () {
 //    if (Meteor.user() || Session.get("exploreMode")) {
-        Meteor.subscribe("userData");
-        Meteor.subscribe("publicCourses");
-        Meteor.subscribe("myCourses");
+    Meteor.subscribe("userData");
+    Meteor.subscribe("publicCourses");
+    Meteor.subscribe("myCourses");
 //Meteor.subscribe("myFlashcards");
 //Meteor.subscribe("myCollections");
 //        Meteor.subscribe("myItems");
 //        Meteor.subscribe("lessons");
-        Meteor.subscribe("theBrain");
-        Meteor.subscribe("unreadNotifications");
+    Meteor.subscribe("theBrain");
+    Meteor.subscribe("unreadNotifications");
 //    }
 });
 
@@ -29,7 +29,7 @@ if (Meteor.isClient) {
 }
 
 
-jQuery.fn.justtext = function() {
+jQuery.fn.justtext = function () {
 
     return $(this).clone()
         .children()
@@ -39,28 +39,28 @@ jQuery.fn.justtext = function() {
 
 };
 
-stripHtml = function(str) {
+stripHtml = function (str) {
     return jQuery('<div />', { html: str }).text();
 }
 
 var _renderer = null;
 
 //Meteor.autosubscribe(function () {
-if (Meteor.userId()) {
-    window.clearTimeout(_renderer);
-    _renderer = window.setTimeout(function () {
+Deps.autorun(function () {
+    if (Meteor.userId()) {
+        window.clearTimeout(_renderer);
+        _renderer = window.setTimeout(function () {
 //        var _now = Meteor.moment.fullNow();
-        Meteor.call("getServerTime", function (error, result) {
-            var _serverTime = result;
-            var _thirtyMinutesAgo = new Date(_serverTime - 60000 * 30);
-            console.log("_thirtyMinutesAgo", _thirtyMinutesAgo);
-            Notifications.find({
-                user: Meteor.userId(),
-                read: false
-                ,created: {
-                    $gte: _thirtyMinutesAgo
-                }
-            }).observe({
+            Meteor.call("getServerTime", function (error, result) {
+                var _serverTime = result;
+                var _thirtyMinutesAgo = new Date(_serverTime - 60000 * 30);
+                console.log("_thirtyMinutesAgo", _thirtyMinutesAgo);
+                Notifications.find({
+                    user: Meteor.userId(),
+                    read: false, created: {
+                        $gte: _thirtyMinutesAgo
+                    }
+                }).observe({
                     added: function (item) {
 
                         console.log("added again ", item);
@@ -82,13 +82,13 @@ if (Meteor.userId()) {
                     }
                 });
 
-        });
+            });
 
-    }, 300);
-}
-//});
+        }, 300);
+    }
+});
 
-Meteor.autorun(function () {
+Deps.autorun(function () {
     if (Meteor.userId()) {
         Meteor.subscribe("itemsToReLearnCount");
         var _now = moment().hours(0).minutes(0).seconds(0).milliseconds(0)._d;
@@ -100,9 +100,9 @@ Meteor.autorun(function () {
 Deps.autorun(function () {
     console.log("deps selectedCourse ", Session.get("selectedCourse"));
     Meteor.subscribe("selectedCourse", Session.get("selectedCourse"));
-    setTimeout(function () {
-        $("#transition").css("display", "block");
-    }, 20);
+//    setTimeout(function () {
+//        $("#transition").css("display", "block");
+//    }, 20);
 });
 
 Meteor.startup(function () {

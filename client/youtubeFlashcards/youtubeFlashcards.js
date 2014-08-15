@@ -83,6 +83,6 @@ Template.youtubeFlashcardsList.events({
 Template.youtubeFlashcardsOptions.events({
     "click .btn-addFlashcardToYoutube": function (e, template) {
         e.preventDefault();
-        $("#newFlashcardModal").modal('show');
+        Meteor.theBrain.modals.newFlashcard();
     }
 })

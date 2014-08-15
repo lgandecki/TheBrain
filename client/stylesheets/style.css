@@ -923,3 +923,11 @@ li.khanVideo:hover {
 .formSpanAdjustment {
     margin-left: -24px;
 }
+
+.width100 {
+    width: 100% !important;
+}
+
+.control-label .btn-addPictureToFront, .control-label .btn-addPictureToBack {
+    margin-top: 34px;
+}

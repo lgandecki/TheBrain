@@ -1,28 +1,6 @@
 <template name="newFlashcardModal">
-    <!-- Modal -->
-    <div id="newFlashcardModal" class="modal fade modal-wide" tabindex="-1" role="dialog"
-    aria-labelledby="newFlashcardModal" data-backdrop="static" data-keyboard="false" aria-hidden="true">
-    <div class="box box-bordered box-color box-modal modal-dialog">
-        <div class="box-title box-modal">
-            <h3><i class="fa fa-th-list"></i> {{newFlashcardModalTitle}} </h3><button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
-        </div>
-        <form action="#" class='form-horizontal form-bordered'>
-        <div class="box-content nopadding modal-box">
+    <form action="#" class='form-horizontal form-bordered'>
 
-
-                {{> flashcardForm }}
-
-
-        </div>
-            <div class="modal-footer-mine">
-            <div class="pull-right modal-form-actions">
-
-
-                {{> flashcardButtons }}
-                <button type="button" class="btn btn-primary btn-primary-main" data-dismiss="modal" aria-hidden="true">Close</button>
-            </div>
-            </div>
+    {{> flashcardForm }}
         </form>
-    </div>
-</div>
 </template>

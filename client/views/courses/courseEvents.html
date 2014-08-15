@@ -54,15 +54,22 @@
 
 <template name="addCourseNews">
     <div class="row">
+        <form action="#" class='form-horizontal form-bordered'>
+
         <div class="new-news">
             <h4>Add News</h4>
 
+
             <div class="form-group">
-                <div class="controls">
-                    <textarea name="newNews" class="col-md-8 newNews" rows="3"></textarea>
+                <div class="input-group col-sm-8 ">
+                    <span class="formSpanReplacement"></span>
+                    <textarea name="newNews" class="newNews formSpanAdjustment" rows="3"></textarea>
                 </div>
             </div>
+
             <button type="submit" class="col-md-6 btn btn-primary btn-primary-main center btn-addNews">Post News</button>
         </div>
+        </form>
+
     </div>
 </template>

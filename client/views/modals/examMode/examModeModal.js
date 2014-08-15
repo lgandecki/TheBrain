@@ -1,20 +1,14 @@
-var itemsToLearn = 0;
-Template.examModeModal.name = function () {
-    var _selectedCollection = Session.get("selectedCollection");
-    var _collectionName = "";
-    if (_selectedCollection) {
-        _collectionName = Meteor.collections.returnName(_selectedCollection);
-    }
-    return _collectionName + "test";
-}
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
 
-Template.examModeModal.collectionName = function () {
+
+var itemsToLearn = 0;
+var _collectionName = function () {
     var _selectedCollection = Session.get("selectedCollection");
     var _collectionName = "";
     if (_selectedCollection) {
         _collectionName = Meteor.collections.returnName(_selectedCollection);
     }
-    return _collectionName;
+    return _collectionName + " - exam mode!";
 }
 
 Template.examModeModal.collectionId = function() {
@@ -30,10 +24,7 @@ Template.examModeModal.itemsInCollection = function () {
 var _renderer2;
 
 Template.examModeModal.rendered = function () {
-    window.clearTimeout(_renderer2);
-    _renderer2 = window.setTimeout(function () {
-        var _sliderTimeout;
-        _collectionId = "";
+        var _collectionId = "";
         $(".slider-custom").slider({value: 0}).on("slideStart",function (ev) {
             _collectionId = $(this).attr("data-id");
             itemsToLearn = ev.value;
@@ -68,11 +59,9 @@ Template.examModeModal.rendered = function () {
 
         })
 
-    }, 500);
 }
 
-Template.examModeModal.events({
-    "click .scheduleExamMode": function (e) {
+var _scheduleExamMode = function (e) {
         var _collectionId = Session.get("selectedCollection");
 
         var _callOpts = {
@@ -83,11 +72,25 @@ Template.examModeModal.events({
             },
             errorTitle: "Setting extra repetitions error",
             successTitle: "Extra repetition sessions applied"
-        }
+        };
 
         Meteor.myCall(_callOpts);
 
 //        console.log("This many we want to schedule extra", itemsToLearn);
         $("#examModeModal").modal("hide");
-    }
-})
+};
+
+Meteor.theBrain.modals.examMode = function() {
+    var _opts = {
+        withCancel: true,
+        closeOnOk: true,
+        okLabel: "Schedule extra repetitions!"
+    };
+
+    var _modal = Meteor.modal.initAndShow(Template.examModeModal, _collectionName(), _opts);
+    _modal.buttons.ok.on('click', function(button) {_scheduleExamMode()});
+
+}
+
+
+

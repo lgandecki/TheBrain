@@ -467,7 +467,7 @@ Template.flashcardsOptions.events({
 
     "click .btn-addFlashcardToLesson": function (e, template) {
         e.preventDefault();
-        $("#newFlashcardModal").modal('show');
+        Meteor.theBrain.modals.newFlashcard();
     }
 
 

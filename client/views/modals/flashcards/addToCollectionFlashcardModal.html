@@ -29,12 +29,11 @@
     <div class="form-group">
         <label class="control-label">Collection</label>
 
-        <div class="controls">
+        <div class="input-group col-sm-8">
             <select name="collectionId" id="collectionId" class="input-lg select2">
                 {{#each collection}}
                     <option value="{{_id}}" {{selectIfNew}}>{{name}}</option>
                 {{/each}}
-                {{select2 'collection'}}
             </select>
             <button class="btn btn-primary btn-primary-main btn-collectionModal">New</button>
 

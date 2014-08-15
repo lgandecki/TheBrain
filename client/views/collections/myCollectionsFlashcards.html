@@ -44,7 +44,6 @@
     {{> editFlashcardModal }}
     {{> historyFlashcardModal }}
     {{> commentsFlashcardModal }}
-    {{> examModeModal }}
 </template>
 
 <template name="withSelectedItems">
@@ -135,12 +134,11 @@
     <div class="form-group">
         <label class="control-label">Collection</label>
 
-        <div class="controls">
-            <select name="newCollectionId" id="newCollectionId" class="input-lg select2">
+        <div class="input-group col-sm-8">
+            <select name="newCollectionId" id="newCollectionId" class="select2">
                 {{#each collection}}
                     <option value="{{_id}}" {{selectIfCurrent}}>{{name}}</option>
                 {{/each}}
-                {{select2 'collection'}}
             </select>
         </div>
     </div>

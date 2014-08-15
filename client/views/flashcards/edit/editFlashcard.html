@@ -16,7 +16,7 @@
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront hidden-sm">Add Picture</button>
         </label>
 
-        <div class="controls">
+        <div class="input-group col-sm-8">
 
             <div name="front" id="front" class="flashcard flashcardNoMargin" contentEditable="false">
                         <a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img
@@ -28,7 +28,7 @@
     </div>
     <div class="form-group itemSpecific">
         <label for="frontNote" class="control-label">Front note<br/></label>
-        <div class="controls">
+        <div class="input-group col-sm-8">
             <div name="frontNote" id="frontNote" class="flashcard flashcardNoMargin" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{frontNote}}</div>
         </div>
     </div>
@@ -38,7 +38,7 @@
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack hidden-sm">Add Picture</button>
         </label>
 
-        <div class="controls">
+        <div class="input-group col-sm-8">
             <div name="back" id="back" class="flashcard flashcardNoMargin" contentEditable="false">
                         <a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newBackPicture}}<img
                             src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>
@@ -49,7 +49,7 @@
     </div>
     <div class="form-group itemSpecific">
         <label for="frontNote" class="control-label">Back note</label>
-        <div class="controls">
+        <div class="input-group col-sm-8">
             <div name="backNote" id="backNote" class="flashcard flashcardNoMargin" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{backNote}}</div>
         </div>
     </div>

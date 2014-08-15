@@ -1,3 +1,5 @@
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
+
 Template.collectionGroup.collection = function() {
     return Meteor.user() ? Meteor.user().collections : [];
 };
@@ -161,12 +163,6 @@ Template.flashcardForm.selectIfSelectedLesson = function() {
     return "";
 }
 
-Template.collectionGroup.rendered = function() {
-//    $("#collection.select2").Select2();
-//    var _selectedId = $("#collection option:selected").val();
-//    $("#collection").Select2("val", _selectedId);
-}
-
 addFlashcard = function(e) {
     $(e.target).attr("disabled", true).html("Checking...");
     Meteor.validations.clearErrors();
@@ -184,7 +180,6 @@ addFlashcard = function(e) {
                 $("#newBack").children(".flashcardBack").html("");
                 Session.set("newBackPicture", "");
                 Session.set("newFrontPicture", "");
-
             }
         });
     } else {
@@ -313,29 +308,113 @@ Template.publicGroup.rendered = function() {
 
 var _renderer;
 Template.flashcardForm.rendered = function() {
-    window.clearTimeout(_renderer);
-//    _renderer = window.setTimeout(function() {
-//    $("#lesson.select2").Select2();
-//    $("#course.select2").Select2().on("change", function(e) {
-//        Session.set("selectedCourseInForm", e.val);
-//    });
-//    if (Session.get("selectedCourse")) {
-//        $("#coursesControlGroup").hide();
-//    }
-//    }, 100);
+    this.autorun(function() {
+        $("#lesson.select2").select2();
+        $("#course.select2").select2().on("change", function (e) {
+            Session.set("selectedCourseInForm", e.val);
+        });
+        if (Session.get("selectedCourse")) {
+            $("#coursesControlGroup").hide();
+        }
+    });
 
-//    var _selectedCourseId = $("#lesson option:selected").val();
-//    var _selectedCourseId = $("#course").Select2("val");
-//    var _selectedLessonId
-////    var _selectedLessonId = $("#course option:selected").val();
-//    $("#course").Select2("val", _selectedCourseId);
-//    $("#lesson").Select2("val", _selectedLessonId);
 };
+
 
 Template.flashcardForm.destroyed = function() {
-    Session.set("newBackPicture", "");
-    Session.set("newFrontPicture", "");
-    Session.set("newCollectionName", "");
-    Session.set("selectedCourseInForm", "");
+    delete Session.keys["newBackPicture"];
+    delete Session.keys["newFrontPicture"];
+    delete Session.keys["newCollectionName"];
+    console.log("running destroyed?");
+    delete Session.keys["selectedCourseInForm"];
 //    Session.set("selectedLesson", "");
 };
+
+
+
+
+Template.collectionGroup.rendered = function() {
+    console.log("is this first, collectionGroup");
+
+    this.autorun(function() {
+        var _user = Meteor.user();
+        var _collections = [];
+        var _newCollection = Session.get("newCollectionName");
+        var _selectedCollection;
+
+        if (_newCollection) {
+            _user.collections.forEach(function (collection) {
+                if (collection.name === _newCollection) {
+                    _selectedCollection = collection;
+                }
+                    _collections.push({id: collection._id, text: collection.name})
+            });
+        } else {
+            _user.collections.forEach(function (collection) {
+                if (collection.name === "Main collection") {
+                    _selectedCollection = collection;
+                }
+                    _collections.push({id: collection._id, text: collection.name})
+            });
+        }
+
+
+
+        console.log("_selectedCollection ", _selectedCollection);
+
+        $("#collection").select2({
+            query: function (query) {
+                var data = {
+
+                    results: _collections
+                };
+                query.callback(data);
+            },
+            initSelection: function(element, callback) {
+                var data = {id: _selectedCollection._id, text: _selectedCollection.name};
+                callback(data);
+            }
+        }).on("change", function (e) {
+            var _collection = _.find(_user.collections, function(collection) {
+                return collection._id === e.val;
+            });
+
+            Session.set("newCollectionName", _collection ? _collection.name : "");
+        });
+    })
+};
+
+
+var _flashcardModalTitle = function() {
+    var _currentRoute = window.location.pathname;
+    _currentRoute = "/" + _currentRoute.split("/")[1];
+    if (_currentRoute === "/lesson" || _currentRoute === "/course") {
+        var _selectedCourseSession = Session.get("selectedCourse");
+        var _selectedCourse = Courses.findOne({_id: _selectedCourseSession});
+        var _courseName = _selectedCourse ? _selectedCourse.name : "";
+        var _selectedLesson = Session.get("selectedLesson");
+        var _lesson;
+        if (_selectedCourse && _selectedLesson) {
+            var _lessonIndex = _.indexOf(_.pluck(_selectedCourse.lessons, '_id'), _selectedLesson);
+            _lesson = _selectedCourse.lessons[_lessonIndex];
+        }
+        var _lessonName = _lesson ? _lesson.name : "";
+        return "New Flashcard for " + _courseName + ", lesson: " + _lessonName;
+
+    }
+    return "New Flashcard";
+};
+
+Meteor.theBrain.modals.newFlashcard = function() {
+    var _title;
+    var _opts = {
+        withCancel: true,
+        closeOnOk: false,
+        okLabel: "Add Flashcard"
+    };
+
+    var _modal = Meteor.modal.initAndShow(Template.newFlashcardModal, _flashcardModalTitle(), _opts);
+    _modal.buttons.ok.on('click', function(button) {addFlashcard(button)});
+
+}
+
