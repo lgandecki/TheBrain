@@ -23,15 +23,15 @@ Template.addFlashcardComment.events({
 });
 
 Template.flashcardComments.mainComment = function() {
-    _currentFlashcardId = Session.get("currentFlashcardId");
-    _flashcard = Flashcards.findOne({
+    var _currentFlashcardId = Session.get("currentFlashcardId");
+    var _flashcard = Flashcards.findOne({
         _id: _currentFlashcardId
     });
 
 
 
     if (_flashcard && _flashcard.comments) {
-        _comments = _flashcard.comments;
+        var _comments = _flashcard.comments;
 
 //        var _mainComments = [];
         var _mainComments = $.grep(_comments, function(comment) {
@@ -56,15 +56,15 @@ Template.flashcardComments.mainComment = function() {
 };
 
 Template.flashcardComments.subComment = function() {
-    _currentFlashcardId = Session.get("currentFlashcardId");
-    _flashcard = Flashcards.findOne({
+    var _currentFlashcardId = Session.get("currentFlashcardId");
+    var _flashcard = Flashcards.findOne({
         _id: _currentFlashcardId
     });
 
 
 
     if (_flashcard && _flashcard.comments) {
-        _comments = _flashcard.comments;
+        var _comments = _flashcard.comments;
 
 //        var _mainComments = [];
         console.log("this._id", this._id);
@@ -93,7 +93,7 @@ Template.flashcardComments.subComment = function() {
 }
 
 validateNewFlashcardComment = function() {
-    invalids = [];
+    var invalids = [];
     Meteor.validations.checkIfEmpty(".newComment");
     return !!(invalids.length === 0);
 };
@@ -115,7 +115,7 @@ Template.flashcardComments.events({
     "click .badge-upVote": function(e) {
         e.preventDefault();
         e.stopPropagation();
-        _opts = {
+        var _opts = {
             flashcardId: Session.get("currentFlashcardId"),
             commentId: this._id
         }
@@ -124,7 +124,7 @@ Template.flashcardComments.events({
     "click .badge-downVote": function(e) {
         e.preventDefault();
         e.stopPropagation();
-        _opts = {
+        var _opts = {
             flashcardId: Session.get("currentFlashcardId"),
             commentId: this._id
         }

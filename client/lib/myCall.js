@@ -1,4 +1,4 @@
-var _myCall = function (opts) {
+var _myCall = function (opts, cb) {
     if (!opts.successMessage) {
         opts.successMessage = "TheBrain made neural connections you asked for.";
     }
@@ -23,8 +23,14 @@ var _myCall = function (opts) {
         Meteor.call(opts.function, opts.arguments, function (error) {
             if (error) {
                 Meteor.popUp.error(opts.errorTitle, error.reason);
+                if (cb) {
+                    cb(false);
+                }
             } else if (opts.successTitle) {
                 Meteor.popUp.success(opts.successTitle, opts.successMessage);
+                if (cb) {
+                    cb(true)
+                }
             }
         })
     }

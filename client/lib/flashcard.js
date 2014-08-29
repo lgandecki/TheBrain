@@ -1,21 +1,11 @@
 var _returnSide = function(side, isNew) {
     var _selector;
-    if (isNew) {
         if (side === "front") {
             _selector = "#newFront .flashcardFront"
         }
         else {
             _selector = "#newBack .flashcardBack"
         }
-    }
-    else {
-        if (side === "front") {
-            _selector = "#front .flashcardFront";
-        }
-        else {
-            _selector = "#back .flashcardBack";
-        }
-    }
 
     var html = $(_selector).html();
     var justText = $(_selector).justtext();

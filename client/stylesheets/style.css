@@ -58,11 +58,11 @@ textarea[disabled].flashcard {
     margin-top: 0px !important;
 }
 
-.modal-box {
-    border: 3px solid #219BCC !important;
-    border-top: 0px !important;
-    overflow-y: auto !important;
-}
+/*.modal-box {*/
+    /*border: 3px solid #219BCC !important;*/
+    /*border-top: 0px !important;*/
+    /*overflow-y: auto !important;*/
+/*}*/
 
 .modal-close {
     padding-right: 8px !important;
@@ -251,8 +251,7 @@ h3.repeat {
 
 .modalInfo {
     text-align: center;
-    border-bottom: 1px solid #ddd;
-    background: #f6f6f6;
+    padding: 20px;
 }
 
 .addBottomLine {
@@ -616,24 +615,31 @@ li.active > a {
     /*border-bottom: 1px solid #219bcc !important;*/
 }
 
-.modal-footer-mine {
-    padding: 14px 15px 15px;
-    margin-bottom: 0;
+/*.modal-footer-mine {*/
+    /*padding: 14px 15px 15px;*/
+    /*margin-bottom: 0;*/
+    /*background-color: #f5f5f5;*/
+    /*border-right: 3px solid #219BCC;*/
+    /*border-left: 3px solid #219bcc;*/
+    /*border-bottom: 3px solid #219bcc;*/
+    /*border-top: 0px #219bcc !important;*/
+/*}*/
+
+/*.modal-footer-mine:before, .modal-footer-mine:after {*/
+    /*display: table;*/
+    /*line-height: 0;*/
+    /*content: "";*/
+/*}*/
+
+/*.modal-footer-mine:after {*/
+    /*clear: both;*/
+/*}*/
+
+.modal-footer {
     background-color: #f5f5f5;
-    border-right: 3px solid #219BCC;
-    border-left: 3px solid #219bcc;
-    border-bottom: 3px solid #219bcc;
-    border-top: 0px #219bcc !important;
-}
-
-.modal-footer-mine:before, .modal-footer-mine:after {
-    display: table;
-    line-height: 0;
-    content: "";
-}
-
-.modal-footer-mine:after {
-    clear: both;
+    border-top: 3px solid #219BCC;
+    text-align: right;
+    padding: 15px;
 }
 
 .updatedFlashcardOptionsRow .row{

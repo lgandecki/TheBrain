@@ -217,11 +217,34 @@ var _setMenuActive = function() {
     _element.closest('li.topNav').addClass('active');
     Session.set("isNewPage", _currentRoute);
 }
+function _clearSession(name) {
+    console.log("name", name);
+    if (name !== "course" && name !== "lesson" && name !== "videoLesson") {
+        delete Session.keys["selectedCourse"];
+        delete Session.keys["selectedLesson"];
+    }
+//    courseOpened: "false"
+//    coursePath: ""/myCourses"" ??
+//    courseTab: ""#lessons"" ??
+//    isNewPage: ""/availableFlashcards""
+//    lessonTab: ""#lessonFlashcards"" ??
+//    optsSearch: "[]"
+//    previousCourseTab: ""#events""
+//    reloadFlashcards: ""c44fc6"" ??
+//    selectedCourse: ""QZLHMn95qsjwdduKT""
+//    selectedCourseTab: ""#events""
+//    selectedFlashcards: "["HL96XcFFtFNaotPeb","4YNq4zWiqAfcGBKKg"]"
+//    selectedLesson: ""9b124e0856880c1b3e14025c""
+//    serverNextDay: "1408942800000"
+//    showStudentsFlashcards: "false"
+}
 
 Router.onBeforeAction(function (pause) {
     var _randomLogNumber = Math.random();
     var _name = this.route.name;
     console.log("in onBeforeAction");
+
+    _clearSession(_name);
 
     $("html, body").animate({
         scrollTop: 0
@@ -307,7 +330,7 @@ Router.onBeforeAction(function (pause) {
                 }
             }, 300);
 
-        }, 500);
+        }, 250);
 
 
     } else {

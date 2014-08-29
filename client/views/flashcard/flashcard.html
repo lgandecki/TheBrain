@@ -73,3 +73,9 @@
 <template name="inKhanRow">
     <li class="inKhanRow khanVideo" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}"><i class="fa fa-hand-o-right pull-left"></i><span class="khanTitle" data-id="{{playlistSlug}}/{{videoSlug}}/{{youtube_id}}">{{playlistTitle}} / {{videoTitle}} </span></li>
 </template>
+
+<template name="flashcardDetailsModal">
+    <div class="box-content modalInfo" id="flashcardDetailsModal">
+    {{> flashcardDetails}}
+    </div>
+</template>

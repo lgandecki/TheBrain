@@ -4,6 +4,27 @@ var currentFlashcard, currentItemId, itemsToLearn = [], _renderer, _renderer2;
 //Meteor.subscribe("testItems");
 //Meteor.subscribe("currentFlashcard");
 
+
+Meteor.theBrain.modals.schedule = function() {
+    var _title;
+    var _opts = {
+        withCancel: false,
+        closeOnOk: false,
+        okLabel: "Start Learning"
+    };
+    Meteor.tour.showIfNeeded("setStudyFirstTour");
+
+    var _modal = Meteor.modal.initAndShow(Template.myCollectionsList, "Learn new Flashcards!", _opts);
+    _modal.buttons.ok.on('click', function(button) {_onScheduleClick(button)});
+
+};
+
+var _onScheduleClick = function() {
+    itemsToLearn = Session.get("itemsToLearn");
+    _setAmountOfReps();
+    Meteor.modal.hideClosestTo("#myCollectionsList");
+};
+
 var resizeTheBar = function(opts) {
     var _done = opts.total - opts.left;
     console.log("resizingTheBar", opts);
@@ -170,19 +191,7 @@ Template.repeat.rendered = function () {
             // itemsToLearn = Session.get("itemsToLearn");
 
             if (Session.equals("showScheduleModal", true)) {
-                $("#scheduleModal").modal("show").on('hidden', function () {
-                    itemsToLearn = Session.get("itemsToLearn");
-                    _setAmountOfReps();
-                    $('#setStudyFirstTour').crumble("clear");
-
-                }).on("shown", function() {
-//                        setTimeout(function() {
-
-
-
-                            Meteor.tour.showIfNeeded("setStudyFirstTour");
-//                        }, 500);
-                    });
+                Meteor.theBrain.modals.schedule();
             }
             else {
                 _setAmountOfReps();

@@ -1,52 +1,32 @@
-Template.courseSelector.course = function() {
-    return Courses.find();
-}
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
 
-Template.courseSelector.lesson = function() {
-    var _selectedCourse, _course;
-    _selectedCourse = Session.get("selectedCourseInForm") || $("#courseId.select2").val();
-    console.log("_selectedCourse", _selectedCourse);
-    if (_selectedCourse) {
-        _course = Courses.findOne({
-            _id: _selectedCourse
-        });
-    }
-    return _course ? _course.lessons : [];
-}
-
-var _renderer;
-
-Template.courseSelector.rendered = function() {
-    $("#courseId.select2").select2();
-    window.clearTimeout(_renderer);
-    _renderer = window.setTimeout(function() {
-        $("#lessonId.select2").select2();
-        $("#courseId.select2").select2().on("change", function(e) {
-            Session.set("selectedCourseInForm", e.val);
-        });
-    }, 100);
-}
-Template.courseSelector.destroyed = function() {
-    Session.set("selectedCourseInForm", "");
-    Session.set("selectedLesson", "");
-}
-
-Template.addToCourseFlashcardModal.events({
-    "click .btn-addToCourse": function(e) {
-        var _opts = {
-            courseId : $("#courseId").val(),
-            lessonId : $("#lessonId").val(),
-            flashcardsIds: Session.get("selectedFlashcard") || Session.get("selectedFlashcards"),
+var _addToCourseFlashcard = function () {
+    var _opts = {
+        courseId: $("#course").val(),
+        lessonId: $("#lesson").val(),
+        flashcardsIds: Session.get("selectedFlashcard") || Session.get("selectedFlashcards"),
+    };
+    var _callOpts = {
+        function: "addFlashcardsToCourse",
+        arguments: _opts,
+        errorTitle: "Adding to course error",
+        successTitle: "Added to course"
+    };
+    Meteor.myCall(_callOpts, function (success) {
+        if (success) {
+            Meteor.modal.hideClosestTo("#addToCourseFlashcardModal");
         }
-        if (_opts.courseId !== "" && _opts.lessonId !== "") {
-            var _callOpts = {
-                function: "addFlashcardsToCourse",
-                arguments: _opts,
-                errorTitle: "Adding to course error",
-                successTitle: "Added to course"
-            }
-            Meteor.myCall(_callOpts);
-            $("#addToCourseFlashcardModal").modal("hide");
-        }
-    }
-})
+    });
+};
+
+Meteor.theBrain.modals.addToCourseFlashcard = function () {
+    var _opts = {
+        withCancel: true,
+        closeOnOk: false
+    };
+
+    var _modal = Meteor.modal.initAndShow(Template.addToCourseFlashcardModal, "Add Flashcard to Course", _opts);
+    _modal.buttons.ok.on('click', function () {
+        _addToCourseFlashcard()
+    });
+}

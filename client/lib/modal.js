@@ -113,6 +113,7 @@ var _error = function(message) {
     var _modal = _initAndShow(Template.modalError, _title = "Oops..", _opts);
 };
 
+
 var _newCollection = function () {
 
 }

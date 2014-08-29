@@ -35,7 +35,7 @@
                 <a href='{{newFrontPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if newFrontPicture}}<img
                         src="{{newFrontPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>
 
-                <div name="front" class="flashcardFront" contentEditable="true"></div>
+                <div name="front" class="flashcardFront" contentEditable="true">{{{front}}}</div>
             </div>
 
         </div>
@@ -43,6 +43,14 @@
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToFront">
                 Add Picture
             </button>
+        </div>
+    </div>
+    <div class="form-group itemSpecific" style="display: none;">
+        <label for="frontNote" class="control-label col-sm-4">Front note</label>
+        <div class="input-group col-sm-8">
+            <span class="formSpanReplacement"></span>
+
+            <div name="frontNote" id="frontNote" class="flashcard flashcardNoMargin formSpanAdjustment" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{frontNote}}</div>
         </div>
     </div>
     <div class="form-group">
@@ -60,13 +68,21 @@
                 <a href='{{newBackPicture}}' class="flashcardPicture pull-right slimboxPicture">{{#if
                     newBackPicture}}<img src="{{newBackPicture}}/convert?h=80&w=80" class="editableImage"/>{{else}}&nbsp;{{/if}}</a>
 
-                <div name="back" class="flashcardBack" contentEditable="true"></div>
+                <div name="back" class="flashcardBack" contentEditable="true">{{{back}}}</div>
             </div>
 
         </div>
         <div class="col-sm-8 visible-xs">
             <button class="btn btn-primary btn-primary-main btn-block btn-addPictureToBack">Add Picture
             </button>
+        </div>
+    </div>
+    <div class="form-group itemSpecific" style="display: none;">
+        <label for="frontNote" class="control-label col-sm-4">Back note</label>
+        <div class="input-group col-sm-8">
+            <span class="formSpanReplacement"></span>
+
+            <div name="backNote" id="backNote" class="flashcard flashcardNoMargin formSpanAdjustment" contentEditable="true" placeholder="taki?" data-placeholder="czy taki?">{{backNote}}</div>
         </div>
     </div>
     <div id="advancedSettings" style='display: none;'>
@@ -76,40 +92,7 @@
 
         {{> collectionGroup }}
 
-
-        <div class="form-group" id="coursesControlGroup">
-            <label class="control-label col-sm-4">Course</label>
-
-            <div class="col-sm-8">
-                <span class="formSpanReplacement"></span>
-
-                <select name="course" id="course" class="select2 width100">
-                    <option>Don't add to any courses</option>
-
-                    {{#each course}}
-                    <option value="{{_id}}"
-                    {{selectIfSelectedCourse}}>{{name}}</option>
-                    {{/each}}
-
-                </select>
-            </div>
-        </div>
-        <div class="form-group" id="lessonControlGroup" style=''>
-            <label class="control-label col-sm-4">Lesson</label>
-
-            <div class="col-sm-8">
-
-                <select name="lesson" id="lesson" class="select2 width100">
-                    <option value="">Don't add to any lessons</option>
-
-                    {{#each lesson}}
-                    <option value="{{_id}}" id="{{_id}}"
-                    {{selectIfSelectedLesson}}>{{name}}</option>
-                    {{/each}}
-
-                </select>
-            </div>
-        </div>
+        {{> lessonGroup }}
 
         <div class="form-group" id="sourcesControlGroup" style="display: none;">
             <label class="control-label">Sources</label>
@@ -126,6 +109,43 @@
         </div>
     </div>
 
+</template>
+
+<template name="lessonGroup">
+
+    <div class="form-group" id="coursesControlGroup">
+        <label class="control-label col-sm-4">Course</label>
+
+        <div class="col-sm-8">
+            <span class="formSpanReplacement"></span>
+
+            <select name="course" id="course" class="select2 width100">
+                <option>Don't add to any courses</option>
+
+                {{#each course}}
+                <option value="{{_id}}"
+                {{selectIfSelectedCourse}}>{{name}}</option>
+                {{/each}}
+
+            </select>
+        </div>
+    </div>
+    <div class="form-group" id="lessonControlGroup" style=''>
+        <label class="control-label col-sm-4">Lesson</label>
+
+        <div class="col-sm-8">
+
+            <select name="lesson" id="lesson" class="select2 width100">
+                <option value="">Don't add to any lessons</option>
+
+                {{#each lesson}}
+                <option value="{{_id}}" id="{{_id}}"
+                {{selectIfSelectedLesson}}>{{name}}</option>
+                {{/each}}
+
+            </select>
+        </div>
+    </div>
 </template>
 
 <template name="flashcardButtons">
@@ -169,4 +189,25 @@
             <button class="btn btn-primary btn-primary-main btn-collectionModal width100">Add new</button>
         </div>
     </div>
+</template>
+
+
+<template name="editFlashcardPrompt">
+    <div class="box-content modalInfo" id="editFlashcardPrompt">
+        You are about to change the FlashCard, your changes will affect all TheBrain users.
+        If you want to add personal information to the FlashCard please use the 'notes' fields.
+        If you do want to change the FlashCard, please provide a reason for change.
+    </div>
+    <form class="form-validate form-horizontal form-bordered">
+
+        <div class="form-group" id="reasonFormGroup">
+            <label class="control-label hidden-xs col-sm-4">Reason for update</label>
+
+            <div class="input-group col-sm-8">
+                <span class="input-group-addon"><i class="fa fa-bullhorn"></i></span>
+                <input class="form-control" type="text" name="reason"
+                       id="reason" placeholder="Reason for update" required/><br/>
+            </div>
+        </div>
+    </form>
 </template>
