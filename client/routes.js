@@ -1,5 +1,5 @@
 Router.configure({
-    layoutTemplate: 'body'
+    layoutTemplate: 'TheBrainBody'
 });
 
 var _timePassedSinceLast = 0;

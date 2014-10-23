@@ -117,7 +117,7 @@ $.fn.modal.Constructor.prototype.enforceFocus = function () {
 }; // Fix to enable stacking modals
 
 
-Template.body.events({
+Template.TheBrainBody.events({
 //    "mouseenter .btn-primary": function(e) {
 //        $(e.target).stop(true, true).switchClass("btn-primary-main", "btn-primary-reversed", 400);
 //    },
