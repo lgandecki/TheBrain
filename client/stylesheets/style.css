@@ -937,3 +937,74 @@ li.khanVideo:hover {
 .control-label .btn-addPictureToFront, .control-label .btn-addPictureToBack {
     margin-top: 34px;
 }
+
+#main .breadcrumbs {
+    background: #eeeeee;
+    border-top: 1px dashed #ddd;
+    border-bottom: 1px dashed #ddd;
+}
+#main .breadcrumbs ul>li>span {
+    float: left;
+    color: #204473;
+}
+
+#main .breadcrumbs ul>li>a {
+    color: #219BCC;
+    display: block;
+    padding: 2px 6px;
+    font-size: 12px;
+    float: left;
+}
+
+#main .breadcrumbs li > a {
+    background: #eeeeee !important;
+}
+
+#main .breadcrumbs li i.fa-angle-right {
+    margin: 6px 5px 6px 0px;
+}
+
+li.active>a {
+    background: #f2f2f2 !important;
+    border-bottom: 0 !important;
+}
+
+#navigation .mobile-nav {
+    display: none;
+    list-style: none;
+    padding: 0 20px 20px 20px;
+    margin: 0;
+    background: #219BCC;
+}
+
+#navigation .mobile-nav>li>a {
+    display: block;
+    background: #1A385E;
+    padding: 8px 12px;
+    margin-bottom: 1px;
+    color: #fff;
+    text-decoration: none;
+}
+
+#navigation .mobile-nav>li>ul {
+    background: #1A385E;
+    list-style-type: none;
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+
+#navigation .mobile-nav>li>ul>li a {
+    padding: 4px 35px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+#navigation .mobile-nav>li.active a {
+    background: #2176CC !important;
+    color: #000;
+}
+
+#navigation .mobile-nav>li>ul.open {
+    display: block;
+}

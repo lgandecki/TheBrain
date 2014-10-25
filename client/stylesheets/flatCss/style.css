@@ -3970,9 +3970,9 @@ label, input, button, select, textarea {
     #navigation #brand {
         padding-right: 0 !important;
     }
-    #navigation .main-nav {
-        display: none;
-    }
+    /*#navigation .main-nav {*/
+        /*display: none;*/
+    /*}*/
     #navigation .toggle-nav {
         display: none !important;
     }

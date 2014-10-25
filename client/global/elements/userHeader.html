@@ -1,14 +1,13 @@
 <template name="userHeader">
 <div class="user">
-    <ul class="icon-nav">
+    <ul class="icon-nav hidden-xs hidden-sm">
         {{> notifications }}
 
         
 
     </ul>
     <div class="dropdown">
-        <a href="#" class='dropdown-toggle hidden-sm' data-toggle="dropdown"> {{user.identity.nick}}  <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
-        <a href="#" class='dropdown-toggle hidden-lg' data-toggle="dropdown"> <img class="visible-sm" style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt="{{user.identity.nick}}"></a>
+        <a href="#" class='dropdown-toggle hidden-xs' data-toggle="dropdown"> {{user.identity.nick}}  <img style="height: 27px; width: 27px" src="{{user.profile.picture}}" alt=""></a>
         <ul class="dropdown-menu dropdown-menu-custom pull-right">
             <li>
                 <a href="/myProfile">My Profile</a>
@@ -26,7 +25,7 @@
             </li>
         </ul>
     </div>
-    <a href="#" class="toggle-mobile visible-sm"><i class="fa fa-reorder"></i></a>
+    <a href="#" class="toggle-mobile visible-xs visible-sm"><i class="fa fa-reorder"></i></a>
 </div>
 
 </template>

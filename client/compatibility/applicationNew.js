@@ -99,6 +99,16 @@ function getNav(current) {
     current.find(">li").each(function () {
         currentNav += getNavElement($(this));
     });
+    currentNav += "</ul>";
+    nav = currentNav;
+    return currentNav;
+}
+function getMainNav(current) {
+    var currentNav = "";
+    currentNav += "<ul>";
+    current.find(">li").each(function () {
+        currentNav += getNavElement($(this));
+    });
     currentNav += returnPersonalMenu();
     currentNav += "</ul>";
     nav = currentNav;
@@ -110,7 +120,7 @@ function createSubNav() {
         var original = $("#navigation .main-nav");
         // loop
         var current = original;
-        getNav(current);
+        getMainNav(current);
         $("#navigation").append(nav);
         $("#navigation > ul").last().addClass("mobile-nav");
 
