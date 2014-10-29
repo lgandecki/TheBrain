@@ -416,6 +416,9 @@ Meteor.theBrain.modals.editFlashcardModal = function () {
     _modal.buttons.ok.on('click', function (button) {
         _editFlashcard(button)
     });
+    _modal.modalTarget.on('hide.bs.modal', function() {
+        delete Session.keys["currentFlashcardId"];
+    })
 
 }
 

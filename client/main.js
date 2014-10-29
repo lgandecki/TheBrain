@@ -106,7 +106,7 @@ Deps.autorun(function () {
 });
 
 Meteor.startup(function () {
-    filepicker.setKey("AHkjyUnfjQku2SL4OTQbxz");
+    loadFilePicker("AHkjyUnfjQku2SL4OTQbxz");
     new GA(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
     window.ga('create', 'UA-33043573-4', 'thebrain.pro');
     console.log("creating GA");
@@ -124,6 +124,11 @@ Template.TheBrainBody.events({
 //    "mouseleave .btn-primary": function(e) {
 //        $(e.target).stop(true, true).switchClass("btn-primary-reversed", "btn-primary-main", 400);
 //    },
+    "click .logOut": function(e) {
+        e.preventDefault();
+        Meteor.logout();
+        Router.go('/');
+    },
     "click .mobile-nav li a[href!='#']": function (e, template) {
         $(".mobile-nav").stop().slideToggle(600, "easeInOutBack");
     },

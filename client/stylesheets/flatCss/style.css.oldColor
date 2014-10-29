@@ -3506,7 +3506,7 @@ li [class*=" glyphicon-"], .nav li [class^="glyphicon-"],
     filter: none;
 }
 .dropdown-menu.typeahead > li.active:focus > a, .dropdown-menu.typeahead > li.active:hover > a {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     filter: none;
 }
@@ -3670,7 +3670,7 @@ input, textarea, input:focus {
     box-shadow: none;
 }
 .btn-group.open .dropdown-toggle.btn-primary {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .btn-group.open .dropdown-toggle.btn-danger {
     background: #e51400;
@@ -3685,7 +3685,7 @@ input, textarea, input:focus {
     background: #f8a31f;
 }
 .btn-group.open .dropdown-toggle.btn-info {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
@@ -3700,10 +3700,10 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 .dropdown-menu.dropdown-primary {
-    border-color: rgb(60,171,218);
+    border-color: #368ee0;
 }
 .dropdown-menu.dropdown-primary > li > a:hover {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .dropdown-menu.dropdown-danger {
@@ -3827,7 +3827,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 .nav.nav-pills > li.active > a, .nav.nav-list > li.active > a {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 
 .popover {
@@ -4536,7 +4536,7 @@ label, input, button, select, textarea {
     margin: 8px 0 0 8px;
 }
 .theme-colors li span.blue {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .theme-colors li span.orange {
     background: #f8a31f;
@@ -4591,7 +4591,7 @@ label, input, button, select, textarea {
 }
 
 #navigation {
-    background: rgb(60,171,218);
+    background: #368ee0;
     position: relative;
     z-index: 100;
 }
@@ -4601,24 +4601,24 @@ label, input, button, select, textarea {
 }
 #navigation .dropdown-menu {
     border-top: 0;
-    border-color: rgb(60,171,218);
+    border-color: #368ee0;
 }
 #navigation .dropdown-menu > li.dropdown-submenu .dropdown-menu {
-    border-top: 2px solid rgb(60,171,218);
+    border-top: 2px solid #368ee0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
     margin-left: 0;
 }
 #navigation .dropdown-menu > li.dropdown-submenu:hover > a, #navigation .dropdown-menu > li.dropdown-submenu:focus > a {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 #navigation .dropdown-menu > li.dropdown-submenu:hover > a:after, #navigation .dropdown-menu > li.dropdown-submenu:focus > a:after {
     border-left-color: #fff;
 }
 #navigation .dropdown-menu > li > a:hover {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     filter: none;
 }
@@ -4675,7 +4675,7 @@ label, input, button, select, textarea {
     list-style: none;
     padding: 0 20px 20px 20px;
     margin: 0;
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 #navigation .mobile-nav.open > li {
     display: block;
@@ -4961,7 +4961,7 @@ label, input, button, select, textarea {
     color: #aaa;
 }
 .letterbox .letter > li.active {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     cursor: pointer;
 }
@@ -5054,7 +5054,7 @@ label, input, button, select, textarea {
 .blog-widget-tags > li > a {
     display: block;
     padding: 3px 6px;
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     text-decoration: none;
 }
@@ -5136,7 +5136,7 @@ label, input, button, select, textarea {
 }
 .blog-list-post .post-comments h3 {
     font-weight: 400;
-    border-top: 2px solid rgb(60,171,218);
+    border-top: 2px solid #368ee0;
     padding-top: 10px;
     margin-top: 30px;
 }
@@ -5211,27 +5211,27 @@ label, input, button, select, textarea {
     padding: 5px;
 }
 .box.box-color .box-title {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .box.box-color .box-title h3 {
     color: #fff;
 }
 .box.box-color .box-title .tabs > li.active > a {
     background: #fff;
-    color: rgb(60,171,218);
+    color: #368ee0;
 }
 .box.box-color .box-title .tabs > li > a {
     color: #fff;
 }
 .box.box-color .box-title .tabs > li > a:hover {
-    color: rgb(60,171,218);
+    color: #368ee0;
 }
 .box.box-color .box-title .actions > a {
     color: #fff;
 }
 .box.box-color .box-title .actions > a:hover {
     background: #fff;
-    color: rgb(60,171,218);
+    color: #368ee0;
 }
 .box.box-bordered .table {
     margin-bottom: 0;
@@ -5261,13 +5261,13 @@ label, input, button, select, textarea {
     border-bottom: 2px solid #ddd;
 }
 .box.box-bordered.box-color .slimScrollDiv {
-    border-bottom: 2px solid rgb(60,171,218);
+    border-bottom: 2px solid #368ee0;
 }
 .box.box-bordered.box-color .box-title {
-    border-color: rgb(60,171,218);
+    border-color: #368ee0;
 }
 .box.box-bordered.box-color .box-content {
-    border-color: rgb(60,171,218);
+    border-color: #368ee0;
 }
 .box.box-bordered .box-title {
     border: 2px solid #ddd;
@@ -5328,7 +5328,7 @@ label, input, button, select, textarea {
     background: #eee;
 }
 .box .box-title .tabs > li.active > a {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .box .box-title .actions {
@@ -5342,7 +5342,7 @@ label, input, button, select, textarea {
     padding: 5px 9px;
 }
 .box .box-title .actions .btn:hover {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .box .box-title .actions .content-move {
@@ -5431,7 +5431,7 @@ label, input, button, select, textarea {
 }
 .search-form > .search-pane button[type="submit"] {
     float: right;
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     border: 0;
     margin: 2px 2px 0px 0;
@@ -5617,7 +5617,7 @@ label, input, button, select, textarea {
 }
 .gallery > li .extras .extras-inner a:hover {
     color: #fff;
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 
 .messages {
@@ -5652,7 +5652,7 @@ label, input, button, select, textarea {
 }
 .messages > li.insert .submit button {
     border: 0;
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     margin: 2px;
     padding: 6px 8px;
@@ -5734,7 +5734,7 @@ label, input, button, select, textarea {
     margin-right: 17px;
 }
 .user-list h4 {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     padding: 5px 8px;
     font-weight: 400;
@@ -6108,12 +6108,12 @@ label, input, button, select, textarea {
     padding: 0;
 }
 .ui-datepicker .ui-datepicker-calendar td:hover > a {
-    background: rgb(60,171,218);
+    background: #368ee0;
     text-decoration: none;
     color: #fff;
 }
 .ui-datepicker .ui-datepicker-calendar td.ui-datepicker-current-day > a {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .ui-datepicker .ui-datepicker-calendar td.ui-datepicker-other-month:hover > a {
@@ -6192,7 +6192,7 @@ label, input, button, select, textarea {
 }
 .progress.small .bar {
     height: 8px;
-    background: rgb(60,171,218);
+    background: #368ee0;
     filter: none;
 }
 
@@ -6337,7 +6337,7 @@ label, input, button, select, textarea {
     cursor: move;
 }
 .table.table-colored-header thead th, .table.table-colored-header thead td {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .table.table-nohead thead {
@@ -6360,7 +6360,7 @@ label, input, button, select, textarea {
     background: #eee;
 }
 .table.table-user tr.alpha td.alpha-val span {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     display: block;
     padding: 10px 0;
@@ -6458,7 +6458,7 @@ label, input, button, select, textarea {
     cursor: pointer;
 }
 .table-pagination > span > a.active {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 
@@ -6485,7 +6485,7 @@ label, input, button, select, textarea {
     border: 1px solid #aaa;
 }
 .dataTable-columnfilter .thefilter .filter_column input:focus, .usertable .thefilter .filter_column input:focus {
-    border: 1px solid rgb(60,171,218);
+    border: 1px solid #368ee0;
 }
 .dataTable-columnfilter .thefilter .filter_column select, .usertable .thefilter .filter_column select {
     margin-bottom: 0;
@@ -6812,7 +6812,7 @@ label, input, button, select, textarea {
     height: 120px;
 }
 .tiles > li.image > a .name {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .tiles > li > a {
@@ -6928,7 +6928,7 @@ label, input, button, select, textarea {
     position: relative;
 }
 .timeline > li .timeline-content .left .icon {
-    background: rgb(60,171,218);
+    background: #368ee0;
     float: left;
     padding: 6px;
     font-size: 24px;
@@ -6972,7 +6972,7 @@ label, input, button, select, textarea {
 }
 
 body.error {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 body.error .wrapper {
     width: 300px;
@@ -7007,7 +7007,7 @@ body.error .wrapper .input-group input {
 }
 body.error .wrapper .input-group .btn {
     border: 0;
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 body.error .wrapper .input-group .btn:hover {
@@ -7107,7 +7107,7 @@ body.error .wrapper .buttons {
     }
 }
 .locked {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .locked .wrapper {
     width: 500px;
@@ -7158,7 +7158,7 @@ body.error .wrapper .buttons {
 }
 
 .login {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .login .wrapper {
     width: 400px;
@@ -7247,11 +7247,11 @@ body.error .wrapper .buttons {
     margin-top: -1px;
 }
 .pagination.pagination-custom li.active a {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .pagination.pagination-custom li.active a:hover {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .pagination.pagination-custom li a {
     background: #eee;
@@ -7319,13 +7319,13 @@ body.error .wrapper .buttons {
     position: relative;
 }
 .shop-items > li .product:hover {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .shop-items > li .product:hover .extended {
     display: block;
     position: absolute;
     z-index: 999;
-    background: rgb(60,171,218);
+    background: #368ee0;
     left: 0;
     right: 0;
 }
@@ -7427,7 +7427,7 @@ body.error .wrapper .buttons {
     border: 0 !important;
 }
 .calendar .fc-content .fc-event .fc-event-inner {
-    background: rgb(60,171,218);
+    background: #368ee0;
     border: 0 !important;
     margin: 0;
 }
@@ -7443,11 +7443,11 @@ body.error .wrapper .buttons {
     margin-right: 5px;
 }
 .calendar .fc-button.fc-state-active {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .calendar .fc-button.fc-state-active:hover {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .calendar .fc-button:hover {
@@ -7494,7 +7494,7 @@ body.error .wrapper .buttons {
     box-shadow: none;
 }
 .chosen-container .chosen-drop .chosen-results > li.highlighted {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .chosen-container.chosen-container-single .chosen-search input {
     background: none;
@@ -7603,7 +7603,7 @@ table.DTCR_clonedTable {
 
 div.DTCR_pointer {
     width: 1px;
-    background-color: rgb(60,171,218);
+    background-color: #368ee0;
     z-index: 201;
 }
 div.DTCR_pointer:before {
@@ -7612,7 +7612,7 @@ div.DTCR_pointer:before {
     position: absolute;
     top: -25px;
     left: -5px;
-    color: rgb(60,171,218);
+    color: #368ee0;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -7798,7 +7798,7 @@ span.ColVis_radio {
     cursor: pointer;
 }
 .dataTables_wrapper .dataTables_paginate > span > a.paginate_active {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 
@@ -7871,7 +7871,7 @@ div.DTS div.dataTables_scrollBody {
     border-radius: 0;
 }
 .datepicker.datepicker-dropdown .datepicker-days .active, .datepicker.datepicker-dropdown .datepicker-years .active, .datepicker.datepicker-dropdown .datepicker-months .active {
-    background: rgb(60,171,218);
+    background: #368ee0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
@@ -7892,7 +7892,7 @@ div.DTS div.dataTables_scrollBody {
     border-radius: 0;
 }
 .daterangepicker .active {
-    background: rgb(60,171,218);
+    background: #368ee0;
     background-image: none !important;
 }
 
@@ -8329,7 +8329,7 @@ div.DTS div.dataTables_scrollBody {
     display: block;
 }
 .form-wizard .wizard-steps li.active .single-step .title {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
 }
 .form-wizard .wizard-steps li.active .single-step .description {
@@ -8395,7 +8395,7 @@ div.DTS div.dataTables_scrollBody {
     box-shadow: none !important;
 }
 .ms-container .multi-custom-header {
-    background: rgb(60,171,218);
+    background: #368ee0;
     color: #fff;
     padding: 2px 8px;
 }
@@ -8587,7 +8587,7 @@ div.DTS div.dataTables_scrollBody {
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
-    background: rgb(60,171,218);
+    background: #368ee0;
     width: 14px;
     height: 14px;
 }
@@ -8611,7 +8611,7 @@ div.DTS div.dataTables_scrollBody {
     padding-bottom: 0;
 }
 .tagsinput[id$="_tagsinput"] .tag {
-    background: rgb(60,171,218);
+    background: #368ee0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
@@ -8643,7 +8643,7 @@ div.DTS div.dataTables_scrollBody {
     background: #bbb;
 }
 .editable-input .datepicker table tr td.active {
-    background: rgb(60,171,218);
+    background: #368ee0;
 }
 .editable-input .datepicker table tr td.active:hover {
     background: #1b67af;
@@ -8743,7 +8743,7 @@ h1, h2, h3, h4, h5 {
 }
 
 a {
-    color: rgb(60,171,218);
+    color: #368ee0;
 }
 a:focus {
     outline: none;

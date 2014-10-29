@@ -18,8 +18,8 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th class="hidden-sm">Description</th>
-                            <th class="hidden-sm">Flashcards</th>
+                            <th class="hidden-xs">Description</th>
+                            <th class="hidden-xs">Flashcards</th>
                             <th>Enter</th>
                             <th>Add Flashcards</th>
                         </tr>
@@ -29,8 +29,8 @@
                             {{#each lesson}}
                             <tr class="lessonRow" data-id="{{_id}}">
                                 <td>{{#if isCourseOwner}}<a href="" name="name" data-id="{{_id}}" data-type="text" class="lesson-name editable">{{name}}</a>{{else}}{{name}}{{/if}}</td>
-                                <td class="hidden-sm">{{#if isCourseOwner}}<a href="" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a>{{else}}{{shortDescription}}{{/if}}</td>
-                                <td class="hidden-sm">{{flashcardsLength}}</td>
+                                <td class="hidden-xs">{{#if isCourseOwner}}<a href="" name="description" data-id="{{_id}}" data-type="text" class="lesson-description editable">{{shortDescription}}</a>{{else}}{{shortDescription}}{{/if}}</td>
+                                <td class="hidden-xs">{{flashcardsLength}}</td>
                                 <td>
                                     <button class="btn btn-primary btn-primary-main btn-enterLesson btn-block" data-id="{{_id}}"><i class="fa fa-hand-o-left"></i>
                                     </button>
@@ -43,7 +43,7 @@
                             {{/each}}
 
                         <tr>
-                            <td></td><td class="hidden-sm"></td><td class="hidden-sm"></td><td></td>
+                            <td></td><td class="hidden-xs"></td><td class="hidden-xs"></td><td></td>
                             <td><button class="btn btn-primary btn-primary-main btn-addLessonModal btn-block" data-id="{{_id}}"><i class="fa fa-plus"></i> New Lesson</button></td>
                         </tr>
 

@@ -174,4 +174,7 @@ Meteor.theBrain.modals.flashcardDetailsModal = function() {
     };
 
     var _modal = Meteor.modal.initAndShow(Template.flashcardDetailsModal, "Flashcard's details", _opts);
+    _modal.modalTarget.on('hide.bs.modal', function() {
+        delete Session.keys["flashcardId"];
+    })
 };

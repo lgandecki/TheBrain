@@ -325,9 +325,8 @@ displayNextRepetition = function () {
         Session.set("currentItemId", null);
         Session.set("currentFlashcardId", null);
         emptyTemplate();
-        $("#doneForTodayModal").modal("show").on('hidden', function () {
-            Router.go("/");
-        });
+
+        Meteor.theBrain.modals.doneForToday();
         // Info that you've done all repetitions for given day.
     }
 }

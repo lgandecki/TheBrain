@@ -20,7 +20,6 @@ var _newCourse = function () {
     }
 }
 
-
 Meteor.theBrain.modals.newCourse = function() {
     var _title;
     var _opts = {
@@ -31,6 +30,12 @@ Meteor.theBrain.modals.newCourse = function() {
 
     var _modal = Meteor.modal.initAndShow(Template.courseForm, _title = "New Course", _opts);
     _modal.buttons.ok.on('click', function(button) {_newCourse()});
+    _modal.template.events({
+        'submit form': function(event) {
+            console.log("submitted");
+            _newCourse();
+        }
+    })
 }
 
 var validateNewCourse = function () {

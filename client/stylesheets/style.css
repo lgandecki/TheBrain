@@ -7,7 +7,7 @@ body {
     text-align: left;
     background: #f2f2f2;
     color: #000000;
-    border: 2px solid #219BCC !important;
+    border: 2px solid rgb(60,171,218) !important;
     font-weight: normal;
     resize: none;
     height: 90px;
@@ -24,7 +24,7 @@ body {
 textarea[disabled].flashcard {
     background: #f2f2f2 !important;
     color: #000000 !important;
-    border: 2px solid #219BCC !important;
+    border: 2px solid rgb(60,171,218) !important;
     opacity: 1 !important;
 }
 
@@ -59,7 +59,7 @@ textarea[disabled].flashcard {
 }
 
 /*.modal-box {*/
-    /*border: 3px solid #219BCC !important;*/
+    /*border: 3px solid rgb(60,171,218) !important;*/
     /*border-top: 0px !important;*/
     /*overflow-y: auto !important;*/
 /*}*/
@@ -276,7 +276,7 @@ h3.repeat {
     position: relative;
     background-color: #F2F2F2;
     color: #204473;
-    border: 2px solid #219BCC;
+    border: 2px solid rgb(60,171,218);
 
     transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
     -moz-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
@@ -284,7 +284,7 @@ h3.repeat {
 
 }
 .quickButton:hover {
-    background-color: #219BCC;
+    background-color: rgb(60,171,218);
     color: #F2F2F2;
 
 
@@ -303,7 +303,7 @@ h3.repeat {
     /*position: relative;*/
     /*background-color: #F2F2F2;*/
     /*color: #204473;*/
-    /*border: 2px solid #219BCC;*/
+    /*border: 2px solid rgb(60,171,218);*/
 
     /*transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
     /*-moz-transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;*/
@@ -311,7 +311,7 @@ h3.repeat {
 
 /*}*/
 /*.quickButtonLogin:hover {*/
-    /*background-color: #219BCC;*/
+    /*background-color: rgb(60,171,218);*/
     /*color: #F2F2F2;*/
 
 
@@ -460,7 +460,7 @@ ul.icons > li {
     text-align: left;
     background: #f2f2f2;
     color: #000000;
-    border: 2px solid #219BCC !important;
+    border: 2px solid rgb(60,171,218) !important;
     font-weight: normal;
     height: 60px;
     margin-left: 10px;
@@ -593,7 +593,7 @@ li.active > a {
     -moz-box-shadow: 0 0 0 0 #ccc !important;
     box-shadow: 0 0 0 0 #ccc !important;
     height: 42px;
-    border: 2px solid #219BCC;
+    border: 2px solid rgb(60,171,218);
 }
 
 #login-form {
@@ -608,21 +608,21 @@ li.active > a {
     -webkit-box-shadow: 8px 8px 8px -4px #444;
     -moz-box-shadow: 8px 8px 8px -4px #444;
     box-shadow: 8px 8px 8px -4px #444;
-    border: 2px solid #219bcc;
+    border: 2px solid rgb(60,171,218);
 }
 
 .box-content.modal-box {
-    /*border-bottom: 1px solid #219bcc !important;*/
+    /*border-bottom: 1px solid rgb(60,171,218) !important;*/
 }
 
 /*.modal-footer-mine {*/
     /*padding: 14px 15px 15px;*/
     /*margin-bottom: 0;*/
     /*background-color: #f5f5f5;*/
-    /*border-right: 3px solid #219BCC;*/
-    /*border-left: 3px solid #219bcc;*/
-    /*border-bottom: 3px solid #219bcc;*/
-    /*border-top: 0px #219bcc !important;*/
+    /*border-right: 3px solid rgb(60,171,218);*/
+    /*border-left: 3px solid rgb(60,171,218);*/
+    /*border-bottom: 3px solid rgb(60,171,218);*/
+    /*border-top: 0px rgb(60,171,218) !important;*/
 /*}*/
 
 /*.modal-footer-mine:before, .modal-footer-mine:after {*/
@@ -637,7 +637,7 @@ li.active > a {
 
 .modal-footer {
     background-color: #f5f5f5;
-    border-top: 3px solid #219BCC;
+    border-top: 3px solid rgb(60,171,218);
     text-align: right;
     padding: 15px;
 }
@@ -800,7 +800,7 @@ li.active > a {
 }
 
 .iconFace {
-    background-color: #219BCC;
+    background-color: rgb(60,171,218);
     float: left;
     padding: 2px;
     font-size: 24px;
@@ -844,7 +844,7 @@ li.active > a {
 .khanVideos ul, #khanVideoPlaylist ul, #coursePlaylist ul {
     list-style: none;
     /*text-decoration: underline;*/
-    color: #219BCC;
+    color: rgb(60,171,218);
 
 
 }
@@ -890,11 +890,11 @@ li.khanVideo:hover {
     }
 
     .modal-content {
-        border: 3px solid #219BCC;
+        border: 3px solid rgb(60,171,218);
     }
 
     .modal-header {
-        background: #219BCC;
+        background: rgb(60,171,218);
         color: white;
     }
 
@@ -905,11 +905,11 @@ li.khanVideo:hover {
 .btn.btn-primary-main {
     background: #F2F2F2;
     color: #204473;
-    border: 2px solid #219BCC;
+    border: 2px solid rgb(60,171,218);
     transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 .btn.btn-primary:hover {
-    background: #219BCC;
+    background: rgb(60,171,218);
     color: #F2F2F2;
     transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
@@ -949,7 +949,7 @@ li.khanVideo:hover {
 }
 
 #main .breadcrumbs ul>li>a {
-    color: #219BCC;
+    color: rgb(60,171,218);
     display: block;
     padding: 2px 6px;
     font-size: 12px;
@@ -974,7 +974,7 @@ li.active>a {
     list-style: none;
     padding: 0 20px 20px 20px;
     margin: 0;
-    background: #219BCC;
+    background: rgb(60,171,218);
 }
 
 #navigation .mobile-nav>li>a {
@@ -1007,4 +1007,26 @@ li.active>a {
 
 #navigation .mobile-nav>li>ul.open {
     display: block;
+}
+
+.form-bordered.top-bordered {
+    border-top: 1px solid #ddd;
+}
+
+.newReply {
+    margin-left:15px;
+    margin-top:10px;
+}
+
+.myPadding20 {
+    padding: 20px;
+}
+
+#myBrand {
+    background: url("../img/logo@2x.png") no-repeat;
+    background-size: 44px 44px;
+    float: left;
+    padding-right: 69px;
+    line-height: 42px;
+    color: rgb(60,171,218);
 }

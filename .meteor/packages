@@ -6,7 +6,6 @@
 accounts-password
 accounts-facebook
 standard-app-packages
-select2
 cron-tick
 service-configuration
 spiderable
@@ -21,6 +20,10 @@ iron:router
 gadicohen:sitemaps
 meteorhacks:fast-render
 natestrauser:font-awesome
-mrt:x-editable-bootstrap3
 mrt:jquery-ui
 mizzao:bootstrap-3
+kidovate:pnotify
+natestrauser:x-editable-bootstrap
+natestrauser:select2
+natestrauser:filepicker-plus
+
