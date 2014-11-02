@@ -53,16 +53,22 @@
 </template>
 
 <template name="addCourseNews">
-    <div class="row-fluid">
-        <div class="new-news">
-            <h4>Add News</h4>
+        <h4>Add news</h4>
+        <form class='form-horizontal'>
 
-            <div class="control-group">
-                <div class="controls">
-                    <textarea name="newNews" class="span8 newNews" rows="3"></textarea>
+
+
+            <div class="form-group">
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="fa fa-bullhorn"></i></span>
+
+                    <textarea name="newNews" class="newNews form-control" rows="3"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-primary-main center btn-addNews">Post
+                        News
+                    </button></span>
                 </div>
             </div>
-            <button type="submit" class="span6 btn btn-primary btn-primary-main center btn-addNews">Post News</button>
-        </div>
-    </div>
+
+        </form>
+
 </template>

@@ -1,9 +1,9 @@
 <template name="myCollections">
-    <div class="row-fluid">
-        <div class="span12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> My collections</h3>
+                    <h3><i class="fa fa-th-list"></i> My collections</h3>
                 </div>
                 <div class="box-content nopadding">
                     <table class="table table-hover table-nomargin">
@@ -29,7 +29,7 @@
 
                         <tr>
                             <td></td><td class="hidden-480"></td><td class="hidden-480"></td><td class="hidden-480"></td><td class="hidden-480"></td>
-                            <td><button class="btn btn-primary btn-primary-main btn-addCollectionModal btn-block"><i class="icon-plus-sign-at"></i> Add new</button></td>
+                            <td><button class="btn btn-primary btn-primary-main btn-addCollectionModal btn-block"><i class="fa fa-plus"></i> Add new</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -37,7 +37,6 @@
             </div>
         </div>
     </div>
-   {{> newCollectionModal }}
 </template>
 
 <template name="collectionRow">
@@ -47,7 +46,7 @@
         <td class="hidden-480">{{itemsToRepeat}}</td>
         <td class="hidden-480">{{itemsToReLearn}}</td>
         <td class="hidden-480">{{learnedItems}}</td>
-        <td><button class="btn btn-primary btn-primary-main btn-enterCollection btn-block" data-id="{{_id}}"><i class="icon-hand-left"></i></button>
+        <td><button class="btn btn-primary btn-primary-main btn-enterCollection btn-block" data-id="{{_id}}"><i class="fa fa-hand-o-left"></i></button>
         </td>
     </tr>
 </template>

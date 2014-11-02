@@ -98,7 +98,7 @@ Meteor.methods({
             var _opts = {
                 items: _itemIds
             }
-            console.log("_opts", _opts);
+            console.log("_opts", _opts, opts);
             Meteor.call("extraRepeatItems", _opts);
         }
     },

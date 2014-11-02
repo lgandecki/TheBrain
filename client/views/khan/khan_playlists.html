@@ -1,17 +1,17 @@
 <template name="khanPlaylists">
-    <div class="row-fluid">
-        <div class="span6 center">
+    <div class="row">
+        <div class="col-md-6 center">
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> KhanAcademy Playlists</h3>
+                    <h3><i class="fa fa-th-list"></i> KhanAcademy Playlists</h3>
                 </div>
                 <div class="box-content padding">
-                    <div class="row-fluid searchPanel">
-                        <div class="span8 center">
+                    <div class="row searchPanel">
+                        <div class="col-md-8 center">
                             <form action="" method="GET" class="search-form">
                                 <div class="search-pane">
                                     <input type="text" name="search" id="khanPlaylistsSearch" placeholder="Search here...">
-                                    <button type="submit"><i class="icon-search"></i></button>
+                                    <button type="submit"><i class="fa fa-search"></i></button>
                                 </div>
                             </form>
                         </div>
@@ -26,7 +26,7 @@
 
                                 {{#unless allKhanPlaylistsLoaded}}
                                     <div class="textCenter">
-                                        <button class="btn btn-primary btn-primary-main load-more"><i class="icon-hand-down"> Load more</i></button>
+                                        <button class="btn btn-primary btn-primary-main load-more"><i class="fa fa-hand-o-down"> Load more</i></button>
                                     </div>
                                 {{/unless}}
 
@@ -59,8 +59,8 @@
 
 <template name="khanVideoRow">
     {{#if currentKhanVideo}}
-    <li class="khanVideo" data-id="{{readable_id}}"><i class="icon-hand-right pull-left"></i><b style="color: black">{{title}} </b></li>
+    <li class="khanVideo" data-id="{{readable_id}}"><i class="fa fa-hand-o-right pull-left"></i><b style="color: black">{{title}} </b></li>
     {{else}}
-    <li class="khanVideo" data-id="{{readable_id}}"><i class="icon-hand-right pull-left"></i><span class="khanTitle">{{title}} </span></li>
+    <li class="khanVideo" data-id="{{readable_id}}"><i class="fa fa-hand-o-right pull-left"></i><span class="khanTitle">{{title}} </span></li>
     {{/if}}
 </template>

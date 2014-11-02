@@ -1,15 +1,15 @@
 <template name="course">
 
-    <div class="row-fluid">
-        <div class="span12">
+    <div class="row">
+        <div class="col-md-12">
             <div class="box box-bordered box-color">
 
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Course: {{courseName}}</h3>
+                    <h3><i class="fa fa-th-list"></i> Course: {{courseName}}</h3>
                     {{#unless isCourseOwner}}
                         <div class="pull-right">
                             <button class="btn btn-primary btn-primary-main btn-courseEnrollment {{enrollBtnAction}}" data-id="{{_id}}"><i
-                                    class="icon-hand-left"> {{enrollBtnText}}!</i>
+                                    class="fa fa-hand-o-left"> {{enrollBtnText}}!</i>
                             </button>
                         </div>
 
@@ -20,27 +20,27 @@
                     <div class="tabs-container">
                         <ul class="tabs tabs-inline tabs-left nav">
                             <li class="active">
-                                <a href="#events" data-toggle="tab" class="tabLink tabbable"><i class="icon-calendar"></i> <span
-                                        class="hidden-phone">Timeline</span></a>
+                                <a href="#events" data-toggle="tab" class="tabLink tabbable"><i class="fa fa-calendar-o"></i> <span
+                                        class="hidden-xs">Timeline</span></a>
                             </li>
                             <li>
-                                <a href="#lessons" data-toggle="tab" class="tabLink tabbable"><i class='icon-book'></i> <span
-                                        class="hidden-phone">Lessons</span></a>
+                                <a href="#lessons" data-toggle="tab" class="tabLink tabbable"><i class='fa fa-book'></i> <span
+                                        class="hidden-xs">Lessons</span></a>
                             </li>
                             <li>
-                                <a href="#comments" data-toggle="tab" class="tabLink tabbable"><i class="icon-twitter"></i> <span
-                                        class="hidden-phone">Comments </span>({{commentsLength}})</a>
+                                <a href="#comments" data-toggle="tab" class="tabLink tabbable"><i class="fa fa-comments-o"></i> <span
+                                        class="hidden-xs">Comments </span>({{commentsLength}})</a>
                             </li>
 
 
                                 {{#if isCourseOwner}}
 
                             <li>
-                                <a href="#courseStats" data-toggle="tab" class="tabLink tabbable"><i class="icon-bar-chart"></i> <span
-                                        class="hidden-phone">Stats</span></a>
+                                <a href="#courseStats" data-toggle="tab" class="tabLink tabbable"><i class="fa fa-bar-chart-o"></i> <span
+                                        class="hidden-xs">Stats</span></a>
                             </li>
                                     <li>
-                                        <a href="#courseSettings" data-toggle="tab" class="tabLink tabbable"><i class="icon-edit"></i><span class="hidden-phone">Settings</span></a>
+                                        <a href="#courseSettings" data-toggle="tab" class="tabLink tabbable"><i class="fa fa-edit"></i><span class="hidden-xs">Settings</span></a>
                                     </li>
 
 

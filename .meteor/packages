@@ -3,20 +3,29 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-bootstrap
 accounts-password
 accounts-facebook
 standard-app-packages
-paginated-subscription
-publish-with-relations
-jquery-ui
-select2
-spin
 cron-tick
-npm
 service-configuration
-iron-router
 spiderable
-sitemaps
 phonegap-oauth
-fast-render
+reactive-modal
+mrt:cron-tick
+tmeasday:paginated-subscription
+mrt:publish-with-relations
+sacha:spin
+arunoda:npm
+iron:router
+gadicohen:sitemaps
+meteorhacks:fast-render
+natestrauser:font-awesome
+mrt:jquery-ui
+mizzao:bootstrap-3
+kidovate:pnotify
+natestrauser:x-editable-bootstrap
+natestrauser:select2
+natestrauser:filepicker-plus
+kidovate:bootstrap-slider
+launch-screen
+

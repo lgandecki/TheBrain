@@ -59,12 +59,12 @@ Template.withSelectedFlashcards.events({
     'click .btn-addToCollection': function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        $("#addToCollectionFlashcardModal").modal("show");
+        Meteor.theBrain.modals.addToCollectionFlashcard();
     },
     'click .btn-addToCourse': function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        $("#addToCourseFlashcardModal").modal("show");
+        Meteor.theBrain.modals.addToCourseFlashcard();
     },
     "keyup #availableFlashcardsSearch": function (e, template) {
         console.log("e", $("#availableFlashcardsSearch").val());

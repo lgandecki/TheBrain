@@ -1,14 +1,14 @@
 <template name="repeat">
 
-    <div class="row-fluid">
-        <div class="span8 center mainBox">
-            <div class="row-fluid" style="
+    <div class="row">
+        <div class="col-md-8 center mainBox">
+            <div class="row" style="
     margin-bottom: 0px;
     padding-bottom: 0px;
 ">
 
 
-                <div class="span4" style="
+                <div class="col-md-4" style="
     margin-bottom: 0px;
     padding-bottom: 0px;
 ">
@@ -22,11 +22,11 @@
     margin-bottom: 0px; padding-bottom: 0px;
     border: 1px solid #219BCC;
 ">
-                       <div class="bar barNew"></div>
+                        <div class="bar barNew"></div>
                         <span>0 / 0</span>
                     </div>
                 </div>
-                <div class="span4" style="
+                <div class="col-md-4" style="
     margin-bottom: 0px; padding-bottom: 0px;
 ">
                     <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Repetitions</h4>
@@ -43,10 +43,11 @@
                         <span>0 / 0</span>
                     </div>
                 </div>
-                <div class="span4" style="
+                <div class="col-md-4" style="
     margin-bottom: 0px; padding-bottom: 0px;
 ">
-                    <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Extra Repetitions</h4>
+                    <h4 style="text-align: center;margin-bottom: 0px !important;margin-top: 20px;">Extra
+                        Repetitions</h4>
 
                     <div class="progress progress-striped " style="
     margin-top: 20px;
@@ -56,7 +57,7 @@
     margin-bottom: 0px; padding-bottom: 0px;
     border: 1px solid #219BCC;
 ">
-<div class="bar barExtraRepetitions"></div>
+                        <div class="bar barExtraRepetitions"></div>
                         <span>0 / 0</span>
                     </div>
                 </div>
@@ -65,7 +66,7 @@
             </div>
             <div class="box box-bordered box-color">
                 <div class="box-title">
-                    <h3><i class="icon-th-list"></i> Improve TheBrain connections!</h3>
+                    <h3><i class="fa fa-th-list"></i> Improve TheBrain connections!</h3>
                 </div>
 
                 <div class="box-content nopadding">
@@ -73,19 +74,21 @@
                         <ul class="tabs tabs-inline tabs-left ">
 
 
-                                <li>
-                                    <a href="#repeatFlashcards" data-toggle="tab"><i class="icon-road"></i> Repetitions</a>
-                                </li>
-                                <li>
-                                    <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> Comments {{#with flashcard}}({{comments.length}}){{/with}}</a>
-                                </li>
+                            <li>
+                                <a href="#repeatFlashcards" data-toggle="tab"><i class="fa fa-road"></i> Repetitions</a>
+                            </li>
+                            <li>
+                                <a href="#comments" data-toggle="tab"><i class="fa fa-comments-o"></i> Comments {{#with
+                                    flashcard}}({{comments.length}}){{/with}}</a>
+                            </li>
 
-                                <li>
-                                    <a href="#history" data-toggle="tab"><i class="icon-calendar"></i> History {{#with item}}({{previousAnswers.length}}){{/with}}</a>
-                                </li>
-                                <li>
-                                    <a href="#edit" data-toggle="tab"><i class="icon-edit"></i> Edit</a>
-                                </li>
+                            <li>
+                                <a href="#history" data-toggle="tab"><i class="fa fa-calendar-o"></i> History {{#with
+                                    item}}({{previousAnswers.length}}){{/with}}</a>
+                            </li>
+                            <li>
+                                <a href="#edit" data-toggle="tab"><i class="fa fa-edit"></i> Edit</a>
+                            </li>
 
                         </ul>
                     </div>
@@ -95,18 +98,44 @@
 
                                 <div class="currentFlashcard">
                                     <h5 class="collectionName"></h5>
+
                                     <div class="flashcard front"></div>
-                                    <div id="answer" class="flashcard answer hidden-phone" contentEditable="true"></div>
-                                    <button class="btn btn-large btn-primary btn-primary-main btn-block btn-show-answer" style="">Show answer</button>
+                                    <div id="answer" class="flashcard answer hidden-xs" contentEditable="true"></div>
+                                    <button class="btn btn-large btn-primary btn-primary-main btn-block btn-show-answer"
+                                            style="">Show answer
+                                    </button>
                                     <div class="flashcard back" style="display: none;"></div>
 
                                     <div id="evaluate" class="evaluate form-actions" item-id="">
-                                        <button class="btn btn-primary btn-primary-main evaluation popoverRight" rel="popover" data-content="I don't remember this at all." value="0">Blackout</button>
-                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp" rel="popover" data-content="Now when I see it it makes sense, but I had no clue." value="1">Terrible</button>
-                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp" rel="popover" data-content="My answer was wrong, but I had a general idea." value="2">Bad</button>
-                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp" rel="popover" data-content="I was on the right track, but got it wrong/slightly wrong." value="3">Hardly</button>
-                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp" rel="popover" data-content="My answer was good. It took me a moment to recall it." value="4">Good</button>
-                                        <button class="btn btn-primary btn-primary-main evaluation popoverLeft" rel="popover" data-content="My answer was good. And it was as obvious as 2+2=4." value="5">Perfect!</button>
+                                        <button class="btn btn-primary btn-primary-main evaluation popoverRight"
+                                                rel="popover" data-content="I don't remember this at all." value="0">
+                                            Blackout
+                                        </button>
+                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp"
+                                                rel="popover"
+                                                data-content="Now when I see it it makes sense, but I had no clue."
+                                                value="1">Terrible
+                                        </button>
+                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp"
+                                                rel="popover"
+                                                data-content="My answer was wrong, but I had a general idea." value="2">
+                                            Bad
+                                        </button>
+                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp"
+                                                rel="popover"
+                                                data-content="I was on the right track, but got it wrong/slightly wrong."
+                                                value="3">Hardly
+                                        </button>
+                                        <button class="btn btn-primary btn-primary-main evaluation popoverUp"
+                                                rel="popover"
+                                                data-content="My answer was good. It took me a moment to recall it."
+                                                value="4">Good
+                                        </button>
+                                        <button class="btn btn-primary btn-primary-main evaluation popoverLeft"
+                                                rel="popover"
+                                                data-content="My answer was good. And it was as obvious as 2+2=4."
+                                                value="5">Perfect!
+                                        </button>
                                     </div>
 
                                 </div>
@@ -130,31 +159,29 @@
             </div>
         </div>
     </div>
-
-
-
-
-    {{> doneForTodayModal }}
-    {{> scheduleModal }}
-    {{> newFlashcardVersionModal }}
 </template>
 
+<template name="itemHistoryModal">
+    <div class="box-content modalInfo" id="itemHistoryModal">
+        {{> itemHistory}}
+    </div>
+</template>
 
 <template name="itemHistory">
     {{#each previousAnswer}}
-        <div class="row-fluid addBottomLine itemHistory">
-            <div class="previousAnswer">
-                <h4>{{historyDate}}</h4>
+    <div class="row addBottomLine itemHistory">
+        <div class="previousAnswer">
+            <h4>{{historyDate}}</h4>
 
-                <p>My answer: <strong>{{answer}}</strong><br/>
-                    My evaluation: <strong>{{historyEvaluation}}</strong><br/>
-                    {{#if extraRepetition}}
-                        Additional repetition session.<br/>
-                    {{else}}
-                        Next repetition set for <strong>{{daysChangeFormat}}</strong> in the future.<br/>
-                    {{/if}}
-                </p>
-            </div>
+            <p>My answer: <strong>{{answer}}</strong><br/>
+                My evaluation: <strong>{{historyEvaluation}}</strong><br/>
+                {{#if extraRepetition}}
+                Additional repetition session.<br/>
+                {{else}}
+                Next repetition set for <strong>{{daysChangeFormat}}</strong> in the future.<br/>
+                {{/if}}
+            </p>
         </div>
+    </div>
     {{/each}}
 </template>

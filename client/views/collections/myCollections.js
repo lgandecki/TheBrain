@@ -1,5 +1,3 @@
-
-
 Template.myCollections.collection = function() {
     return Meteor.user() ? Meteor.user().collections : [];
 };
@@ -74,7 +72,7 @@ Template.myCollections.events({
 
     "click .btn-addCollectionModal": function (e, template) {
         e.preventDefault();
-        $('#newCollectionModal').modal('show');
+        Meteor.theBrain.modals.newCollection();
     }
 
 });

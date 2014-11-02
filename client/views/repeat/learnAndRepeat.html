@@ -1,40 +1,18 @@
-<template name="scheduleModal">
-    <!-- Modal -->
-    <div id="scheduleModal" class="modal hide fade" tabindex="-1" role="dialog"
-            aria-labelledby="scheduleModal" aria-hidden="true">
-        <div class="box box-bordered box-color box-modal">
-            <div class="box-title box-modal">
-                <h3><i class="icon-th-list"></i> Learn new flashcards!</h3>
-                <button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="box-content modal-box modalInfo">
-                {{> myCollectionsList }}
-
-
-            </div>
-            <div class=" modal-form-actions modal-footer-mine">
-
-                <button id="startLearning" type="button" class="btn btn-primary btn-primary-main pull-right" data-dismiss="modal" aria-hidden="true">Start learning!</button>
-            </div>
-        </div>
-    </div>
-</template>
-
 <template name="myCollectionsList">
+    <div class="box-content modalInfo" id="myCollectionsList">
+        <div style="display: none;" class="sliderInfo">
+            <p class="small">Use the slider to select how many new flashcards you want to learn</p>
+        </div>
 
-    <div style="display: none;" class="sliderInfo">
-        <p class="small">Use the slider to select how many new flashcards you want to learn</p>
-    </div>
+        <div class="myCollectionsList">
 
-    <div class="myCollectionsList">
-
-        {{#each collection}}
-                {{> collectionStudyRow }}
+            {{#each collection}}
+            {{> collectionStudyRow }}
 
 
-        {{/each}}
-    </div>
-    {{#if noNewItems}}
+            {{/each}}
+        </div>
+        {{#if noNewItems}}
         <div class="modalInfo">
             <p class="lead repeat">Congratulations!</p>
 
@@ -43,26 +21,26 @@
             <p class="lead repeat last">Let's do the repetitions!</p>
         </div>
         <br/>
-    {{/if}}
-
+        {{/if}}
+    </div>
 
 </template>
 
 
 <template name="collectionStudyRow">
-    <div class="row-fluid addBottomLine">
-        <div class="span5"><h4>{{name}}</h4>
+    <div class="row addBottomLine">
+        <div class="col-md-5"><h4>{{name}}</h4>
 
             <p class="scheduleDetails">Learn: <a href="#" data-type="text" data-id="{{_id}}" name="toLearn"
-                    class="toLearn editable">0</a> out of  {{itemsToLearn}} new. <br/>
+                                                 class="toLearn editable">0</a> out of {{itemsToLearn}} new. <br/>
                 {{itemsInCollection}} Flashcards in collection </p>
         </div>
-        <div class="offset1 span6">
+        <div class="cold-md-offset-1 col-md-6">
 
             <input type="text" class="slider-custom" value="" data-slider-min="0"
-                    data-slider-max="{{itemsToLearn}}" data-slider-step="1" data-slider-value="0"
-                    data-slider-orientation="horizontal" data-slider-handle="square"
-                    data-slider-selection="after" data-slider-tooltip="hide" data-id="{{_id}}"/>
+                   data-slider-max="{{itemsToLearn}}" data-slider-step="1" data-slider-value="0"
+                   data-slider-orientation="horizontal" data-slider-handle="square"
+                   data-slider-selection="after" data-slider-tooltip="hide" data-id="{{_id}}"/>
 
 
         </div>

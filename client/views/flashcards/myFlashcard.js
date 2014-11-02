@@ -105,20 +105,21 @@ Template.myFlashcard.events({
 //        Session.get("currentItemId");
         Session.set("currentItemId", this._id);
         Session.set("currentFlashcardId", this.flashcard);
-        $("#editFlashcardModal").modal("show").on("show", function() {
-            console.log("set to false");
-            Session.set("noRender", false);
-        }).on("hidden", function() {
-                console.log("set to true");
-                Session.set("noRender", true);
-            });
+        Meteor.theBrain.modals.editFlashcardModal();
+//
+//        $("#editFlashcardModal").modal("show").on("show", function() {
+//            console.log("set to false");
+//            Session.set("noRender", false);
+//        }).on("hidden", function() {
+//                console.log("set to true");
+//                Session.set("noRender", true);
+//            });
     },
     "click .btn-historyFlashcard": function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         Session.set("currentItemId", this._id);
-        $("#historyFlashcardModal").modal("show");
-
+        Meteor.theBrain.modals.flashcardHistory();
     },
     "click .btn-commentsFlashcard": function(e) {
         e.preventDefault();
@@ -126,7 +127,7 @@ Template.myFlashcard.events({
         Session.set("currentItemId", this._id);
         console.log("btn this.flashcard", this.flashcard);
         Session.set("currentFlashcardId", this.flashcard);
-        $("#commentsFlashcardModal").modal("show");
+        Meteor.theBrain.modals.commentsFlashcard();
     },
     "click .myFlashcardRow": function (e) {
         console.log("click");
@@ -134,13 +135,13 @@ Template.myFlashcard.events({
         var _e = e.currentTarget;
         setTimeout(function () {
             if (_toggleFlashcard(_that._id)) {
-                $(_e).removeClass("flashcardSelected");
-                $(_e).find(".btn-selectFlashcard").text("Select");
+                //$(_e).removeClass("flashcardSelected");
+                //$(_e).find(".btn-selectFlashcard").text("Select");
 //            $(".btn-selectFlashcard[data-id=" + this._id + "]").text("Select");
             }
             else {
-                $(_e).addClass("flashcardSelected");
-                $(_e).find(".btn-selectFlashcard").text("Deselect");
+                //$(_e).addClass("flashcardSelected");
+                //$(_e).find(".btn-selectFlashcard").text("Deselect");
 //            $(".btn-selectFlashcard[data-id=" + this._id + "]").text("Deselect");
             }
         }, 1);
@@ -152,13 +153,13 @@ Template.myFlashcard.events({
         var _e = e.currentTarget;
         setTimeout(function () {
             if (_toggleFlashcard(_that._id)) {
-                $(_e).closest(".myFlashcardRow").removeClass("flashcardSelected");
-                $(_e).text("Select");
+                //$(_e).closest(".myFlashcardRow").removeClass("flashcardSelected");
+                //$(_e).text("Select");
 //            $(".btn-selectFlashcard[data-id=" + this._id + "]").text("Select");
             }
             else {
-                $(_e).closest(".myFlashcardRow").addClass("flashcardSelected");
-                $(_e).text("Deselect");
+                //$(_e).closest(".myFlashcardRow").addClass("flashcardSelected");
+                //$(_e).text("Deselect");
 //            $(".btn-selectFlashcard[data-id=" + this._id + "]").text("Deselect");
             }
         }, 1);

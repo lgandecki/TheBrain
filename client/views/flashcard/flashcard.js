@@ -1,3 +1,5 @@
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
+
 Template.flashcardDetails.flashcardVersion = function () {
     var _updatedVersions = [];
     var _flashcard = Flashcards.findOne({_id: Session.get("flashcardId")});
@@ -148,8 +150,8 @@ Template.inCourseRow.events({
     'click .inCourseRow': function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        Meteor.modal.hideClosestTo("#flashcardDetailsModal");
         var _courseId = $(e.target).attr("data-id");
-        $("#flashcardDetailsModal").modal("hide");
         Router.go('/course/' + _courseId);
     }
 })
@@ -158,8 +160,21 @@ Template.inKhanRow.events({
     'click .inKhanRow': function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
+        Meteor.modal.hideClosestTo("#flashcardDetailsModal");
         var _videoId = $(e.target).attr("data-id");
-        $("#flashcardDetailsModal").modal("hide");
         Router.go('/khanVideo/' + _videoId);
     }
 });
+
+Meteor.theBrain.modals.flashcardDetailsModal = function() {
+    var _opts = {
+        withCancel: false,
+        closeOnOk: true,
+        okLabel: "Got it!"
+    };
+
+    var _modal = Meteor.modal.initAndShow(Template.flashcardDetailsModal, "Flashcard's details", _opts);
+    _modal.modalTarget.on('hide.bs.modal', function() {
+        delete Session.keys["flashcardId"];
+    })
+};

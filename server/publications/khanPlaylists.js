@@ -18,7 +18,7 @@ Meteor.publish("paginatedKhanPlaylists", function (opts, limit) {
 
     if (_updateFlag) {
         //var _url = "http://www.khanacademy.org/api/v1/playlists";
-        var _url = "http://www.khanacademy.org/api/v1/playlists/library/list"
+        var _url = "http://www.khanacademy.org/api/v1/playlists/library/list";
         Meteor.http.get(_url, function(error, results) {
             console.log("in update");
             var _khanPlaylists = JSON.parse(results.content);

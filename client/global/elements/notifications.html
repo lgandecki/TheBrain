@@ -1,6 +1,6 @@
 <template name="notifications">
-        <li class='dropdown hidden-phone'>
-            <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-bell-alt"></i>
+        <li class='dropdown hidden-xs'>
+            <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="fa fa-bell"></i>
                 {{#if notificationCount}}<span class="label label-lightred">{{notificationCount}}</span>{{/if}}
             </a>
             <ul class="dropdown-menu dropdown-menu-custom pull-right message-ul">
@@ -18,7 +18,7 @@
                 {{/if}}
 
                 <li>
-                    <a href="/notificationCenter" class='more-messages'>Go to Notification center <i class="icon-arrow-right"></i></a>
+                    <a href="/notificationCenter" class='more-messages'>Go to Notification center <i class="fa fa-arrow-right"></i></a>
                 </li>
             </ul>
         </li>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="count">
-                    <i class="icon-comment"></i>
+                    <i class="fa fa-comments-o"></i>
                     <span>1</span>
                 </div>
             </a>

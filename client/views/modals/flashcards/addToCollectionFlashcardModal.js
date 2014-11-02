@@ -1,44 +1,37 @@
-Template.collectionWithEmptyAndNewSelector.selectIfNew = function() {
-    var _newCollectionName = Session.get("newCollectionName");
-    if (_newCollectionName) {
-        return this.name === _newCollectionName ? "selected" : "";
-    }
-}
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
 
-Template.collectionWithEmptyAndNewSelector.collection = function() {
-    return Meteor.user() ? Meteor.user().collections : [];
-}
-
-Template.collectionWithEmptyAndNewSelector.rendered = function() {
-    $("#collectionId.select2").select2();
-    var _selectedId = $("#collectionId option:selected").val();
-    $("#collectionId").select2("val", _selectedId);
-}
-
-Template.collectionWithEmptyAndNewSelector.events({
-    "click .btn-collectionModal": function(e, template) {
-        e.preventDefault();
-        $('#newCollectionModal').modal('show');
-    }
-})
-
-
-
-Template.addToCollectionFlashcardModal.events({
-    "click .btn-addToCollection": function(e) {
-        var _collectionId = $("#collectionId").val();
-        if (_collectionId !== "") {
-            var _callOpts = {
-                function: "addFlashcardsToCollection",
-                arguments: {
-                    flashcardsIds: Session.get("selectedFlashcard") || Session.get("selectedFlashcards"),
-                    collectionId: _collectionId
-                },
-                errorTitle: "Adding to collection error",
-                successTitle: "Added to collection"
-            }
-            Meteor.myCall(_callOpts);
-            $("#addToCollectionFlashcardModal").modal("hide");
+var _addToCollectionFlashcard = function () {
+    var _collectionId = $("#collection").val();
+    var _callOpts = {
+        function: "addFlashcardsToCollection",
+        arguments: {
+            flashcardsIds: Session.get("selectedFlashcard") || Session.get("selectedFlashcards"),
+            collectionId: _collectionId
+        },
+        errorTitle: "Adding to collection error",
+        successTitle: "Added to collection"
+    };
+    Meteor.myCall(_callOpts, function(success) {
+        if (success) {
+            Meteor.modal.hideClosestTo("#commentsFlashcardModal");
         }
-    }
-})
+    });
+};
+
+Template.addToCollectionFlashcardModal.destroyed = function () {
+    delete Session.keys["selectedFlashcard"];
+};
+
+
+Meteor.theBrain.modals.addToCollectionFlashcard = function () {
+    var _opts = {
+        withCancel: true,
+        closeOnOk: false
+    };
+
+    var _modal = Meteor.modal.initAndShow(Template.addToCollectionFlashcardModal, "Add Flashcards to Collection", _opts);
+    _modal.buttons.ok.on('click', function () {
+        _addToCollectionFlashcard()
+    });
+
+};

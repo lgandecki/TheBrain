@@ -1,11 +1,11 @@
 <template name="lesson">
 
-    <div class="row-fluid">
-        <div class="span11 center">
+    <div class="row">
+        <div class="col-md-11 center">
             <div class="box box-bordered box-color">
 
                     <div class="box-title">
-                        <h3><i class="icon-th-list"></i> Course: {{courseName}} Lesson:  {{lessonName}}</h3>
+                        <h3><i class="fa fa-th-list"></i> Course: {{courseName}} Lesson:  {{lessonName}}</h3>
                     </div>
 
                     <div class="box-content nopadding">
@@ -13,12 +13,12 @@
                             <ul class="tabs tabs-inline tabs-left nav">
 
                                 <li class="active">
-                                    <a href="#lessonFlashcards" data-toggle="tab" class="tabLink"><i class='icon-book'></i> <span
-                                            class="hidden-phone">Flashcards</span></a>
+                                    <a href="#lessonFlashcards" data-toggle="tab" class="tabLink"><i class='fa fa-book'></i> <span
+                                            class="hidden-xs">Flashcards</span></a>
                                 </li>
                                 <!-- <li>
-                                    <a href="#comments" data-toggle="tab"><i class="icon-twitter"></i> <span
-                                            class="hidden-phone">Comments </span>(9)</a>
+                                    <a href="#comments" data-toggle="tab"><i class="fa fa-comments-o"></i> <span
+                                            class="hidden-sm">Comments </span>(9)</a>
                                 </li> -->
 
                             </ul>
@@ -31,9 +31,6 @@
             </div>
         </div>
     </div>
-    {{> newFlashcardModal}}
-    {{> editFlashcardModal }}
-    {{> commentsFlashcardModal }}
 </template>
 
 

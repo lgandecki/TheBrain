@@ -6,30 +6,37 @@
 
 <template name="quickButtons">
 
-    <div class="row-fluid">
-        <div class="span8 center">
+    <div class="row">
+        <div class="col-md-8 center">
             <div class="box box-bordered box-color">
                 <div class="box-title" id="quickButtons">
-                    <h3><i class="icon-th-list"></i> Quick Buttons</h3>
+                    <h3><i class="fa fa-th-list"></i> Quick Buttons</h3>
                 </div>
                 <div class="box-content padding padding-quickButtons">
                     <div class=" quickButtons">
-                        <div class="span6">
-                            <button type="button" class="quickButton quickButtonNormal" data-target="/study">
-                                <span class="quickIcon"><i class="icon-cogs"></i> {{itemsToStudy}} </span><span class="name">Study!</span></button>
-                        </div>
-                        <div class="span6">
-                            <button type="button" class="quickButton quickButtonNormal" data-target="/newFlashcard">
-                                <span class="quickIcon"><i class="icon-edit"></i></span><span class="name">Add Flashcards</span></button>
-                        </div>
-                        <div class="row-fluid">
-                            <div class="span6">
-                                <button type="button" class="quickButton quickButtonNormal" data-target="/enrolledCourses">
-                                    <span class="quickIcon"><i class="icon-group"></i></span><span class="name">Courses I'm taking</span></button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="quickButton quickButtonNormal" data-target="/study">
+                                    <span class="quickIcon"><i class="fa fa-cogs"></i> {{itemsToStudy}} </span><span
+                                        class="name">Study!</span></button>
                             </div>
-                            <div class="span6">
+                            <div class="col-md-6">
+                                <button type="button" class="quickButton quickButtonNormal" data-target="/newFlashcard">
+                                    <span class="quickIcon"><i class="fa fa-edit"></i></span><span class="name">Add Flashcards</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="quickButton quickButtonNormal"
+                                        data-target="/enrolledCourses">
+                                    <span class="quickIcon"><i class="fa fa-group"></i></span><span class="name">Courses I'm taking</span>
+                                </button>
+                            </div>
+                            <div class="col-md-6">
                                 <button type="button" class="quickButton quickButtonNormal" data-target="/myCourses">
-                                    <span class="quickIcon"><i class="icon-briefcase"></i></span><span class="name">Courses I'm teaching</span></button>
+                                    <span class="quickIcon"><i class="fa fa-briefcase"></i></span><span class="name">Courses I'm teaching</span>
+                                </button>
                             </div>
                         </div>
                     </div>

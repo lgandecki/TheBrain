@@ -4,6 +4,27 @@ var currentFlashcard, currentItemId, itemsToLearn = [], _renderer, _renderer2;
 //Meteor.subscribe("testItems");
 //Meteor.subscribe("currentFlashcard");
 
+
+Meteor.theBrain.modals.schedule = function() {
+    var _title;
+    var _opts = {
+        withCancel: false,
+        closeOnOk: false,
+        okLabel: "Start Learning"
+    };
+    Meteor.tour.showIfNeeded("setStudyFirstTour");
+
+    var _modal = Meteor.modal.initAndShow(Template.myCollectionsList, "Learn new Flashcards!", _opts);
+    _modal.buttons.ok.on('click', function(button) {_onScheduleClick(button)});
+
+};
+
+var _onScheduleClick = function() {
+    itemsToLearn = Session.get("itemsToLearn");
+    _setAmountOfReps();
+    Meteor.modal.hideClosestTo("#myCollectionsList");
+};
+
 var resizeTheBar = function(opts) {
     var _done = opts.total - opts.left;
     console.log("resizingTheBar", opts);
@@ -170,19 +191,7 @@ Template.repeat.rendered = function () {
             // itemsToLearn = Session.get("itemsToLearn");
 
             if (Session.equals("showScheduleModal", true)) {
-                $("#scheduleModal").modal("show").on('hidden', function () {
-                    itemsToLearn = Session.get("itemsToLearn");
-                    _setAmountOfReps();
-                    $('#setStudyFirstTour').crumble("clear");
-
-                }).on("shown", function() {
-//                        setTimeout(function() {
-
-
-
-                            Meteor.tour.showIfNeeded("setStudyFirstTour");
-//                        }, 500);
-                    });
+                Meteor.theBrain.modals.schedule();
             }
             else {
                 _setAmountOfReps();
@@ -316,9 +325,8 @@ displayNextRepetition = function () {
         Session.set("currentItemId", null);
         Session.set("currentFlashcardId", null);
         emptyTemplate();
-        $("#doneForTodayModal").modal("show").on('hidden', function () {
-            Router.go("/");
-        });
+
+        Meteor.theBrain.modals.doneForToday();
         // Info that you've done all repetitions for given day.
     }
 }
@@ -452,10 +460,10 @@ Template.repeat.events({
         _parseEvaluation(_evaluation, _itemId)
     },
     "click a[href='#picture']": function (e) {
-        $(".mainBox").switchClass("span8", "span11", 800, "easeInOutBack");
+        $(".mainBox").switchClass("col-md-8", "col-md-11", 800, "easeInOutBack");
     },
     "click a[href='#repeatFlashcards']": function (e) {
-        $(".mainBox").switchClass("span11", "span8", 800, "easeInOutBack");
+        $(".mainBox").switchClass("col-md-11", "col-md-8", 800, "easeInOutBack");
     }
 });
 
@@ -811,9 +819,7 @@ var checkIfFlashcardUpdated = function(opts) {
     var _flashcard = Flashcards.findOne(opts.flashcardId);
 
     if (_item && _flashcard && _item.flashcardVersionSeen < _flashcard.version) {
-        $("#newFlashcardVersionModal").modal("show").on("hidden", function() {
-//            console.log("are we ever here in hidden modal");
-        });
+        Meteor.theBrain.modals.newFlashcardVersion();
     }
 }
 

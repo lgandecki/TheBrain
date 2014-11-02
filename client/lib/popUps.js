@@ -1,10 +1,10 @@
-_stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
-_stack_bottomright = {"dir1": "up", "dir2": "left", "firstpos1": 25, "firstpos2": 25};
-_stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
+var _stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
+var _stack_bottomright = {"dir1": "up", "dir2": "left", "firstpos1": 25, "firstpos2": 25};
+var _stack_bottomleft = {"dir1": "right", "dir2": "up", "push": "top"};
 
 
 
-_success = function(title, text) {
+var _success = function(title, text) {
     var opts = {
         title: title,
         text: text,
@@ -21,7 +21,7 @@ _success = function(title, text) {
     $.pnotify(opts);
 };
 
-_error = function(title, text) {
+var _error = function(title, text) {
     var opts = {
         title: title,
         text: text,
@@ -39,8 +39,8 @@ _error = function(title, text) {
     $.pnotify(opts);
 };
 
-_notification = function(title, message, userAvatar) {
-    text = '<img class="notificationImage pull-right" src="' + userAvatar + '"/>' + "<h5>" + title + "</h5>" + message;
+var _notification = function(title, message, userAvatar) {
+    var text = '<img class="notificationImage pull-right" src="' + userAvatar + '"/>' + "<h5>" + title + "</h5>" + message;
     var opts = {
         text: text,
         addclass: "stack-bottomright",

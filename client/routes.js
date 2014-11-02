@@ -1,5 +1,5 @@
 Router.configure({
-    layoutTemplate: 'body'
+    layoutTemplate: 'TheBrainBody'
 });
 
 var _timePassedSinceLast = 0;
@@ -169,6 +169,10 @@ Router.map(function () {
         }
     })
 
+    this.route('notFound', {
+        path: '*'
+    });
+
 });
 var _enoughTimePassedSinceLastTransition = function() {
     var _now = new Date().valueOf();
@@ -177,6 +181,16 @@ var _enoughTimePassedSinceLastTransition = function() {
 
 
 Router.onBeforeAction(function() {
+    if ($(".transition").length > 0) {
+        _setMenuActive();
+    } else {
+        setTimeout(function() {
+                _setMenuActive();
+        }, 500);
+    }
+});
+
+var _setMenuActive = function() {
     $('li.active').removeClass('active');
     var _currentRoute = window.location.pathname;
     if (_currentRoute === "/home" || _currentRoute === "/login") {
@@ -202,12 +216,35 @@ Router.onBeforeAction(function() {
     _element.closest('li').addClass('active');
     _element.closest('li.topNav').addClass('active');
     Session.set("isNewPage", _currentRoute);
-})
+}
+function _clearSession(name) {
+    console.log("name", name);
+    if (name !== "course" && name !== "lesson" && name !== "videoLesson") {
+        delete Session.keys["selectedCourse"];
+        delete Session.keys["selectedLesson"];
+    }
+//    courseOpened: "false"
+//    coursePath: ""/myCourses"" ??
+//    courseTab: ""#lessons"" ??
+//    isNewPage: ""/availableFlashcards""
+//    lessonTab: ""#lessonFlashcards"" ??
+//    optsSearch: "[]"
+//    previousCourseTab: ""#events""
+//    reloadFlashcards: ""c44fc6"" ??
+//    selectedCourse: ""QZLHMn95qsjwdduKT""
+//    selectedCourseTab: ""#events""
+//    selectedFlashcards: "["HL96XcFFtFNaotPeb","4YNq4zWiqAfcGBKKg"]"
+//    selectedLesson: ""9b124e0856880c1b3e14025c""
+//    serverNextDay: "1408942800000"
+//    showStudentsFlashcards: "false"
+}
 
 Router.onBeforeAction(function (pause) {
     var _randomLogNumber = Math.random();
     var _name = this.route.name;
+    console.log("in onBeforeAction");
 
+    _clearSession(_name);
 
     $("html, body").animate({
         scrollTop: 0
@@ -222,6 +259,7 @@ Router.onBeforeAction(function (pause) {
     var _width = $(window).width()/1.2;
 
     if (_html && _off && !Meteor.loggingIn() && _enoughTimePassedSinceLastTransition() ) {
+        console.log("robimy to przejscie");
         _timePassedSinceLast = new Date().valueOf();
         if (_off.top === 0) {
         }
@@ -280,10 +318,10 @@ Router.onBeforeAction(function (pause) {
             //                    $(".make-pretty").prettyCheckable();
 
             checkLeftNav();
-            resizeContent();
+//            resizeContent();
 
 
-            makeModalsScrollable();
+//            makeModalsScrollable();
 
             setTimeout(function () {
                 if (!$(".transition").is(":visible")) {
@@ -292,41 +330,54 @@ Router.onBeforeAction(function (pause) {
                 }
             }, 300);
 
-        }, 500);
+        }, 250);
 
 
-    }
+    } else {
+        setTimeout(function () {
+            if (!$(".transition").is(":visible")) {
+                console.log("TRANSITION WAS NOT VISIBLE SO manually displayed it");
+                $(".transition").css("left", _width).show()
+                    .animate({
+                        "left": "0px"
+                    }, 1200, _easing, function () {
 
-
-
-    if (window.woopra) {
-        var _user = Meteor.user();
-
-
-        if (_user) {
-            if (_user.identity) {
-                var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
-                window.woopra.identify({
-                    email: _email || _user._id,
-                    name: _user.identity.nick,
-                    avatar: _user.profile && _user.profile.picture
-                })
-            } else {
-                setTimeout(function() {
-                    var _user = Meteor.user();
-                    var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
-                    window.woopra.identify({
-                        email: _email || _user._id,
-                        name: _user.identity && _user.identity.nick || _user._id,
-                        avatar: _user.profile && _user.profile.picture
-                    })
-
-                }, 500);
+                    });
             }
-
-        }
-        window.woopra.track();
+        }, 1000);
     }
+
+
+
+
+//    if (window.woopra) {
+//        var _user = Meteor.user();
+//
+//
+//        if (_user) {
+//            if (_user.identity) {
+//                var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
+//                window.woopra.identify({
+//                    email: _email || _user._id,
+//                    name: _user.identity.nick,
+//                    avatar: _user.profile && _user.profile.picture
+//                })
+//            } else {
+//                setTimeout(function() {
+//                    var _user = Meteor.user();
+//                    var _email = _user.emails && _user.emails[0] && _user.emails[0].address;
+//                    window.woopra.identify({
+//                        email: _email || _user._id,
+//                        name: _user.identity && _user.identity.nick || _user._id,
+//                        avatar: _user.profile && _user.profile.picture
+//                    })
+//
+//                }, 500);
+//            }
+//
+//        }
+//        window.woopra.track();
+//    }
 
     if (window.ga) {
         window.ga('send', 'pageview', window.location.pathname);
@@ -362,8 +413,26 @@ Router.onBeforeAction(function (pause) {
             if (!Session.get("exploreModeOnModal") && _location.indexOf("_escaped_fragment") === -1) {
                 Session.set("exploreModeOnModal", true);
                 setTimeout(function() {
-                    $("#workInProgressModal").modal("show");
-                }, 5000);
+                    var workInProgressModal = {
+                        template: Template.workInProgressReactiveModal,
+                        title: "Not logged in!",
+                        buttons: {
+                            "ok": {
+                                closeModalOnClick: true, // if this is false, dialog doesnt close automatically on click
+                                class: 'btn btn-primary btn-primary-main',
+                                label: 'Got ya!'
+                            }
+
+                        }
+                    };
+
+                    var rd = ReactiveModal.initDialog(workInProgressModal);
+                    rd.buttons.ok.on('click', function(button) {
+                        console.log("clicked in modal");
+                    });
+
+                    rd.show();
+                }, 1000);
 
             }
         }

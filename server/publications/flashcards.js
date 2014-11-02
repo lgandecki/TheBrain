@@ -6,7 +6,7 @@
 
 Meteor.publish("currentFlashcard", function (id) {
 
-    _query = {
+    var _query = {
         _id: id,
     };
 //    if (opts.onlyAdmin) {
@@ -62,9 +62,6 @@ Meteor.publish("currentFlashcard", function (id) {
         ]
     })
 
-    return id && Flashcards.find({
-        _id: id
-    })
 });
 
 Meteor.publish("paginatedFlashcards", function (opts, limit) {
@@ -132,7 +129,7 @@ Meteor.publish("lessonFlashcards", function (opts, limit) {
 
     }
     _flashcardIds = _teacherFlashcards.concat(_studentsFlashcards);
-    _query = {
+    var _query = {
         _id: {$in: _flashcardIds},
         public: true,
         "lessons.lesson": opts.lessonId
@@ -173,7 +170,7 @@ Meteor.publish("lessonFlashcards", function (opts, limit) {
 
 Meteor.publish("youtubeFlashcards", function(opts, limit) {
 
-    _query = {
+    var _query = {
         public: true,
         "youtube_id": opts.youtube_id
     }

@@ -1,4 +1,5 @@
-<template name="body">
+<template name="TheBrainBody">
+    <div class="container-fluid">
 <div id="wrapper">
 {{> header }}
 <div id="main">
@@ -9,12 +10,11 @@
             </div>
             </div>
     <div class="push"></div>
-    {{> logInModal }}
 </div>
 </div>
 
 <div id="footer">
-    <p class="hidden-phone">
+    <p class="hidden-xs">
         2013 TheBrain by Łukasz "gozda" Gandecki <span class="font-grey-4">|</span>
         {{#if isLoggedIn}}<a href="/conversation/L2vK3r4MdZJaKB4N2">Bug Report? Feature Request? Contact?</a>
         {{else}}
@@ -22,15 +22,13 @@
         {{/if}}
         <span class="font-grey-4">|</span> <a href="http://blog.thebrain.pro" target="_blank">TheBrain.Pro Blog</a>
     </p>
-    <p class="visible-phone">
+    <p class="visible-xs">
         TheBrain by <a href="/conversation/L2vK3r4MdZJaKB4N2">Łukasz "gozda" Gandecki</a>
     </p>
-    <a href="#" class="gototop"><i class="icon-arrow-up"></i></a>
+    <a href="#" class="gototop"><i class="fa fa-arrow-up"></i></a>
 </div>
 
-    {{> workInProgressModal }}
-
     {{> tours }}
-
+    </div>
 </template>
 

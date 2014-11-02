@@ -1,40 +1,33 @@
 var _returnSide = function(side, isNew) {
     var _selector;
-    if (isNew) {
         if (side === "front") {
             _selector = "#newFront .flashcardFront"
         }
         else {
             _selector = "#newBack .flashcardBack"
         }
-    }
-    else {
-        if (side === "front") {
-            _selector = "#front .flashcardFront";
-        }
-        else {
-            _selector = "#back .flashcardBack";
-        }
-    }
 
     var html = $(_selector).html();
     var justText = $(_selector).justtext();
     justText = justText.trim();
-    var html2 = html.replace(justText, "<div>"+justText+"</div>")
-    $(_selector).html(html2);
+    html = html.replace("&nbsp;", "");
     var _side = "";
+    if (justText !== "") {
+        var html2 = html.replace(justText, "<div>" + justText + "</div>")
+        $(_selector).html(html2);
 
-    $.each($(_selector).children(), function(key, value) {
-        if (_side !== "") {
-            _side = _side + "\n" + $(value).text();
-        }
-        else {
-            _side = $(value).text();
-        }
+        $.each($(_selector).children(), function (key, value) {
+            if (_side !== "") {
+                _side = _side + "\n" + $(value).text();
+            }
+            else {
+                _side = $(value).text();
+            }
 
-    })
-    console.log("_side", _side);
-    console.log("selector", _selector);
+        })
+        console.log("_side", _side);
+        console.log("selector", _selector);
+    }
     return _side;
 }
 

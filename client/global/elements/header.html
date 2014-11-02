@@ -1,19 +1,19 @@
 <template name="header">
 <div id="navigation" class="navbar-fixed-top">
-    <div class="{{containerType}}">
-        <a href="/" id="brand">TheBrain</a>
+    <div class="container">
+        <a href="/" id="myBrand" alt="TheBrain">&nbsp;</a>
             {{> topMenu }}
         {{#if isLoggedIn}}
             {{> userHeader }}
         {{else}}
             {{#unless isExplore}}
-                <!-- <button type="button" class="pull-right btn btn-primary btn-header btn-explore"><i class="icon-hand-right"></i> Explore</button> -->
+                <!-- <button type="button" class="pull-right btn btn-primary btn-header btn-explore"><i class="fa fa-hand-o-right"></i> Explore</button> -->
             {{/unless}}
             {{> logInHeader }}
        {{/if}}
         {{#unless isLoggedIn}}
             <div class="user">
-                <a href="#" class="toggle-mobile hidden-desktop"><i class="icon-reorder"></i></a>
+                <a href="#" class="toggle-mobile hidden-lg"><i class="fa fa-reorder"></i></a>
             </div>
         {{/unless}}
         </div>

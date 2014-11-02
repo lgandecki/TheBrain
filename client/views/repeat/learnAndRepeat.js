@@ -1,11 +1,11 @@
-var _renderer, _itemsToLearnCount = 0, itemsToLearn = {};
-Template.scheduleModal.rendered = function() {
-    console.log("scheduleModal rendered");
-    Meteor.subscribe("itemsToLearnCount");
-};
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
+
+var _itemsToLearnCount = 0, itemsToLearn = {};
 
 Template.myCollectionsList.created = function() {
     _itemsToLearnCount = 0;
+    itemsToLearn = {};
+    Meteor.subscribe("itemsToLearnCount");
     Session.set("itemsToLearnCount", 0);
     console.log("myCollectionsList created");
     delete Session.keys['itemsToLearn'];
@@ -88,4 +88,5 @@ Template.collectionStudyRow.itemsInCollection = function() {
 Template.collectionStudyRow.itemsToLearn = function() {
    return this.count;
 }
+
 
