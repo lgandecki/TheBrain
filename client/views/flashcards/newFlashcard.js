@@ -435,6 +435,14 @@ Meteor.theBrain.modals.editFlashcardPrompt = function () {
     });
 }
 
+Template.editFlashcardPrompt.events({
+    "submit #reasonForChange": function(e) {
+        e.preventDefault();
+        console.log("submmited from #");
+        _saveChanges();
+    }
+});
+
 var _originalFront, _originalBack;
 
 

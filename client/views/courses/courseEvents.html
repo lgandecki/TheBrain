@@ -53,23 +53,22 @@
 </template>
 
 <template name="addCourseNews">
-    <div class="row">
-        <form action="#" class='form-horizontal form-bordered'>
+        <h4>Add news</h4>
+        <form class='form-horizontal'>
 
-        <div class="new-news">
-            <h4>Add News</h4>
 
 
             <div class="form-group">
-                <div class="input-group col-sm-8 ">
-                    <span class="formSpanReplacement"></span>
-                    <textarea name="newNews" class="newNews formSpanAdjustment" rows="3"></textarea>
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="fa fa-bullhorn"></i></span>
+
+                    <textarea name="newNews" class="newNews form-control" rows="3"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-primary btn-primary-main center btn-addNews">Post
+                        News
+                    </button></span>
                 </div>
             </div>
 
-            <button type="submit" class="col-md-6 btn btn-primary btn-primary-main center btn-addNews">Post News</button>
-        </div>
         </form>
 
-    </div>
 </template>

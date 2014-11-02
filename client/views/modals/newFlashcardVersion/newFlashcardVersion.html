@@ -1,79 +1,59 @@
-<template name="newFlashcardVersionModal">
-    <!-- Modal -->
-    <div id="newFlashcardVersionModal" class="modal modal-wide hide fade" tabindex="-1" role="dialog"
-            aria-labelledby="newFlashcardVersionModal" data-backdrop="static" data-keyboard="false" aria-hidden="true">
-        <div class="box box-bordered box-color box-modal modal-dialog">
-            <div class="box-title box-modal">
-                <h3><i class="fa fa-th-list"></i> That flashcard has been updated!</h3>
-                <button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="box-content modal-box modalInfo">
-                {{> updatedFlashcardVersions }}
-
-
-            </div>
-            <div class="modal-footer-mine">
-                <div class="pull-right modal-form-actions">
-
-                    <button type="button" class="btn btn-primary btn-primary-main pull-right" data-dismiss="modal" aria-hidden="true">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
 <template name="updatedFlashcardVersions">
-    <div class="updatedFlashcardVersions">
-        Before you evaluate your answer,
-        <h3>TheBrain would like to say that this FlashCard has been updated!</h3>
-        <h4>This is your current version:</h4>
+    <div class="myPadding20">
+        <div class="updatedFlashcardVersions">
+            Before you evaluate your answer,
+            <h3>TheBrain would like to say that this FlashCard has been updated!</h3>
+            <h4>This is your current version:</h4>
 
             {{#with currentItem}}
-                <div class="flashcardRow center">
-                    <div class="flashcard front">{{{currentItemFront}}}</div>
-                    <div class="flashcard back">{{{currentItemBack}}}</div>
-                </div>
+            <div class="flashcardRow center">
+                <div class="flashcard front">{{{currentItemFront}}}</div>
+                <div class="flashcard back">{{{currentItemBack}}}</div>
+            </div>
             {{/with}}
 
-        <h3>And below are new versions.</h3><br/>
-        <small>You can use any of them, or, if you feel inspired, close this window and go to the "edit" tab, to make your own changes</small>
-        <br/>
-        <small>If you decide to use any of the updated versions, you will keep your personal notes.</small>
-        <br/>
-        <small>If you change your mind later on, you can always change your flashcard version back!</small>
-        <br/><br/>
+            <h3>And below are new versions.</h3><br/>
+            <small>You can use any of them, or, if you feel inspired, close this window and go to the "edit" tab, to
+                make your own changes
+            </small>
+            <br/>
+            <small>If you decide to use any of the updated versions, you will keep your personal notes.</small>
+            <br/>
+            <small>If you change your mind later on, you can always change your flashcard version back!</small>
+            <br/><br/>
 
             {{#each flashcardVersion}}
-                <div class="flashcardsList">
+            <div class="flashcardsList">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="updatedFlashcardRow center">
-                                <div class="updatedFlashcardOptionsRow">
-                                    <div class="row">
-                                        <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i class="fa fa-thumbs-o-up"></i> {{upVotes}}</span> &nbsp;
-                                            <span class="badge badge-downVote clickable badge-warning"><i class="fa fa-thumbs-o-down"></i> {{downVotes}}</span> </div>
-                                    </div>
-                                    <div class="row"><h5>By: {{userName}} </h5></div>
-                                    <div class="row"><h5>Reason for update: {{reason}}</h5></div>
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="updatedFlashcardRow center">
+                            <div class="updatedFlashcardOptionsRow">
+                                <div class="row">
+                                    <div class="pull-left"><span class="badge badge-upVote clickable badge-success"><i
+                                            class="fa fa-thumbs-o-up"></i> {{upVotes}}</span> &nbsp;
+                                        <span class="badge badge-downVote clickable badge-warning"><i
+                                                class="fa fa-thumbs-o-down"></i> {{downVotes}}</span></div>
                                 </div>
-                                <div class="flashcard front">{{{flashcardFront}}}</div>
-                                <div class="flashcard back">{{{flashcardBack}}}</div>
-                                <div class="updatedFlashcardOptionsRow">
-                                    <div class="row">
-                                        <button class="center btn btn-primary btn-primary-main btn-useThisNewVersion btn-block"><i class="icon-hand-up"></i> Use this one!
-                                        </button>
-                                    </div>
-                                    </div>
+                                <div class="row"><h5>By: {{userName}} </h5></div>
+                                <div class="row"><h5>Reason for update: {{reason}}</h5></div>
+
+                            </div>
+                            <div class="flashcard front">{{{flashcardFront}}}</div>
+                            <div class="flashcard back">{{{flashcardBack}}}</div>
+                            <div class="updatedFlashcardOptionsRow">
+                                <div class="row">
+                                    <button class="center btn btn-primary btn-primary-main btn-useThisNewVersion btn-block">
+                                        <i class="icon-hand-up"></i> Use this one!
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
-
-
+            </div>
             {{/each}}
-
+        </div>
     </div>
 </template>

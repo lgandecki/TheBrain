@@ -172,6 +172,7 @@ html, body {
     bottom: 0;
     height: 40px; /* .push must be the same height as .footer */
     z-index: 150;
+    margin-left: -15px;
 }
 
 /*.modal {*/

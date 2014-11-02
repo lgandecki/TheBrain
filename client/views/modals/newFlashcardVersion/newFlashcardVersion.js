@@ -1,8 +1,22 @@
+if (!Meteor.theBrain) Meteor.theBrain = {modals: {}};
+
+Meteor.theBrain.modals.newFlashcardVersion = function() {
+    var _title;
+    var _opts = {
+        withCancel: false,
+        closeOnOk: true,
+        okLabel: "Close"
+    };
+
+    var _modal = Meteor.modal.initAndShow(Template.updatedFlashcardVersions, _title = "That flashcard has been updated!", _opts);
+    //_modal.buttons.ok.on('click', function(button) {_newCollection(button)});
+}
+
+
 Template.updatedFlashcardVersions.flashcardVersion = function () {
     var _item = Items.findOne({user: Meteor.userId(), _id: Session.get("currentItemId")});
     var _flashcard = Flashcards.findOne({_id: Session.get("currentFlashcardId")});
     if (_item && _flashcard && _item.flashcardVersionSeen < _flashcard.version) {
-        var _updatedVersions = [];
         if (_flashcard) {
             var _updatedVersions = $.grep(_flashcard.previousVersions, function (previousVersion) {
                 return previousVersion.version > _item.flashcardVersionSeen;
@@ -104,20 +118,20 @@ Template.updatedFlashcardVersions.events({
             itemId: Session.get("currentItemId"),
             flashcardId: Session.get("currentFlashcardId"),
             selectedVersion: this.version
-        }
+        };
         Meteor.call("useUpdatedFlashcardVersion", _opts, function (error) {
             if (error) {
                 Meteor.popUp.error("Updating Flashcard server error", error.reason);
             } else {
                 Meteor.popUp.success("Updating Flashcard success", "TheBrain made neural connections you asked for.");
-                $("#newFlashcardVersionModal").modal("hide");
             }
         });
+        Meteor.modal.hideClosestTo(".updatedFlashcardVersions");
     },
     "click .badge-upVote": function(e) {
         e.preventDefault();
         e.stopPropagation();
-        _opts = {
+        var _opts = {
             flashcardId: Session.get("currentFlashcardId"),
             selectedVersion: this.version
         }
@@ -127,7 +141,7 @@ Template.updatedFlashcardVersions.events({
     "click .badge-downVote": function(e) {
         e.preventDefault();
         e.stopPropagation();
-        _opts = {
+        var _opts = {
             flashcardId: Session.get("currentFlashcardId"),
             selectedVersion: this.version
         }

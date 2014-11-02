@@ -819,9 +819,7 @@ var checkIfFlashcardUpdated = function(opts) {
     var _flashcard = Flashcards.findOne(opts.flashcardId);
 
     if (_item && _flashcard && _item.flashcardVersionSeen < _flashcard.version) {
-        $("#newFlashcardVersionModal").modal("show").on("hidden", function() {
-//            console.log("are we ever here in hidden modal");
-        });
+        Meteor.theBrain.modals.newFlashcardVersion();
     }
 }
 
