@@ -1031,3 +1031,7 @@ li.active>a {
     line-height: 42px;
     color: rgb(60,171,218);
 }
+
+.sendMessage {
+    width:90%;
+}
