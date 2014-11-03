@@ -1035,3 +1035,17 @@ li.active>a {
 .sendMessage {
     width:90%;
 }
+
+
+@media (max-width: 767px) {
+    #progressMy h4, #progressMy div {
+        margin-top: 5px;
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    #progressMy h4, #progressMy div{
+        margin-top: 20px;
+    }
+}
