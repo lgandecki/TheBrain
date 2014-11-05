@@ -1,6 +1,6 @@
 
 Template.courseEvents.course = function () {
-    _course = Courses.findOne({_id: Session.get("selectedCourse")});
+    var _course = Courses.findOne({_id: Session.get("selectedCourse")});
 
     return _course;
     //? _course.events : {}
@@ -56,7 +56,7 @@ Template.courseEvents.eventData = function (e) {
     }
     _event.date = new moment(this.created.on).fromNow();
 //    _event.date = _date.format("MMM Do");
-    _user = Meteor.users.findOne(this.created.by);
+    var _user = Meteor.users.findOne(this.created.by);
     if (_user) {
         _event.user = Meteor.userDetails.getName(this.user);
         _event.picture = Meteor.userDetails.getProfilePicture(this.user);
