@@ -9,19 +9,14 @@ Template.lesson.created = function () {
         var _lessonTab = Session.get("lessonTab");
         setTimeout(function () {
             Meteor.tabs.setHeight();
-//        var _courseTab = Session.get("courseTab");
-            console.log("lessonTab", _lessonTab);
             $('.nav a[href="' + _lessonTab + '"]').tab('show');
         }, 50);
         setTimeout(function () {
             Meteor.tabs.setHeight();
-//        var _courseTab = Session.get("courseTab");
-            console.log("lessonTab", _lessonTab);
             $('.nav a[href="' + _lessonTab + '"]').tab('show');
         }, 500);
     })
 
-//    _firstOpened = true;
     Session.set("showStudentsFlashcards", false);
     Session.set("lessonTab", "#lessonFlashcards");
 
@@ -42,15 +37,7 @@ Template.lesson.created = function () {
     else {
         console.log("WHAT THE F!");
     }
-
-    setTimeout(function () {
-        Meteor.tabs.setHeight();
-//        var _courseTab = Session.get("courseTab");
-        var _lessonTab = Session.get("lessonTab", _lessonTab);
-        console.log("lessonTab", _lessonTab);
-        $('.nav a[href="' + _lessonTab + '"]').tab('show');
-    }, 500);
-}
+};
 
 
 
@@ -158,34 +145,39 @@ Template.lessonFlashcardsList.events({
 
 Template.lessonFlashcardsList.flashcard = function () {
     var _reload;
+    var _optionsQuery = Session.get("_optionsQuery");
     if (Session.get("_optionsQuery") && _flashcardSubscription) {
         _reload = true;
         console.log("i co z subskrypcja?");
 
     }
     console.log("Przeladowywujemy?");
-    _lesson = Session.get("_lesson");
-    if (_lesson) {
-        var _teacherFlashcards = _lesson.teacherFlashcards;
-        var _studentsFlashcards = [];
-//        if (!Session.get("_optionsQuery").onlyAdmin) {
-//            _studentsFlashcards = _lesson.studentsFlashcards;
-//        }
-//        _flashcardIds = $.merge(_teacherFlashcards, _studentsFlashcards);
-        _query = {
-//            _id: {$in: _flashcardIds},
-            public: true,
-            "lessons.lesson": _lesson._id
-        };
-        if (_flashcardSubscription) {
-            console.log("wrzucamy flashcardy", _query);
-            return Flashcards.find(_query, {limit: _flashcardSubscription.limit(), sort: {score: -1}})
-        }
-        else {
-            console.log("nie wrzucamy flashcardow");
-        }
+    var _course = Courses.findOne({_id: Session.get("selectedCourse")});
+    if (_course) {
+        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
+
+        _lesson = _course.lessons[_lessonIndex];
+        Session.set("_lesson", _lesson);
+        if (_lesson) {
+            var _teacherFlashcards = _lesson.teacherFlashcards;
+            var _studentsFlashcards = [];
+            if (_optionsQuery && !_optionsQuery.onlyAdmin) {
+                _studentsFlashcards = _lesson.studentsFlashcards;
+            }
+            var _flashcardIds = $.merge(_teacherFlashcards, _studentsFlashcards);
+            _query = {
+                _id: {$in: _flashcardIds}
+            };
+            if (_flashcardSubscription) {
+                console.log("wrzucamy flashcardy", _query);
+                return Flashcards.find(_query, {limit: _flashcardSubscription.limit(), sort: {score: -1}})
+            }
+            else {
+                console.log("nie wrzucamy flashcardow");
+            }
 
 
+        }
     }
 }
 
@@ -211,35 +203,6 @@ _getFlashcards = function (addTeachersFlashcards, optionsQuery) {
     return [];
 
 }
-//_getFlashcards = function (addTeachersFlashcards, optionsQuery) {
-//    var _courseId = Session.get("selectedCourse");
-//    var _lessonId = Session.get("selectedLesson");
-//    var _optionsQuery = {};
-//    _course = Courses.findOne({_id: _courseId});
-//    if (_course) {
-//        var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), _lessonId);
-//        _lesson = _course.lessons[_lessonIndex];
-////        if (optionsQuery === true) {
-//        _optionsQuery = Session.get("_optionsQuery") || {};
-////        }
-//        if (_lesson) {
-//            _query = {public: true, "lessons.lesson": _lesson._id};
-//            _query._id = {$in: $_lesson.flashcards};
-//            if ((optionsQuery === true && _optionsQuery.onlyAdmin === true) || addTeachersFlashcards === true) {
-////                console.log("from here I'm guessing?");
-//                _query.user = {$in: _optionsQuery.adminIds};
-////                _optionsQuery.addTeachersFlashcards = false;
-//            }
-//            console.log("query ", _query);
-//            return Flashcards.find(_query);
-//        }
-//    }
-////    return [];
-//}
-//
-//Template.flashcardsOptions.rendered = function () {
-////    $('#onlyByTeacher').parent().bootstrapSwitch();
-//}
 
 Template.flashcardRow.isFlashcardSelected = function () {
     var _selectedFlashcards = Session.get("selectedFlashcards");
@@ -519,15 +482,13 @@ Template.flashcardsDefaultOptions.destroyed = function () {
 }
 
 Template.flashcardsDefaultOptions.flashcardsAvailable = function () {
-    var _lesson = Session.get("_lesson");
     var _youtube_id = Session.get("youtube_id");
     var _count = 0;
-    if (!_lesson) {
         _course = Courses.findOne({_id: Session.get("selectedCourse")});
         var _lessonId = Session.get("selectedLesson");
         console.log("Course in created", _course);
         if (_course && _lessonId) {
-            var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), Session.get("selectedLesson"));
+            var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), _lessonId);
             _lesson = _course.lessons[_lessonIndex];
             if (_lesson.teacherFlashcards && _lesson.studentsFlashcards) {
                 _count = _lesson.teacherFlashcards.length + _lesson.studentsFlashcards.length;
@@ -538,6 +499,5 @@ Template.flashcardsDefaultOptions.flashcardsAvailable = function () {
             var _countObject = YoutubeVideoFlashcardsCount.findOne({_id: _youtube_id});
             _count = _countObject && _countObject.count;
         }
-    }
     return _count;
 }
