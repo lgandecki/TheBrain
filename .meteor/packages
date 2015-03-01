@@ -6,11 +6,10 @@
 accounts-password
 accounts-facebook
 standard-app-packages
-cron-tick
 service-configuration
 spiderable
-phonegap-oauth
-reactive-modal
+particle4dev:meteor-phonegap-oauth
+pahans:reactive-modal
 mrt:cron-tick
 tmeasday:paginated-subscription
 mrt:publish-with-relations
