@@ -5,11 +5,11 @@ Router.configure({
 var _timePassedSinceLast = 0;
 var _routes = [
     {name: "home", path: "/"},
-    {name: "home", path: "/home"},
+    {name: "home1", path: "/home"},
     {name: "login", path: "/login"},
     {name: "loading", path: "/loading"},
     {name: "availableFlashcards", path: "/availableFlashcards"},
-    {name: "repeat", path: "/repeat"},
+    /*{name: "repeat", path: "/repeat"},*/
     {name: "myCollections", path: "/myCollections"},
     {name: "myProfile", path: "/myProfile"},
     {name: "notificationCenter", path: "/notificationCenter"},
@@ -32,6 +32,7 @@ Router.map(function () {
         path: '/myFlashcards',
         onBeforeAction: function () {
             Session.set("selectedCollection", "");
+		this.next();
         }
     });
 
@@ -39,6 +40,7 @@ Router.map(function () {
         path: '/newFlashcard',
         onBeforeAction: function() {
             Session.set("selectedCourse", "");
+		this.next();
         }
     });
 
@@ -46,13 +48,15 @@ Router.map(function () {
         path: '/study',
         onBeforeAction: function () {
             Session.set("showScheduleModal", true);
+		this.next();
         }
     });
 
-    this.route('myCollectionsFlashcards', {
+    this.route('myCollectionsFlashcards/:_id', {
         path: '/myCollection/:id',
         onBeforeAction: function () {
-            Session.set("selectedCollection", this.params.id);
+            Session.set("selectedCollection", this.params._id);
+		this.next();
         }
     });
 
@@ -60,6 +64,7 @@ Router.map(function () {
         path: '/myCourses',
         onBeforeAction: function () {
             Session.set("coursePath", "/myCourses");
+		this.next();
         }
     })
 
@@ -67,6 +72,7 @@ Router.map(function () {
         path: "/enrolledCourses",
         onBeforeAction: function () {
             Session.set("coursePath", "/enrolledCourses");
+		this.next();
         }
     })
 
@@ -79,6 +85,7 @@ Router.map(function () {
 //            setTimeout(function () {
 //                Session.set("selectedCourse", _id);
 //            }, 800);
+		this.next();
         }
     })
 
@@ -93,6 +100,7 @@ Router.map(function () {
 //            setTimeout(function () {
 //                Session.set("selectedCourse", _id);
 //            }, 800);
+		this.next();
         }
     })
 
@@ -100,6 +108,7 @@ Router.map(function () {
         path: "/availableCourses",
         onBeforeAction: function () {
             Session.set("coursePath", "/availableCourses");
+		this.next();
         }
     })
 
@@ -115,6 +124,7 @@ Router.map(function () {
 //                Session.set("selectedCourse", _courseId);
 //                Session.set("selectedLesson", _lessonId);
 //            }, 800);
+		this.next();
         }
     })
 
@@ -123,6 +133,7 @@ Router.map(function () {
         onBeforeAction: function() {
             Session.set("selectedCourse", this.params.courseId);
             Session.set("youtube_id", this.params.youtubeId);
+		this.next();
       }
     })
 
@@ -130,6 +141,7 @@ Router.map(function () {
         path: "/conversation/:otherUser",
         onBeforeAction: function () {
             Session.set("otherUser", this.params.otherUser);
+		this.next();
         }
     })
 
@@ -158,6 +170,7 @@ Router.map(function () {
 //            setTimeout(function() {
 //                $('a[href="#khanVideo"]').tab('show');
 //            }, 100);
+		this.next();
         }
     })
 
@@ -166,6 +179,7 @@ Router.map(function () {
         waitOn: function() { return Meteor.subscribe('currentFlashcard', this.params.flashcardId)},
         onBeforeAction: function () {
             Session.set("flashcardId", this.params.flashcardId);
+		this.next();
         }
     })
 
@@ -188,6 +202,7 @@ Router.onBeforeAction(function() {
                 _setMenuActive();
         }, 500);
     }
+	this.next();
 });
 
 var _setMenuActive = function() {
@@ -239,9 +254,9 @@ function _clearSession(name) {
 //    showStudentsFlashcards: "false"
 }
 
-Router.onBeforeAction(function (pause) {
+Router.onBeforeAction(function () {
     var _randomLogNumber = Math.random();
-    var _name = this.route.name;
+    var _name = this.route.getName();
     console.log("in onBeforeAction");
 
     _clearSession(_name);
@@ -400,11 +415,12 @@ Router.onBeforeAction(function (pause) {
 
         } else if (Meteor.userId() || Session.get("exploreMode") || _name === "policy") {
             console.log("logged in", _name);
+		this.next();
 
-        } else if (_name === "home") {
+        } else if ((_name === "home") || (_name === "home1")) {
             console.log("show login");
             this.render("login");
-            pause();
+            //pause();
 
         } else {
             var _location = window.location.href.toString();
@@ -435,9 +451,9 @@ Router.onBeforeAction(function (pause) {
                 }, 1000);
 
             }
+		this.next();
         }
     }
-
 
 
 });
