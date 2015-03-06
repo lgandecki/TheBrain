@@ -198,16 +198,7 @@ var _enoughTimePassedSinceLastTransition = function() {
 }
 
 
-Router.onBeforeAction(function() {
-    if ($(".transition").length > 0) {
-        _setMenuActive();
-    } else {
-        setTimeout(function() {
-                _setMenuActive();
-        }, 500);
-    }
-	this.next();
-});
+
 
 var _setMenuActive = function() {
     $('li.active').removeClass('active');
@@ -462,6 +453,11 @@ Router.onBeforeAction(function () {
 
 });
 
+Router.onAfterAction(function() {
+    setTimeout(function() {
+        _setMenuActive();
+    }, 100);
+});
 
 var makeModalsScrollable = function () {
     console.log("window height", $(window).height())
