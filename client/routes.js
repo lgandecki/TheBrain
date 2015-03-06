@@ -28,12 +28,16 @@ Router.map(function () {
         })
     });
 
-    this.route('myCollectionsFlashcards', {
-        path: '/myFlashcards',
-        onBeforeAction: function () {
-            Session.set("selectedCollection", "");
-		this.next();
-        }
+    this.route('/myFlashcards', function() {
+
+            this.render("myCollectionsFlashcards");
+
+        },
+        {
+            onBeforeAction: function () {
+                delete Session.keys["selectedCollection"];
+                this.next();
+            }
     });
 
     this.route('newFlashcard', {
@@ -52,8 +56,8 @@ Router.map(function () {
         }
     });
 
-    this.route('myCollectionsFlashcards/:_id', {
-        path: '/myCollection/:id',
+    this.route('myCollectionsFlashcards', {
+        path: '/myCollection/:_id',
         onBeforeAction: function () {
             Session.set("selectedCollection", this.params._id);
 		this.next();
