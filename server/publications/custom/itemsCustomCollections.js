@@ -310,7 +310,7 @@ Meteor.publish("customItemsToRepeat", function (now) {
     var _userId = this.userId;
     console.log("that.userId 1", that.userId);
     var _now = moment().add("days", 1).hours(0).minutes(0).seconds(0).milliseconds(0)._d;
-    var handle = Items.find({user: _userId, deactivated: false, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}, {limit: 2}).observeChanges({
+    var handle = Items.find({user: _userId, deactivated: false, nextRepetition: {$lte: _now}, actualTimesRepeated: {$gt: 0}}, {limit: 3, sort: {lastRepetition: 1}}).observeChanges({
         added: function (itemId, item, abc) {
 //            console.log("Add this one ", item, "idx: ", abc, "abc: ", abc);
 //                console.log("that.userId", that.userId);
@@ -357,7 +357,7 @@ Meteor.publish("customItemsToReLearn", function () {
     var initializing = true;
     var that = this;
     var _userId = this.userId;
-    var handle = Items.find({user: _userId,deactivated: false, extraRepeatToday: true}, {limit: 2}).observeChanges({
+    var handle = Items.find({user: _userId,deactivated: false, extraRepeatToday: true}, {limit: 3, sort: {lastRepetition: 1}}).observeChanges({
         added: function (itemId, item, abc) {
 //            console.log("Add this one ", item, "idx: ", abc, "abc: ", abc);
 //                console.log("that.userId", that.userId);
