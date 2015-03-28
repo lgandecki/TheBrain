@@ -12,28 +12,48 @@ Meteor.publish("paginatedKhanPlaylists", function (opts, limit) {
     }
     else {
         console.log("first time");
-        TheBrain.insert({_id: "khanPlaylistsUpdated", date: moment()._d});
-        _updateFlag = true;
+        if (TheBrain.findOne({_id: "khanPlaylistsUpdated"})) {
+
+        } else {
+            TheBrain.insert({_id: "khanPlaylistsUpdated", date: moment()._d});
+            _updateFlag = true;
+        }
     }
+
+    //_updateFlag = true;
 
     if (_updateFlag) {
         //var _url = "http://www.khanacademy.org/api/v1/playlists";
-        var _url = "http://www.khanacademy.org/api/v1/playlists/library/list";
+        var _url = "http://www.khanacademy.org/api/v1/topictree";
+        console.log("before get");
         Meteor.http.get(_url, function(error, results) {
             console.log("in update");
+            //results.content.replace('"', '\"');
             var _khanPlaylists = JSON.parse(results.content);
-            console.log("_khanPlaylists", _khanPlaylists.length);
+            //var _khanPlaylists = [];
+            console.log("_khanPlaylists", _khanPlaylists.children.length);
 //            KhanPlaylists.insert(_khanPlaylists);
 //            KhanPlaylists.insert({_id: "test", "abc": "test"});
             KhanPlaylists.remove({});
-            _khanPlaylists.forEach(function(playlist) {
-                KhanPlaylists.insert(playlist);
-            })
+
+            //KhanPlaylists.insert(_khanPlaylists.children[2]);
+
+                    _khanPlaylists && _khanPlaylists.children.forEach(function (playlist) {
+                        playlist.children && playlist.children.forEach(function(children) {
+                            KhanPlaylists.insert(children);
+                        });
+                        //console.log("playlist \n\n", playlist);
+                        //KhanPlaylists.insert(playlist);
+                    });
+
+
+
             TheBrain.update({_id: "khanPlaylistsUpdated"}, {$set: {date: moment()._d}})
         })
     }
 
-    var _query = {"videos.0": {$exists: true}};
+    //var _query = {"videos.0": {$exists: true}};
+    var _query = {};
     if (opts.search) {
         _query.$or = [
             {title: new RegExp(opts.search, "i")},

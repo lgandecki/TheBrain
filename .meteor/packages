@@ -8,7 +8,6 @@ accounts-facebook
 standard-app-packages
 service-configuration
 spiderable
-particle4dev:meteor-phonegap-oauth
 pahans:reactive-modal
 mrt:cron-tick
 tmeasday:paginated-subscription

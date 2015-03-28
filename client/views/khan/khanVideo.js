@@ -20,7 +20,7 @@ Template.khanVideo.playlistTitle = function () {
 Template.khanVideo.videos = function() {
     var _playlistSlug = Session.get("playlistSlug");
     var _playlist = KhanPlaylists.findOne({slug: _playlistSlug});
-    return _playlist && _playlist.videos;
+    return _playlist && _playlist.children;
 }
 Template.khanVideo.videoTitle = function () {
     var _videoSlug = Session.get("videoSlug");
@@ -58,7 +58,7 @@ Template.khanVideo.isNotLastVideo = function () {
     var _playlistSlug = Session.get("playlistSlug");
     var _playlist = KhanPlaylists.findOne({slug: _playlistSlug});
 
-    return _playlist && _playlist.videos && (_videoIndex + 1 < _playlist.videos.length);
+    return _playlist && _playlist.children && (_videoIndex + 1 < _playlist.children.length);
 }
 
 Template.khanVideo.previousVideo = function () {
@@ -67,8 +67,8 @@ Template.khanVideo.previousVideo = function () {
     var _playlistSlug = Session.get("playlistSlug");
     var _playlist = KhanPlaylists.findOne({slug: _playlistSlug});
 
-    if (_playlist && _playlist.videos) {
-        return _playlist.videos[_videoIndex - 1];
+    if (_playlist && _playlist.children) {
+        return _playlist.children[_videoIndex - 1];
     }
 
 
@@ -84,8 +84,8 @@ Template.khanVideo.nextVideo = function () {
     var _playlistSlug = Session.get("playlistSlug");
     var _playlist = KhanPlaylists.findOne({slug: _playlistSlug});
 
-    if (_playlist && _playlist.videos) {
-        return _playlist.videos[_videoIndex + 1];
+    if (_playlist && _playlist.children) {
+        return _playlist.children[_videoIndex + 1];
     }
 
 

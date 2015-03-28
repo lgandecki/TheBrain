@@ -4,7 +4,7 @@ var _returnVideo = function (videoSlug) {
     var _videoIndex = _returnVideoIndex(videoSlug);
     console.log("_videoIndex", _videoIndex);
     if (_videoIndex > -1) {
-        return _playlist.videos[_videoIndex];
+        return _playlist.children[_videoIndex];
     }
 }
 
@@ -13,7 +13,7 @@ var _returnVideoIndex = function (videoSlug) {
     var _playlist = KhanPlaylists.findOne({slug: _playlistSlug});
     console.log("_videoSlug", _playlist);
     if (_playlist) {
-        var _videoIndex = _.indexOf(_.pluck(_playlist.videos, 'readable_id'), videoSlug);
+        var _videoIndex = _.indexOf(_.pluck(_playlist.children, 'readable_id'), videoSlug);
         return _videoIndex;
     }
 }

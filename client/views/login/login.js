@@ -28,8 +28,9 @@ Template.login.events({
     "click .btn-signUpWithFacebook": function(e, template) {
         e.preventDefault();
 
-        Meteor.loginWithFacebook(function(err) {
+        Meteor.loginWithFacebook({}, function(err, sth) {
             if (err) {
+                console.log("err ", err, sth);
                 Meteor.modal.error("TheBrain is confused<br/>Please make sure you are logged in to facebook")
             } else {
                 console.log("sign up with facebook")

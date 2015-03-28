@@ -671,10 +671,11 @@ var addFlashcardToLesson = function (opts) {
     var _course = Courses.findOne(opts.course);
 
     var _lessonIndex = _.indexOf(_.pluck(_course.lessons, '_id'), opts.lesson);
-    var modifier = {$addToSet: {}, $pull: {}};
+    var modifier = {$addToSet: {}};
     if (_.indexOf(_course.admins, Meteor.user()._id) > -1) {
         if (_.indexOf(_course.lessons[_lessonIndex].studentsFlashcards, opts.flashcardId) > -1) {
             modifier.$addToSet["lessons." + _lessonIndex + ".teacherFlashcards"] = opts.flashcardId;
+            modifier.$pull = {};
             modifier.$pull["lessons." + _lessonIndex + ".studentsFlashcards"] = opts.flashcardId;
         } else {
             modifier.$addToSet["lessons." + _lessonIndex + ".teacherFlashcards"] = opts.flashcardId;
