@@ -46,26 +46,8 @@ Template.courseRow.isUpVoted = function () {
 }
 
 Template.courseRow.flashcardsCount = function () {
-    var _flashcards = 0;
-    var _that = this;
-    if (this.lessons) {
-        this.lessons.forEach(function (lesson) {
-            if (lesson.studentsFlashcards) {
-                _flashcards += lesson.studentsFlashcards.length;
-                _flashcards += lesson.teacherFlashcards.length;
-            }
-        });
-    }
-
-//    if (_flashcards === 0) {
-//        setTimeout(function() {
-//            console.log("hiding ", _that._id);
-//            $(".courseRow[data-id='" + _that._id + "'").hide();
-//        }, 200);
-//    }
-
-    return _flashcards;
-}
+   return this.flashcards;
+};
 
 voted = function (votes) {
     return ($.inArray(Meteor.userId(), votes) > -1)
