@@ -1,7 +1,7 @@
 Template.logInForm.events({
     "click .btn-signUpWithFacebook": function(e, template) {
         e.preventDefault();
-        Meteor.modal.hideClosest(e.target);
+        Meteor.modal.hideClosestTo(e.target);
         Meteor.loginWithFacebook(function(err) {
             if (err) {
                 Meteor.modal.error("TheBrain is confused<br/>Please make sure you are logged in to facebook")
