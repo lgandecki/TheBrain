@@ -2,9 +2,15 @@ TheBrain = new Meteor.Collection('theBrain');
 
 TheBrain.allow({
 
-    'insert': false,
-    'update': false,
-    'remove': false
+    'insert': function() {
+        return false;
+    },
+    'update': function() {
+        return false;
+    },
+    'remove': function() {
+        return false;
+    }
 
 });
 

@@ -9,3 +9,5 @@ client/lib/views/auditlog/
 tests/casper/screenshots
 server/config.js
 server/social-config.js
+node_modules/
+settings.json
